@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "storage",
+      "type": "com.project.demo.sushiCo.configuration.StorageProperties",
+      "sourceType": "com.project.demo.sushiCo.configuration.StorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "storage.location",
+      "type": "java.lang.String",
+      "description": "Folder location for storing files",
+      "sourceType": "com.project.demo.sushiCo.configuration.StorageProperties"
+    }
+  ],
+  "hints": []
+}
