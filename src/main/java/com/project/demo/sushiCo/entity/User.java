@@ -34,7 +34,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	// Te gjithe userat survejohen nga administratori i platformës
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "idAppl ")
+	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "idAppl")
 	private User AdminPlatforma;
 
 	// N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin
