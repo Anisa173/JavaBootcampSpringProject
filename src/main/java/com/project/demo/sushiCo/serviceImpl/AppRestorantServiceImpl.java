@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.project.demo.sushiCo.domain.dto.RestorantDto;
-import com.project.demo.sushiCo.domain.dto.Service_PlacesDto;
+import com.project.demo.sushiCo.domain.dto.ServicePlacesDto;
 import com.project.demo.sushiCo.service.AppRestorantService;
 
 import jakarta.validation.Valid;
@@ -44,7 +44,7 @@ public class AppRestorantServiceImpl implements AppRestorantService {
 	}
 
 	@Override
-	public RestorantDto update(Integer Id, @Valid Service_PlacesDto placesDto) {
+	public RestorantDto update(Integer Id, @Valid ServicePlacesDto placesDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,6 +3,11 @@ package com.project.demo.sushiCo.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.project.demo.sushiCo.domain.dto.Getter;
+import com.project.demo.sushiCo.domain.dto.Setter;
+
+import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,32 +20,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
 public class Order extends BasicEntity<Integer> {
 
-	//Porosite e restorantit  menaxhohen nga admini përkates
+	// Porosite e restorantit menaxhohen nga admini përkates
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "adminRestId", referencedColumnName = "id ")
+	@JoinColumn(name = "adminRestId", referencedColumnName = "oId ")
 	private User adminUser;
 
 	// Disa Metoda Pagese i vihen ne dispozicion klientit per te kryer nje porosi
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "paymentMethodId", referencedColumnName = "id")
+	@JoinColumn(name = "paymentMethodId", referencedColumnName = "oId")
 	private PaymentMethods p_methods;
-	
+
 	// Nje porosi permban disa menu
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Dish> dish = new ArrayList<Dish>();
-	
+
 	// Nje ose disa porosi permban nje shporte porosie
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idShporta", referencedColumnName = "id")
+	@JoinColumn(name = "idShporta", referencedColumnName = "oId")
 	private PackageOrdered packageOrdered;
-	
-	// Disa porosi mund te kryen gjate nje intervali te shkurter kohe ose gjate te gjithe dite ~ varet nga klienti
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinColumn(name = "idCustomer", referencedColumnName = "id")
+
+	// Disa porosi mund te kryen gjate nje intervali te shkurter kohe ose gjate te
+	// gjithe dite ~ varet nga klienti
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idCustomer", referencedColumnName = "oId")
 	private User user;
 
 	@Id

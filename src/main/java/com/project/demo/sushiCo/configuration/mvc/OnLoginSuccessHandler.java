@@ -16,6 +16,7 @@ public class OnLoginSuccessHandler implements AuthentificationSuccessHandler  {
 	private static final SimpleGrantedAuthority ADMIN_ROLE = new SimpleGrantedAuthority(UserRole.ADMIN.name());
 	private static final SimpleGrantedAuthority CUSTOMER_ROLE = new SimpleGrantedAuthority(UserRole.CUSTOMER.name());
 	private static final SimpleGrantedAuthority SHIPPERS_ROLE = new SimpleGrantedAuthority(UserRole.SHIPPERS.name());
+    private static final SimpleGrantedAuthority ADMINISTRATOR_ROLE = new SimpleGrantedAuthority(UserRole.ADMINISTRATOR.name()); 
 
 	@Override
 	public void onAuthenticationSuccess(javax.servlet.http.HttpServletRequest request,
@@ -38,7 +39,12 @@ public class OnLoginSuccessHandler implements AuthentificationSuccessHandler  {
 			System.err.println("User Details " + userDetails.getFirst_name());
 			redirectUrl = (userDetails.getFirst_name() != null && userDetails.getLast_name() != null) ? "shippers"
 					: "users/details/" + userDetails.getId();
+		} else if(userDetails.getAuthorities().contains(ADMINISTRATOR_ROLE)) {
+			System.err.println("User Details " + userDetails.getFirst_name());
+			redirectUrl = (userDetails.getFirst_name() != null && userDetails.getLast_name() != null) ? "administrator"
+					: "users/details/" + userDetails.getId();
 		}
+		
 		return redirectUrl;
 	}
 

@@ -2,6 +2,11 @@ package com.project.demo.sushiCo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.project.demo.sushiCo.domain.dto.Getter;
+import com.project.demo.sushiCo.domain.dto.Setter;
+
+import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,21 +17,26 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
 public class ServicePlaces extends BasicEntity<Integer> {
 
-	//Në çdo zonë sherbimi dergohen 1 ose N-shporta porosie gjate punes ditore
+	// Në çdo zonë sherbimi dergohen 1 ose N-shporta porosie gjate punes ditore
 	@OneToMany(mappedBy = "servicePlaces", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PackageOrdered> pckO = new ArrayList<PackageOrdered>();
 
-	//Disa zona sherbimi i perkasin cdo restoranti
+	// Disa zona sherbimi i perkasin cdo restoranti
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "service_idApp", referencedColumnName = "idRestorant")
 	private Restorant restorantService;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	@Column(name = "service_Places")
 	private String service_Places;

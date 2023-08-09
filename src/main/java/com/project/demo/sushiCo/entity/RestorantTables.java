@@ -1,6 +1,11 @@
 package com.project.demo.sushiCo.entity;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.demo.sushiCo.domain.dto.Getter;
+import com.project.demo.sushiCo.domain.dto.Setter;
+
+import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +15,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
 public class RestorantTables extends BasicEntity<Integer> {
 //  'Mjedisi fizik' i restorantit i nderlidhet çdo rezervimi
@@ -19,7 +29,7 @@ public class RestorantTables extends BasicEntity<Integer> {
 	@JsonManagedReference
 	private CustomerReservation reservation;
 
-	//Çdo mjedis i arreduar "si per restorant" i perket nje restoranti
+	// Çdo mjedis i arreduar "si per restorant" i perket nje restoranti
 	@OneToOne(mappedBy = "restorantTables", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonBackReference
 	private Restorant aRest;
@@ -147,8 +157,4 @@ public class RestorantTables extends BasicEntity<Integer> {
 				+ unlocked + ",reservation = " + reservation + ",aRest = " + aRest + "]";
 	}
 
-
 }
-
-
-

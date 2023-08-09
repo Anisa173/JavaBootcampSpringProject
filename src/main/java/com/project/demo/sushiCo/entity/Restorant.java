@@ -5,6 +5,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.demo.sushiCo.domain.dto.Getter;
+import com.project.demo.sushiCo.domain.dto.Setter;
+
+import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,10 +21,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
-@Table(name = "RestorantService")
 public class Restorant extends BasicEntity<Integer> {
 
 	// Çdo restoranti i perket nje admin
@@ -54,7 +61,7 @@ public class Restorant extends BasicEntity<Integer> {
 
 	@Column(name = "restNUIS")
 	private String restNUIS;
-	@Column(name = "restaurantName")
+	@Column(name = "restName")
 	private String restName;
 	@Column(name = "phoneNo")
 	private String phoneNo;
@@ -223,8 +230,8 @@ public class Restorant extends BasicEntity<Integer> {
 				+ payment_MethodsR + ",places = " + places + ",restNUIS = " + restNUIS + ", restName = " + restName
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest =" + addressRest
 				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",TimeServiceDay = "
-				+ TimeServiceDay + ",restorantTables = " + restorantTables + ",aplication = " + aplication
-				+ ",admin = " + admin + "]";
+				+ TimeServiceDay + ",restorantTables = " + restorantTables + ",aplication = " + aplication + ",admin = "
+				+ admin + "]";
 	}
 
 }

@@ -3,7 +3,7 @@ package com.project.demo.sushiCo.service;
 import java.util.List;
 
 import com.project.demo.sushiCo.domain.dto.RestorantDto;
-import com.project.demo.sushiCo.domain.dto.Service_PlacesDto;
+import com.project.demo.sushiCo.domain.dto.ServicePlacesDto;
 import com.project.demo.sushiCo.serviceImpl.RegisterUserForm;
 
 import jakarta.validation.Valid;
@@ -19,5 +19,5 @@ public interface AppRestorantService {
 
 	RestorantDto create(@Valid RestorantDto restorantDto) throws Exception;
 
-	RestorantDto update(Integer Id, @Valid Service_PlacesDto placesDto);
+	RestorantDto update(Integer Id, @Valid ServicePlacesDto placesDto);
 }

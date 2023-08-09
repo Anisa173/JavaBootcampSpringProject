@@ -16,13 +16,14 @@ public class AddInBasketDto {
 	private Integer dishId;
 	private String dishName;
 	private Integer addItemsDish;
+	private Double valueAmount;
 
 	public AddInBasketDto() {
 		addItemsDish = 5;
 	}
 
 	public AddInBasketDto(Integer addId, Integer custId, String phoneNo, String customerName, Integer dishId,
-			String dishName, Integer addItemsDish) {
+			String dishName, Integer addItemsDish, Double valueAmount) {
 		this.addId = addId;
 		this.setCustId(custId);
 		this.setPhoneNo(phoneNo);
@@ -30,6 +31,7 @@ public class AddInBasketDto {
 		this.setDishId(dishId);
 		this.setDishName(dishName);
 		this.addItemsDish = addItemsDish;
+		this.valueAmount = valueAmount;
 	}
 
 	public Integer getAddId() {
@@ -88,10 +90,18 @@ public class AddInBasketDto {
 		this.dishName = dishName;
 	}
 
+	public Double getValueAmount() {
+		return valueAmount;
+	}
+
+	public void setValueAmount(Double valueAmount) {
+		this.valueAmount = valueAmount;
+	}
+
 	public String toString() {
 		return "AddInBasket[addId = " + addId + ",custId = " + custId + ",phoneNo = " + phoneNo + ",customerName = "
 				+ customerName + ",dishId = " + dishId + ",dishName = " + dishName + ",addItemDish = " + addItemsDish
-				+ "]";
+				+ ", valueAmount = " + valueAmount + "]";
 	}
 
 }

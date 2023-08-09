@@ -2,6 +2,11 @@ package com.project.demo.sushiCo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.project.demo.sushiCo.domain.dto.Getter;
+import com.project.demo.sushiCo.domain.dto.Setter;
+
+import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +17,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
 public class Dish extends BasicEntity<Integer> {
     //Disa dishes menaxhohen nga admini
@@ -28,7 +38,7 @@ public class Dish extends BasicEntity<Integer> {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderId", referencedColumnName = "oId")
 	private Order order;
-
+//
 	@OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AddInBasket> addInBasket = new ArrayList<AddInBasket>();
 

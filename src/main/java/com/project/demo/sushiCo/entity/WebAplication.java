@@ -3,6 +3,10 @@ package com.project.demo.sushiCo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.demo.sushiCo.domain.dto.Getter;
+import com.project.demo.sushiCo.domain.dto.Setter;
+
+import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,12 +15,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
 public class WebAplication extends BasicEntity<String> {
 
 	// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
-	// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo restoranti
+	// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo
+	// restoranti
 	@OneToMany(mappedBy = "AdminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> user = new ArrayList<User>();
 

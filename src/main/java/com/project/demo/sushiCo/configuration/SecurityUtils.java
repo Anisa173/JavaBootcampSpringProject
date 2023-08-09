@@ -14,6 +14,7 @@ public class SecurityUtils {
 		case CUSTOMER -> "/customer";
 		case ADMIN -> "/admin";
 		case SHIPPERS -> "/shippers";
+		case ADMINISTRATOR -> "/administrator ";
 		default -> throw new IllegalArgumentException("Unexpected value: " + loggedUser.getUserRole());
 		};
 	}

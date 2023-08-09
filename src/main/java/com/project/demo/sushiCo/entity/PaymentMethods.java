@@ -2,6 +2,11 @@ package com.project.demo.sushiCo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.project.demo.sushiCo.domain.dto.Getter;
+import com.project.demo.sushiCo.domain.dto.Setter;
+
+import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +17,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Entity
 public class PaymentMethods extends BasicEntity<Integer> {
 
@@ -20,7 +30,7 @@ public class PaymentMethods extends BasicEntity<Integer> {
 	// restorant
 	@OneToMany(mappedBy = "p_Methods", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<Order>();
-    //Disa metoda Pagese i perkasin nje restoranti
+	// Disa metoda Pagese i perkasin nje restoranti
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "paymentIdApp", referencedColumnName = "idRestorant")
 	private Restorant restorant;
@@ -29,7 +39,7 @@ public class PaymentMethods extends BasicEntity<Integer> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private Integer Id;
-	@Column(name = "payment_Methods")
+	@Column(name = "payment_Method")
 	private String payment_Method;
 
 	public PaymentMethods() {
