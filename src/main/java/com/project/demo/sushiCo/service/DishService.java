@@ -6,7 +6,7 @@ import com.project.demo.sushiCo.serviceImpl.RegisterUserForm;
 import jakarta.validation.Valid;
 
 public interface DishService {
-	void delete(Integer id) throws Exception;
+/*	void delete(Integer id) throws Exception;
 
 	DishDto register(@Valid RegisterUserForm form) throws Exception;
 
@@ -16,6 +16,6 @@ public interface DishService {
 
 	List<DishDto> getDishes() throws Exception;
 
-	DishDto getDishById(Integer id) throws Exception;
+	DishDto getDishById(Integer id) throws Exception;*/
 
 }

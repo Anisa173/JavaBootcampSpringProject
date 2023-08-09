@@ -10,7 +10,6 @@ public class DishCategoryDto {
 	public DishCategoryDto() {
 
 	}
-
 	public DishCategoryDto(Integer id, String categoryName, Long totalDishes, Integer admin_Id, String adminName) {
 		this.id = id;
 		this.categoryName = categoryName;
