@@ -17,8 +17,6 @@ public class WebAplication extends BasicEntity<String> {
 
 	// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
 	// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo restoranti
-	 
-
 	@OneToMany(mappedBy = "AdminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> user = new ArrayList<User>();
 

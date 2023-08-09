@@ -63,7 +63,12 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		userDto.setRestorant(result.getRestorant());
 		var totalOrders1 = result.getOrders().stream().count();
 		userDto.setTotalOrders1(totalOrders1);
-
+		userDto.setAdminIdPlatforma(result.getWebAplication().getId());
+		var platformaName = result.getWebAplication().getAppname();
+		userDto.setPlatformaName(platformaName);
+		userDto.setUserApplId(result.getWebAplication().getId());
+		var webAppname = result.getWebAplication().getAppname();
+		userDto.setWebAppname(webAppname);
 		return userDto;
 	}
 
@@ -75,7 +80,7 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		entity.setEmail(dto.getEmail());
 		entity.setPassword(dto.getPassword());
 		entity.setPersonalIdentityNo(dto.getPersonalIdentityNo());
-		
+
 		return entity;
 	}
 

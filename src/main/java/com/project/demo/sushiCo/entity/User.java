@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,13 +31,14 @@ import jakarta.persistence.OneToOne;
 public class User extends BasicEntity<Integer> implements UserDetails {
 
 	private static final long serialVersionUID = 6350320748155867627L;
-    
-	//Te gjithe userat survejohen nga administratori i platformës
+
+	// Te gjithe userat survejohen nga administratori i platformës
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "adminIdPlatforma ", referencedColumnName = "idAppl ")
+	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "idAppl ")
 	private User AdminPlatforma;
 
-     //N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin aplikacionin tone	
+	// N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin
+	// aplikacionin tone
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userApplId ", referencedColumnName = "idAppl ")
 	private WebAplication webAplication;
@@ -158,6 +158,8 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.setPackage_Orders(package_Orders);
 		this.setRestorant(restorant);
 		this.setOrders1(orders1);
+		this.AdminPlatforma = adminPlatforma;
+		this.webAplication = webAplication;
 	}
 
 	@Override
