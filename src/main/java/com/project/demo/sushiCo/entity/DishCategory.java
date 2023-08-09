@@ -18,14 +18,15 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "dishCategory")
 public class DishCategory extends BasicEntity<Integer> {
-//Admini i cdo restoranti menaxhon dishes
+
+	//Dishes menaxhohen nga Admini i çdo restoranti
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "admin_Id", referencedColumnName = "id")
 	private User user;
 
 
-//Cdo dishCategory permban N-dishes	
-	@OneToMany(mappedBy = "Dish", cascade = CascadeType.ALL)
+    //Çdo dishCategory përmban N-dishes	
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Dish> dishes = new ArrayList<Dish>();
 
 	@Id

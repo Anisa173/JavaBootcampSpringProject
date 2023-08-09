@@ -14,13 +14,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
-
 	@Entity
 	public class CustomerReservation extends BasicEntity<Integer> {
+	
+		//Nje apo disa rezervime mund te kryehen nga i njejti klient gjate punes ditore
 		@ManyToOne(cascade = CascadeType.ALL)
 		@JoinColumn(name = "customerId", referencedColumnName = "id")
 		private User user;
 
+        //Cdo rezervim kryhet ne te njejtin restorant fhe ne te njejten vendododhje
 		@OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 		@JsonBackReference
 		private RestorantTables tables;

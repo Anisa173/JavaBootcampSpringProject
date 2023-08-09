@@ -25,8 +25,8 @@ public class Service_PlacesMapper extends BaseMapper<ServicePlaces, Service_Plac
 		servicePdto.setShippingCost(entity.getShippingCost());
 		var totalPackaged_Ordered = entity.getPckO().stream().count();
 		servicePdto.setTotalPackaged_Ordered(totalPackaged_Ordered);
-		servicePdto.setService_idApp(entity.getAppRest().getId());
-		var restName = entity.getAppRest().getRestName();
+		servicePdto.setService_idApp(entity.getRestorantService().getId());
+		var restName = entity.getRestorantService().getRestName();
 		servicePdto.setRestName(restName);
 
 		return servicePdto;

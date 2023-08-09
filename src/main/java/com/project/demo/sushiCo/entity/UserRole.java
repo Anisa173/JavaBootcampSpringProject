@@ -3,7 +3,7 @@ package com.project.demo.sushiCo.entity;
 import java.util.Arrays;
 
 public enum UserRole {
-	CUSTOMER("Customer"), ADMIN("Admin"), SHIPPERS("Shippers");
+	CUSTOMER("Customer"), ADMIN("Admin"), SHIPPERS("Shippers"),ADMINISTRATOR("Administrator platforme-webi");
 
 	private String value;
 

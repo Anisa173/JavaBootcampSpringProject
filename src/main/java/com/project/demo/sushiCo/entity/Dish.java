@@ -15,15 +15,16 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Dish extends BasicEntity<Integer> {
-
+    //Disa dishes menaxhohen nga admini
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "adminId", referencedColumnName = "id")
 	private User user;
-
+//Disa dishes i perkasin nje kategorie
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private DishCategory category;
 
+	//Nje apo disa dishes mund te pergjidhen nga 'customers' per nje porosi
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderId", referencedColumnName = "oId")
 	private Order order;

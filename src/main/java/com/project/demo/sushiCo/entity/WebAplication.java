@@ -11,18 +11,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+
 @Entity
 public class WebAplication extends BasicEntity<String> {
 
-	// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen  si : 1)klientet qe
-	// rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo restoranti
-	@OneToMany(mappedBy = "Admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
+	// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo restoranti
+	 
+
+	@OneToMany(mappedBy = "AdminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> user = new ArrayList<User>();
 
-	// N-kliente zgjedhin apo preferojne te perdorin aplikacionin tone
-	@OneToMany(mappedBy = "WebAplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// Ne aplikacion zgjedhin te regjistrohen,logohen apo preferojne ta perdorin
+	// N-klientë
+	@OneToMany(mappedBy = "webAplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> users = new ArrayList<User>();
-    //Web_based Aplication permban disa restorante
+
+	// Web_based Aplication permban disa restorante
 	@OneToMany(mappedBy = "webAplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Restorant> restorants = new ArrayList<Restorant>();
 	@Id
@@ -37,13 +42,14 @@ public class WebAplication extends BasicEntity<String> {
 		super();
 	}
 
-	public WebAplication(String idAppl, String appname, String serialNo, List<User> users, List<Restorant> restorants) {
+	public WebAplication(String appname, String serialNo, List<Restorant> restorants, List<User> users,
+			List<User> user) {
 		super();
-		this.idAppl = idAppl;
 		this.appname = appname;
 		this.serialNo = serialNo;
-		this.users = users;
 		this.setRestorants(restorants);
+		this.users = users;
+		this.user = user;
 	}
 
 	@Override
@@ -87,9 +93,18 @@ public class WebAplication extends BasicEntity<String> {
 		this.restorants = restorants;
 	}
 
+	public List<User> getUser() {
+
+		return user;
+	}
+
+	public void setUser(List<User> user) {
+		this.user = user;
+	}
+
 	public String toString() {
 		return "WebApplication[idAppl = " + idAppl + ",appname = " + appname + ",serialNo = " + serialNo + ",users = "
-				+ users + ",restorants = " + restorants + "]";
+				+ users + ",user = " + user + ",restorants = " + restorants + "]";
 	}
 
 }

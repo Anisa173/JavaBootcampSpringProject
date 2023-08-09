@@ -21,11 +21,13 @@ public class PackageOrdered extends BasicEntity<Integer> {
 	// pune
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "serviceId", referencedColumnName = "id")
-	private ServicePlaces serviceP;
-    //Seciles shporte porosie i perkasin nje ose N porosi
-	@OneToMany(mappedBy = "package_ordered", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private ServicePlaces servicePlaces;
+    
+	//Seciles shporte porosie i perkasin nje ose N porosi
+	@OneToMany(mappedBy = "packageOrdered", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Order> ord = new ArrayList<Order>();
-     //Disa shporta_porosie dergohen nepermjet nje "shippers"
+    
+	//Disa shporta_porosie dergohen nepermjet nje "shippers"
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shippersId", referencedColumnName = "id")
 	private User user;
@@ -44,13 +46,13 @@ public class PackageOrdered extends BasicEntity<Integer> {
 	}
 
 	public PackageOrdered(StatusOrderSession statusOrderSession, Double sessionPayment, List<Order> ord, User user,
-			ServicePlaces serviceP) {
+			ServicePlaces servicePlaces) {
 		super();
 		this.statusOrderSession = statusOrderSession;
 		this.sessionPayment = sessionPayment;
 		this.ord = ord;
 		this.user = user;
-		this.serviceP = serviceP;
+		this.servicePlaces = servicePlaces;
 	}
 
 	@Override
@@ -94,17 +96,17 @@ public class PackageOrdered extends BasicEntity<Integer> {
 		this.user = user;
 	}
 
-	public ServicePlaces getServiceP() {
-		return serviceP;
+	public ServicePlaces getServicePlaces() {
+		return servicePlaces;
 	}
 
-	public void setServiceP(ServicePlaces serviceP) {
-		this.serviceP = serviceP;
+	public void setServicePlaces(ServicePlaces serviceP) {
+		this.servicePlaces = serviceP;
 	}
 
 	public String toString() {
 		return "PackageOrdered[id = " + id + ",statusOrderSession = " + statusOrderSession + ",sessionPayment = "
-				+ sessionPayment + ",ord = " + ord + ",user = " + user + ",serviceP = " + serviceP + " ]";
+				+ sessionPayment + ",ord = " + ord + ",user = " + user + ",servicePlaces = " + servicePlaces + " ]";
 	}
 
 }

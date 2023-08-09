@@ -13,13 +13,14 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class RestorantTables extends BasicEntity<Integer> {
-// Çdo rezervim i nderlidhet nje 'mjedisi fizik' te restorantit
+//  'Mjedisi fizik' i restorantit i nderlidhet çdo rezervimi
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "reservationId", referencedColumnName = "cR_id")
 	@JsonManagedReference
 	private CustomerReservation reservation;
-//Çdo mjedis i arreduar "si per restorant" i perket nje restoranti
-	@OneToOne(mappedBy = "tables", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+	//Çdo mjedis i arreduar "si per restorant" i perket nje restoranti
+	@OneToOne(mappedBy = "restorantTables", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonBackReference
 	private Restorant aRest;
 

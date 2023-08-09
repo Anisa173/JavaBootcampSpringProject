@@ -19,7 +19,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Order extends BasicEntity<Integer> {
 
-	// Çdo admin menaxhon porosite e restorantit perkates
+	//Porosite e restorantit  menaxhohen nga admini përkates
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminRestId", referencedColumnName = "id ")
 	private User adminUser;
@@ -28,15 +28,17 @@ public class Order extends BasicEntity<Integer> {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "paymentMethodId", referencedColumnName = "id")
 	private PaymentMethods p_methods;
+	
 	// Nje porosi permban disa menu
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Dish> dish = new ArrayList<Dish>();
+	
 	// Nje ose disa porosi permban nje shporte porosie
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idShporta", referencedColumnName = "id")
 	private PackageOrdered packageOrdered;
-	// Disa porosi mund te kryehen nga nje interval te shkurter kohe ~ varet nga
-	// reagueshmeria e shpejte e klientit
+	
+	// Disa porosi mund te kryen gjate nje intervali te shkurter kohe ose gjate te gjithe dite ~ varet nga klienti
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCustomer", referencedColumnName = "id")
 	private User user;

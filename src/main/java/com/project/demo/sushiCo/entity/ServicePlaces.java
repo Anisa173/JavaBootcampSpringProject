@@ -16,14 +16,14 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class ServicePlaces extends BasicEntity<Integer> {
 
-	//Në çdo zonë sherbimi dergohen 1 ose N-shporta porosie
+	//Në çdo zonë sherbimi dergohen 1 ose N-shporta porosie gjate punes ditore
 	@OneToMany(mappedBy = "servicePlaces", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PackageOrdered> pckO = new ArrayList<PackageOrdered>();
 
 	//Disa zona sherbimi i perkasin cdo restoranti
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "service_idApp", referencedColumnName = "idRestorant")
-	private Restorant restorant;
+	private Restorant restorantService;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class ServicePlaces extends BasicEntity<Integer> {
 	public ServicePlaces(String service_Places, Restorant restorant, List<PackageOrdered> pckO, Double shippingCost) {
 		super();
 		this.service_Places = service_Places;
-		this.restorant = restorant;
+		this.restorantService = restorant;
 		this.pckO = pckO;
 		this.shippingCost = shippingCost;
 	}
@@ -63,12 +63,12 @@ public class ServicePlaces extends BasicEntity<Integer> {
 		this.service_Places = service_Places;
 	}
 
-	public Restorant getAppRest() {
-		return restorant;
+	public Restorant getRestorantService() {
+		return restorantService;
 	}
 
-	public void setAppRest(Restorant restorant) {
-		this.restorant = restorant;
+	public void setRestorantService(Restorant restorant) {
+		this.restorantService = restorant;
 	}
 
 	public List<PackageOrdered> getPckO() {
@@ -88,7 +88,7 @@ public class ServicePlaces extends BasicEntity<Integer> {
 	}
 
 	public String toString() {
-		return "ServicePlaces[Id = " + Id + ",service_Places = " + service_Places + ", restorant = " + restorant
+		return "ServicePlaces[Id = " + Id + ",service_Places = " + service_Places + ", restorant = " + restorantService
 				+ ",pckO = " + pckO + ",shippingCost = " + shippingCost + "]";
 	}
 

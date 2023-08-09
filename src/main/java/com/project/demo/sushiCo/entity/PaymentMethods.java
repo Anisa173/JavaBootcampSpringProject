@@ -18,7 +18,7 @@ public class PaymentMethods extends BasicEntity<Integer> {
 
 	// Nepermjet seciles prej metodave te pageses kryhen nje ose disa porosi ne cdo
 	// restorant
-	@OneToMany(mappedBy = "payment_Method", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "p_Methods", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<Order>();
     //Disa metoda Pagese i perkasin nje restoranti
 	@ManyToOne(cascade = CascadeType.ALL)

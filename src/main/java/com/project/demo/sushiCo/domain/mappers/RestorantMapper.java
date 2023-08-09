@@ -46,8 +46,8 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 		restDto.setAplicationId(entity.getAplication().getId());
 		var applicationName = entity.getAplication().getAppname();
 		restDto.setApplicationName(applicationName);
-		restDto.setAdminRId(entity.getUser().getId());
-		var adminName = entity.getUser().getFirst_name().concat(" ").concat(entity.getUser().getLast_name());
+		restDto.setAdminRId(entity.getAdmin().getId());
+		var adminName = entity.getAdmin().getFirst_name().concat(" ").concat(entity.getAdmin().getLast_name());
 		restDto.setAdminName(adminName);
 		return restDto;
 	}

@@ -27,8 +27,8 @@ public class Packaged_OrderedMapper extends BaseMapper<PackageOrdered, Package_O
 		orderedDto.setShippersName(shippersName);
 		var totalOrd = entity.getOrd().stream().count();
 		orderedDto.setTotalOrd(totalOrd);
-		orderedDto.setServiceId(entity.getServiceP().getId());
-		var servicePlaces = entity.getServiceP().getService_Places();
+		orderedDto.setServiceId(entity.getServicePlaces().getId());
+		var servicePlaces = entity.getServicePlaces().getService_Places();
 		orderedDto.setServicePlaces(servicePlaces);
 
 		return orderedDto;

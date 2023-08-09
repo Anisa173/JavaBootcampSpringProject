@@ -12,6 +12,8 @@ import jakarta.persistence.ManyToOne;
 
 	@Entity
 	public class CardBank extends BasicEntity<String>{
+	
+		//Nje ose shumë karta mund të posedohen nga nje user
 		@ManyToOne(cascade = CascadeType.ALL)
 		@JoinColumn(name = "userCardId",referencedColumnName = "id")
 		private User user;

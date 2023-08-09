@@ -27,7 +27,7 @@ public class Restorant extends BasicEntity<Integer> {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminRId", referencedColumnName = "id")
 	@JsonManagedReference
-	private User user;
+	private User admin;
 //Disa restorante kryejne sherbimin ne rruge dixhitale nepermjet te njejtit aplikacion
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "webAppId", referencedColumnName = "idAppl")
@@ -38,14 +38,14 @@ public class Restorant extends BasicEntity<Integer> {
 	@JsonManagedReference
 	private RestorantTables restorantTables;
 //Shume kliente zgjedhin per tu rregjistruar ne aplikacionin tone
-	@ManyToMany(mappedBy = "Restorant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "rest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties
 	private List<User> users;
 //Çdo restorant lejon kryerjen e pageses se porosive nepermjet disa metodave pagese
 	@OneToMany(mappedBy = "restorant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PaymentMethods> payment_MethodsR = new ArrayList<PaymentMethods>();
-//Cdo restorant kryen transportin e porosive ne disa zona "sherbimi"
-	@OneToMany(mappedBy = "RestorantService", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//Çdo restorant kryen transportin e porosive ne disa zona "sherbimi"
+	@OneToMany(mappedBy = "restorantService", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ServicePlaces> places = new ArrayList<ServicePlaces>();
 
 	@Id
@@ -93,7 +93,7 @@ public class Restorant extends BasicEntity<Integer> {
 		this.places = places;
 		this.setRestorant_tables(restorantTables);
 		this.setAplication(aplication);
-		this.setUser(user);
+		this.setAdmin(user);
 	}
 
 	@Override
@@ -210,12 +210,12 @@ public class Restorant extends BasicEntity<Integer> {
 		this.aplication = aplication;
 	}
 
-	public User getUser() {
-		return user;
+	public User getAdmin() {
+		return admin;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAdmin(User user) {
+		this.admin = user;
 	}
 
 	public String toString() {
@@ -224,7 +224,7 @@ public class Restorant extends BasicEntity<Integer> {
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest =" + addressRest
 				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",TimeServiceDay = "
 				+ TimeServiceDay + ",restorantTables = " + restorantTables + ",aplication = " + aplication
-				+ ",user = " + user + "]";
+				+ ",admin = " + admin + "]";
 	}
 
 }

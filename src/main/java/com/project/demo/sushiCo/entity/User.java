@@ -32,12 +32,23 @@ import jakarta.persistence.OneToOne;
 public class User extends BasicEntity<Integer> implements UserDetails {
 
 	private static final long serialVersionUID = 6350320748155867627L;
-//Cdo admin menaxhon porosite e restorantit te tij
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    
+	//Te gjithe userat survejohen nga administratori i platformës
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "adminIdPlatforma ", referencedColumnName = "idAppl ")
+	private User AdminPlatforma;
+
+     //N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin aplikacionin tone	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "userApplId ", referencedColumnName = "idAppl ")
+	private WebAplication webAplication;
+
+	// Cdo admin menaxhon porosite e restorantit te tij
+	@OneToMany(mappedBy = "adminUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Order> orders1 = new ArrayList<Order>();
 
 	// Secilit admin i perket nje restorant
-	@OneToOne(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonBackReference
 	private Restorant restorant;
 
@@ -46,17 +57,19 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	private List<DishCategory> dishCategories = new ArrayList<>();
 
 	// Çdo user mund te posedoje nje ose disa karta banke
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CardBank> cardBank = new ArrayList<CardBank>();
 
-	// Admini menaxhon shippersat e restorantit
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	// Admini i restorantit 'X' e realizon transportin ndërurban të porosive
+	// nepermjet 'shippersave' te tij
+	@OneToMany(mappedBy = "shippers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> user = new ArrayList<User>();
 
 	// Disa transportues te restorantit i pergjigjen porosive te adminit
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idAdmin", referencedColumnName = "id")
-	private User user2;
+	private User shippers;
+
 	// Klientet mund te preferojne nje ose disa restorante dhe nje restorant mund te
 	// zgjidhet nga nje ose N-kliente
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -72,19 +85,20 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	// Klienti shton ne shporte disa menu duke selektuar edhe numrin e artikujve per
 	// cdo menu
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AddInBasket> addInBaskets = new ArrayList<AddInBasket>();
 
 	// Klienti mund te kryeje nje ose disa porosi ne nje interval te shkurter kohe
+	// ose gjate te gjithe intervalit ditor
 	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<Order>();
 
 	// Klienti mund te kryeje disa rezervime gjate intervalit kohor ditor
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CustomerReservation> customerReservations = new ArrayList<CustomerReservation>();
 
 	// Nje shippers-i i urdherohet te dergoje disa shporta porosie
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PackageOrdered> package_Orders = new ArrayList<PackageOrdered>();
 
 	@Id
@@ -117,10 +131,10 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	public User(String first_name, String last_name, String address, String phoneNo, String email, String password,
 			String personalIdentityNo, ShippersStatus shippersStatus, Integer age, UserRole userRole,
-			List<DishCategory> dishCategories, List<CardBank> cardBank, List<User> user, List<Restorant> rest,
-			User user2, List<Dish> dishes, List<AddInBasket> addInBaskets, List<Order> orders,
-			List<CustomerReservation> customerReservations, List<PackageOrdered> package_Orders, Restorant restorant,
-			List<Order> orders1) {
+			List<CustomerReservation> customerReservations, List<PackageOrdered> package_Orders, List<Order> orders,
+			List<AddInBasket> addInBaskets, List<Dish> dishes, List<Restorant> rest, User shippers, List<User> user,
+			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant, List<Order> orders1,
+			User adminPlatforma, WebAplication webAplication) {
 		super();
 
 		this.setFirst_name(first_name);
@@ -136,7 +150,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.cardBank = cardBank;
 		this.dishCategories = dishCategories;
 		this.setRest(rest);
-		this.setUser2(user2);
+		this.setShippers(shippers);
 		this.setDishes(dishes);
 		this.setAddInBaskets(addInBaskets);
 		this.setOrders(orders);
@@ -251,12 +265,12 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.user = user;
 	}
 
-	public User getUser2() {
-		return user2;
+	public User getShippers() {
+		return shippers;
 	}
 
-	public void setUser2(User user2) {
-		this.user2 = user2;
+	public void setShippers(User user2) {
+		this.shippers = user2;
 	}
 
 	public List<Restorant> getRest() {
@@ -331,14 +345,31 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.orders1 = orders1;
 	}
 
+	public User getAdminPlatforma() {
+		return AdminPlatforma;
+	}
+
+	public void setAdminPlatforma(User adminPlatforma) {
+		AdminPlatforma = adminPlatforma;
+	}
+
+	public WebAplication getWebAplication() {
+		return webAplication;
+	}
+
+	public void setWebAplication(WebAplication webAplication) {
+		this.webAplication = webAplication;
+	}
+
 	public String toString() {
 		return "User[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = " + address
 				+ ",phoneNo = " + address + ",email = " + email + ",password = " + password + ",personalIdentityNo = "
 				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",age = " + age + ",userRole = "
 				+ userRole + ",dishCategories = " + dishCategories + ",cardBank = " + cardBank + ",user = " + user
-				+ ",user2 = " + user2 + ",rest = " + rest + ",dishes = " + dishes + ",addInBaskets = " + addInBaskets
-				+ ",orders = " + orders + ", customerReservations = " + customerReservations + ", package_Orders = "
-				+ package_Orders + ",restorant = " + restorant + ",orders1 = " + orders1 + "]";
+				+ ",shippers = " + shippers + ",rest = " + rest + ",dishes = " + dishes + ",addInBaskets = "
+				+ addInBaskets + ",orders = " + orders + ", customerReservations = " + customerReservations
+				+ ", package_Orders = " + package_Orders + ",restorant = " + restorant + ",orders1 = " + orders1
+				+ ",adminPlatforma = " + AdminPlatforma + ",webAplication = " + webAplication + "]";
 	}
 
 	@Override

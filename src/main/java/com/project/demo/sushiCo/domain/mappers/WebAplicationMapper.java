@@ -3,6 +3,8 @@ package com.project.demo.sushiCo.domain.mappers;
 import com.project.demo.sushiCo.domain.dto.WebAplicationDto;
 import com.project.demo.sushiCo.entity.WebAplication;
 
+import lombok.experimental.var;
+
 public class WebAplicationMapper extends BaseMapper<WebAplication, WebAplicationDto> {
 
 	@Override
@@ -24,7 +26,7 @@ public class WebAplicationMapper extends BaseMapper<WebAplication, WebAplication
 		aplDto.setTotalUsers(totalUsers);
 		var totalRestorants = entity.getRestorants().stream().count();
 		aplDto.setTotalRestorants(totalRestorants);
-
+var totalUser = entity.getUser().stream().count();
 		return aplDto;
 	}
 
