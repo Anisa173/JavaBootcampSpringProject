@@ -23,7 +23,7 @@ public class RestorantDto {
 	private Long totalUser;
 	private Long totalPayment_MethodsR;
 	private Long totalService_Places;
-	private String aplicationId;
+	private String webAppId;
 	private String applicationName;
 	private Integer adminRId;
 	private String adminName;
@@ -36,7 +36,7 @@ public class RestorantDto {
 	public RestorantDto(Integer idRestorant, String restNUIS, String restName, String phoneNo, String activity_field,
 			String addressRest, String service_Places, String payment_Methods, String TimeServiceDay,
 			Integer tableCapacity, Integer restorant_tbId, Long totalUser, Long totalPayment_MethodsR,
-			Long totalService_Places, String aplicationId, String applicationName, Integer adminRId, String adminName) {
+			Long totalService_Places, String webAppId, String applicationName, Integer adminRId, String adminName) {
 
 		this.idRestorant = idRestorant;
 		this.setRestNUIS(restNUIS);
@@ -52,7 +52,7 @@ public class RestorantDto {
 		this.setTotalUser(totalUser);
 		this.setTotalPayment_MethodsR(totalPayment_MethodsR);
 		this.setTotalService_Places(totalService_Places);
-		this.setAplicationId(aplicationId);
+		this.setWebAppId(webAppId);
 		this.setApplicationName(applicationName);
 		this.adminRId = adminRId;
 		this.adminName = adminName;
@@ -170,12 +170,12 @@ public class RestorantDto {
 		this.totalService_Places = totalService_Places;
 	}
 
-	public String getAplicationId() {
-		return aplicationId;
+	public String getWebAppId() {
+		return webAppId;
 	}
 
-	public void setAplicationId(String aplicationId) {
-		this.aplicationId = aplicationId;
+	public void setWebAppId(String aplicationId) {
+		this.webAppId = aplicationId;
 	}
 
 	public String getApplicationName() {
@@ -209,7 +209,7 @@ public class RestorantDto {
 				+ service_Places + ",payment_Methods = " + payment_Methods + ",TimeServiceDay = " + TimeServiceDay
 				+ ",tableCapacity = " + tableCapacity + ",restorant_tbId = " + restorant_tbId + ",totalUser = "
 				+ totalUser + ",totalPayment_MethodsR = " + totalPayment_MethodsR + ",totalService_Places = "
-				+ totalService_Places + ",applicationName = " + applicationName + ",aplicationId = " + aplicationId
+				+ totalService_Places + ",applicationName = " + applicationName + ",aplicationId = " + webAppId
 				+ ",adminRId = " + adminRId + ",adminName = " + adminName + "]";
 	}
 
