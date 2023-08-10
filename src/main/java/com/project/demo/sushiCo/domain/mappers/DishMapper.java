@@ -40,12 +40,12 @@ public class DishMapper extends BaseMapper<Dish, DishDto> {
 	}
 
 	@Override
-	public Dish toUpdate(DishDto dto, Dish entity) {
-		entity.setDishName(dto.getDishName());
-		entity.setDishPrize(dto.getDishPrize());
-		entity.setDishDescription(dto.getDishDescription());
+	public Dish toUpdate(DishDto dto, Dish dishes) {
+		dishes.setDishName(dto.getDishName());
+		dishes.setDishPrize(dto.getDishPrize());
+		dishes.setDishDescription(dto.getDishDescription());
 		
-		return entity;
+		return dishes;
 	}
 
 }

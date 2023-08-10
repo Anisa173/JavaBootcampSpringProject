@@ -1,9 +1,9 @@
 package com.project.demo.sushiCo.domain.mappers;
 
 import org.springframework.stereotype.Component;
-
 import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
 import com.project.demo.sushiCo.entity.AddInBasket;
+
 @Component
 public class AddInBasketMapper extends BaseMapper<AddInBasket, AddInBasketDto> {
 
@@ -12,6 +12,7 @@ public class AddInBasketMapper extends BaseMapper<AddInBasket, AddInBasketDto> {
 		AddInBasket inBasket = new AddInBasket();
 		inBasket.setAddId(dto.getAddId());
 		inBasket.setAddItemsDish(dto.getAddItemsDish());
+		inBasket.setValueAmount(dto.getValueAmount());
 		return inBasket;
 	}
 
@@ -25,9 +26,14 @@ public class AddInBasketMapper extends BaseMapper<AddInBasket, AddInBasketDto> {
 		basketDto.setPhoneNo(phoneNo);
 		var customerName = entity.getUser().getFirst_name().concat(" ").concat(entity.getUser().getLast_name());
 		basketDto.setCustomerName(customerName);
-		basketDto.setDishId(entity.getId());
+		basketDto.setIDdish(entity.getId());
 		var dishName = entity.getDish().getDishName();
 		basketDto.setDishName(dishName);
+		var dishPrize = entity.getDish().getDishPrize();
+		basketDto.setDishPrize(dishPrize);
+		basketDto.setdCatId(entity.getDishCategory().getId());
+		var dishType = entity.getDishCategory().getCategoryName();
+		basketDto.setDishName(dishType);
 		return basketDto;
 	}
 
@@ -36,7 +42,5 @@ public class AddInBasketMapper extends BaseMapper<AddInBasket, AddInBasketDto> {
 		entity.setAddItemsDish(dto.getAddItemsDish());
 		return entity;
 	}
-
-
 
 }

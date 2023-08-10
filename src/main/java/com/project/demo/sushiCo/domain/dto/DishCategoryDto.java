@@ -6,16 +6,20 @@ public class DishCategoryDto {
 	private String categoryName;
 	private Integer admin_Id;
 	private String adminName;
+	private Long totalAddInBasket;
 
 	public DishCategoryDto() {
 
 	}
-	public DishCategoryDto(Integer id, String categoryName, Long totalDishes, Integer admin_Id, String adminName) {
+
+	public DishCategoryDto(Integer id, String categoryName, Long totalDishes, Integer admin_Id, String adminName,
+			Long totalAddInBasket) {
 		this.id = id;
 		this.categoryName = categoryName;
 		this.totalDishes = totalDishes;
 		this.admin_Id = admin_Id;
 		this.adminName = adminName;
+		this.totalAddInBasket = totalAddInBasket;
 	}
 
 	public Integer getId() {
@@ -58,9 +62,18 @@ public class DishCategoryDto {
 		this.adminName = adminName;
 	}
 
+	public Long getTotalAddInBasket() {
+		return totalAddInBasket;
+	}
+
+	public void setTotalAddInBasket(Long totalAddInBasket) {
+		this.totalAddInBasket = totalAddInBasket;
+	}
+
 	public String toString() {
 		return "DishCategoryDto[id = " + id + ",categoryName = " + categoryName + ",totalDishes = " + totalDishes
-				+ ",admin_Id = " + admin_Id + ",adminName = " + adminName + "]";
+				+ ",admin_Id = " + admin_Id + ",adminName = " + adminName + ",totalAddInBasket = " + totalAddInBasket
+				+ "]";
 	}
 
 }

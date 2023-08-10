@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 
 @Getter
@@ -24,15 +25,19 @@ import lombok.AllArgsConstructor;
 @Builder
 @AllArgsConstructor
 @Entity
+@Table(name = "dishCategory")
 public class DishCategory extends BasicEntity<Integer> {
 
-	//Dishes menaxhohen nga Admini i çdo restoranti
+	// Dishes menaxhohen nga Admini i çdo restoranti
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "admin_Id", referencedColumnName = "id")
 	private User user;
 
+	// Nje kategori Dishes mund te perzgjidhet nga me shume se nje konsumator
+	@OneToMany(mappedBy = "dishCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<AddInBasket> addInBasket = new ArrayList<AddInBasket>();
 
-    //Çdo dishCategory përmban N-dishes	
+	// Çdo dishCategory përmban N-dishes
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Dish> dishes = new ArrayList<Dish>();
 
@@ -46,11 +51,12 @@ public class DishCategory extends BasicEntity<Integer> {
 		super();
 	}
 
-	public DishCategory(String categoryName, List<Dish> dishes, User user) {
+	public DishCategory(String categoryName, List<Dish> dishes, User user, List<AddInBasket> addInBasket) {
 		super();
 		this.categoryName = categoryName;
 		this.setDishes(dishes);
 		this.user = user;
+		this.addInBasket = addInBasket;
 	}
 
 	@Override
@@ -86,9 +92,17 @@ public class DishCategory extends BasicEntity<Integer> {
 		this.user = user;
 	}
 
+	public List<AddInBasket> getAddInBasket() {
+		return addInBasket;
+	}
+
+	public void setAddInBasket(List<AddInBasket> addInBasket) {
+		this.addInBasket = addInBasket;
+	}
+
 	public String toString() {
 		return "DishCategory[id = " + id + ",categoryName = " + categoryName + ",dishes = " + dishes + ",user = " + user
-				+ "]";
+				+ ",addInBasket = " + addInBasket + "]";
 	}
 
 }

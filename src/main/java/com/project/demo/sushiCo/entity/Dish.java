@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 
 @Getter
@@ -24,6 +25,7 @@ import lombok.AllArgsConstructor;
 @Builder
 @AllArgsConstructor
 @Entity
+@Table(name = "dish")
 public class Dish extends BasicEntity<Integer> {
     //Disa dishes menaxhohen nga admini
 	@ManyToOne(cascade = CascadeType.ALL)

@@ -21,6 +21,8 @@ public class DishCategoryMapper extends BaseMapper<DishCategory, DishCategoryDto
 		dishCategoryDto.setCategoryName(entity.getCategoryName());
 		var totalDishes = entity.getDishes().stream().count();
 		dishCategoryDto.setTotalDishes(totalDishes);
+		var totalAddInBasket = entity.getAddInBasket().stream().count();
+		dishCategoryDto.setTotalAddInBasket(totalAddInBasket);
 		dishCategoryDto.setAdmin_Id(entity.getUser().getId());
 		dishCategoryDto
 				.setAdminName(entity.getUser().getFirst_name().concat(" ").concat(entity.getUser().getLast_name()));
@@ -32,4 +34,5 @@ public class DishCategoryMapper extends BaseMapper<DishCategory, DishCategoryDto
 		entity.setCategoryName(dto.getCategoryName());
 		return entity;
 	}
+
 }

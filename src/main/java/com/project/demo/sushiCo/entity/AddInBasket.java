@@ -7,6 +7,7 @@ import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,14 +26,17 @@ public class AddInBasket extends BasicEntity<Integer> {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "custId", referencedColumnName = "id")
 	private User user;
-	
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "dCatId ", referencedColumnName = "id")
+	private DishCategory dishCategory;
+
 	// Nje menu mund te selektohet nga shume kliente
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "IDdish", referencedColumnName = "dId")
 	private Dish dish;
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer addId;
 	@Column(name = "addId")
@@ -92,9 +96,17 @@ public class AddInBasket extends BasicEntity<Integer> {
 		this.valueAmount = valueAmount;
 	}
 
+	public DishCategory getDishCategory() {
+		return dishCategory;
+	}
+
+	public void setDishCategory(DishCategory dishCategory) {
+		this.dishCategory = dishCategory;
+	}
+
 	public String toString() {
 		return "AddInBasket[addId = " + addId + ", addItemDish = " + addItemsDish + ",user = " + user + ",dish = "
-				+ dish + ",valueAmount = " + valueAmount + "]";
+				+ dish + ",valueAmount = " + valueAmount + ",dishCategory = " + dishCategory + "]";
 	}
 
 }

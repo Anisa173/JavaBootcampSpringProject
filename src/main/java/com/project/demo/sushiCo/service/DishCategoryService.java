@@ -3,9 +3,12 @@ package com.project.demo.sushiCo.service;
 import java.util.List;
 
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
+import com.project.demo.sushiCo.domain.dto.DishDto;
+
 import jakarta.validation.Valid;
 
 public interface DishCategoryService {
+
 	void delete(Integer id) throws Exception;
 
 	DishCategoryDto register(@Valid RegisterCategoryDishForm dishCategoryform) throws Exception;
@@ -17,4 +20,7 @@ public interface DishCategoryService {
 	List<DishCategoryDto> getDishCategory() throws Exception;
 
 	DishCategoryDto getDishCategoryById(Integer id) throws Exception;
+
+	List<DishDto> getDishesByDishCategory(Integer id) throws Exception;
+
 }

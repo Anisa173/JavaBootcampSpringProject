@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
+import com.project.demo.sushiCo.domain.dto.DishDto;
 import com.project.demo.sushiCo.domain.mappers.DishCategoryMapper;
+import com.project.demo.sushiCo.entity.DishCategory;
 import com.project.demo.sushiCo.repository.DishCategoryRepository;
 import com.project.demo.sushiCo.service.DishCategoryService;
 import com.project.demo.sushiCo.service.RegisterCategoryDishForm;
@@ -61,6 +63,12 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 
 		return dishCategoryMapper.toDto(dishCategoryRepository.findById(id)
 				.orElseThrow(() -> new ResourceException(String.format("DishCategory not found!", id))));
+	}
+
+	@Override
+	public List<DishDto> getDishesByDishCategory(Integer id) throws Exception {
+		List<DishDto> list = ((List<DishDto>) dishCategoryMapper.toDto((DishCategory) dishCategoryRepository.getDishesByDishCategory(id)));
+		return list;
 	}
 
 }

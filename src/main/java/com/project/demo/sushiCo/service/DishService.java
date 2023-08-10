@@ -1,21 +1,22 @@
 package com.project.demo.sushiCo.service;
 
-import java.util.List;
 import com.project.demo.sushiCo.domain.dto.DishDto;
-import com.project.demo.sushiCo.serviceImpl.RegisterUserForm;
+import com.project.demo.sushiCo.serviceImpl.RegisterDishForm;
 import jakarta.validation.Valid;
 
 public interface DishService {
-/*	void delete(Integer id) throws Exception;
 
-	DishDto register(@Valid RegisterUserForm form) throws Exception;
+	void deleteDishByCategory(Integer id, Integer categoryId) throws Exception;
+
+	DishDto register(@Valid RegisterDishForm form) throws Exception;
 
 	DishDto create(@Valid DishDto dishDto) throws Exception;
 
-	DishDto update(@Valid DishDto dishDto, Integer id) throws Exception;
+    DishDto update(@Valid DishDto dishDto, Integer dId, Integer categoryId) throws Exception;
+	
+	DishDto getDishByDishCategory(Integer dId, Integer categoryId) throws Exception;
 
-	List<DishDto> getDishes() throws Exception;
+	
 
-	DishDto getDishById(Integer id) throws Exception;*/
 
 }

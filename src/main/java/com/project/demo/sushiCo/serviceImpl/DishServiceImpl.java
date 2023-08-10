@@ -1,11 +1,10 @@
 package com.project.demo.sushiCo.serviceImpl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.demo.sushiCo.domain.dto.DishDto;
 import com.project.demo.sushiCo.domain.mappers.DishMapper;
+import com.project.demo.sushiCo.entity.Dish;
 import com.project.demo.sushiCo.repository.DishRepository;
 import com.project.demo.sushiCo.service.DishService;
 import jakarta.validation.Valid;
@@ -23,44 +22,39 @@ public class DishServiceImpl implements DishService {
 	}
 
 	@Override
-	public void delete(Integer id) throws Exception {
-		dishRepository.deleteById(id);
+	public void deleteDishByCategory(Integer id, Integer categoryId) throws Exception {
+		dishRepository.deleteDishByCategory(id, categoryId);
 	}
 
 	@Override
-	public DishDto register(@Valid RegisterUserForm form) throws Exception {
-		
-		return null;
+	public DishDto register(@Valid RegisterDishForm form) throws Exception {
+		var dishes = getDishByDishCategory(form.getId(), form.getCategoryId());
+		dishes.setDishName(form.getDishName());
+		dishes.setDishPrize(form.getDishPrize());
+		dishes.setDishDescription(form.getDishDescription());
+		dishes.setCategoryId(form.getCategoryId());
+		dishes.setDishType(form.getDishType());//selective
+		dishes.setAdminId(form.getAdminId());
+		return dishMapper.toDto(dishRepository.save(dishes));
 	}
 
-/*private String dishName;
-	@Column(name = "dishPrize")
-	private Double dishPrize;
-	@Column(name = "dishDescrition")
-	private String dishDescription;*/
-	
 	@Override
 	public DishDto create(@Valid DishDto dishDto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		var dishDto1 = dishMapper.toEntity(dishDto);
+		return dishMapper.toDto(dishRepository.save(dishDto1));
 	}
 
 	@Override
-	public DishDto update(@Valid DishDto dishDto, Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public DishDto update(@Valid DishDto dishDto, Integer dId, Integer categoryId) throws Exception {
+		Dish dishes = dishMapper.toEntity(getDishByDishCategory(dId, categoryId));
+		var uptodate = dishMapper.toUpdate(dishDto, dishes);
+		return dishMapper.toDto(dishRepository.save(uptodate));
 	}
 
 	@Override
-	public List<DishDto> getDishes() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public DishDto getDishByDishCategory(Integer dId, Integer categoryId) throws Exception {
 
-	@Override
-	public DishDto getDishById(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return dishRepository.getDishByDishCategory(dId, categoryId);
 	}
 
 }
