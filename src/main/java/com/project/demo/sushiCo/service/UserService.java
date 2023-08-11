@@ -3,6 +3,9 @@ package com.project.demo.sushiCo.service;
 import java.util.List;
 import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.project.demo.sushiCo.domain.dto.CardBankDto;
+import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
 import com.project.demo.sushiCo.domain.dto.UserDto;
 import com.project.demo.sushiCo.domain.dto.UserWithFileDto;
 import com.project.demo.sushiCo.serviceImpl.Login;
@@ -33,11 +36,21 @@ public interface UserService {
 
 	UserDto getRestorantPServices(Integer custId, Integer restorantId, Integer service_PlacesId) throws Exception;
 
+    UserDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception; 
+	
+	OrderByProcessingDto getPaymentServicesById(Integer custmId,Integer idRestorant,Integer pmId,Integer servPId) throws Exception;
+	
+	CardBankDto getCardsByCustomerId(Integer cardId,Integer custId) throws Exception;
+	
+    UserDto  displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception;
+	
+	UserDto createPaymentCard() throws Exception;
+	
+	UserDto createUserOrder() throws Exception;
 
 	
-	
-	
-	UserDto selectPaymentCard() throws Exception;
-	
+
+
+
 	
 }

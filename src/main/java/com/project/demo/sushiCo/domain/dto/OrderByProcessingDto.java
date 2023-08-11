@@ -7,12 +7,13 @@ public class OrderByProcessingDto {
 	private Integer servicePId;
 	private String service_placesR;
 
-	public OrderByProcessingDto(Integer idcust,Integer paymentMId,String payments_methodR,Integer servicePId,String service_placesR) {
-	this.idcust = idcust;
-	this.paymentMId = paymentMId;	
-	this.payments_methodR = payments_methodR;	
-	this.servicePId = servicePId;
-	this.service_placesR = service_placesR;
+	public OrderByProcessingDto(Integer idcust, Integer paymentMId, String payments_methodR, Integer servicePId,
+			String service_placesR) {
+		this.idcust = idcust;
+		this.paymentMId = paymentMId;
+		this.payments_methodR = payments_methodR;
+		this.servicePId = servicePId;
+		this.service_placesR = service_placesR;
 	}
 
 	public Integer getPaymentMId() {
@@ -55,4 +56,8 @@ public class OrderByProcessingDto {
 		this.idcust = idcust;
 	}
 
+	public String toString() {
+		return "OrderByProcessing[idcust = " + idcust + ",paymentMId = " + paymentMId + ",payments_methodR = "
+				+ payments_methodR + ",servicePId = " + servicePId + ",service_placesR = " + service_placesR + "]";
+	}
 }

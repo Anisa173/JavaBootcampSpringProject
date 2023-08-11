@@ -3,6 +3,7 @@ package com.project.demo.sushiCo.domain.dto;
 import java.sql.Date;
 
 import groovy.transform.builder.Builder;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class CardBankDto {
 	@NotNull(message = "It's required")
 	@Size(min = 16, max = 20, message = "This contains at least 16 characters which are all numbers")
 	private String BankId;
+	@NotBlank
 	@NotNull(message = "It's required")
 	private Date valid_from;
 	@NotNull(message = "It's required")
