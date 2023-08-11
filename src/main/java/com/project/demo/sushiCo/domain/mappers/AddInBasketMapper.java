@@ -33,7 +33,7 @@ public class AddInBasketMapper extends BaseMapper<AddInBasket, AddInBasketDto> {
 		basketDto.setDishPrize(dishPrize);
 		basketDto.setdCatId(entity.getDishCategory().getId());
 		var dishType = entity.getDishCategory().getCategoryName();
-		basketDto.setDishName(dishType);
+		basketDto.setDishType(dishType);
 		return basketDto;
 	}
 

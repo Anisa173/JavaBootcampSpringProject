@@ -51,7 +51,7 @@ public class Order extends BasicEntity<Integer> {
 	// Disa porosi mund te kryen gjate nje intervali te shkurter kohe ose gjate te
 	// gjithe dite ~ varet nga klienti
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "idCustomer", referencedColumnName = "oId")
+	@JoinColumn(name = "idCustomer" , referencedColumnName = "oId")
 	private User user;
 
 	@Id
