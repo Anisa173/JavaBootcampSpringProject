@@ -14,7 +14,7 @@ public class PaymentMethodsDto {
 	@NotNull(message = "It can not be null,it's optional")
 	private String payment_Method;
 	private Long totalOrders;
-	private Integer paymentIdApp;
+	private Integer paymentId;
 	private String restName;
 
 	public PaymentMethodsDto() {
@@ -26,7 +26,7 @@ public class PaymentMethodsDto {
 		this.Id = Id;
 		this.payment_Method = payment_Methods;
 		this.setTotalOrders(totalOrders);
-		this.setPaymentIdApp(paymentIdApp);
+		this.setPaymentId(paymentIdApp);
 		this.setRestName(restName);
 	}
 
@@ -54,13 +54,13 @@ public class PaymentMethodsDto {
 		this.totalOrders = totalOrders;
 	}
 
-	public Integer getPaymentIdApp() {
+	public Integer getPaymentId() {
 
-		return paymentIdApp;
+		return paymentId;
 	}
 
-	public void setPaymentIdApp(Integer paymentIdApp) {
-		this.paymentIdApp = paymentIdApp;
+	public void setPaymentId(Integer paymentIdApp) {
+		this.paymentId = paymentIdApp;
 	}
 
 	public String getRestName() {
@@ -73,7 +73,7 @@ public class PaymentMethodsDto {
 
 	public String toString() {
 		return "PaymentMethodsDto[Id = " + Id + ",payment_Method = " + payment_Method + ",totalOrders = " + totalOrders
-				+ ",paymentIdApp = " + paymentIdApp + ",restName = " + restName + "]";
+				+ ",paymentIdApp = " + paymentId + ",restName = " + restName + "]";
 
 	}
 

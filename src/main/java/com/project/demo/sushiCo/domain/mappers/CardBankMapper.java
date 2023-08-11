@@ -20,7 +20,8 @@ public class CardBankMapper extends BaseMapper<CardBank , CardBankDto> {
 	@Override
 	public CardBankDto toDto(CardBank entity) {
 		CardBankDto cardsDto = new CardBankDto();
-		cardsDto.setBankId(entity.getId());
+		cardsDto.setId(entity.getId());
+		cardsDto.setBankId(entity.getBankId());
 		cardsDto.setValid_from(entity.getValid_from());
 		cardsDto.setExpiredTime(entity.getExpiredTime());
 		cardsDto.setCardSecurityCode(entity.getCardSecurityCode());

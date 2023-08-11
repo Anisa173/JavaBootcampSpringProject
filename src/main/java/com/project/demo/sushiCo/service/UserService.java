@@ -24,11 +24,20 @@ public interface UserService {
 	void delete(Integer id) throws Exception;
 
 	UserDto login(@Valid Login form) throws Exception;
-	
+
 	Resource downloadIdentitficationCard(Integer userId) throws Exception;
 
 	UserDto addIdentification(Integer userId, UserWithFileDto reqDto) throws Exception;
 
-	
+	UserDto getRestorantPMethods(Integer userId, Integer restorantId, Integer paymentId) throws Exception;
 
+	UserDto getRestorantPServices(Integer custId, Integer restorantId, Integer service_PlacesId) throws Exception;
+
+
+	
+	
+	
+	UserDto selectPaymentCard() throws Exception;
+	
+	
 }

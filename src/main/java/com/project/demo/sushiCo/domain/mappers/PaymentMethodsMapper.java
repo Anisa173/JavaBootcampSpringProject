@@ -22,9 +22,9 @@ public class PaymentMethodsMapper extends BaseMapper<PaymentMethods, PaymentMeth
 	methodsDto.setPayment_Method(entity.getPayment_Method());
 	var totalOrders = entity.getOrders().stream().count();
 	methodsDto.setTotalOrders(totalOrders);
-	methodsDto.setPaymentIdApp(entity.getAppRest().getId());
-	var appName = entity.getAppRest().getRestName();
-	methodsDto.setRestName(appName);
+	methodsDto.setPaymentId(entity.getRestorant().getId());
+	var restName = entity.getRestorant().getRestName();
+	methodsDto.setRestName(restName);
 
 		return methodsDto;
 	}

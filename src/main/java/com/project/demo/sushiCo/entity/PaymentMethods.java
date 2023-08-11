@@ -32,7 +32,7 @@ public class PaymentMethods extends BasicEntity<Integer> {
 	private List<Order> orders = new ArrayList<Order>();
 	// Disa metoda Pagese i perkasin nje restoranti
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "paymentIdApp", referencedColumnName = "idRestorant")
+	@JoinColumn(name = "paymentId", referencedColumnName = "idRestorant")
 	private Restorant restorant;
 
 	@Id
@@ -70,7 +70,7 @@ public class PaymentMethods extends BasicEntity<Integer> {
 		this.payment_Method = payment_Methods;
 	}
 
-	public Restorant getAppRest() {
+	public Restorant getRestorant() {
 		return restorant;
 	}
 
@@ -90,5 +90,7 @@ public class PaymentMethods extends BasicEntity<Integer> {
 		return "PaymentMethods[Id = " + Id + ",payment_Method = " + payment_Method + ", restorant = " + restorant
 				+ ",orders = " + orders + "]";
 	}
+
+	
 
 }

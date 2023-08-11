@@ -100,7 +100,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void delete(Integer id) {
-		repository.deleteById(id);
+		var toDelete = repository.findById(id);
+		toDelete.get().setDeleted(false);
+		repository.save(toDelete.get());
 	}
 
 	@Override
@@ -125,4 +127,21 @@ public class UserServiceImpl implements UserService {
 		return (Resource) storageService.loadAsResource(user.getPersonalIdentityNo());
 	}
 
+	@Override
+	public UserDto getRestorantPMethods(Integer userId, Integer restorantId, Integer paymentId) throws Exception {
+		return repository.getRestorantPMethods(userId, restorantId, paymentId);
+	}
+
+	@Override
+	public UserDto getRestorantPServices(Integer custId, Integer restorantId, Integer service_PlacesId)
+			throws Exception {
+		return repository.getRestorantPServices(custId, restorantId, service_PlacesId);
+	}
+
+	@Override
+	public UserDto selectPaymentCard() throws Exception {
+		return repository.selectPaymentCard();
+	}
+
+	
 }

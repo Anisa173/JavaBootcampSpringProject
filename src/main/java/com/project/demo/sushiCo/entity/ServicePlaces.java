@@ -32,7 +32,7 @@ public class ServicePlaces extends BasicEntity<Integer> {
 
 	// Disa zona sherbimi i perkasin cdo restoranti
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "service_idApp", referencedColumnName = "idRestorant")
+	@JoinColumn(name = "service_idR", referencedColumnName = "idRestorant")
 	private Restorant restorantService;
 
 	@Id

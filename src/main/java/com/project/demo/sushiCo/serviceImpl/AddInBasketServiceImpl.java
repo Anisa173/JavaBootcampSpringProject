@@ -35,6 +35,13 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 	}
 
 	@Override
+	public SelectDishesFormDto getDishDCategoriesByCustomerId(Integer dId, Integer categoryId, Integer customerId)
+			throws Exception {
+
+		return basketRepository.getDishDCategoriesByCustomerId(dId, categoryId, customerId);
+	}
+
+	@Override
 	public SelectDishesFormDto getDishesByCustomerId(Integer dId, Integer categoryId, Integer custId) throws Exception {
 		return basketRepository.getDishesByCustomerId(dId, categoryId, custId);
 	}
@@ -52,18 +59,10 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 		return basketMapper.toDto(basketRepository.save(result));
 	}
 
-
-	@Override
-	public SelectDishesFormDto getDishDCategoriesByCustomerId(Integer dId, Integer categoryId, Integer customerId)
-			throws Exception {
-
-		return basketRepository.getDishDCategoriesByCustomerId(dId, categoryId, customerId);
-	}
-
 	@Override
 	public void delete(Integer dId, Integer id) throws Exception {
 		basketRepository.delete(dId, id);
-		
+
 	}
 
 }
