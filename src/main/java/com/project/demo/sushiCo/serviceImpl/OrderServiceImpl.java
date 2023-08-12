@@ -55,9 +55,9 @@ public class OrderServiceImpl implements OrderService {
 
 	//Admini i webAplication rendit porositë sipas kostos ASC apo DESC te grupuara sipas customerId
 	@Override
-	public List<OrderDto> getOrdersByCustId(Integer customerId) throws Exception {
+	public List<OrderDto> getOrdersByCost() throws Exception {
 		
-		return orderRepository.getOrdersByCustId(customerId);
+		return orderRepository.getOrdersByCost();
 	}
 
 
@@ -68,11 +68,19 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.getOrderMaxByCustomerId(idRestorant, custId);
 	}
 	
-	// Admini i restorantit 'sheh' porositë sipas customerId dhe datës së proçesimit
+	
+	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne cilin restorant 
 	@Override
-	public List<OrderDto> getRestorantOrders(Integer adminIdR) throws Exception {
+	public List<OrderDto> getOrdByRestorantId(Integer customerId, Integer restorantId) throws Exception {
 		
-		return ((OrderRepository) orderRepository).getRestorantOrders(adminIdR);
+		return orderRepository.getOrdByRestorantId(customerId,restorantId);
+	}
+
+
+	@Override
+	public void cancelUserOrder(Integer orderId, Integer customerId) throws Exception {
+
+		 orderRepository.cancelUserOrder(orderId,customerId);
 	}
 
 	

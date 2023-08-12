@@ -180,11 +180,7 @@ public class UserServiceImpl implements UserService {
 	return userMapper.toDto(repository.save(cardB));
 	}
 
-	@Override
-	public UserDto cancelUserOrder() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 }
