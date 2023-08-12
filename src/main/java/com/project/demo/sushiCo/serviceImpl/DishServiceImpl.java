@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.demo.sushiCo.domain.dto.DishDto;
@@ -55,6 +57,19 @@ public class DishServiceImpl implements DishService {
 	public DishDto getDishByDishCategory(Integer dId, Integer categoryId) throws Exception {
 
 		return dishRepository.getDishByDishCategory(dId, categoryId);
+	}
+
+	@Override
+	public List<DishDto> getDishByPreferences() throws Exception {
+		
+		return dishRepository.getDishByPreferences();
+	}
+
+
+	@Override
+	public DishDto getMaxPreference(Integer IdDish) throws Exception {
+		
+		return dishRepository.getMaxPreference(IdDish);
 	}
 
 }

@@ -47,8 +47,11 @@ public interface UserService {
 
 	UserDto createPaymentCard() throws Exception;
 
+	// Anullon porosine e konfirmuar 'customer'
 	UserDto cancelUserOrder() throws Exception;
 
-	UserDto getOrdersByCustomerId(Integer IdCustom) throws Exception;
+
+
+
 
 }

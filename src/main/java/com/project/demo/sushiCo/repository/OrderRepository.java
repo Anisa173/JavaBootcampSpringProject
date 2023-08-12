@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,29 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ "WHERE uc.o.orderItems = sum(uc.ab.addItemDish) AND uc.o.orderPrize = sum(uc.ab.amountValue) AND uc.o.orderStatus = 'Pending' ")
 	Order createOrder();
 
+	//Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon sipas idRestorant
+	@Query("Select r.c.o , r.idRestorant "
++ "From User c INNER JOIN Restorant r ON  "
++ "INNER JOIN Order o ON "	
++ "Group By "	
++ "Order By "	
+	)
 	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
+
+	@Query(" ")
+
+	List<OrderDto> getOrdersByRestorantId(Integer customerId, Integer restorantId);
+
+	@Query(" ")
+	List<OrderDto> getOrdersRByCustomerId(Integer customerId);
+
+	@Query(" ")
+	List<OrderDto> getOrdersByCustId(Integer customerId);
+
+	@Query(" ")
+	OrderDto getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
+
+	@Query(" ")
+	List<OrderDto> getRestorantOrders(Integer adminIdR);
 
 }

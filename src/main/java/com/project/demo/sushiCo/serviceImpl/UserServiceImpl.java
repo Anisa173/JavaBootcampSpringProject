@@ -186,10 +186,5 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	@Override
-	public UserDto getOrdersByCustomerId(Integer IdCustom) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
