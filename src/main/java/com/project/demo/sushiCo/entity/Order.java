@@ -11,8 +11,6 @@ import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -62,26 +60,23 @@ public class Order extends BasicEntity<Integer> {
 	private Double orderPrize;
 	@Column(name = "orderItems")
 	private Integer orderItems;
-	@Enumerated(EnumType.STRING)
-	private OrderStatus orderStatus;
+	@Column(name = "orderStatus")
+	private String orderStatus;
 	@Column(name = "oTimeConfirmed")
 	private LocalDateTime oTimeConfirmed;
 	@Column(name = "oTimeProccessed")
 	private LocalDateTime oTimeProccessed;
-
 	public Order() {
 		super();
 	}
 
-	public Order(Double orderPrize, Integer orderItems, OrderStatus orderStatus, LocalDateTime oTimeConfirmed,
-			LocalDateTime oTimeProccessed, List<Dish> dish, PackageOrdered packageOrdered, User user,
+	public Order(Double orderPrize, Integer orderItems, String orderStatus, List<Dish> dish, PackageOrdered packageOrdered, User user,
 			PaymentMethods p_methods) {
 		super();
 		this.orderPrize = orderPrize;
 		this.orderItems = orderItems;
 		this.orderStatus = orderStatus;
-		this.oTimeConfirmed = oTimeConfirmed;
-		this.oTimeProccessed = oTimeConfirmed;
+		
 		this.dish = dish;
 		this.packageOrdered = packageOrdered;
 		this.user = user;
@@ -114,28 +109,12 @@ public class Order extends BasicEntity<Integer> {
 		this.orderItems = orderItems;
 	}
 
-	public OrderStatus getOrderStatus() {
+	public String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(OrderStatus oStatus) {
+	public void setOrderStatus(String oStatus) {
 		this.orderStatus = oStatus;
-	}
-
-	public LocalDateTime getOTimeConfirmed() {
-		return oTimeConfirmed;
-	}
-
-	public void setOTimeConfirmed(LocalDateTime oTimeConfirmed) {
-		this.oTimeConfirmed = oTimeConfirmed;
-	}
-
-	public LocalDateTime getOTimeProccessed() {
-		return oTimeProccessed;
-	}
-
-	public void setOTimeProccessed(LocalDateTime oTimeProccessed) {
-		this.oTimeProccessed = oTimeProccessed;
 	}
 
 	public List<Dish> getDish() {
@@ -169,12 +148,27 @@ public class Order extends BasicEntity<Integer> {
 	public void setP_methods(PaymentMethods p_methods) {
 		this.p_methods = p_methods;
 	}
+public LocalDateTime getOTimeConfirmed() {
+		return oTimeConfirmed;
+	}
+
+	public void setOTimeConfirmed(LocalDateTime oTimeConfirmed) {
+		this.oTimeConfirmed = oTimeConfirmed;
+	}
+
+	public LocalDateTime getOTimeProccessed() {
+		return oTimeProccessed;
+	}
+
+	public void setOTimeProccessed(LocalDateTime oTimeProccessed) {
+		this.oTimeProccessed = oTimeProccessed;
+	}
 
 	public String toString() {
 		return "Order[oId = " + oId + ",orderPrize = " + orderPrize + ",orderItems = " + orderItems + ",orderStatus ="
-				+ orderStatus + ",oTimeConfirmed =" + oTimeConfirmed + ",oTimeProccessed =" + oTimeProccessed
-				+ ", dish = " + dish + ",packageOrdered = " + packageOrdered + ",user = " + user + ",p_methods = "
-				+ p_methods + "]";
+				+ orderStatus + ",dish = " + dish + ",packageOrdered = " + packageOrdered + ",user = " + user + ",p_methods = "
+				+ p_methods + ",oTimeConfirmed = " +oTimeConfirmed+ ",oTimeProccessed = " +oTimeProccessed+ "]";
 	}
 
+	
 }

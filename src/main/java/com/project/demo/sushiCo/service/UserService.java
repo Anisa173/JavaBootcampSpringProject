@@ -36,21 +36,19 @@ public interface UserService {
 
 	UserDto getRestorantPServices(Integer custId, Integer restorantId, Integer service_PlacesId) throws Exception;
 
-    UserDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception; 
-	
-	OrderByProcessingDto getPaymentServicesById(Integer custmId,Integer idRestorant,Integer pmId,Integer servPId) throws Exception;
-	
-	CardBankDto getCardsByCustomerId(Integer cardId,Integer custId) throws Exception;
-	
-    UserDto  displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception;
-	
+	UserDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception;
+
+	OrderByProcessingDto getPaymentServicesById(Integer custmId, Integer idRestorant, Integer pmId, Integer servPId)
+			throws Exception;
+
+	CardBankDto getCardsByCustomerId(Integer cardId, Integer custId) throws Exception;
+
+	UserDto displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception;
+
 	UserDto createPaymentCard() throws Exception;
-	
-	UserDto createUserOrder() throws Exception;
 
-	
+	UserDto cancelUserOrder() throws Exception;
 
+	UserDto getOrdersByCustomerId(Integer IdCustom) throws Exception;
 
-
-	
 }

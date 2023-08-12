@@ -2,8 +2,6 @@ package com.project.demo.sushiCo.domain.dto;
 
 import java.time.LocalDateTime;
 
-import com.project.demo.sushiCo.entity.OrderStatus;
-
 import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,7 +16,7 @@ public class OrderDto {
 	@NotNull(message = "It can not be null")
 	private Integer orderItems;
 	@NotNull(message = "It can not be null")
-	private OrderStatus orderStatus;
+	private String orderStatus;
 	@NotNull(message = "It can not be null")
 	private LocalDateTime oTimeConfirmed;
 	@NotNull(message = "It can not be null")
@@ -35,7 +33,7 @@ public class OrderDto {
 
 	}
 
-	public OrderDto(Integer oId, Double orderPrize, Integer orderItems, OrderStatus orderStatus,
+	public OrderDto(Integer oId, Double orderPrize, Integer orderItems, String orderStatus,
 			LocalDateTime oTimeConfirmed, LocalDateTime oTimeProccessed, Integer idCustomer, String customerName,
 			Integer idShporta, String paymentMethodRest, Integer paymentMethodId) {
 		this.oId = oId;
@@ -75,11 +73,11 @@ public class OrderDto {
 		this.orderItems = orderItems;
 	}
 
-	public OrderStatus getOrderStatus() {
+	public String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(OrderStatus orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 

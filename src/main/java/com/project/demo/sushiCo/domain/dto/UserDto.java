@@ -6,6 +6,7 @@ import com.project.demo.sushiCo.entity.UserRole;
 
 import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -20,13 +21,16 @@ public class UserDto {
 	private Integer id;
 	@NotNull(message = " * Required * ")
 	@Size(min = 3, message = "Name should be at least 3 characters")
+	@NotBlank(message = "First_name ")
 	private String first_name;
 	@NotNull(message = "* Required *")
 	@Size(min = 4, message = "Surname should be at least 4 characters")
 	private String last_name;
+	@NotBlank(message = "Zona e Sherbimit/Rruga:/Ndertesa nr: /Kati i nderteses/Apartamenti nr ")
 	@NotNull(message = " * Required *")
 	@Size(min = 20, max = 65, message = "This field should include all components such as : Country/City/Street/Apartment/Apartment no")
 	private String address;
+	@NotBlank(message = "+355 6000000000")
 	@NotNull(message = " * Required *")
 	@Size(min = 9, max = 12, message = "PhoneNo is at minimum with 9 characters and at maximin with 12 characters")
 	private String phoneNo;

@@ -14,8 +14,6 @@ public class OrderMapper extends BaseMapper<Order, OrderDto> {
 	order.setOrderPrize(dto.getOrderPrize());
 	order.setOrderItems(dto.getOrderItems());
 	order.setOrderStatus(dto.getOrderStatus());
-	order.setOTimeConfirmed(dto.getOTimeConfirmed());
-	order.setOTimeProccessed(dto.getOTimeProccessed());
 	return order;
 	}
 
@@ -26,8 +24,6 @@ public class OrderMapper extends BaseMapper<Order, OrderDto> {
 	orderDto.setOrderPrize(entity.getOrderPrize());
 	orderDto.setOrderItems(entity.getOrderItems());
 	orderDto.setOrderStatus(entity.getOrderStatus());
-	orderDto.setOTimeConfirmed(entity.getOTimeConfirmed());
-	orderDto.setOTimeProccessed(entity.getOTimeProccessed());	
 	orderDto.setPaymentMethodId(entity.getP_methods().getId());
 	var paymentMethodRest = entity.getP_methods().getPayment_Method();
 	orderDto.setPaymentMethodRest(paymentMethodRest);
@@ -45,9 +41,7 @@ public class OrderMapper extends BaseMapper<Order, OrderDto> {
 	public Order toUpdate(OrderDto dto, Order entity) {
 		entity.setOrderPrize(dto.getOrderPrize());
 		entity.setOrderItems(dto.getOrderItems());
-		entity.setOrderStatus(dto.getOrderStatus());
-		entity.setOTimeConfirmed(dto.getOTimeConfirmed());
-		entity.setOTimeProccessed(dto.getOTimeProccessed());	
+		entity.setOrderStatus(dto.getOrderStatus());	
 		return entity;
 	}
 

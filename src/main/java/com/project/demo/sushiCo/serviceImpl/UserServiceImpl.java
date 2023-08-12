@@ -164,12 +164,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto createUserOrder() throws Exception {
-		
-		return null;
-	}
-
-	@Override
 	public CardBankDto getCardsByCustomerId(Integer cardId, Integer custId) throws Exception {
 		
 		return repository.getCardsByCustomerId(cardId,custId);
@@ -184,6 +178,18 @@ public class UserServiceImpl implements UserService {
 	cardB.setCardSecurityCode(cardBankForm.getCardSecurityCode());
 	cardB.setCardHolderName(cardBankForm.getCardHolderName());
 	return userMapper.toDto(repository.save(cardB));
+	}
+
+	@Override
+	public UserDto cancelUserOrder() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDto getOrdersByCustomerId(Integer IdCustom) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
