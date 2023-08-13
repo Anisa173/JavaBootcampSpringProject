@@ -35,8 +35,9 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 		restDto.setService_Places(entity.getService_Places());
 		restDto.setPayment_Methods(entity.getPayment_Methods());
 		restDto.setTimeServiceDay(entity.getTimeServiceDay());
-		restDto.setTableCapacity(entity.getRestorant_tables().getNoChairTable());
-		restDto.setRestorant_tbId(entity.getRestorant_tables().getTb_id());
+		var tableDescription = entity.getRestorantTables().getTableDescription();
+		restDto.setTableDescription(tableDescription);
+		restDto.setRestorant_tbId(entity.getRestorantTables().getTb_id());
 		var totalUser = entity.getUsers().stream().count();
 		restDto.setTotalUser(totalUser);
 		Long totalPayment_MethodsR = entity.getPayment_MethodsR().stream().count();

@@ -4,6 +4,7 @@ import com.project.demo.sushiCo.entity.Restorant;
 
 import groovy.transform.builder.Builder;
 import lombok.AllArgsConstructor;
+
 @Getter
 @Setter
 @Builder
@@ -15,11 +16,12 @@ public class RestorantTablesDto {
 
 	private String tableName;
 
-	private Integer noChairTable;
+	private Integer noTables;
+	private Integer availableTables;
+	private Integer unAvailableTables;
+	private String tableDescription;
 
-	private String description;
-
-	private boolean status;
+	private String status;
 
 	private Integer reservationId;
 
@@ -31,19 +33,29 @@ public class RestorantTablesDto {
 
 	}
 
-	public RestorantTablesDto(Integer rtb_id, Integer tb_id, String tableName, Integer noChairTable,
-			String description, boolean status, Integer reservationId, String reservationDescription,
-			Restorant aRest) {
+	public RestorantTablesDto(Integer rtb_id, Integer tb_id, String tableName, Integer noTables,
+			Integer availableTables, Integer unAvailableTables, String tableDescription, String status,
+			Integer reservationId, String reservationDescription, Restorant aRest) {
 		this.rtb_id = rtb_id;
 		this.tb_id = tb_id;
 		this.tableName = tableName;
-		this.noChairTable = noChairTable;
-		this.description = description;
+		this.setNoTables(noTables);
+		this.setAvailableTables(availableTables);
+		this.setUnAvailableTables(unAvailableTables);
+		this.setTableDescription(tableDescription);
 		this.status = status;
 		this.reservationId = reservationId;
 		this.reservationDescription = reservationDescription;
 		this.aRest = aRest;
 
+	}
+
+	public Integer getRtb_id() {
+		return rtb_id;
+	}
+
+	public void setRtb_id(Integer rtb_id) {
+		this.rtb_id = rtb_id;
 	}
 
 	public Integer getTb_id() {
@@ -62,27 +74,43 @@ public class RestorantTablesDto {
 		this.tableName = tableName;
 	}
 
-	public Integer getNoChairTable() {
-		return noChairTable;
+	public Integer getNoTables() {
+		return noTables;
 	}
 
-	public void setNoChairTable(Integer noChairTable) {
-		this.noChairTable = noChairTable;
+	public void setNoTables(Integer noTables) {
+		this.noTables = noTables;
 	}
 
-	public String getDescription() {
-		return description;
+	public Integer getAvailableTables() {
+		return availableTables;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setAvailableTables(Integer availableTables) {
+		this.availableTables = availableTables;
 	}
 
-	public boolean isStatus() {
+	public Integer getUnAvailableTables() {
+		return unAvailableTables;
+	}
+
+	public void setUnAvailableTables(Integer unAvailableTables) {
+		this.unAvailableTables = unAvailableTables;
+	}
+
+	public String getTableDescription() {
+		return tableDescription;
+	}
+
+	public void setTableDescription(String tableDescription) {
+		this.tableDescription = tableDescription;
+	}
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -102,14 +130,6 @@ public class RestorantTablesDto {
 		this.reservationDescription = reservationDescription;
 	}
 
-	public Integer getRtb_id() {
-		return rtb_id;
-	}
-
-	public void setRtb_id(Integer rtb_id) {
-		this.rtb_id = rtb_id;
-	}
-
 	public Restorant getARest() {
 		return aRest;
 	}
@@ -119,10 +139,10 @@ public class RestorantTablesDto {
 	}
 
 	public String toString() {
-		return "return[rtb_id = " + rtb_id + ",tb_id = " + tb_id + ",tableName = " + tableName + ",noChairTable = "
-				+ noChairTable + ",description = " + description + ",status = " + status + ",reservationId = "
-				+ reservationId + ",reservationDescription = " + reservationDescription + ",aRest = " + aRest + "]";
+		return "return[rtb_id = " + rtb_id + ",tb_id = " + tb_id + ",tableName = " + tableName + ",noTables = "
+				+ noTables + ",availableTables = " + availableTables + ",unAvailableTables = " + unAvailableTables
+				+ ",description = " + tableDescription + ",status = " + status + ",reservationId = " + reservationId
+				+ ",reservationDescription = " + reservationDescription + ",aRest = " + aRest + "]";
 	}
-
 
 }

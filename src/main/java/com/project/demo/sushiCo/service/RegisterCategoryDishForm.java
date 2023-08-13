@@ -10,4 +10,9 @@ public class RegisterCategoryDishForm {
 		return getCategoryName();
 	}
 
+	public Integer getAdminId() {
+		
+		return getAdminId();
+	}
+
 }

@@ -27,10 +27,7 @@ import lombok.AllArgsConstructor;
 @Entity
 @Table(name = "dish")
 public class Dish extends BasicEntity<Integer> {
-    //Disa dishes menaxhohen nga admini
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "adminId", referencedColumnName = "id")
-	private User user;
+   
 //Disa dishes i perkasin nje kategorie
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
@@ -58,13 +55,12 @@ public class Dish extends BasicEntity<Integer> {
 		super();
 	}
 
-	public Dish(String dishName, Double dishPrize, String dishDescription, User user, DishCategory category,
+	public Dish(String dishName, Double dishPrize, String dishDescription, DishCategory category,
 			Order order, List<AddInBasket> addInBasket) {
 		super();
 		this.dishName = dishName;
 		this.dishPrize = dishPrize;
 		this.dishDescription = dishDescription;
-		this.user = user;
 		this.setCategory(category);
 		this.order = order;
 		this.addInBasket = addInBasket;
@@ -104,14 +100,6 @@ public class Dish extends BasicEntity<Integer> {
 		this.dishDescription = dishDescription;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public DishCategory getCategory() {
 		return category;
 	}
@@ -138,7 +126,7 @@ public class Dish extends BasicEntity<Integer> {
 
 	public String toString() {
 		return "Dish[dId = " + dId + ",dishName = " + dishName + ",dishPrize = " + dishPrize + ",dishDescription = "
-				+ dishDescription + ",user =" + user + ",category = " +category+ ",order = " + order + ", addInBasket = " + addInBasket + "]";
+				+ dishDescription + ",category = " +category+ ",order = " + order + ", addInBasket = " + addInBasket + "]";
 	}
 
 }

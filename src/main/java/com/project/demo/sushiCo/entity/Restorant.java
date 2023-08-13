@@ -83,7 +83,7 @@ public class Restorant extends BasicEntity<Integer> {
 	public Restorant(String restNUIS, String restName, String phoneNo, String activity_field, String addressRest,
 			String service_Places, String payment_Methods, String TimeServiceDay, List<User> users,
 			List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places, RestorantTables restorantTables,
-			WebAplication aplication, User user) {
+			WebAplication aplication, User admin) {
 
 		super();
 
@@ -98,9 +98,9 @@ public class Restorant extends BasicEntity<Integer> {
 		this.users = users;
 		this.payment_MethodsR = payment_MethodsR;
 		this.places = places;
-		this.setRestorant_tables(restorantTables);
+		this.setRestorantTables(restorantTables);
 		this.setAplication(aplication);
-		this.setAdmin(user);
+		this.setAdmin(admin);
 	}
 
 	@Override
@@ -193,11 +193,11 @@ public class Restorant extends BasicEntity<Integer> {
 		this.TimeServiceDay = serviceIntervalTime;
 	}
 
-	public RestorantTables getRestorant_tables() {
+	public RestorantTables getRestorantTables() {
 		return restorantTables;
 	}
 
-	public void setRestorant_tables(RestorantTables restorantTables) {
+	public void setRestorantTables(RestorantTables restorantTables) {
 		this.restorantTables = restorantTables;
 	}
 
@@ -233,5 +233,6 @@ public class Restorant extends BasicEntity<Integer> {
 				+ TimeServiceDay + ",restorantTables = " + restorantTables + ",aplication = " + aplication + ",admin = "
 				+ admin + "]";
 	}
+
 
 }

@@ -21,8 +21,6 @@ public class DishDto {
 	private Integer categoryId;
 	@NotNull(message = "It's required!")
 	private String dishType;
-	private Integer adminId;
-	private String adminName;
 	private Integer orderId;
 	private Integer orderItems;
 	private Long totalItemsInBasket;
@@ -32,7 +30,7 @@ public class DishDto {
 	}
 
 	public DishDto(Integer dId, String dishName, Double dishPrize, String dishDescription, Integer categoryId,
-			String dishType, Integer adminId, String adminName, Integer orderId, Integer orderItems,
+			String dishType,Integer orderId, Integer orderItems,
 			Integer totalItemsInBasket) {
 		this.dId = dId;
 		this.dishName = dishName;
@@ -41,8 +39,6 @@ public class DishDto {
 		this.dishPrize = dishPrize;
 		this.categoryId = categoryId;
 		this.dishType = dishType;
-		this.setAdminId(adminId);
-		this.setAdminName(adminName);
 		this.setOrderId(orderId);
 		this.setOrderItems(orderItems);
 		this.setTotalItemsInBasket(totalItemsInBasket);
@@ -88,22 +84,6 @@ public class DishDto {
 		this.dishDescription = dishDescription;
 	}
 
-	public Integer getAdminId() {
-		return adminId;
-	}
-
-	public void setAdminId(Integer adminId) {
-		this.adminId = adminId;
-	}
-
-	public String getAdminName() {
-		return adminName;
-	}
-
-	public void setAdminName(String adminName) {
-		this.adminName = adminName;
-	}
-
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -138,8 +118,7 @@ public class DishDto {
 
 	public String toString() {
 		return "DishDto[dId = " + dId + ",dishName = " + dishName + ",dishPrize = " + dishPrize + ",dishDescription = "
-				+ dishDescription + ",dishType = " + dishType + ",categoryId = " +categoryId+ ",adminId = " + adminId + ",adminName = " + adminName
-				+ ",orderId = " + orderId + ",orderItems = " + orderItems + ",totalItemsInBasket = "
+				+ dishDescription + ",dishType = " + dishType + ",categoryId = " +categoryId+ ",orderId = " + orderId + ",orderItems = " + orderItems + ",totalItemsInBasket = "
 				+ totalItemsInBasket + "]";
 	}
 

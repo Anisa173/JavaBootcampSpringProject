@@ -24,19 +24,18 @@ public class DishServiceImpl implements DishService {
 	}
 
 	@Override
-	public void deleteDishByCategory(Integer id, Integer categoryId) throws Exception {
+	public void deleteDishByCategory(Integer id, Integer categoryId,Integer adminId) throws Exception {
 		dishRepository.deleteDishByCategory(id, categoryId);
 	}
 
 	@Override
 	public DishDto register(@Valid RegisterDishForm form) throws Exception {
-		var dishes = getDishByDishCategory(form.getId(), form.getCategoryId());
+		var dishes = getDishByDishCategory(form.getId(), form.getCategoryId(),form.getAdminId());
 		dishes.setDishName(form.getDishName());
 		dishes.setDishPrize(form.getDishPrize());
 		dishes.setDishDescription(form.getDishDescription());
 		dishes.setCategoryId(form.getCategoryId());
 		dishes.setDishType(form.getDishType());//selective
-		dishes.setAdminId(form.getAdminId());
 		return dishMapper.toDto(dishRepository.save(dishes));
 	}
 
@@ -47,16 +46,16 @@ public class DishServiceImpl implements DishService {
 	}
 
 	@Override
-	public DishDto update(@Valid DishDto dishDto, Integer dId, Integer categoryId) throws Exception {
-		Dish dishes = dishMapper.toEntity(getDishByDishCategory(dId, categoryId));
+	public DishDto update(@Valid DishDto dishDto, Integer dId, Integer categoryId,Integer adminId) throws Exception {
+		Dish dishes = dishMapper.toEntity(getDishByDishCategory(dId, categoryId,adminId));
 		var uptodate = dishMapper.toUpdate(dishDto, dishes);
 		return dishMapper.toDto(dishRepository.save(uptodate));
 	}
 
 	@Override
-	public DishDto getDishByDishCategory(Integer dId, Integer categoryId) throws Exception {
+	public DishDto getDishByDishCategory(Integer dId, Integer categoryId,Integer adminId) throws Exception {
 
-		return dishRepository.getDishByDishCategory(dId, categoryId);
+		return dishRepository.getDishByDishCategory(dId, categoryId,adminId);
 	}
 
 	@Override
@@ -71,5 +70,12 @@ public class DishServiceImpl implements DishService {
 		
 		return dishRepository.getMaxPreference(IdDish);
 	}
+
+	@Override
+	public List<DishDto> getDishesByDishCategory(Integer idCategoria, Integer adminId) throws Exception {
+	
+		return dishRepository.getDishesByDishCategory(idCategoria, adminId);
+	}
+
 
 }

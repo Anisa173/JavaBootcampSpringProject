@@ -3,14 +3,14 @@ package com.project.demo.sushiCo.domain.mappers;
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.CustomerReservationDto;
-import com.project.demo.sushiCo.entity.CustomerReservation;
+import com.project.demo.sushiCo.entity.BookingProcessing;
 @Component
-public class CustomerReservationMapper extends BaseMapper<CustomerReservation, CustomerReservationDto> {
+public class CustomerReservationMapper extends BaseMapper<BookingProcessing, CustomerReservationDto> {
 
 	
 	@Override
-	public CustomerReservation toEntity(CustomerReservationDto dto) {
-		CustomerReservation reservation = new CustomerReservation();
+	public BookingProcessing toEntity(CustomerReservationDto dto) {
+		BookingProcessing reservation = new BookingProcessing();
 	reservation.setcR_Id(dto.getcR_Id());
 	reservation.setReservationDate(dto.getReservationDate());
 	reservation.setStart_reservationTime(dto.getStart_reservationTime());
@@ -21,7 +21,7 @@ public class CustomerReservationMapper extends BaseMapper<CustomerReservation, C
 	}
 
 	@Override
-	public CustomerReservationDto toDto(CustomerReservation entity) {
+	public CustomerReservationDto toDto(BookingProcessing entity) {
 		CustomerReservationDto reservationDto = new CustomerReservationDto();
 		reservationDto.setcR_Id(entity.getId());
 		reservationDto.setReservationDate(entity.getReservationDate());
@@ -38,7 +38,7 @@ public class CustomerReservationMapper extends BaseMapper<CustomerReservation, C
 	}
 
 	@Override
-	public CustomerReservation toUpdate(CustomerReservationDto dto, CustomerReservation entity) {
+	public BookingProcessing toUpdate(CustomerReservationDto dto, BookingProcessing entity) {
 		entity.setReservationDate(dto.getReservationDate());
 		entity.setStart_reservationTime(dto.getStart_reservationTime());
 		entity.setEnd_reservationTime(dto.getEnd_reservationTime());

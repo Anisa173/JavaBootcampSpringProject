@@ -13,9 +13,9 @@ public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantT
 		tables.setRtb_id(dto.getRtb_id());
 		tables.setTb_id(dto.getTb_id());
 		tables.setTableName(dto.getTableName());
-		tables.setNoChairTable(dto.getNoChairTable());
-		tables.setDescription(dto.getDescription());
-		tables.setStatus(dto.isStatus());
+		tables.setAvailableTables(dto.getAvailableTables());
+		tables.setUnAvailableTables(dto.getUnAvailableTables());
+		tables.setTableDescription(dto.getTableDescription());
 		return tables;
 	}
 
@@ -25,9 +25,9 @@ public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantT
 		dto.setRtb_id(entity.getId());
 		dto.setTb_id(entity.getTb_id());
 		dto.setTableName(entity.getTableName());
-		dto.setNoChairTable(entity.getNoChairTable());
-		dto.setDescription(entity.getDescription());
-		dto.setStatus(entity.isStatus());
+		dto.setAvailableTables(entity.getAvailableTables());
+		dto.setUnAvailableTables(entity.getUnAvailableTables());
+		dto.setTableDescription(entity.getTableDescription());
 		dto.setReservationId(entity.getReservation().getId());
 		var reservationDescription = entity.getReservation().getReservationDescription();
 		dto.setReservationDescription(reservationDescription);
@@ -41,9 +41,9 @@ public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantT
 		entity.setRtb_id(dto.getRtb_id());
 		entity.setTb_id(dto.getTb_id());
 		entity.setTableName(dto.getTableName());
-		entity.setNoChairTable(dto.getNoChairTable());
-		entity.setDescription(dto.getDescription());
-		entity.setStatus(dto.isStatus());
+		dto.setAvailableTables(entity.getAvailableTables());
+		dto.setUnAvailableTables(entity.getUnAvailableTables());
+		dto.setTableDescription(entity.getTableDescription());
 		return entity;
 	}
 

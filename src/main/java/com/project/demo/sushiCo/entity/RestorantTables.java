@@ -27,7 +27,7 @@ public class RestorantTables extends BasicEntity<Integer> {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "reservationId", referencedColumnName = "cR_id")
 	@JsonManagedReference
-	private CustomerReservation reservation;
+	private BookingProcessing reservation;
 
 	// Çdo mjedis i arreduar "si per restorant" i perket nje restoranti
 	@OneToOne(mappedBy = "restorantTables", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -41,31 +41,30 @@ public class RestorantTables extends BasicEntity<Integer> {
 	private Integer tb_id;
 	@Column(name = "tableName")
 	private String tableName;
-	@Column(name = "noChairTable")
-	private Integer noChairTable;
-	@Column(name = "description")
-	private String description;
-	@Column(name = "status")
-	private boolean status;
-	@Column(name = "locked")
-	private static boolean locked = true;
-	@Column(name = "unlocked")
-	private static boolean unlocked = false;
+	@Column(name = "noTables")
+	private Integer noTables;
+	@Column(name = "availableTables")
+	private Integer availableTables;
+	@Column(name = "unAvailableTables")
+	private Integer unAvailableTables;
+	@Column(name = "tableDescription")
+	private String tableDescription;
+	
 
 	public RestorantTables() {
 		super();
 	}
 
-	public RestorantTables(Integer tb_id, String tableName, Integer noChairTable, String description, boolean status,
-			boolean locked, boolean unlocked, CustomerReservation reservation, Restorant aRest) {
+	public RestorantTables(Integer tb_id, String tableName, Integer noTables, Integer availableTables,
+			Integer unAvailableTables,String tableDescription, BookingProcessing reservation,
+			Restorant aRest) {
 		super();
 		this.tb_id = tb_id;
 		this.tableName = tableName;
-		this.noChairTable = noChairTable;
-		this.status = status;
-		this.description = description;
-		RestorantTables.locked = locked;
-		RestorantTables.unlocked = unlocked;
+		this.setNoTables(noTables);
+		this.availableTables = availableTables;
+		this.setUnAvailableTables(unAvailableTables);
+		this.tableDescription = tableDescription;
 		this.reservation = reservation;
 		this.aRest = aRest;
 	}
@@ -95,51 +94,44 @@ public class RestorantTables extends BasicEntity<Integer> {
 		this.tableName = tableName;
 	}
 
-	public Integer getNoChairTable() {
-		return noChairTable;
+	public Integer getNoTables() {
+		return noTables;
 	}
 
-	public void setNoChairTable(Integer noChairTable) {
-		this.noChairTable = noChairTable;
+	public void setNoTables(Integer noTables) {
+		this.noTables = noTables;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public int getAvailableTables() {
+		return availableTables;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setAvailableTables(int availableTables) {
+		this.availableTables = availableTables;
 	}
 
-	public String getDescription() {
-		return description;
+	public Integer getUnAvailableTables() {
+		return unAvailableTables;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setUnAvailableTables(Integer unAvailableTables) {
+		this.unAvailableTables = unAvailableTables;
 	}
 
-	public static boolean isLocked() {
-		return locked;
+
+	public String getTableDescription() {
+		return tableDescription;
 	}
 
-	public static void setLocked(boolean locked) {
-		RestorantTables.locked = locked;
+	public void setTableDescription(String tableDescription) {
+		this.tableDescription = tableDescription;
 	}
 
-	public static boolean isUnlocked() {
-		return unlocked;
-	}
-
-	public static void setUnlocked(boolean unlocked) {
-		RestorantTables.unlocked = unlocked;
-	}
-
-	public CustomerReservation getReservation() {
+	public BookingProcessing getReservation() {
 		return reservation;
 	}
 
-	public void setReservation(CustomerReservation reservation) {
+	public void setReservation(BookingProcessing reservation) {
 		this.reservation = reservation;
 	}
 
@@ -152,9 +144,10 @@ public class RestorantTables extends BasicEntity<Integer> {
 	}
 
 	public String toString() {
-		return "RestorantTables[tb_id = " + tb_id + ",tableName = " + tableName + ",noChairTable = " + noChairTable
-				+ ",status = " + status + ",description = " + description + ",locked = " + locked + ",unlocked = "
-				+ unlocked + ",reservation = " + reservation + ",aRest = " + aRest + "]";
+		return "RestorantTables[rtb_id = " + rtb_id + ",tb_id = " + tb_id + ",tableName = " + tableName + ",noTables = "
+				+ noTables + ",availableTables = " + availableTables + ",unAvailableTables = " + unAvailableTables
+				+ " ,tableDescription = " + tableDescription + ",reservation = " + reservation
+				+ ",aRest = " + aRest + "]";
 	}
 
 }

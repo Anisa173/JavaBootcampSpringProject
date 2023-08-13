@@ -104,7 +104,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	// Klienti mund te kryeje disa rezervime gjate intervalit kohor ditor
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<CustomerReservation> customerReservations = new ArrayList<CustomerReservation>();
+	private List<BookingProcessing> bookingProcessings = new ArrayList<BookingProcessing>();
 
 	// Nje shippers-i i urdherohet te dergoje disa shporta porosie
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -140,7 +140,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	public User(String first_name, String last_name, String address, String phoneNo, String email, String password,
 			String personalIdentityNo, ShippersStatus shippersStatus, Integer age, UserRole userRole,
-			List<CustomerReservation> customerReservations, List<PackageOrdered> package_Orders, List<Order> orders,
+			List<BookingProcessing> bookingProcessings, List<PackageOrdered> package_Orders, List<Order> orders,
 			List<AddInBasket> addInBaskets, List<Dish> dishes, List<Restorant> rest, User shippers, List<User> user,
 			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant, List<Order> orders1,
 			User adminPlatforma, WebAplication webAplication) {
@@ -163,7 +163,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.setDishes(dishes);
 		this.setAddInBaskets(addInBaskets);
 		this.setOrders(orders);
-		this.setCustomerReservations(customerReservations);
+		this.setCustomerReservations(bookingProcessings);
 		this.setPackage_Orders(package_Orders);
 		this.setRestorant(restorant);
 		this.setOrders1(orders1);
@@ -324,12 +324,12 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.orders = orders;
 	}
 
-	public List<CustomerReservation> getCustomerReservations() {
-		return customerReservations;
+	public List<BookingProcessing> getCustomerReservations() {
+		return bookingProcessings;
 	}
 
-	public void setCustomerReservations(List<CustomerReservation> customerReservations) {
-		this.customerReservations = customerReservations;
+	public void setCustomerReservations(List<BookingProcessing> bookingProcessings) {
+		this.bookingProcessings = bookingProcessings;
 	}
 
 	public List<PackageOrdered> getPackage_Orders() {
@@ -378,7 +378,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",age = " + age + ",userRole = "
 				+ userRole + ",dishCategories = " + dishCategories + ",cardBank = " + cardBank + ",user = " + user
 				+ ",shippers = " + shippers + ",rest = " + rest + ",dishes = " + dishes + ",addInBaskets = "
-				+ addInBaskets + ",orders = " + orders + ", customerReservations = " + customerReservations
+				+ addInBaskets + ",orders = " + orders + ", bookingProcessings = " + bookingProcessings
 				+ ", package_Orders = " + package_Orders + ",restorant = " + restorant + ",orders1 = " + orders1
 				+ ",adminPlatforma = " + AdminPlatforma + ",webAplication = " + webAplication + "]";
 	}

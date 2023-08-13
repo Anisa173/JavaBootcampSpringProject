@@ -18,7 +18,7 @@ public class RestorantDto {
 	private String service_Places;
 	private String payment_Methods;
 	private String TimeServiceDay;
-	private Integer tableCapacity;
+	private String tableDescription;
 	private Integer restorant_tbId;
 	private Long totalUser;
 	private Long totalPayment_MethodsR;
@@ -35,7 +35,7 @@ public class RestorantDto {
 
 	public RestorantDto(Integer idRestorant, String restNUIS, String restName, String phoneNo, String activity_field,
 			String addressRest, String service_Places, String payment_Methods, String TimeServiceDay,
-			Integer tableCapacity, Integer restorant_tbId, Long totalUser, Long totalPayment_MethodsR,
+			String tableDescription, Integer restorant_tbId, Long totalUser, Long totalPayment_MethodsR,
 			Long totalService_Places, String webAppId, String applicationName, Integer adminRId, String adminName) {
 
 		this.idRestorant = idRestorant;
@@ -47,7 +47,7 @@ public class RestorantDto {
 		this.service_Places = service_Places;
 		this.payment_Methods = payment_Methods;
 		this.TimeServiceDay = TimeServiceDay;
-		this.setTableCapacity(tableCapacity);
+		this.setTableDescription(tableDescription);
 		this.setRestorant_tbId(restorant_tbId);
 		this.setTotalUser(totalUser);
 		this.setTotalPayment_MethodsR(totalPayment_MethodsR);
@@ -130,12 +130,12 @@ public class RestorantDto {
 		TimeServiceDay = timeServiceDay;
 	}
 
-	public Integer getTableCapacity() {
-		return tableCapacity;
+	public String getTableDescription() {
+		return tableDescription;
 	}
 
-	public void setTableCapacity(Integer tableCapacity) {
-		this.tableCapacity = tableCapacity;
+	public void setTableDescription(String tableDescription) {
+		this.tableDescription = tableDescription;
 	}
 
 	public Integer getRestorant_tbId() {
@@ -207,7 +207,7 @@ public class RestorantDto {
 		return "RestorantService[idRestorant = " + idRestorant + ",restName = " + restName + ",phoneNo = " + phoneNo
 				+ ",activity_field = " + activity_field + ",addressRest = " + addressRest + ",service_Places = "
 				+ service_Places + ",payment_Methods = " + payment_Methods + ",TimeServiceDay = " + TimeServiceDay
-				+ ",tableCapacity = " + tableCapacity + ",restorant_tbId = " + restorant_tbId + ",totalUser = "
+				+ ",tableCapacity = " + tableDescription + ",restorant_tbId = " + restorant_tbId + ",totalUser = "
 				+ totalUser + ",totalPayment_MethodsR = " + totalPayment_MethodsR + ",totalService_Places = "
 				+ totalService_Places + ",applicationName = " + applicationName + ",aplicationId = " + webAppId
 				+ ",adminRId = " + adminRId + ",adminName = " + adminName + "]";

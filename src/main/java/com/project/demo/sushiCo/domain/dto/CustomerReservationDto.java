@@ -119,7 +119,7 @@ public class CustomerReservationDto {
 		this.tables = tables;
 	}
 	public String toString() {
-		return "CustomerReservation[cR_Id = " + cR_Id + ",reservationDate = " + reservationDate + ",start_reservationTime = "
+		return "BookingProcessing[cR_Id = " + cR_Id + ",reservationDate = " + reservationDate + ",start_reservationTime = "
 				+ start_reservationTime + ",end_reservationTime = " +end_reservationTime+ ",noParticipants = " + noParticipants + ",reservationDescription = "
 				+ reservationDescription + ",customerId = " + customerId + ",customerName = " + customerName
 				+ ",tables = " + tables + "]";

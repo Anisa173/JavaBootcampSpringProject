@@ -27,7 +27,19 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
 
 	@Query("Select d , max(d.totalAddInBasket)  maxCustomerNo,"
 			+ "From Dish d INNER JOIN AddInBasket addB ON d.dId = d.addB.IDdish ")
-
 	DishDto getMaxPreference(Integer idDish);
+
+	@Query(value = "Select d.dId , dc.id ,a.id From DishCategory as dc INNER JOIN Dish as d ON dc.id = d.categoryId"
+			+ "INNER JOIN User a ON dc.admin_Id = a.id  "
+			+ "Where d.dId = ? and a.id = ? and dc.id = ?", nativeQuery = true)
+	DishDto getDishByDishCategory(Integer dId, Integer categoryId, Integer adminId);
+
+
+	@Query(value = "Select d,dc.categoryName"
++ " From DishCategory as dc INNER JOIN User as a ON dc.admin_Id = d.id "	
++ " INNER JOIN Dish as d ON dc.id = d.categoryId "	
++ " Where dc.id = ? And a.id = ?",nativeQuery = true)
+
+	List<DishDto> getDishesByDishCategory(Integer idCategoria, Integer adminId);
 
 }

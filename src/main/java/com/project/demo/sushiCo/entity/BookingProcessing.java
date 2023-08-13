@@ -24,7 +24,7 @@ import lombok.AllArgsConstructor;
 @Builder
 @AllArgsConstructor
 @Entity
-	public class CustomerReservation extends BasicEntity<Integer> {
+	public class BookingProcessing extends BasicEntity<Integer> {
 	
 		//Nje apo disa rezervime mund te kryehen nga i njejti klient gjate punes ditore
 		@ManyToOne(cascade = CascadeType.ALL)
@@ -50,11 +50,11 @@ import lombok.AllArgsConstructor;
 		@Column(name = "reservationDescription")
 		private String reservationDescription;
 
-		public CustomerReservation() {
+		public BookingProcessing() {
 			super();
 		}
 
-		public CustomerReservation(Date reservationDate, Time start_reservationTime, Time end_reservationTime,
+		public BookingProcessing(Date reservationDate, Time start_reservationTime, Time end_reservationTime,
 				Integer noParticipants, String reservationDescription, User user,RestorantTables tables) {
 			super();
 			this.reservationDate = reservationDate;
@@ -132,7 +132,7 @@ import lombok.AllArgsConstructor;
 			this.tables = tables;
 		}
 		public String toString() {
-			return "CustomerReservation[cR_Id = " + cR_Id + ",reservationDate = " + reservationDate
+			return "BookingProcessing[cR_Id = " + cR_Id + ",reservationDate = " + reservationDate
 					+ ",start_reservationTime = " + start_reservationTime + ",noParticipants = " + noParticipants
 					+ ",reservationDescription = " + reservationDescription + ",user = " + user + ",tables = " +tables+ "]";
 		}

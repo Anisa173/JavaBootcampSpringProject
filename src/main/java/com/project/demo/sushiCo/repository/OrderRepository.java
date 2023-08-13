@@ -30,41 +30,41 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
 
 	// Cdo klient te shohe porosite qe ka kryer për çdo restorant ne kete aplikacion
-	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.idCustomer = uc.o.oId "
+	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
 			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ "Where r.c.id =: id " + "Group By r.restName ")
 	List<OrderDto> getOrdersByRestorantId(Integer customerId, Integer restorantId);
 
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe
 	// ku?... ne cilin restorant i ka kryer
-	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.idCustomer = uc.o.oId "
+	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
 			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ "Where r.c.id =: id ")
 	List<OrderDto> getOrdersRByCustomerId(Integer customerId);
 
 	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC
-	@Query("Select c.o , c.customerName " + "From User c INNER JOIN Order o ON c.o.oId = c.idCustomer"
+	@Query("Select c.o , c.customerName " + "From User c INNER JOIN Order o ON c.o.idCustomer = c.id"
 			+ "Order By c.o.orderPrize ASC ")
 	List<OrderDto> getOrdersByCost();
 
 	// Admini i restorantit kerkon te gjeneroje porosine me koston me te madhe dhe
 	// me te vogel si edhe kush e kreu ate
 	@Query(value = "Select c.customerName , max(o.orderPrize),min(o.orderPrize),o.orderId"
-			+ "From User as uc INNER JOIN Order  as o ON uc.idCustomer = o.oId "
+			+ "From User as uc INNER JOIN Order  as o ON uc.id = o.idCustomer "
 			+ "	INNER JOIN Restorant as r ON uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ " Where r.idRestorant =: idRestorant ", nativeQuery = true)
 	OrderDto getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
 
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne
 	// njerin prej restoranteve
-	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.idCustomer = uc.o.oId "
+	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
 			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ "Where r.c.id =: id AND r.idRestorant =: idRestorant ")
 	List<OrderDto> getOrdByRestorantId(Integer customerId, Integer restorantId);
 
 	// Anullon porosine e konfirmuar 'customer'
 	@Modifying
-	@Query("Update Order or Set deleted = true Where or.idCustomer IN"
+	@Query("UPDATE Order or SET deleted = true WHERE Exists"
 			+ "(Select c.or From User c INNER JOIN c.or ON c.id = c.or.idCustomer"
 			+ "Where c.or.orderStatus ='Cancel' AND c.id =: id ))")
 	void cancelUserOrder(Integer orderId, Integer customerId);
