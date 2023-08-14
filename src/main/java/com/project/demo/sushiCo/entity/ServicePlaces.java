@@ -30,7 +30,7 @@ public class ServicePlaces extends BasicEntity<Integer> {
 	@OneToMany(mappedBy = "servicePlaces", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PackageOrdered> pckO = new ArrayList<PackageOrdered>();
 
-	// Disa zona sherbimi i perkasin cdo restoranti
+	// Disa zona sherbimi i perkasin çdo restoranti 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "service_idR", referencedColumnName = "idRestorant")
 	private Restorant restorantService;

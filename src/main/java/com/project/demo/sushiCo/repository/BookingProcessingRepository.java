@@ -5,6 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.demo.sushiCo.entity.BookingProcessing;
 @Service
-public interface CustomerReservationRepository extends JpaRepository<BookingProcessing, Integer>{
+public interface BookingProcessingRepository extends JpaRepository<BookingProcessing, Integer>{
 
 }

@@ -22,14 +22,14 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	Order createOrder();
 
 	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon
-	// sipas idRestorant
+	// sipas Restorantit perkates
 	@Query("Select r.c.o , r.idRestorant "
 			+ "From User c INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ "INNER JOIN Order o ON c.o.oId = c.idCustomer " + "Group By r.c.id " + "Order By r.c.o.orderPrize ASC ")
 
 	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
 
-	// Cdo klient te shohe porosite qe ka kryer për çdo restorant ne kete aplikacion
+	// Çdo klient te shohe porosite qe ka kryer për çdo restorant ne kete aplikacion
 	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
 			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ "Where r.c.id =: id " + "Group By r.restName ")
@@ -49,12 +49,12 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 	// Admini i restorantit kerkon te gjeneroje porosine me koston me te madhe dhe
 	// me te vogel si edhe kush e kreu ate
-	@Query(value = "Select c.customerName , max(o.orderPrize),min(o.orderPrize),o.orderId"
-			+ "From User as uc INNER JOIN Order  as o ON uc.id = o.idCustomer "
-			+ "	INNER JOIN Restorant as r ON uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-			+ " Where r.idRestorant =: idRestorant ", nativeQuery = true)
+	@Query(value = "Select c.customerName , max(o.orderPrize) as MaxPrize,min(o.orderPrize) as MinPrize,o.orderId"
+			+ "From Order as o INNER JOIN User as c ON o.idCustomer = c.id"
+			+ "	INNER JOIN User as a ON o.adminRestId = a.id"
+			+ " Where a.id =: id  ", nativeQuery = true)
 	OrderDto getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
-
+	
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne
 	// njerin prej restoranteve
 	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 @Builder
 @AllArgsConstructor
 public class RestorantTablesDto {
+
 	private Integer rtb_id;
 
 	private Integer tb_id;
@@ -17,11 +18,14 @@ public class RestorantTablesDto {
 	private String tableName;
 
 	private Integer noTables;
+	
 	private Integer availableTables;
-	private Integer unAvailableTables;
+	
+	private Integer lockedTables;
+	
 	private String tableDescription;
 
-	private String status;
+	private Integer noChairsT;
 
 	private Integer reservationId;
 
@@ -34,16 +38,16 @@ public class RestorantTablesDto {
 	}
 
 	public RestorantTablesDto(Integer rtb_id, Integer tb_id, String tableName, Integer noTables,
-			Integer availableTables, Integer unAvailableTables, String tableDescription, String status,
+			Integer availableTables, Integer lockedTables, String tableDescription, Integer noChairsT,
 			Integer reservationId, String reservationDescription, Restorant aRest) {
 		this.rtb_id = rtb_id;
 		this.tb_id = tb_id;
 		this.tableName = tableName;
 		this.setNoTables(noTables);
 		this.setAvailableTables(availableTables);
-		this.setUnAvailableTables(unAvailableTables);
+		this.setLockedTables(lockedTables);
 		this.setTableDescription(tableDescription);
-		this.status = status;
+		this.noChairsT = noChairsT;
 		this.reservationId = reservationId;
 		this.reservationDescription = reservationDescription;
 		this.aRest = aRest;
@@ -90,12 +94,12 @@ public class RestorantTablesDto {
 		this.availableTables = availableTables;
 	}
 
-	public Integer getUnAvailableTables() {
-		return unAvailableTables;
+	public Integer getLockedTables() {
+		return lockedTables;
 	}
 
-	public void setUnAvailableTables(Integer unAvailableTables) {
-		this.unAvailableTables = unAvailableTables;
+	public void setLockedTables(Integer lockedTables) {
+		this.lockedTables = lockedTables;
 	}
 
 	public String getTableDescription() {
@@ -106,12 +110,12 @@ public class RestorantTablesDto {
 		this.tableDescription = tableDescription;
 	}
 
-	public String getStatus() {
-		return status;
+	public Integer getNoChairsT() {
+		return noChairsT;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setNoChairsT(Integer noChairsT) {
+		this.noChairsT = noChairsT;
 	}
 
 	public Integer getReservationId() {
@@ -140,9 +144,9 @@ public class RestorantTablesDto {
 
 	public String toString() {
 		return "return[rtb_id = " + rtb_id + ",tb_id = " + tb_id + ",tableName = " + tableName + ",noTables = "
-				+ noTables + ",availableTables = " + availableTables + ",unAvailableTables = " + unAvailableTables
-				+ ",description = " + tableDescription + ",status = " + status + ",reservationId = " + reservationId
-				+ ",reservationDescription = " + reservationDescription + ",aRest = " + aRest + "]";
+				+ noTables + ",availableTables = " + availableTables + ",unAvailableTables = " + lockedTables
+				+ ",description = " + tableDescription + ",noChairsT = " + noChairsT + ",reservationId = "
+				+ reservationId + ",reservationDescription = " + reservationDescription + ",aRest = " + aRest + "]";
 	}
 
 }

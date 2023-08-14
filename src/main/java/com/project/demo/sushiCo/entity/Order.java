@@ -27,14 +27,14 @@ import lombok.AllArgsConstructor;
 @Entity
 public class Order extends BasicEntity<Integer> {
 
-	// Porosite e restorantit menaxhohen nga admini përkates
+	// Porosite e restorantit menaxhohen nga admini përkates i restorantit
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "adminRestId", referencedColumnName = "oId ")
+	@JoinColumn(name = "adminRestId", referencedColumnName = "id")
 	private User adminUser;
 
 	// Disa Metoda Pagese i vihen ne dispozicion klientit per te kryer nje porosi
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "paymentMethodId", referencedColumnName = "oId")
+	@JoinColumn(name = "paymentMethodId", referencedColumnName = "Id")
 	private PaymentMethods p_methods;
 
 	// Nje porosi permban disa menu
@@ -43,7 +43,7 @@ public class Order extends BasicEntity<Integer> {
 
 	// Nje ose disa porosi permban nje shporte porosie
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idShporta", referencedColumnName = "oId")
+	@JoinColumn(name = "idShporta", referencedColumnName = "id")
 	private PackageOrdered packageOrdered;
 
 	// Disa porosi mund te kryen gjate nje intervali te shkurter kohe ose gjate te
@@ -76,7 +76,6 @@ public class Order extends BasicEntity<Integer> {
 		this.orderPrize = orderPrize;
 		this.orderItems = orderItems;
 		this.orderStatus = orderStatus;
-		
 		this.dish = dish;
 		this.packageOrdered = packageOrdered;
 		this.user = user;
@@ -148,7 +147,7 @@ public class Order extends BasicEntity<Integer> {
 	public void setP_methods(PaymentMethods p_methods) {
 		this.p_methods = p_methods;
 	}
-public LocalDateTime getOTimeConfirmed() {
+    public LocalDateTime getOTimeConfirmed() {
 		return oTimeConfirmed;
 	}
 

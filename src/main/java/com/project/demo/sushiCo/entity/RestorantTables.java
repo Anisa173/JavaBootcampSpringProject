@@ -43,27 +43,29 @@ public class RestorantTables extends BasicEntity<Integer> {
 	private String tableName;
 	@Column(name = "noTables")
 	private Integer noTables;
+	@Column(name = "noChairsT")
+	private Integer noChairsT;
 	@Column(name = "availableTables")
 	private Integer availableTables;
-	@Column(name = "unAvailableTables")
-	private Integer unAvailableTables;
+	@Column(name = "lockedTables")
+	private Integer lockedTables;
 	@Column(name = "tableDescription")
 	private String tableDescription;
-	
 
 	public RestorantTables() {
 		super();
 	}
 
-	public RestorantTables(Integer tb_id, String tableName, Integer noTables, Integer availableTables,
-			Integer unAvailableTables,String tableDescription, BookingProcessing reservation,
+	public RestorantTables(Integer tb_id, String tableName, Integer noTables, Integer noChairsT,
+			Integer availableTables, Integer lockedTables, String tableDescription, BookingProcessing reservation,
 			Restorant aRest) {
 		super();
 		this.tb_id = tb_id;
 		this.tableName = tableName;
 		this.setNoTables(noTables);
+		this.setNoChairsT(noChairsT);
 		this.availableTables = availableTables;
-		this.setUnAvailableTables(unAvailableTables);
+		this.setLockedTables(lockedTables);
 		this.tableDescription = tableDescription;
 		this.reservation = reservation;
 		this.aRest = aRest;
@@ -102,6 +104,14 @@ public class RestorantTables extends BasicEntity<Integer> {
 		this.noTables = noTables;
 	}
 
+	public Integer getNoChairsT() {
+		return noChairsT;
+	}
+
+	public void setNoChairsT(Integer noChairsT) {
+		this.noChairsT = noChairsT;
+	}
+
 	public int getAvailableTables() {
 		return availableTables;
 	}
@@ -110,14 +120,13 @@ public class RestorantTables extends BasicEntity<Integer> {
 		this.availableTables = availableTables;
 	}
 
-	public Integer getUnAvailableTables() {
-		return unAvailableTables;
+	public Integer getLockedTables() {
+		return lockedTables;
 	}
 
-	public void setUnAvailableTables(Integer unAvailableTables) {
-		this.unAvailableTables = unAvailableTables;
+	public void setLockedTables(Integer unAvailableTables) {
+		this.lockedTables = unAvailableTables;
 	}
-
 
 	public String getTableDescription() {
 		return tableDescription;
@@ -145,9 +154,9 @@ public class RestorantTables extends BasicEntity<Integer> {
 
 	public String toString() {
 		return "RestorantTables[rtb_id = " + rtb_id + ",tb_id = " + tb_id + ",tableName = " + tableName + ",noTables = "
-				+ noTables + ",availableTables = " + availableTables + ",unAvailableTables = " + unAvailableTables
-				+ " ,tableDescription = " + tableDescription + ",reservation = " + reservation
-				+ ",aRest = " + aRest + "]";
+				+ noTables + ",noChairsTable = " + noChairsT + ",availableTables = " + availableTables
+				+ ",unAvailableTables = " + lockedTables + " ,tableDescription = " + tableDescription
+				+ ",reservation = " + reservation + ",aRest = " + aRest + "]";
 	}
 
 }

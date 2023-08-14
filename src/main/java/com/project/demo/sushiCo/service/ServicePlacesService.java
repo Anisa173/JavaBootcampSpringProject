@@ -10,8 +10,6 @@ public interface ServicePlacesService {
 
 	void delete(Integer id) throws Exception;
 
-	ServicePlacesDto getService_PlacesById(Integer Id) throws Exception;
-
 	List<ServicePlacesDto> getAllService_Places() throws Exception;
 
 	ServicePlacesDto registerPlaces(@Valid RegisterRegisterPlacesForm registerForm) throws Exception;
@@ -19,5 +17,9 @@ public interface ServicePlacesService {
 	ServicePlacesDto create(@Valid ServicePlacesDto placesDto) throws Exception;
 
 	ServicePlacesDto update(Integer Id, @Valid ServicePlacesDto placesDto) throws Exception;
+
+	ServicePlacesDto getService_PlacesById(Integer Id) throws Exception;
+
+	
 
 }

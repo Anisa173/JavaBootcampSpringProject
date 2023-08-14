@@ -1,5 +1,5 @@
 package com.project.demo.sushiCo.service;
 
-public interface CustomReservationService {
+public class RegisterBookingForm {
 
 }
