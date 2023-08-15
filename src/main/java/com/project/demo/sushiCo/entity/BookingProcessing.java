@@ -2,7 +2,7 @@ package com.project.demo.sushiCo.entity;
 
 import java.sql.Date;
 import java.sql.Time;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.demo.sushiCo.domain.dto.Getter;
 import com.project.demo.sushiCo.domain.dto.Setter;
 
@@ -32,8 +32,9 @@ import lombok.AllArgsConstructor;
 		private User user;
 
         //Cdo rezervim kryhet ne te njejtin restorant fhe ne te njejten vendododhje
-		@OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-		@JsonBackReference
+		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		@JoinColumn(name = "reservationId", referencedColumnName = "rtb_id")
+		@JsonManagedReference
 		private RestorantTables tables;
 
 		@Id

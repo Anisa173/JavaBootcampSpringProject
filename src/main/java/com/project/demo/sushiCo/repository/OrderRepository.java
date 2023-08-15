@@ -13,12 +13,16 @@ import com.project.demo.sushiCo.entity.Order;
 @Service
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-	@Query("Insert Into Order(orderPrize,orderItems,orderStatus,oTimeConfirmed,oTimeProccessed)"
+	@Query("Insert Into Order(orderPrize,orderItems,orderStatus,oTimeConfirmed,oTimeProccessed,idShporta,idCustomer,adminRestId) Values(?1,?2,?3,?4,?5,"
+			+ "(Select o.idShporta From Order o Inner Join PackageOrdered p ON p.o.idShporta = p.id Where p.id =: id),"
+			+ "(Select o.idCustomer From Order o Inner Join User c ON c.o.idCustomer = c.id Where c.id =: id ),"
+			+ "(Select o.adminRestId From Order o Inner Join User a ON a.o.adminRestId = a.id Where a.id =: id))"
 			+ "Select uc.o.orderPrize,uc.o.orderItems,uc.o.orderStatus"
 			+ "From User uc INNER JOIN AddInBasket ab ON uc.id =uc.ab.userId"
 			+ "INNER JOIN Order o ON uc.idCustomer = uc.o.oId"
 			+ "INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
 			+ "WHERE uc.o.orderItems = sum(uc.ab.addItemDish) AND uc.o.orderPrize = sum(uc.ab.amountValue) AND uc.o.orderStatus = 'Pending' ")
+
 	Order createOrder();
 
 	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon
@@ -51,10 +55,9 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	// me te vogel si edhe kush e kreu ate
 	@Query(value = "Select c.customerName , max(o.orderPrize) as MaxPrize,min(o.orderPrize) as MinPrize,o.orderId"
 			+ "From Order as o INNER JOIN User as c ON o.idCustomer = c.id"
-			+ "	INNER JOIN User as a ON o.adminRestId = a.id"
-			+ " Where a.id =: id  ", nativeQuery = true)
+			+ "	INNER JOIN User as a ON o.adminRestId = a.id" + " Where a.id =: id  ", nativeQuery = true)
 	OrderDto getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
-	
+
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne
 	// njerin prej restoranteve
 	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "

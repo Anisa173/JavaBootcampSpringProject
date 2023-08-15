@@ -1,10 +1,8 @@
 package com.project.demo.sushiCo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.demo.sushiCo.domain.dto.Getter;
 import com.project.demo.sushiCo.domain.dto.Setter;
-
 import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,7 +11,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 
@@ -24,9 +21,8 @@ import lombok.AllArgsConstructor;
 @Entity
 public class RestorantTables extends BasicEntity<Integer> {
 //  'Mjedisi fizik' i restorantit i nderlidhet çdo rezervimi
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "reservationId", referencedColumnName = "cR_id")
-	@JsonManagedReference
+	@OneToOne(mappedBy = "tables",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JsonBackReference
 	private BookingProcessing reservation;
 
 	// Çdo mjedis i arreduar "si per restorant" i perket nje restoranti

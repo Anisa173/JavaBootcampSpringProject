@@ -24,9 +24,8 @@ public class OrderMapper extends BaseMapper<Order, OrderDto> {
 	orderDto.setOrderPrize(entity.getOrderPrize());
 	orderDto.setOrderItems(entity.getOrderItems());
 	orderDto.setOrderStatus(entity.getOrderStatus());
-	orderDto.setPaymentMethodId(entity.getP_methods().getId());
-	var paymentMethodRest = entity.getP_methods().getPayment_Method();
-	orderDto.setPaymentMethodRest(paymentMethodRest);
+	var totalP_Methods = entity.getP_methods().stream().count();
+	orderDto.setTotalP_methods(totalP_Methods);
 	orderDto.setIdShporta(entity.getPackage_Ordered().getId());
 	var totalDish = entity.getDish().stream().count();
 	orderDto.setTotalDish(totalDish);

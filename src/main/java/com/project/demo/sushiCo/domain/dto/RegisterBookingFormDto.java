@@ -3,7 +3,7 @@ package com.project.demo.sushiCo.domain.dto;
 import java.sql.Date;
 import java.sql.Time;
 
-public class BookingDto {
+public class RegisterBookingFormDto {
 	private Integer crId;
 	private String First_name;
 	private String Last_name;
@@ -17,7 +17,7 @@ public class BookingDto {
 	private Integer noTables;
 	private Integer lockedTables;
 
-	public BookingDto(Integer crId, String First_name, String Last_name, String phoneNo, Date reservationDate,
+	public RegisterBookingFormDto(Integer crId, String First_name, String Last_name, String phoneNo, Date reservationDate,
 			Time start_reservationTime, Time end_reservationTime, Integer noParticipants, String reservationDescription,
 			String tableName, Integer noTables, Integer lockedTables) {
 		this.crId = crId;
@@ -131,7 +131,7 @@ public class BookingDto {
 	}
 
 	public String toString() {
-		return "BookingDto[crId = " + crId + ", First_name = " + First_name + ",Last_name = " + Last_name
+		return "RegisterBookingFormDto[crId = " + crId + ", First_name = " + First_name + ",Last_name = " + Last_name
 				+ ",phoneNo = " + phoneNo + ", reservationDate = " + reservationDate + ",start_reservationTime = "
 				+ start_reservationTime + ", end_reservationTime = " + end_reservationTime + ",noParticipants = "
 				+ noParticipants + ", reservationDescription = " + reservationDescription + ",tableName = " + tableName

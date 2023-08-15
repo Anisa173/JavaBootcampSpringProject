@@ -33,9 +33,8 @@ public class Order extends BasicEntity<Integer> {
 	private User adminUser;
 
 	// Disa Metoda Pagese i vihen ne dispozicion klientit per te kryer nje porosi
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "paymentMethodId", referencedColumnName = "Id")
-	private PaymentMethods p_methods;
+	@OneToMany(mappedBy = "order" ,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<PaymentMethods> p_methods;
 
 	// Nje porosi permban disa menu
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -71,7 +70,7 @@ public class Order extends BasicEntity<Integer> {
 	}
 
 	public Order(Double orderPrize, Integer orderItems, String orderStatus, List<Dish> dish, PackageOrdered packageOrdered, User user,
-			PaymentMethods p_methods) {
+			List<PaymentMethods> p_methods) {
 		super();
 		this.orderPrize = orderPrize;
 		this.orderItems = orderItems;
@@ -140,11 +139,11 @@ public class Order extends BasicEntity<Integer> {
 		this.user = user;
 	}
 
-	public PaymentMethods getP_methods() {
+	public List<PaymentMethods> getP_methods() {
 		return p_methods;
 	}
 
-	public void setP_methods(PaymentMethods p_methods) {
+	public void setP_methods(List<PaymentMethods> p_methods) {
 		this.p_methods = p_methods;
 	}
     public LocalDateTime getOTimeConfirmed() {

@@ -3,7 +3,6 @@ package com.project.demo.sushiCo.service;
 import java.util.List;
 
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
-import com.project.demo.sushiCo.domain.dto.DishDto;
 
 import jakarta.validation.Valid;
 

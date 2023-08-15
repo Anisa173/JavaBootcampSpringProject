@@ -28,10 +28,7 @@ public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantT
 		dto.setAvailableTables(entity.getAvailableTables());
 		dto.setLockedTables(entity.getLockedTables());
 		dto.setTableDescription(entity.getTableDescription());
-		dto.setReservationId(entity.getReservation().getId());
-		var reservationDescription = entity.getReservation().getReservationDescription();
-		dto.setReservationDescription(reservationDescription);
-		
+		dto.setReservation(entity.getReservation());
 		dto.setARest(entity.getARest());
 		
 		return dto;

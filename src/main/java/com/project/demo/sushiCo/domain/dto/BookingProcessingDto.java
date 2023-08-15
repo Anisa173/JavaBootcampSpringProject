@@ -2,18 +2,17 @@ package com.project.demo.sushiCo.domain.dto;
 
 import java.sql.Date;
 import java.sql.Time;
-
-import com.project.demo.sushiCo.entity.RestorantTables;
-
 import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
-public class CustomerReservationDto {
+public class BookingProcessingDto {
+
 	private Integer cR_Id;
 	@NotNull(message = "It's required")
 	private Date reservationDate;
@@ -29,14 +28,16 @@ public class CustomerReservationDto {
 	private String reservationDescription;
 	private Integer customerId;
 	private String customerName;
-	private RestorantTables tables;
+	private Integer reservationId;
+	private String tableName;
 
-	public CustomerReservationDto() {
+	public BookingProcessingDto() {
 
 	}
 
-	public CustomerReservationDto(Integer cR_Id, Date reservationDate, Time start_reservationTime,Time end_reservationTime, Integer noParticipants,
-			String reservationDescription, Integer customerId, String customerName, RestorantTables tables) {
+	public BookingProcessingDto(Integer cR_Id, Date reservationDate, Time start_reservationTime,
+			Time end_reservationTime, Integer noParticipants, String reservationDescription, Integer customerId,
+			String customerName, Integer reservationId, String tableName) {
 		this.cR_Id = cR_Id;
 		this.reservationDate = reservationDate;
 		this.start_reservationTime = start_reservationTime;
@@ -45,8 +46,9 @@ public class CustomerReservationDto {
 		this.reservationDescription = reservationDescription;
 		this.setCustomerId(customerId);
 		this.setCustomerName(customerName);
-		this.setTables(tables);
-		
+		this.reservationId = reservationId;
+		this.setTableName(tableName);
+
 	}
 
 	public Integer getcR_Id() {
@@ -72,6 +74,7 @@ public class CustomerReservationDto {
 	public void setStart_reservationTime(Time reservationTime) {
 		this.start_reservationTime = reservationTime;
 	}
+
 	public Time getEnd_reservationTime() {
 		return end_reservationTime;
 	}
@@ -79,6 +82,7 @@ public class CustomerReservationDto {
 	public void setEnd_reservationTime(Time reservationTime) {
 		this.end_reservationTime = reservationTime;
 	}
+
 	public Integer getNoParticipants() {
 		return noParticipants;
 	}
@@ -111,17 +115,27 @@ public class CustomerReservationDto {
 		this.customerName = customerName;
 	}
 
-    public RestorantTables getTables() {
-		return tables;
+	public Integer getReservationId() {
+		return reservationId;
 	}
 
-	public void setTables(RestorantTables tables) {
-		this.tables = tables;
+	public void setReservationId(Integer reservationId) {
+		this.reservationId = reservationId;
 	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
 	public String toString() {
-		return "BookingProcessing[cR_Id = " + cR_Id + ",reservationDate = " + reservationDate + ",start_reservationTime = "
-				+ start_reservationTime + ",end_reservationTime = " +end_reservationTime+ ",noParticipants = " + noParticipants + ",reservationDescription = "
-				+ reservationDescription + ",customerId = " + customerId + ",customerName = " + customerName
-				+ ",tables = " + tables + "]";
+		return "BookingProcessing[cR_Id = " + cR_Id + ",reservationDate = " + reservationDate
+				+ ",start_reservationTime = " + start_reservationTime + ",end_reservationTime = " + end_reservationTime
+				+ ",noParticipants = " + noParticipants + ",reservationDescription = " + reservationDescription
+				+ ",customerId = " + customerId + ",customerName = " + customerName + ",reservationId = "
+				+ reservationId + ",tableName = " + tableName + "]";
 	}
 }

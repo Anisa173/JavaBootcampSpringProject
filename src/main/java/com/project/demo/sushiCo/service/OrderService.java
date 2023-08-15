@@ -1,9 +1,8 @@
 package com.project.demo.sushiCo.service;
 
 import java.util.List;
-
 import com.project.demo.sushiCo.domain.dto.OrderDto;
-import com.project.demo.sushiCo.domain.dto.UserDto;
+
 
 public interface OrderService {
 

@@ -1,5 +1,6 @@
 package com.project.demo.sushiCo.domain.dto;
 
+import com.project.demo.sushiCo.entity.BookingProcessing;
 import com.project.demo.sushiCo.entity.Restorant;
 
 import groovy.transform.builder.Builder;
@@ -27,9 +28,7 @@ public class RestorantTablesDto {
 
 	private Integer noChairsT;
 
-	private Integer reservationId;
-
-	private String reservationDescription;
+	private BookingProcessing reservation;
 
 	private Restorant aRest;
 
@@ -39,7 +38,7 @@ public class RestorantTablesDto {
 
 	public RestorantTablesDto(Integer rtb_id, Integer tb_id, String tableName, Integer noTables,
 			Integer availableTables, Integer lockedTables, String tableDescription, Integer noChairsT,
-			Integer reservationId, String reservationDescription, Restorant aRest) {
+			BookingProcessing reservation,Restorant aRest) {
 		this.rtb_id = rtb_id;
 		this.tb_id = tb_id;
 		this.tableName = tableName;
@@ -48,8 +47,7 @@ public class RestorantTablesDto {
 		this.setLockedTables(lockedTables);
 		this.setTableDescription(tableDescription);
 		this.noChairsT = noChairsT;
-		this.reservationId = reservationId;
-		this.reservationDescription = reservationDescription;
+		this.reservation = reservation;
 		this.aRest = aRest;
 
 	}
@@ -118,20 +116,12 @@ public class RestorantTablesDto {
 		this.noChairsT = noChairsT;
 	}
 
-	public Integer getReservationId() {
-		return reservationId;
+	public BookingProcessing getReservation() {
+		return reservation;
 	}
 
-	public void setReservationId(Integer reservationId) {
-		this.reservationId = reservationId;
-	}
-
-	public String getReservationDescription() {
-		return reservationDescription;
-	}
-
-	public void setReservationDescription(String reservationDescription) {
-		this.reservationDescription = reservationDescription;
+	public void setReservation(BookingProcessing reservation) {
+		this.reservation = reservation;
 	}
 
 	public Restorant getARest() {
@@ -145,8 +135,9 @@ public class RestorantTablesDto {
 	public String toString() {
 		return "return[rtb_id = " + rtb_id + ",tb_id = " + tb_id + ",tableName = " + tableName + ",noTables = "
 				+ noTables + ",availableTables = " + availableTables + ",unAvailableTables = " + lockedTables
-				+ ",description = " + tableDescription + ",noChairsT = " + noChairsT + ",reservationId = "
-				+ reservationId + ",reservationDescription = " + reservationDescription + ",aRest = " + aRest + "]";
+				+ ",description = " + tableDescription + ",noChairsT = " + noChairsT + ",reservation = " + reservation + ",aRest = " + aRest + "]";
 	}
+
+	
 
 }

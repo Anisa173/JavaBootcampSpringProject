@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+
 @Getter
 @Setter
 @Builder
@@ -22,8 +23,7 @@ public class OrderDto {
 	@NotNull(message = "It can not be null")
 	private LocalDateTime oTimeProccessed;
 
-	private Integer paymentMethodId;
-	private String paymentMethodRest;
+	private Long totalP_methods;
 	private Integer idShporta;
 	private Long totalDish;
 	private Integer idCustomer;
@@ -35,7 +35,7 @@ public class OrderDto {
 
 	public OrderDto(Integer oId, Double orderPrize, Integer orderItems, String orderStatus,
 			LocalDateTime oTimeConfirmed, LocalDateTime oTimeProccessed, Integer idCustomer, String customerName,
-			Integer idShporta, String paymentMethodRest, Integer paymentMethodId) {
+			Integer idShporta, Long totalP_methods) {
 		this.oId = oId;
 		this.orderPrize = orderPrize;
 		this.orderItems = orderItems;
@@ -45,8 +45,7 @@ public class OrderDto {
 		this.setIdCustomer(idCustomer);
 		this.setCustomerName(customerName);
 		this.setIdShporta(idShporta);
-		this.setPaymentMethodRest(paymentMethodRest);
-		this.setPaymentMethodId(paymentMethodId);
+		this.totalP_methods = totalP_methods;
 	}
 
 	public Integer getOId() {
@@ -97,20 +96,12 @@ public class OrderDto {
 		this.oTimeProccessed = oTimeProccessed;
 	}
 
-	public Integer getPaymentMethodId() {
-		return paymentMethodId;
+	public Long getTotalP_methods() {
+		return totalP_methods;
 	}
 
-	public void setPaymentMethodId(Integer paymentMethodId) {
-		this.paymentMethodId = paymentMethodId;
-	}
-
-	public String getPaymentMethodRest() {
-		return paymentMethodRest;
-	}
-
-	public void setPaymentMethodRest(String paymentMethodRest) {
-		this.paymentMethodRest = paymentMethodRest;
+	public void setTotalP_methods(Long totalP_methods) {
+		this.totalP_methods = totalP_methods;
 	}
 
 	public Integer getIdShporta() {
@@ -148,9 +139,9 @@ public class OrderDto {
 	public String toString() {
 		return "OrderDto[oId = " + oId + ",orderPrize = " + orderPrize + ",orderItems = " + orderItems
 				+ ",orderStatus = " + orderStatus + ",oTimeConfirmed = " + oTimeConfirmed + ",oTimeProccessed = "
-				+ oTimeProccessed + ",paymentMethodId = " + paymentMethodId + ",paymentMethodRest = "
-				+ paymentMethodRest + ", idShporta= " + idShporta + ",totalDish = " + totalDish + ",idCustomer = "
-				+ idCustomer + ",customerName = " + customerName + "]";
+				+ oTimeProccessed + ",totalP_methods = " + totalP_methods + ", idShporta= " + idShporta
+				+ ",totalDish = " + totalDish + ",idCustomer = " + idCustomer + ",customerName = " + customerName + "]";
 	}
+
 
 }
