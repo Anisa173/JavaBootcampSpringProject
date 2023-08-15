@@ -18,7 +18,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ "(Select o.idCustomer From Order o Inner Join User c ON c.o.idCustomer = c.id Where c.id =: id ),"
 			+ "(Select o.adminRestId From Order o Inner Join User a ON a.o.adminRestId = a.id Where a.id =: id))"
 			+ "Select uc.o.orderPrize,uc.o.orderItems,uc.o.orderStatus"
-			+ "From User uc INNER JOIN AddInBasket ab ON uc.id =uc.ab.userId"
+			+ "From User uc INNER JOIN AddInBasket ab ON uc.id = uc.ab.userId"
 			+ "INNER JOIN Order o ON uc.idCustomer = uc.o.oId"
 			+ "INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
 			+ "WHERE uc.o.orderItems = sum(uc.ab.addItemDish) AND uc.o.orderPrize = sum(uc.ab.amountValue) AND uc.o.orderStatus = 'Pending' ")

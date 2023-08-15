@@ -28,7 +28,7 @@ import lombok.AllArgsConstructor;
 @Table(name = "dishCategory")
 public class DishCategory extends BasicEntity<Integer> {
 
-	// Dishes menaxhohen nga Admini i çdo restoranti
+	// DishCategory menaxhohen nga Admini i çdo restoranti
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "admin_Id", referencedColumnName = "id")
 	private User user;

@@ -43,7 +43,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	// Te gjithe userat survejohen nga administratori i platformës
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "idAppl")
+	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "id")
 	private User AdminPlatforma;
 
 	// N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin
@@ -62,7 +62,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	private Restorant restorant;
 
 	// Çdo admin menaxhon disa kategori menush
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<DishCategory> dishCategories = new ArrayList<>();
 
 	// Çdo user mund te posedoje nje ose disa karta banke
