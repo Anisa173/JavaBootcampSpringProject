@@ -5,9 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.project.demo.sushiCo.domain.dto.Getter;
-import com.project.demo.sushiCo.domain.dto.Setter;
-
 import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -23,10 +20,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @Entity
 public class Restorant extends BasicEntity<Integer> {
 

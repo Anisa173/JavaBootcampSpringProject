@@ -3,9 +3,6 @@ package com.project.demo.sushiCo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.demo.sushiCo.domain.dto.Getter;
-import com.project.demo.sushiCo.domain.dto.Setter;
-
 import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,11 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 
-
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @Entity
 public class WebAplication extends BasicEntity<String> {
 

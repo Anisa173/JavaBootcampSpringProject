@@ -1,14 +1,7 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 
-
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 public class PaymentMethodsDto {
 	private Integer Id;
 	@NotNull(message = "It can not be null,it's optional")

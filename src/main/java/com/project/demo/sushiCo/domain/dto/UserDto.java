@@ -12,8 +12,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
+
 @Builder
 @AllArgsConstructor
 public class UserDto {
@@ -64,7 +63,6 @@ public class UserDto {
 	private Integer idAdmin;
 	private Long totaldishCategories;
 	private long totalAppRests;
-	private long totalDishes;
 	private long totalAddInBaskets;
 	private long totalOrders;
 	private Long totalReservations;
@@ -82,7 +80,7 @@ public class UserDto {
 	public UserDto(Integer id, String first_name, String last_name, String address, String phoneNo, String email,
 			String password, Integer age, String customerType, String personalIdentityNo, Double points,
 			ShippersStatus shippersStatus, UserRole userRole, Long totalCardBank, Long totalShippers, Integer idAdmin,
-			Long totaldishCategories, Long totalAppRests, Long totalDishes, Long totalAddInBaskets, Long totalOrders,
+			Long totaldishCategories, Long totalAppRests,Long totalAddInBaskets, Long totalOrders,
 			Long totalReservations, Long totalPackage_Orders, String webAppId, String webAppname, Restorant restorant,
 			Long totalOrders1, String adminIdPlatforma, String platformaName) {
 		this.id = id;
@@ -102,7 +100,6 @@ public class UserDto {
 		this.setIdAdmin(idAdmin);
 		this.totaldishCategories = totaldishCategories;
 		this.setTotalAppRests(totalAppRests);
-		this.setTotalDishes(totalDishes);
 		this.setTotalAddInBaskets(totalAddInBaskets);
 		this.setTotalOrders(totalOrders);
 		this.setTotalReservations(totalReservations);
@@ -259,13 +256,6 @@ public class UserDto {
 		this.totalAppRests = totalAppRests;
 	}
 
-	public long getTotalDishes() {
-		return totalDishes;
-	}
-
-	public void setTotalDishes(long totalDishes) {
-		this.totalDishes = totalDishes;
-	}
 
 	public long getTotalAddInBaskets() {
 		return totalAddInBaskets;
@@ -354,7 +344,7 @@ public class UserDto {
 				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",userRole = " + userRole
 				+ ",totalCardBank = " + totalCardBank + ",idAdmin =" + idAdmin + ",totalShippers = " + totalShippers
 				+ ",totaldishCategories = " + totaldishCategories + ",totalAppRests = " + totalAppRests
-				+ ",totalDishes = " + totalDishes + ",totalAddInBaskets = " + totalAddInBaskets + ",totalOrders ="
+				+ ",totalAddInBaskets = " + totalAddInBaskets + ",totalOrders ="
 				+ totalOrders + ",Long totalReservations = " + totalReservations + ",totalPackage_Orders = "
 				+ totalPackage_Orders + ",webAppId = " + userApplId + ",webAppname = " + webAppname + ",restorant = "
 				+ restorant + ",totalOrders1 = " + totalOrders1 + ",adminIdPlatforma = " + adminIdPlatforma

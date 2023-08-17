@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.PackageOrderedDto;
@@ -41,5 +43,17 @@ public class PackagedOrderedMapper extends BaseMapper<PackageOrdered, PackageOrd
 		entity.setSessionPayment(dto.getSessionPayment());
 
 		return entity;
+	}
+
+	@Override
+	public List<PackageOrdered> toEntity(List<PackageOrderedDto> dtoList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PackageOrderedDto> toDto(List<PackageOrdered> entityList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.project.demo.sushiCo.domain.dto.OrderDto;
 import com.project.demo.sushiCo.entity.Order;
 
+
 @Service
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
@@ -27,29 +28,17 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon
 	// sipas Restorantit perkates
-	@Query("Select r.c.o , r.idRestorant "
+	@Query("Select o , r.idRestorant "
 			+ "From User c INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-			+ "INNER JOIN Order o ON c.o.oId = c.idCustomer " + "Group By r.c.id " + "Order By r.c.o.orderPrize ASC ")
-
+			+ "INNER JOIN Order o ON c.o.oId = c.idCustomer  Group By r.c.id  Order By r.c.o.orderPrize")
 	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
-
-	// Çdo klient te shohe porosite qe ka kryer për çdo restorant ne kete aplikacion
-	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
-			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-			+ "Where r.c.id =: id " + "Group By r.restName ")
-	List<OrderDto> getOrdersByRestorantId(Integer customerId, Integer restorantId);
 
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe
 	// ku?... ne cilin restorant i ka kryer
-	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
+	@Query("Select r.restName , o  From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
 			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-			+ "Where r.c.id =: id ")
-	List<OrderDto> getOrdersRByCustomerId(Integer customerId);
-
-	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC
-	@Query("Select c.o , c.customerName " + "From User c INNER JOIN Order o ON c.o.idCustomer = c.id"
-			+ "Order By c.o.orderPrize ASC ")
-	List<OrderDto> getOrdersByCost();
+			+ "Where r.c.id =: id  Group By r.restName")
+	List<Order> getOrdersRByCustomerId(Integer customerId);
 
 	// Admini i restorantit kerkon te gjeneroje porosine me koston me te madhe dhe
 	// me te vogel si edhe kush e kreu ate
@@ -58,25 +47,19 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ "	INNER JOIN User as a ON o.adminRestId = a.id" + " Where a.id =: id  ", nativeQuery = true)
 	OrderDto getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
 
-	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne
-	// njerin prej restoranteve
-	@Query("Select r.restName ,r.c.o" + "From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
-			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-			+ "Where r.c.id =: id AND r.idRestorant =: idRestorant ")
-	List<OrderDto> getOrdByRestorantId(Integer customerId, Integer restorantId);
-
 	// Anullon porosine e konfirmuar 'customer'
 	@Modifying
 	@Query("UPDATE Order or SET deleted = true WHERE Exists"
-			+ "(Select c.or From User c INNER JOIN c.or ON c.id = c.or.idCustomer"
+			+ "(Select or From User c INNER JOIN or ON c.id = c.or.idCustomer"
 			+ "Where c.or.orderStatus ='Cancel' AND c.id =: id ))")
 	void cancelUserOrder(Integer orderId, Integer customerId);
 
-	/*
-	 * @Modifying
-	 * 
-	 * @Query("update Product p set deleted = true where p = :p") void
-	 * delete(Product p);
-	 */
+	// Admini i restorantit rendit porosite sipas kostos ASC apo DESC te grupuara
+	// per çdo klient
+	@Query("Select o  From Order o INNER JOIN User c ON c.o.idCustomer = c.id"
+			+ "INNER JOIN User a ON a.o.adminRestId = a.id" + "Order By c.o.orderPrize ASC  Group By c.id"
+			+ "Where a.id =: id ")
+	List<Order> getOrdersByCost(Integer idCustomer, Integer adminRestId);
+
 
 }

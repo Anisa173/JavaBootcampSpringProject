@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.RestorantTablesDto;
@@ -42,6 +44,18 @@ public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantT
 		dto.setLockedTables(entity.getLockedTables());
 		dto.setTableDescription(entity.getTableDescription());
 		return entity;
+	}
+
+	@Override
+	public List<RestorantTables> toEntity(List<RestorantTablesDto> dtoList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RestorantTablesDto> toDto(List<RestorantTables> entityList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

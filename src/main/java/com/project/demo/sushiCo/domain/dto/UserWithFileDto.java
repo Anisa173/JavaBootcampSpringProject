@@ -2,12 +2,6 @@ package com.project.demo.sushiCo.domain.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import groovy.transform.builder.Builder;
-import lombok.AllArgsConstructor;
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 public class UserWithFileDto {
 
 	private Integer id;

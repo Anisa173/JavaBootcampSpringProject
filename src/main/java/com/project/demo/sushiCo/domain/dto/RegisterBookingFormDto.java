@@ -3,6 +3,8 @@ package com.project.demo.sushiCo.domain.dto;
 import java.sql.Date;
 import java.sql.Time;
 
+import lombok.AllArgsConstructor;
+@AllArgsConstructor
 public class RegisterBookingFormDto {
 	private Integer crId;
 	private String First_name;
@@ -16,10 +18,13 @@ public class RegisterBookingFormDto {
 	private String tableName;
 	private Integer noTables;
 	private Integer lockedTables;
+	private Integer idCustomer;
+	private Integer idRestorant;
 
-	public RegisterBookingFormDto(Integer crId, String First_name, String Last_name, String phoneNo, Date reservationDate,
-			Time start_reservationTime, Time end_reservationTime, Integer noParticipants, String reservationDescription,
-			String tableName, Integer noTables, Integer lockedTables) {
+	public RegisterBookingFormDto(Integer crId, String First_name, String Last_name, String phoneNo,
+			Date reservationDate, Time start_reservationTime, Time end_reservationTime, Integer noParticipants,
+			String reservationDescription, String tableName, Integer noTables, Integer lockedTables, Integer idCustomer,
+			Integer idRestorant) {
 		this.crId = crId;
 		this.First_name = First_name;
 		this.Last_name = Last_name;
@@ -32,6 +37,12 @@ public class RegisterBookingFormDto {
 		this.tableName = tableName;
 		this.noTables = noTables;
 		this.lockedTables = lockedTables;
+		this.idCustomer = idCustomer;
+		this.idRestorant = idRestorant;
+	}
+
+	public RegisterBookingFormDto() {
+		
 	}
 
 	public Integer getCrId() {
@@ -130,12 +141,30 @@ public class RegisterBookingFormDto {
 		this.lockedTables = lockedTables;
 	}
 
+	public Integer getIdCustomer() {
+		return idCustomer;
+	}
+
+	public void setIdCustomer(Integer idCustomer) {
+		this.idCustomer = idCustomer;
+	}
+
+	public Integer getIdRestorant() {
+		return idRestorant;
+	}
+
+	public void setIdRestorant(Integer idRestorant) {
+		this.idRestorant = idRestorant;
+	}
+
 	public String toString() {
 		return "RegisterBookingFormDto[crId = " + crId + ", First_name = " + First_name + ",Last_name = " + Last_name
 				+ ",phoneNo = " + phoneNo + ", reservationDate = " + reservationDate + ",start_reservationTime = "
 				+ start_reservationTime + ", end_reservationTime = " + end_reservationTime + ",noParticipants = "
 				+ noParticipants + ", reservationDescription = " + reservationDescription + ",tableName = " + tableName
-				+ ", noTables = " + noTables + ", lockedTables = " + lockedTables + "]";
+				+ ", noTables = " + noTables + ", lockedTables = " + lockedTables + ",idCustomer = " + idCustomer
+				+ ",idRestorant = " + idRestorant + "]";
 
 	}
+
 }

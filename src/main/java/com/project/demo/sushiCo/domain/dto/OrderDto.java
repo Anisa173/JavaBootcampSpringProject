@@ -1,15 +1,8 @@
 package com.project.demo.sushiCo.domain.dto;
 
 import java.time.LocalDateTime;
-
-import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 public class OrderDto {
 	private Integer oId;
 	@NotNull(message = "It can't be null")

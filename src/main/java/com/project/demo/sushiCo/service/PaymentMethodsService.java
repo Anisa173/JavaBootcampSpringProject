@@ -3,6 +3,7 @@ package com.project.demo.sushiCo.service;
 import java.util.List;
 
 import com.project.demo.sushiCo.domain.dto.PaymentMethodsDto;
+import com.project.demo.sushiCo.domain.dto.UserDto;
 
 import jakarta.validation.Valid;
 
@@ -19,6 +20,6 @@ public interface PaymentMethodsService {
 	PaymentMethodsDto create(@Valid PaymentMethodsDto methodsDto) throws Exception;
 	
 	PaymentMethodsDto update(Integer Id,@Valid PaymentMethodsDto placesDto) throws Exception;
-
+	PaymentMethodsDto getRestorantPMethods(Integer userId, Integer restorantId) throws Exception;
 	
 }

@@ -61,4 +61,9 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 		return methodsMapper.toDto(methodsRepository.save(result));
 	}
 
+	@Override
+	public PaymentMethodsDto getRestorantPMethods(Integer userId, Integer restorantId) throws Exception {
+		return methodsMapper.toDto(methodsRepository.getRestorantPMethods(userId,restorantId));
+	}
+
 }

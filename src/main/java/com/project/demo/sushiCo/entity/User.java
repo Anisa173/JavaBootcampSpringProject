@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.project.demo.sushiCo.domain.dto.Getter;
-import com.project.demo.sushiCo.domain.dto.Setter;
 
 import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
@@ -32,10 +30,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+
 @Entity
 public class User extends BasicEntity<Integer> implements UserDetails {
 
@@ -88,10 +83,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	@JsonIgnoreProperties
 	private List<Restorant> rest = new ArrayList<Restorant>();
 
-	// Admini menaxhon dishes
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Dish> dishes = new ArrayList<Dish>();
-
 	// Klienti shton ne shporte disa menu duke selektuar edhe numrin e artikujve per
 	// cdo menu
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -99,7 +90,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	// Klienti mund te kryeje nje ose disa porosi ne nje interval te shkurter kohe
 	// ose gjate te gjithe intervalit ditor
-	@OneToMany(mappedBy = "User", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<Order>();
 
 	// Klienti mund te kryeje disa rezervime gjate intervalit kohor ditor
@@ -141,7 +132,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	public User(String first_name, String last_name, String address, String phoneNo, String email, String password,
 			String personalIdentityNo, ShippersStatus shippersStatus, Integer age, UserRole userRole,
 			List<BookingProcessing> bookingProcessings, List<PackageOrdered> package_Orders, List<Order> orders,
-			List<AddInBasket> addInBaskets, List<Dish> dishes, List<Restorant> rest, User shippers, List<User> user,
+			List<AddInBasket> addInBaskets, List<Restorant> rest, User shippers, List<User> user,
 			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant, List<Order> orders1,
 			User adminPlatforma, WebAplication webAplication) {
 		super();
@@ -160,7 +151,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.dishCategories = dishCategories;
 		this.setRest(rest);
 		this.setShippers(shippers);
-		this.setDishes(dishes);
 		this.setAddInBaskets(addInBaskets);
 		this.setOrders(orders);
 		this.setCustomerReservations(bookingProcessings);
@@ -300,13 +290,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.dishCategories = dishCategories;
 	}
 
-	public List<Dish> getDishes() {
-		return dishes;
-	}
-
-	public void setDishes(List<Dish> dishes) {
-		this.dishes = dishes;
-	}
+	
 
 	public List<AddInBasket> getAddInBaskets() {
 		return addInBaskets;
@@ -377,7 +361,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 				+ ",phoneNo = " + address + ",email = " + email + ",password = " + password + ",personalIdentityNo = "
 				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",age = " + age + ",userRole = "
 				+ userRole + ",dishCategories = " + dishCategories + ",cardBank = " + cardBank + ",user = " + user
-				+ ",shippers = " + shippers + ",rest = " + rest + ",dishes = " + dishes + ",addInBaskets = "
+				+ ",shippers = " + shippers + ",rest = " + rest + ",addInBaskets = "
 				+ addInBaskets + ",orders = " + orders + ", bookingProcessings = " + bookingProcessings
 				+ ", package_Orders = " + package_Orders + ",restorant = " + restorant + ",orders1 = " + orders1
 				+ ",adminPlatforma = " + AdminPlatforma + ",webAplication = " + webAplication + "]";

@@ -2,13 +2,10 @@ package com.project.demo.sushiCo.domain.dto;
 
 import com.project.demo.sushiCo.entity.StatusOrderSession;
 
-import groovy.transform.builder.Builder;
+
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+
+
 public class PackageOrderedDto {
 	private Integer id;
 	@NotNull(message = "It's required")

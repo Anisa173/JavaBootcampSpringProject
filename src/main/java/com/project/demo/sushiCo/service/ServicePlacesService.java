@@ -20,6 +20,6 @@ public interface ServicePlacesService {
 
 	ServicePlacesDto getService_PlacesById(Integer Id) throws Exception;
 
-	
+	ServicePlacesDto getRestorantPServices(Integer custId, Integer restorantId) throws Exception;
 
 }

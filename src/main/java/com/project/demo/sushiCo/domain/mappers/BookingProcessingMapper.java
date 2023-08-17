@@ -1,7 +1,9 @@
 package com.project.demo.sushiCo.domain.mappers;
 
-import org.springframework.stereotype.Component;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.stereotype.Component;
 import com.project.demo.sushiCo.domain.dto.BookingProcessingDto;
 import com.project.demo.sushiCo.entity.BookingProcessing;
 
@@ -48,4 +50,31 @@ public class BookingProcessingMapper extends BaseMapper<BookingProcessing, Booki
 		return entity;
 	}
 
+	@Override
+	public List<BookingProcessing> toEntity(List<BookingProcessingDto> dtoList) {
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<BookingProcessing> list = new ArrayList<BookingProcessing>( dtoList.size() );
+        for ( BookingProcessingDto bookPDto : dtoList ) {
+            list.add( toEntity( bookPDto ) );
+        }
+
+        return list;
+	}
+
+	@Override
+	public List<BookingProcessingDto> toDto(List<BookingProcessing> entityList) {
+		 if ( entityList == null ) {
+	            return null;
+	        }
+
+	        List<BookingProcessingDto> list = new ArrayList<BookingProcessingDto>( entityList.size() );
+	        for ( BookingProcessing bookP : entityList ) {
+	            list.add( toDto( bookP ) );
+	        }
+
+	        return list;
+	}
 }

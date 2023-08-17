@@ -32,20 +32,7 @@ public interface UserService {
 
 	UserDto addIdentification(Integer userId, UserWithFileDto reqDto) throws Exception;
 
-	UserDto getRestorantPMethods(Integer userId, Integer restorantId, Integer paymentId) throws Exception;
-
-	UserDto getRestorantPServices(Integer custId, Integer restorantId, Integer service_PlacesId) throws Exception;
-
-	UserDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception;
-
-	OrderByProcessingDto getPaymentServicesById(Integer custmId, Integer idRestorant, Integer pmId, Integer servPId)
-			throws Exception;
-
-	CardBankDto getCardsByCustomerId(Integer cardId, Integer custId) throws Exception;
-
-	UserDto displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception;
-
-	UserDto createPaymentCard() throws Exception;
+	
 
 	
 

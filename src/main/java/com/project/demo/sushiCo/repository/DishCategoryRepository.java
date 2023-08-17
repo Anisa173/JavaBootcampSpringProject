@@ -17,12 +17,9 @@ public interface DishCategoryRepository extends JpaRepository<DishCategory, Inte
 
 	void delete(Integer id, Integer adminId);
 
-	@Query("Select dc From dishCategory d INNER JOIN dishCategory.dish dc ON d.id = dc.categoryId Where d.id =: id ")
-	List<DishDto> getDishesByDishCategory(Integer id);
-
 	@Query("Select a.dc From User a INNER JOIN DishCategory dc ON a.id = dc.admin_Id Where a.id =: id")
 	List<DishCategoryDto> getDishCategorybyRestorant(Integer adminId);
 
 	@Query(value = "Select dc.id,a.id  From DishCategory as dc INNER JOIN User as a ON dc.admin_Id = a.id Where dc.id = ? AND a.id = ? ", nativeQuery = true)
-	DishCategoryDto getDishCategoryById(Integer id, Integer adminId);
+	DishCategory getDishCategoryById(Integer id, Integer adminId);
 }

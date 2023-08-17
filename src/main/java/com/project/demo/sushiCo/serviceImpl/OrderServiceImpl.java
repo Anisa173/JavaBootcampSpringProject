@@ -25,39 +25,39 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderDto createOrder() throws Exception {
 		
-		return orderMapper.toDto(orderRepository.createOrder()) ;
+		return (orderMapper.toDto(orderRepository.createOrder())) ;
 	}
 
 	// Admini i aplikacionit 'sheh' porositë sipas customerId dhe datës së
 	// proçesimit
 	@Override
 	public List<OrderDto>  getOrders() throws Exception {
-		return orderRepository.findAll().stream().map(m -> orderMapper.toDto(m)).collect(Collectors.toList());
+		return (orderRepository.findAll().stream().map(m -> orderMapper.toDto(m)).collect(Collectors.toList()));
 	}
 
 
 	//Çdo klient duhet të shohë porositë që ka kryer në çdo restorant në këtë aplikacion
 	@Override
-	public List<OrderDto> getOrdersByRestorantId(Integer customerId, Integer restorantId) throws Exception {
-	
-		return  orderRepository.getOrdersByRestorantId(customerId, restorantId);
+	public List<OrderDto> getOrdersByRestorantId(Integer customerId, Integer idRest , String restName) throws Exception {
+		return  orderRepository.findAll().stream().map(a -> orderMapper.toDto(a)).collect(Collectors.toList());
 	}
 
 
-	// Çdo klient të shohë në profilin e tij të gjitha porositë që ka kryer dhe
-	// ku?... në cilin restorant i ka kryer
+	// Çdo klient të shohë në profilin e tij të gjitha porositë që ka kryer 
+
 	@Override
 	public List<OrderDto> getOrdersRByCustomerId(Integer customerId) throws Exception {
 	
-		return orderRepository.getOrdersRByCustomerId(customerId);
+		return (List<OrderDto>) orderMapper.toDto(orderRepository.getOrdersRByCustomerId(customerId));
 	}
 
 
-	//Admini i webAplication rendit porositë sipas kostos ASC apo DESC te grupuara sipas customerId
+	// Admini i restorantit rendit porosite  sipas kostos ASC apo DESC te grupuara  per çdo klient
+
 	@Override
-	public List<OrderDto> getOrdersByCost() throws Exception {
+	public List<OrderDto> getOrdersByCost(Integer idCustomer,Integer adminRestId) throws Exception {
 		
-		return orderRepository.getOrdersByCost();
+		return orderMapper.toDto( orderRepository.getOrdersByCost(idCustomer, adminRestId));
 	}
 
 
@@ -69,11 +69,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	
-	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne cilin restorant 
+	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne
+		// njerin prej restoranteve
 	@Override
-	public List<OrderDto> getOrdByRestorantId(Integer customerId, Integer restorantId) throws Exception {
+	public List<OrderDto> getOrdByRestorantId(Integer idCustomer, Integer idRest) throws Exception {
 		
-		return orderRepository.getOrdByRestorantId(customerId,restorantId);
+		return orderRepository.findAll().stream().map(h -> orderMapper.toDto(h)).collect(Collectors.toList());
 	}
 
 
@@ -82,6 +83,7 @@ public class OrderServiceImpl implements OrderService {
 
 		 orderRepository.cancelUserOrder(orderId,customerId);
 	}
+
 
 	
 

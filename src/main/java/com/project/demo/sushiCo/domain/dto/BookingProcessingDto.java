@@ -2,15 +2,9 @@ package com.project.demo.sushiCo.domain.dto;
 
 import java.sql.Date;
 import java.sql.Time;
-import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 public class BookingProcessingDto {
 
 	private Integer cR_Id;

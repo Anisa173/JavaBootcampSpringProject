@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.ServicePlacesDto;
@@ -38,6 +40,18 @@ public class ServicePlacesMapper extends BaseMapper<ServicePlaces, ServicePlaces
 		entity.setService_Places(dto.getService_Places());
 		entity.setShippingCost(dto.getShippingCost());
 		return entity;
+	}
+
+	@Override
+	public List<ServicePlaces> toEntity(List<ServicePlacesDto> dtoList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ServicePlacesDto> toDto(List<ServicePlaces> entityList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

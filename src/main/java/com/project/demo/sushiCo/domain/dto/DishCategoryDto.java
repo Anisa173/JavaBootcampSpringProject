@@ -1,8 +1,13 @@
 package com.project.demo.sushiCo.domain.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class DishCategoryDto {
 	private Integer id;
 	private Long totalDishes;
+	@NotNull(message = "It's required!")
+	@Size(max = 25, min = 20, message = "It should be with a minimum of 20 characters and with a maximum of 25 characters")
 	private String categoryName;
 	private Integer admin_Id;
 	private String adminName;

@@ -1,6 +1,4 @@
 package com.project.demo.sushiCo.serviceImpl;
-
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -10,9 +8,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.project.demo.sushiCo.domain.dto.CardBankDto;
-import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
 import com.project.demo.sushiCo.domain.dto.UserDto;
 import com.project.demo.sushiCo.domain.dto.UserWithFileDto;
 import com.project.demo.sushiCo.domain.mappers.UserMapper;
@@ -20,8 +15,6 @@ import com.project.demo.sushiCo.entity.User;
 import com.project.demo.sushiCo.entity.UserRole;
 import com.project.demo.sushiCo.repository.UserRepository;
 import com.project.demo.sushiCo.service.FileSystemStorageService;
-import com.project.demo.sushiCo.service.OrderByProcessing;
-import com.project.demo.sushiCo.service.RegisterCardform;
 import com.project.demo.sushiCo.service.UserService;
 import groovy.util.ResourceException;
 import jakarta.validation.Valid;
@@ -131,55 +124,8 @@ public class UserServiceImpl implements UserService {
 		return (Resource) storageService.loadAsResource(user.getPersonalIdentityNo());
 	}
 
-	@Override
-	public UserDto getRestorantPMethods(Integer userId, Integer restorantId, Integer paymentId) throws Exception {
-		return repository.getRestorantPMethods(userId, restorantId, paymentId);
-	}
 
-	@Override
-	public UserDto getRestorantPServices(Integer custId, Integer restorantId, Integer service_PlacesId)
-			throws Exception {
-		return repository.getRestorantPServices(custId, restorantId, service_PlacesId);
-	}
-
-	@Override
-	public UserDto createPaymentCard() throws Exception {
-		return repository.createPaymentCard();
-	}
-
-	@Override
-	public UserDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception {
-		var pmSer = getPaymentServicesById(byProcessingform.getCustmId(), byProcessingform.getPmId(),
-				byProcessingform.getServPId(), byProcessingform.getIdRestorant());
-		pmSer.setPayments_methodR(byProcessingform.getPayments_methodR());
-		pmSer.setService_placesR(byProcessingform.getService_PlacesR());
-		return userMapper.toDto(repository.save(pmSer));
-	}
-
-	@Override
-	public OrderByProcessingDto getPaymentServicesById(Integer custmId, Integer idRestorant, Integer pmId,
-			Integer servPId) throws Exception {
-
-		return repository.getPaymentServicesById(custmId, idRestorant, pmId, servPId);
-	}
-
-	@Override
-	public CardBankDto getCardsByCustomerId(Integer cardId, Integer custId) throws Exception {
-		
-		return repository.getCardsByCustomerId(cardId,custId);
-	}
-
-	@Override
-	public UserDto displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception {
-	var cardB = getCardsByCustomerId(cardBankForm.getCardId(),cardBankForm.getCustId());
-	cardB.setBankId(cardBankForm.getBankId());
-	cardB.setValid_from(cardBankForm.getValid_from());
-	cardB.setExpiredTime(cardBankForm.getExpiredTime());
-	cardB.setCardSecurityCode(cardBankForm.getCardSecurityCode());
-	cardB.setCardHolderName(cardBankForm.getCardHolderName());
-	return userMapper.toDto(repository.save(cardB));
-	}
-
+	
 	
 
 

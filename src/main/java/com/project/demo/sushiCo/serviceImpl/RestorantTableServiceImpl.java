@@ -43,7 +43,7 @@ public class RestorantTableServiceImpl implements RestorantTablesService {
 	@Override
 	public RestorantTablesDto getRestorant_tablesById(Integer rtb_id, Integer idRestorant) throws Exception {
 
-		return restorantTbRepository.getRestorant_tablesById(rtb_id, idRestorant);
+		return restorantTableMapper.toDto(restorantTbRepository.getRestorant_tablesById(rtb_id, idRestorant));
 	}
 
 	@Override

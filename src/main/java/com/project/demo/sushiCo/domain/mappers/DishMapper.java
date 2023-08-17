@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.DishDto;
@@ -43,6 +45,18 @@ public class DishMapper extends BaseMapper<Dish, DishDto> {
 		dishes.setDishDescription(dto.getDishDescription());
 		
 		return dishes;
+	}
+
+	@Override
+	public List<Dish> toEntity(List<DishDto> dtoList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<DishDto> toDto(List<Dish> entityList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

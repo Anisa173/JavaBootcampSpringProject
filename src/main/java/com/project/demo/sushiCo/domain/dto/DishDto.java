@@ -1,14 +1,9 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+
 public class DishDto {
 	private Integer dId;
 	@NotNull(message = "It's required!")

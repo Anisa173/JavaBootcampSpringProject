@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.project.demo.sushiCo.domain.dto.RegisterBookingFormDto;
 import com.project.demo.sushiCo.domain.dto.BookingProcessingDto;
 import com.project.demo.sushiCo.domain.mappers.BookingProcessingMapper;
+import com.project.demo.sushiCo.domain.mappers.RegisterBookingFormMapper;
 import com.project.demo.sushiCo.repository.BookingProcessingRepository;
 import com.project.demo.sushiCo.service.BookingProcessingService;
 import com.project.demo.sushiCo.service.RegisterBookingForm;
@@ -18,15 +19,17 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 	@Autowired
 	private final BookingProcessingRepository bookingRepository;
 	private final BookingProcessingMapper bookingMapper;
+	private final RegisterBookingFormMapper registerBookMapper;
 
 	public BookingProcessingServiceImpl(BookingProcessingRepository bookingRepository,
-			BookingProcessingMapper bookingMapper) {
+			BookingProcessingMapper bookingMapper, RegisterBookingFormMapper registerBookMapper) {
 		this.bookingRepository = bookingRepository;
 		this.bookingMapper = bookingMapper;
+		this.registerBookMapper = registerBookMapper;
 	}
 
 	@Override
-	public BookingProcessingDto register(@Valid RegisterBookingForm bookingForm) throws Exception {
+	public BookingProcessingDto register(@Valid RegisterBookingForm bookingForm, Integer idCustomer) throws Exception {
 
 		var reservation = getCustomerReservationById(bookingForm.getId(), bookingForm.getIdCustomer(),
 				bookingForm.getIdRestorant());
@@ -36,7 +39,7 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 		reservation.setReservationDate(bookingForm.getReservationDate());
 		reservation.setStart_reservationTime(bookingForm.getStart_reservationTime());
 		reservation.setEnd_reservationTime(bookingForm.getEnd_reservationTime());
-		reservation.setNoParticipants(bookingForm.getNoParticipant());
+		reservation.setNoParticipants(bookingForm.getNoParticipants());
 		reservation.setReservationDescription(bookingForm.getReservationDescription());
 		reservation.setTableName(bookingForm.getTableName());
 		reservation.setNoTables(bookingForm.getNoTables());
@@ -47,24 +50,24 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 	@Override
 	public RegisterBookingFormDto getCustomerReservationById(Integer idCustomer, Integer cR_Id, Integer idRestorant)
 			throws Exception {
-		return bookingRepository.getCustomerReservationById(idCustomer, cR_Id, idRestorant);
+		return registerBookMapper.toDto(bookingRepository.getCustomerReservationById(idCustomer, cR_Id, idRestorant));
 	}
 
 	@Override
 	public RegisterBookingFormDto createBooking(@Valid BookingProcessingDto cReservation) throws Exception {
-	
-		return bookingRepository.createBooking(cReservation);
+
+		return registerBookMapper.toDto(bookingRepository.createBooking(cReservation));
 	}
 
 	@Override
 	public RegisterBookingFormDto update(@Valid BookingProcessingDto reservation, Integer id, Integer rtb_id)
 			throws Exception {
-		return bookingRepository.update(reservation,id,rtb_id);
+		return registerBookMapper.toDto(bookingRepository.update(reservation, id, rtb_id));
 	}
 
 	@Override
 	public void deleteReservation(Integer id, Integer cR_id) throws Exception {
-		bookingRepository.deleteReservation(id,cR_id);
+		bookingRepository.deleteReservation(id, cR_id);
 
 	}
 

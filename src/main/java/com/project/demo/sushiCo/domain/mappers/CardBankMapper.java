@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.CardBankDto;
@@ -34,6 +36,18 @@ public class CardBankMapper extends BaseMapper<CardBank , CardBankDto> {
 	@Override
 	public CardBank toUpdate(CardBankDto dto, CardBank entity) {
 		
+		return null;
+	}
+
+	@Override
+	public List<CardBank> toEntity(List<CardBankDto> dtoList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CardBankDto> toDto(List<CardBank> entityList) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

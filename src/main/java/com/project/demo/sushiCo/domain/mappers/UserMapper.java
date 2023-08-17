@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.UserDto;
@@ -50,8 +52,6 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		userDto.setTotaldishCategories(totaldishCategories);
 		var totalAppRests = result.getRest().stream().count();
 		userDto.setTotalAppRests(totalAppRests);
-		var totalDishes = result.getDishes().stream().count();
-		userDto.setTotalDishes(totalDishes);
 		var totalAddInBasket = result.getAddInBaskets().stream().count();
 		userDto.setTotalAddInBaskets(totalAddInBasket);
 		var totalOrders = result.getOrders().stream().count();
@@ -82,6 +82,18 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		entity.setPersonalIdentityNo(dto.getPersonalIdentityNo());
 
 		return entity;
+	}
+
+	@Override
+	public List<User> toEntity(List<UserDto> dtoList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDto> toDto(List<User> entityList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -24,8 +24,8 @@ public class DishServiceImpl implements DishService {
 	}
 
 	@Override
-	public void deleteDishByCategory(Integer id, Integer categoryId,Integer adminId) throws Exception {
-		dishRepository.deleteDishByCategory(id, categoryId);
+	public void deleteDishByCategory(Integer id, Integer categoryId,Integer admin_Id) throws Exception {
+		dishRepository.deleteDishByCategory(id, categoryId,admin_Id);
 	}
 
 	@Override
@@ -55,20 +55,21 @@ public class DishServiceImpl implements DishService {
 	@Override
 	public DishDto getDishByDishCategory(Integer dId, Integer categoryId,Integer adminId) throws Exception {
 
-		return dishRepository.getDishByDishCategory(dId, categoryId,adminId);
+		return dishMapper.toDto(dishRepository.getDishByDishCategory(dId, categoryId,adminId));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<DishDto> getDishByPreferences() throws Exception {
 		
-		return dishRepository.getDishByPreferences();
+		return ((List<DishDto>) dishMapper.toDto((Dish) dishRepository.getDishByPreferences()));
 	}
 
 
 	@Override
 	public DishDto getMaxPreference(Integer IdDish) throws Exception {
 		
-		return dishRepository.getMaxPreference(IdDish);
+		return dishMapper.toDto(dishRepository.getMaxPreference(IdDish));
 	}
 
 	@Override
@@ -76,6 +77,5 @@ public class DishServiceImpl implements DishService {
 	
 		return dishRepository.getDishesByDishCategory(idCategoria, adminId);
 	}
-
 
 }

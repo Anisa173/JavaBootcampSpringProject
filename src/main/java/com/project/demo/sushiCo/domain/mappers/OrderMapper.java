@@ -1,5 +1,8 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.OrderDto;
@@ -43,5 +46,38 @@ public class OrderMapper extends BaseMapper<Order, OrderDto> {
 		entity.setOrderStatus(dto.getOrderStatus());	
 		return entity;
 	}
+
+	@Override
+	public List<Order> toEntity(List<OrderDto> dtoList) {
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<Order> list = new ArrayList<Order>( dtoList.size() );
+        for ( OrderDto ordDto : dtoList ) {
+            list.add( toEntity( ordDto ) );
+        }
+
+        return list;
+    }
+
+	@Override
+	public List<OrderDto> toDto(List<Order> entityList) {
+		if ( entityList == null ) {
+            return null;
+        }
+
+        List<OrderDto> list = new ArrayList<OrderDto>( entityList.size() );
+        for ( Order o : entityList ) {
+            list.add( toDto( o ) );
+        }
+
+        return list;
+    }
+
+	
+
+
+
 
 }

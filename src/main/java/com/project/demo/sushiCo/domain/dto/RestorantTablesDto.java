@@ -3,13 +3,7 @@ package com.project.demo.sushiCo.domain.dto;
 import com.project.demo.sushiCo.entity.BookingProcessing;
 import com.project.demo.sushiCo.entity.Restorant;
 
-import groovy.transform.builder.Builder;
-import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 public class RestorantTablesDto {
 
 	private Integer rtb_id;

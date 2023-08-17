@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.List;
+
 import com.project.demo.sushiCo.domain.dto.WebAplicationDto;
 import com.project.demo.sushiCo.entity.WebAplication;
 
@@ -35,6 +37,18 @@ public class WebAplicationMapper extends BaseMapper<WebAplication, WebAplication
 		entity.setAppname(dto.getAppname());
 		entity.setSerialNo(dto.getSerialNo());
 		return entity;
+	}
+
+	@Override
+	public List<WebAplication> toEntity(List<WebAplicationDto> dtoList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<WebAplicationDto> toDto(List<WebAplication> entityList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,12 +1,5 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import groovy.transform.builder.Builder;
-import lombok.AllArgsConstructor;
-
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 public class AddInBasketDto {
 
 	private Integer addId;
@@ -18,9 +11,9 @@ public class AddInBasketDto {
 	private Double dishPrize;
 	private Integer addItemsDish;
 	private Double valueAmount;
-private Integer dCatId;
-private String dishType;
-	
+	private Integer dCatId;
+	private String dishType;
+
 	public AddInBasketDto() {
 		addItemsDish = 5;
 	}
@@ -109,7 +102,8 @@ private String dishType;
 	public void setValueAmount(Double valueAmount) {
 		this.valueAmount = valueAmount;
 	}
-public Integer getdCatId() {
+
+	public Integer getdCatId() {
 		return dCatId;
 	}
 
@@ -124,12 +118,12 @@ public Integer getdCatId() {
 	public void setDishType(String dishType) {
 		this.dishType = dishType;
 	}
+
 	public String toString() {
 		return "AddInBasket[addId = " + addId + ",custId = " + custId + ",phoneNo = " + phoneNo + ",customerName = "
 				+ customerName + ",IDdish = " + IDdish + ",dishName = " + dishName + ",dishPrize = " + dishPrize
-				+ ",addItemDish = " + addItemsDish + ", valueAmount = " + valueAmount + ",dCatId = " +dCatId+ ",dishType = "+dishType+ "]";
+				+ ",addItemDish = " + addItemsDish + ", valueAmount = " + valueAmount + ",dCatId = " + dCatId
+				+ ",dishType = " + dishType + "]";
 	}
-
-	
 
 }

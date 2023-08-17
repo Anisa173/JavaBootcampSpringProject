@@ -1,9 +1,6 @@
 package com.project.demo.sushiCo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.project.demo.sushiCo.domain.dto.Getter;
-import com.project.demo.sushiCo.domain.dto.Setter;
-import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,12 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
+
 @Entity
 public class RestorantTables extends BasicEntity<Integer> {
 //  'Mjedisi fizik' i restorantit i nderlidhet çdo rezervimi

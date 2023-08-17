@@ -1,18 +1,11 @@
 package com.project.demo.sushiCo.domain.dto;
 
 import java.sql.Date;
-
-import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 public class CardBankDto {
 
 	private Integer id;

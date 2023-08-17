@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 
 public interface BookingProcessingService {
 
-	BookingProcessingDto register(@Valid RegisterBookingForm bookingForm) throws Exception;
+	BookingProcessingDto register(@Valid RegisterBookingForm bookingForm, Integer idCustomer) throws Exception;
 
 	public RegisterBookingFormDto getCustomerReservationById(Integer idCustomer, Integer cR_Id, Integer idRestorant)
 			throws Exception;
@@ -18,6 +18,8 @@ public interface BookingProcessingService {
 			throws Exception;
 
 	public void deleteReservation(Integer id, Integer cR_id) throws Exception;
+
+	
 
 	
 }

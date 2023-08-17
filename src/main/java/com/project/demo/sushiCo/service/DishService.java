@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 
 public interface DishService {
 
-	void deleteDishByCategory(Integer id, Integer categoryId, Integer adminId) throws Exception;
+	void deleteDishByCategory(Integer id, Integer categoryId,Integer admin_Id) throws Exception;
 
 	List<DishDto> getDishesByDishCategory(Integer idCategoria, Integer adminId) throws Exception;
 
@@ -28,6 +28,7 @@ public interface DishService {
     //Admini i restorantit kerkon te gjeneroje menunë e cila eshte kerkuar me shume nga konsumatoret
 	DishDto getMaxPreference(Integer IdDish) throws Exception;
 
+	
 	
 
 }

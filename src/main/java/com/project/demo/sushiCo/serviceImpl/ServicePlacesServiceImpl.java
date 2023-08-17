@@ -66,4 +66,10 @@ public class ServicePlacesServiceImpl implements ServicePlacesService {
 		serviceP.setShippingCost(registerForm.getShippingCost());
 		return servicePlacesMapper.toDto(servicePlacesRepository.save(serviceP));
 	}
+
+	@Override
+	public ServicePlacesDto getRestorantPServices(Integer custId, Integer restorantId) throws Exception {
+		
+		return servicePlacesMapper.toDto(servicePlacesRepository.getRestorantPServices(custId, restorantId));
+	}
 }
