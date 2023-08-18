@@ -65,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderDto getOrderMaxByCustomerId(Integer idRestorant, Integer custId) throws Exception {
 		
-		return orderRepository.getOrderMaxByCustomerId(idRestorant, custId);
+		return orderMapper.toDto(orderRepository.getOrderMaxByCustomerId(idRestorant, custId));
 	}
 	
 	

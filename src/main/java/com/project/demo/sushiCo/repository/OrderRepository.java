@@ -26,12 +26,12 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 Order createOrder();
 
-	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon
+/*	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon
 	// sipas Restorantit perkates
 	@Query("Select o , r.idRestorant "
 			+ "From User c INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ "INNER JOIN Order o ON c.o.oId = c.idCustomer  Group By r.c.id  Order By r.c.o.orderPrize")
-	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
+	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);*/
 
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe 
 	// ku?... ne cilin restorant i ka kryer
@@ -45,7 +45,7 @@ Order createOrder();
 	@Query(value = "Select c.customerName , max(o.orderPrize) as MaxPrize,min(o.orderPrize) as MinPrize,o.orderId"
 			+ "From Order as o INNER JOIN User as c ON o.idCustomer = c.id"
 			+ "	INNER JOIN User as a ON o.adminRestId = a.id" + " Where a.id =: id  ", nativeQuery = true)
-	OrderDto getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
+	Order getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
 
 	// Anullon porosine e konfirmuar 'customer'
 	@Modifying
