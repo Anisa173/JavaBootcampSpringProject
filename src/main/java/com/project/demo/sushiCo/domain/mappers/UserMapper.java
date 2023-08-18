@@ -69,6 +69,9 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		userDto.setUserApplId(result.getWebAplication().getId());
 		var webAppname = result.getWebAplication().getAppname();
 		userDto.setWebAppname(webAppname);
+	
+		var totalUser1 = result.getUser().stream().count();
+		userDto.setTotalUser1(totalUser1);
 		return userDto;
 	}
 

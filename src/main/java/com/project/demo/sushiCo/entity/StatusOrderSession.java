@@ -3,7 +3,7 @@ package com.project.demo.sushiCo.entity;
 import java.util.Arrays;
 
 public enum StatusOrderSession {
-	PENDING("Pending"), IN_PROGRESS("In_Progress"), PROCESSED("Processed");
+	 IN_PROGRESS("In_Progress"), PROCESSED("Processed");
 
 	StatusOrderSession() {
 		value = "Pending";

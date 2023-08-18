@@ -22,9 +22,9 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ "From User uc INNER JOIN AddInBasket ab ON uc.id = uc.ab.userId"
 			+ "INNER JOIN Order o ON uc.idCustomer = uc.o.oId"
 			+ "INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
-			+ "WHERE uc.o.orderItems = sum(uc.ab.addItemDish) AND uc.o.orderPrize = sum(uc.ab.amountValue) AND uc.o.orderStatus = 'Pending' ")
+			+ "WHERE uc.o.orderItems = sum(uc.ab.addItemDish)  AND uc.o.orderStatus = 'Pending' AND uc.o.orderPrize = sum(uc.ab.amountValue) ")
 
-	Order createOrder();
+Order createOrder();
 
 	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon
 	// sipas Restorantit perkates
@@ -33,7 +33,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ "INNER JOIN Order o ON c.o.oId = c.idCustomer  Group By r.c.id  Order By r.c.o.orderPrize")
 	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
 
-	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe
+	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe 
 	// ku?... ne cilin restorant i ka kryer
 	@Query("Select r.restName , o  From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
 			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "

@@ -1,9 +1,9 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-
 import com.project.demo.sushiCo.domain.dto.PackageOrderedDto;
 import com.project.demo.sushiCo.entity.PackageOrdered;
 @Component
@@ -47,13 +47,31 @@ public class PackagedOrderedMapper extends BaseMapper<PackageOrdered, PackageOrd
 
 	@Override
 	public List<PackageOrdered> toEntity(List<PackageOrderedDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<PackageOrdered> list = new ArrayList<PackageOrdered>( dtoList.size() );
+        for ( PackageOrderedDto pgODto : dtoList ) {
+            list.add( toEntity( pgODto ) );
+        }
+
+        return list;
+
 	}
+	
 
 	@Override
 	public List<PackageOrderedDto> toDto(List<PackageOrdered> entityList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		  if ( entityList == null ) {
+	            return null;
+	        }
+
+	        List<PackageOrderedDto> list = new ArrayList<PackageOrderedDto>( entityList.size() );
+	        for ( PackageOrdered pckO : entityList ) {
+	            list.add( toDto( pckO ) );
+	        }
+
+	        return list;
+	    }
 }

@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +26,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
 
 
 @Entity
@@ -36,10 +33,17 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	private static final long serialVersionUID = 6350320748155867627L;
 
+	// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
+		// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo
+		// restoranti
+		@OneToMany(mappedBy = "adminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		private List<User> user1 = new ArrayList<User>();
+	
+	
 	// Te gjithe userat survejohen nga administratori i platformës
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "id")
-	private User AdminPlatforma;
+	private User adminPlatforma;
 
 	// N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin
 	// aplikacionin tone
@@ -134,7 +138,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 			List<BookingProcessing> bookingProcessings, List<PackageOrdered> package_Orders, List<Order> orders,
 			List<AddInBasket> addInBaskets, List<Restorant> rest, User shippers, List<User> user,
 			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant, List<Order> orders1,
-			User adminPlatforma, WebAplication webAplication) {
+			User adminPlatforma, WebAplication webAplication,List<User> user1) {
 		super();
 
 		this.setFirst_name(first_name);
@@ -157,8 +161,9 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.setPackage_Orders(package_Orders);
 		this.setRestorant(restorant);
 		this.setOrders1(orders1);
-		this.AdminPlatforma = adminPlatforma;
+		this.adminPlatforma = adminPlatforma;
 		this.webAplication = webAplication;
+	this.user1 = user1;
 	}
 
 	@Override
@@ -341,11 +346,11 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	}
 
 	public User getAdminPlatforma() {
-		return AdminPlatforma;
+		return adminPlatforma;
 	}
 
 	public void setAdminPlatforma(User adminPlatforma) {
-		AdminPlatforma = adminPlatforma;
+		this.adminPlatforma = adminPlatforma;
 	}
 
 	public WebAplication getWebAplication() {
@@ -355,8 +360,15 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	public void setWebAplication(WebAplication webAplication) {
 		this.webAplication = webAplication;
 	}
-
+public void setUser1(List<User> user) {
+this.user1 = user;	
+}
+public List<User> getUser1()	{
+return user1;
+}
 	public String toString() {
+		
+	
 		return "User[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = " + address
 				+ ",phoneNo = " + address + ",email = " + email + ",password = " + password + ",personalIdentityNo = "
 				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",age = " + age + ",userRole = "
@@ -364,7 +376,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 				+ ",shippers = " + shippers + ",rest = " + rest + ",addInBaskets = "
 				+ addInBaskets + ",orders = " + orders + ", bookingProcessings = " + bookingProcessings
 				+ ", package_Orders = " + package_Orders + ",restorant = " + restorant + ",orders1 = " + orders1
-				+ ",adminPlatforma = " + AdminPlatforma + ",webAplication = " + webAplication + "]";
+				+ ",adminPlatforma = " + adminPlatforma + ",webAplication = " + webAplication + ",user1 = " +user1+"]";
 	}
 
 	@Override

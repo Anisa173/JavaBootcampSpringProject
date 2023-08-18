@@ -73,6 +73,7 @@ public class UserDto {
 	private String platformaName;
     private String userApplId ;
 	private String webAppname;
+	private Long totalUser1;
 	public UserDto() {
 		age = 28;
 	}
@@ -82,7 +83,7 @@ public class UserDto {
 			ShippersStatus shippersStatus, UserRole userRole, Long totalCardBank, Long totalShippers, Integer idAdmin,
 			Long totaldishCategories, Long totalAppRests,Long totalAddInBaskets, Long totalOrders,
 			Long totalReservations, Long totalPackage_Orders, String webAppId, String webAppname, Restorant restorant,
-			Long totalOrders1, String adminIdPlatforma, String platformaName) {
+			Long totalOrders1, String adminIdPlatforma, String platformaName,Long totalUser1) {
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -110,6 +111,7 @@ public class UserDto {
 		this.totalOrders1 = totalOrders1;
 		this.adminIdPlatforma = adminIdPlatforma;
 		this.platformaName = platformaName;
+	this.totalUser1 = totalUser1;
 	}
 
 	public Integer getId() {
@@ -336,6 +338,13 @@ public class UserDto {
 	public void setPlatformaName(String platformaName) {
 		this.platformaName = platformaName;
 	}
+public Long getTotalUser1() {
+		return totalUser1;
+	}
+
+	public void setTotalUser1(Long totalUser1) {
+		this.totalUser1 = totalUser1;
+	}
 
 	public String toString() {
 		return "UserDto[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = "
@@ -348,7 +357,8 @@ public class UserDto {
 				+ totalOrders + ",Long totalReservations = " + totalReservations + ",totalPackage_Orders = "
 				+ totalPackage_Orders + ",webAppId = " + userApplId + ",webAppname = " + webAppname + ",restorant = "
 				+ restorant + ",totalOrders1 = " + totalOrders1 + ",adminIdPlatforma = " + adminIdPlatforma
-				+ ",platformaName = " + platformaName + "]";
+				+ ",platformaName = " + platformaName + ",totalUser1 = " +totalUser1+"]";
 	}
 
+	
 }

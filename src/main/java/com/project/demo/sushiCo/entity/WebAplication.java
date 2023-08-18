@@ -2,8 +2,6 @@ package com.project.demo.sushiCo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,16 +10,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
+
 
 @Entity
 public class WebAplication extends BasicEntity<String> {
 
-	// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
-	// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo
-	// restoranti
-	@OneToMany(mappedBy = "AdminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<User> user = new ArrayList<User>();
+	
 
 	// Ne aplikacion zgjedhin te regjistrohen,logohen apo preferojne ta perdorin
 	// N-klientë
@@ -29,7 +23,7 @@ public class WebAplication extends BasicEntity<String> {
 	private List<User> users = new ArrayList<User>();
 
 	// Web_based Aplication permban disa restorante
-	@OneToMany(mappedBy = "webAplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "aplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Restorant> restorants = new ArrayList<Restorant>();
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +37,13 @@ public class WebAplication extends BasicEntity<String> {
 		super();
 	}
 
-	public WebAplication(String appname, String serialNo, List<Restorant> restorants, List<User> users,
-			List<User> user) {
+	public WebAplication(String appname, String serialNo, List<Restorant> restorants, List<User> users) {
 		super();
 		this.appname = appname;
 		this.serialNo = serialNo;
 		this.setRestorants(restorants);
 		this.users = users;
-		this.user = user;
+		
 	}
 
 	@Override
@@ -94,18 +87,9 @@ public class WebAplication extends BasicEntity<String> {
 		this.restorants = restorants;
 	}
 
-	public List<User> getUser() {
-
-		return user;
-	}
-
-	public void setUser(List<User> user) {
-		this.user = user;
-	}
-
 	public String toString() {
 		return "WebApplication[idAppl = " + idAppl + ",appname = " + appname + ",serialNo = " + serialNo + ",users = "
-				+ users + ",user = " + user + ",restorants = " + restorants + "]";
+				+ users + ",restorants = " + restorants + "]";
 	}
 
 }

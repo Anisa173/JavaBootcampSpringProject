@@ -2,8 +2,6 @@ package com.project.demo.sushiCo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 
 
 @Entity
@@ -24,7 +21,7 @@ public class PackageOrdered extends BasicEntity<Integer> {
 	// Nje ose N-shporta Porosie dergohet ne te njejten zone sherbimi gjate nje dite
 	// pune
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "serviceId", referencedColumnName = "id")
+	@JoinColumn(name = "serviceId", referencedColumnName = "Id")
 	private ServicePlaces servicePlaces;
 
 	// Seciles shporte porosie i perkasin nje ose N porosi

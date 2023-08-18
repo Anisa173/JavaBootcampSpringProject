@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
-import com.project.demo.sushiCo.domain.dto.DishDto;
 import com.project.demo.sushiCo.entity.DishCategory;
 
 public interface DishCategoryRepository extends JpaRepository<DishCategory, Integer> {
