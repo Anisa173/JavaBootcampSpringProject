@@ -1,9 +1,9 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-
 import com.project.demo.sushiCo.domain.dto.RestorantDto;
 import com.project.demo.sushiCo.entity.Restorant;
 
@@ -19,8 +19,8 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 		rest.setPhoneNo(dto.getPhoneNo());
 		rest.setActivity_field(dto.getActivity_field());
 		rest.setAddressRest(dto.getAddressRest());
-		rest.setService_Places(dto.getService_Places());
-		rest.setPayment_Methods(dto.getPayment_Methods());
+		rest.setStartDay(dto.getStartDay());
+		rest.setEndDay(dto.getEndDay());
 
 		return rest;
 	}
@@ -34,9 +34,8 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 		restDto.setPhoneNo(entity.getPhoneNo());
 		restDto.setActivity_field(entity.getActivity_field());
 		restDto.setAddressRest(entity.getAddressRest());
-		restDto.setService_Places(entity.getService_Places());
-		restDto.setPayment_Methods(entity.getPayment_Methods());
-		restDto.setTimeServiceDay(entity.getTimeServiceDay());
+		restDto.setStartDay(entity.getStartDay());
+		restDto.setEndDay(entity.getEndDay());
 		var tableDescription = entity.getRestorantTables().getTableDescription();
 		restDto.setTableDescription(tableDescription);
 		restDto.setRestorant_tbId(entity.getRestorantTables().getTb_id());
@@ -52,6 +51,7 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 		restDto.setAdminRId(entity.getAdmin().getId());
 		var adminName = entity.getAdmin().getFirst_name().concat(" ").concat(entity.getAdmin().getLast_name());
 		restDto.setAdminName(adminName);
+		restDto.setAdminIdWeb(entity.getAdminWeb().getId());
 		return restDto;
 	}
 
@@ -63,21 +63,36 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 		rest.setPhoneNo(dto.getPhoneNo());
 		rest.setActivity_field(dto.getActivity_field());
 		rest.setAddressRest(dto.getAddressRest());
-		rest.setService_Places(dto.getService_Places());
-		rest.setPayment_Methods(dto.getPayment_Methods());
+		rest.setStartDay(dto.getStartDay());
+		rest.setEndDay(dto.getEndDay());
 		return dto;
 	}
 
 	@Override
 	public List<Restorant> toEntity(List<RestorantDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if (dtoList == null) {
+			return null;
+		}
+
+		List<Restorant> list = new ArrayList<Restorant>(dtoList.size());
+		for (RestorantDto restDto : dtoList) {
+			list.add(toEntity(restDto));
+		}
+
+		return list;
 	}
 
 	@Override
 	public List<RestorantDto> toDto(List<Restorant> entityList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		if (entityList == null) {
+			return null;
+		}
 
+		List<RestorantDto> list = new ArrayList<RestorantDto>(entityList.size());
+		for (Restorant rest : entityList) {
+			list.add(toDto(rest));
+		}
+
+		return list;
+	}
 }

@@ -1,5 +1,6 @@
 package com.project.demo.sushiCo.entity;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,10 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Restorant extends BasicEntity<Integer> {
-
-	// Çdo restoranti i perket nje admin
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "adminIdWeb", referencedColumnName = "id")
+	private User adminWeb;
+// Çdo restoranti i perket nje admin qe administron procesin e punes se restorantit
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminRId", referencedColumnName = "id")
 	@JsonManagedReference
@@ -64,17 +67,19 @@ public class Restorant extends BasicEntity<Integer> {
 	private String service_Places;
 	@Column(name = "payment_Methods")
 	private String payment_Methods;
-	@Column(name = "TimeServiceDay")
-	private String TimeServiceDay;
+	@Column(name = "startDay")
+	private Time startDay;
+	@Column(name = "endDay")
+	private Time endDay;
 
 	public Restorant() {
 		super();
 	}
 
 	public Restorant(String restNUIS, String restName, String phoneNo, String activity_field, String addressRest,
-			String service_Places, String payment_Methods, String TimeServiceDay, List<User> users,
+			String service_Places, String payment_Methods, Time startDay, Time endDay, List<User> users,
 			List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places, RestorantTables restorantTables,
-			WebAplication aplication, User admin) {
+			WebAplication aplication, User admin, User adminWeb) {
 
 		super();
 
@@ -85,13 +90,15 @@ public class Restorant extends BasicEntity<Integer> {
 		this.addressRest = addressRest;
 		this.service_Places = service_Places;
 		this.payment_Methods = payment_Methods;
-		this.TimeServiceDay = TimeServiceDay;
+		this.startDay = startDay;
+		this.endDay = endDay;
 		this.users = users;
 		this.payment_MethodsR = payment_MethodsR;
 		this.places = places;
 		this.setRestorantTables(restorantTables);
 		this.setAplication(aplication);
 		this.setAdmin(admin);
+		this.adminWeb = adminWeb;
 	}
 
 	@Override
@@ -176,12 +183,20 @@ public class Restorant extends BasicEntity<Integer> {
 		this.payment_Methods = payment_Methods;
 	}
 
-	public String getTimeServiceDay() {
-		return TimeServiceDay;
+	public Time getStartDay() {
+		return startDay;
 	}
 
-	public void setTimeServiceDay(String serviceIntervalTime) {
-		this.TimeServiceDay = serviceIntervalTime;
+	public void setStartDay(Time startDay) {
+		this.startDay = startDay;
+	}
+
+	public Time getEndDay() {
+		return endDay;
+	}
+
+	public void setEndDay(Time endDay) {
+		this.endDay = endDay;
 	}
 
 	public RestorantTables getRestorantTables() {
@@ -216,14 +231,21 @@ public class Restorant extends BasicEntity<Integer> {
 		this.admin = user;
 	}
 
+	public User getAdminWeb() {
+		return adminWeb;
+	}
+
+	public void setAdminWeb(User adminWeb) {
+		this.adminWeb = adminWeb;
+	}
+
 	public String toString() {
 		return "RestorantService[idRestorant = " + idRestorant + ",users = " + users + ",payment_MethodsR = "
 				+ payment_MethodsR + ",places = " + places + ",restNUIS = " + restNUIS + ", restName = " + restName
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest =" + addressRest
-				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",TimeServiceDay = "
-				+ TimeServiceDay + ",restorantTables = " + restorantTables + ",aplication = " + aplication + ",admin = "
-				+ admin + "]";
+				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",startDay = "
+				+ startDay + ",endDay = " + endDay + ",restorantTables = " + restorantTables + ",aplication = "
+				+ aplication + ",admin = " + admin + ",adminWeb = " + adminWeb + "]";
 	}
-
 
 }

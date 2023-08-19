@@ -26,13 +26,14 @@ public class RestorantServiceImpl implements RestorantService {
 
 	@Override
 	public RestorantDto registerRestorant(@Valid RegisterRestorantForm registerForm) throws Exception {
-		var restorant = getRestorantsById(registerForm.getId());
+		var restorant = getRestorantsById(registerForm.getId(), registerForm.getAdminIdWeb());
 		restorant.setRestNUIS(registerForm.getRestNUIS());
 		restorant.setRestName(registerForm.getRestName());
 		restorant.setPhoneNo(registerForm.getPhoneNo());
 		restorant.setActivity_field(registerForm.getActivity_field());
 		restorant.setAddressRest(registerForm.getAddressRest());
-		restorant.setTimeServiceDay(registerForm.getTimeServiceDay());
+		restorant.setStartDay(registerForm.getStartDay());
+		restorant.setEndDay(registerForm.getEndDay());
 		return restorantMapper.toDto(restorantRepository.save(restorant));
 	}
 
@@ -44,26 +45,26 @@ public class RestorantServiceImpl implements RestorantService {
 	}
 
 	@Override
-	public RestorantDto getRestorantsById(Integer Id) throws Exception {
-		return restorantMapper.toDto(restorantRepository.findById(Id)
-				.orElseThrow(() -> new RuntimeException(String.format("Restorant not found!", Id))));
+	public RestorantDto getRestorantsById(Integer idRestorant, Integer adminIdWeb) throws Exception {
+		return restorantMapper.toDto(restorantRepository.getRestorantsById(idRestorant, adminIdWeb));
 	}
 
 	@Override
-	public List<RestorantDto> getAllRestorants() throws Exception {
+	public List<RestorantDto> getAllRestorants(Integer adminIdWeb) throws Exception {
 		return restorantRepository.findAll().stream().map(a -> restorantMapper.toDto(a)).collect(Collectors.toList());
 	}
 
 	@Override
-	public RestorantDto update(Integer IdRestorant, @Valid RestorantDto restorantDto) throws Exception {
-		Restorant restorant = restorantMapper.toEntity(getRestorantsById(IdRestorant));
+	public RestorantDto update(Integer idRestorant, Integer adminIdWeb, @Valid RestorantDto restorantDto)
+			throws Exception {
+		Restorant restorant = restorantMapper.toEntity(getRestorantsById(idRestorant, adminIdWeb));
 		var result = restorantMapper.toUpdate(restorantDto, restorant);
 		return restorantMapper.toDto(restorantRepository.save(result));
 	}
 
 	@Override
-	public void delete(Integer id) throws Exception {
-		restorantRepository.deleteById(id);
+	public void delete(Integer idRestorant, Integer adminIdWeb) throws Exception {
+		restorantRepository.delete(idRestorant, adminIdWeb);
 
 	}
 }

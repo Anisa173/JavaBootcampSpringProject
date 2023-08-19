@@ -10,14 +10,14 @@ public interface RestorantService {
 
 	RestorantDto registerRestorant(@Valid RegisterRestorantForm registerForm) throws Exception;
 
-	RestorantDto getRestorantsById(Integer Id) throws Exception;
-
-	List<RestorantDto> getAllRestorants() throws Exception;
-
 	RestorantDto create(@Valid RestorantDto restorantDto) throws Exception;
 
-	RestorantDto update(Integer IdRestorant, @Valid RestorantDto restorantDto) throws Exception;
+	RestorantDto getRestorantsById(Integer idRestorant, Integer adminIdWeb) throws Exception;
 
-	void delete(Integer id) throws Exception;
+	RestorantDto update(Integer idRestorant, Integer adminIdWeb, @Valid RestorantDto restorantDto) throws Exception;
+
+	void delete(Integer idRestorant, Integer adminIdWeb) throws Exception;
+
+	List<RestorantDto> getAllRestorants(Integer adminIdWeb) throws Exception;
 
 }

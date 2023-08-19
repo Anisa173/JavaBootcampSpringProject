@@ -1,25 +1,28 @@
 package com.project.demo.sushiCo.service;
 
 import java.util.List;
-
 import com.project.demo.sushiCo.domain.dto.PaymentMethodsDto;
-import com.project.demo.sushiCo.domain.dto.UserDto;
-
 import jakarta.validation.Valid;
 
 public interface PaymentMethodsService {
 
-	void delete(Integer id) throws Exception;
-	
-	PaymentMethodsDto getPayment_MethodsById(Integer Id) throws Exception;
-	
-	List<PaymentMethodsDto> getAllPayment_Methods() throws Exception;
-	
+
+	List<PaymentMethodsDto> getAllPayment_Methods(Integer idRestorant) throws Exception;
+
 	PaymentMethodsDto registerMethod_Payment(@Valid RegisterMethodsPaymentForm form) throws Exception;
-	
+
 	PaymentMethodsDto create(@Valid PaymentMethodsDto methodsDto) throws Exception;
+
+	PaymentMethodsDto update(Integer Id, Integer idRestorant, @Valid PaymentMethodsDto placesDto) throws Exception;
+
+	PaymentMethodsDto getPayment_MethodsById(Integer Id, Integer idRestorant) throws Exception;
+
+	PaymentMethodsDto getRestorantPMethods(Integer restorantId) throws Exception;
+
+	void delete(Integer Id, Integer idRestorant) throws Exception;
+
 	
-	PaymentMethodsDto update(Integer Id,@Valid PaymentMethodsDto placesDto) throws Exception;
-	PaymentMethodsDto getRestorantPMethods(Integer userId, Integer restorantId) throws Exception;
+
+	
 	
 }

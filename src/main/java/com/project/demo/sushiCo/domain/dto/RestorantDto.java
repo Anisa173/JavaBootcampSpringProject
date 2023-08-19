@@ -1,5 +1,6 @@
 package com.project.demo.sushiCo.domain.dto;
 
+import java.sql.Time;
 
 public class RestorantDto {
 
@@ -11,16 +12,18 @@ public class RestorantDto {
 	private String addressRest;
 	private String service_Places;
 	private String payment_Methods;
-	private String TimeServiceDay;
+	private Time startDay;
+	private Time endDay;
 	private String tableDescription;
 	private Integer restorant_tbId;
 	private Long totalUser;
 	private Long totalPayment_MethodsR;
 	private Long totalService_Places;
-	private String webAppId;
+	private Integer webAppId;
 	private String applicationName;
 	private Integer adminRId;
 	private String adminName;
+	private Integer adminIdWeb;
 
 	public RestorantDto() {
 		restName = "SushiCo Albania";
@@ -28,9 +31,10 @@ public class RestorantDto {
 	}
 
 	public RestorantDto(Integer idRestorant, String restNUIS, String restName, String phoneNo, String activity_field,
-			String addressRest, String service_Places, String payment_Methods, String TimeServiceDay,
+			String addressRest, String service_Places, String payment_Methods, Time startDay, Time endDay,
 			String tableDescription, Integer restorant_tbId, Long totalUser, Long totalPayment_MethodsR,
-			Long totalService_Places, String webAppId, String applicationName, Integer adminRId, String adminName) {
+			Long totalService_Places, Integer webAppId, String applicationName, Integer adminRId, String adminName,
+			Integer adminIdWeb) {
 
 		this.idRestorant = idRestorant;
 		this.setRestNUIS(restNUIS);
@@ -40,7 +44,8 @@ public class RestorantDto {
 		this.addressRest = addressRest;
 		this.service_Places = service_Places;
 		this.payment_Methods = payment_Methods;
-		this.TimeServiceDay = TimeServiceDay;
+		this.startDay = startDay;
+		this.endDay = endDay;
 		this.setTableDescription(tableDescription);
 		this.setRestorant_tbId(restorant_tbId);
 		this.setTotalUser(totalUser);
@@ -50,6 +55,7 @@ public class RestorantDto {
 		this.setApplicationName(applicationName);
 		this.adminRId = adminRId;
 		this.adminName = adminName;
+		this.adminIdWeb = adminIdWeb;
 	}
 
 	public Integer getIdRestorant() {
@@ -116,12 +122,20 @@ public class RestorantDto {
 		this.payment_Methods = payment_Methods;
 	}
 
-	public String getTimeServiceDay() {
-		return TimeServiceDay;
+	public Time getStartDay() {
+		return startDay;
 	}
 
-	public void setTimeServiceDay(String timeServiceDay) {
-		TimeServiceDay = timeServiceDay;
+	public void setStartDay(Time startDay) {
+		this.startDay = startDay;
+	}
+
+	public Time getEndDay() {
+		return endDay;
+	}
+
+	public void setEndDay(Time endDay) {
+		this.endDay = endDay;
 	}
 
 	public String getTableDescription() {
@@ -164,12 +178,12 @@ public class RestorantDto {
 		this.totalService_Places = totalService_Places;
 	}
 
-	public String getWebAppId() {
+	public Integer getWebAppId() {
 		return webAppId;
 	}
 
-	public void setWebAppId(String aplicationId) {
-		this.webAppId = aplicationId;
+	public void setWebAppId(Integer webAppId2) {
+		this.webAppId = webAppId2;
 	}
 
 	public String getApplicationName() {
@@ -196,15 +210,24 @@ public class RestorantDto {
 		this.adminName = adminName;
 	}
 
+	public Integer getAdminIdWeb() {
+		return adminIdWeb;
+	}
+
+	public void setAdminIdWeb(Integer adminIdWeb) {
+		this.adminIdWeb = adminIdWeb;
+	}
+
 	public String toString() {
 
 		return "RestorantService[idRestorant = " + idRestorant + ",restName = " + restName + ",phoneNo = " + phoneNo
 				+ ",activity_field = " + activity_field + ",addressRest = " + addressRest + ",service_Places = "
-				+ service_Places + ",payment_Methods = " + payment_Methods + ",TimeServiceDay = " + TimeServiceDay
-				+ ",tableCapacity = " + tableDescription + ",restorant_tbId = " + restorant_tbId + ",totalUser = "
-				+ totalUser + ",totalPayment_MethodsR = " + totalPayment_MethodsR + ",totalService_Places = "
-				+ totalService_Places + ",applicationName = " + applicationName + ",aplicationId = " + webAppId
-				+ ",adminRId = " + adminRId + ",adminName = " + adminName + "]";
+				+ service_Places + ",payment_Methods = " + payment_Methods + ",startDay = " + startDay + ",endDay = "
+				+ endDay + ",tableCapacity = " + tableDescription + ",restorant_tbId = " + restorant_tbId
+				+ ",totalUser = " + totalUser + ",totalPayment_MethodsR = " + totalPayment_MethodsR
+				+ ",totalService_Places = " + totalService_Places + ",applicationName = " + applicationName
+				+ ",aplicationId = " + webAppId + ",adminRId = " + adminRId + ",adminName = " + adminName
+				+ ",adminIdWeb = " + adminIdWeb + "]";
 	}
 
 }

@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderDto> getOrdersRByCustomerId(Integer customerId) throws Exception {
 	
-		return (List<OrderDto>) orderMapper.toDto(orderRepository.getOrdersRByCustomerId(customerId));
+		return orderMapper.toDto(orderRepository.getOrdersRByCustomerId(customerId));
 	}
 
 

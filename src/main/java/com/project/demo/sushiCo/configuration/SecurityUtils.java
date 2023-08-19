@@ -39,12 +39,4 @@ public class SecurityUtils {
 	        return authentication.getId();
 	    }
 
-
-
-
-
-
-
-
-
 }

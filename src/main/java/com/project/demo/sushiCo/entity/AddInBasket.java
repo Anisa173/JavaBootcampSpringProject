@@ -30,8 +30,9 @@ public class AddInBasket extends BasicEntity<Integer> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer addId;
 	@Column(name = "addId")
+	private Integer addId;
+	
 	private Integer addItemsDish;
 	private Double valueAmount;
 

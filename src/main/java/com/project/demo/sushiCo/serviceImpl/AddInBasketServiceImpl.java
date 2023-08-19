@@ -56,7 +56,7 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 
 	@Override
 	public List<AddInBasketDto> getDishesByCustomerId(Integer dId, Integer categoryId, Integer custId) throws Exception {
-		return (List<AddInBasketDto>) basketMapper.toDto(basketRepository.getDishesByCustomerId(dId, categoryId, custId));
+		return basketMapper.toDto(basketRepository.getDishesByCustomerId(dId, categoryId, custId));
 	}
 
 	@Override

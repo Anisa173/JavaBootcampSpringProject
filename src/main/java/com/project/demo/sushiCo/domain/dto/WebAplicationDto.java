@@ -4,11 +4,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class WebAplicationDto {
-	private String idAppl;
+	private Integer idAppl;
 	@NotNull(message = "It's required")
 	@Size(min = 3, max = 20, message = "This can be between 3 ad 20 characters")
 	private String appname;
-
+	private Integer adminWebId;
 	private String serialNo;
 	private Long totalUsers;
 	private Long totalRestorants;
@@ -18,13 +18,13 @@ public class WebAplicationDto {
 
 	}
 
-	public WebAplicationDto(String idAppl, Long totalRestorants, String appname, String serialNo, Long totalUsers) {
+	public WebAplicationDto(Integer idAppl, Long totalRestorants, String appname, String serialNo, Long totalUsers,Integer adminWebId) {
 		this.idAppl = idAppl;
 		this.appname = appname;
 		this.serialNo = serialNo;
 		this.totalUsers = totalUsers;
 		this.totalRestorants = totalRestorants;
-	
+	this.adminWebId = adminWebId;
 	}
 
 	public Long getTotalRestorants() {
@@ -35,11 +35,11 @@ public class WebAplicationDto {
 		this.totalRestorants = totalRestorants;
 	}
 
-	public String getIdAppl() {
+	public Integer getIdAppl() {
 		return idAppl;
 	}
 
-	public void setIdAppl(String idAppl) {
+	public void setIdAppl(Integer idAppl) {
 		this.idAppl = idAppl;
 	}
 
@@ -67,11 +67,19 @@ public class WebAplicationDto {
 		this.totalUsers = totalUsers;
 	}
 
-	
+	public Integer getAdminWebId() {
+		return adminWebId;
+	}
+
+	public void setAdminWebId(Integer adminWebId) {
+		this.adminWebId = adminWebId;
+	}
 
 	public String toString() {
 		return "WebAplicationDto[idAppl = " + idAppl + ",appname = " + appname + ",serialNo = " + serialNo
-				+ ",totalUsers = " + totalUsers + ",totalRestorants = " + totalRestorants + "]";
+				+ ",totalUsers = " + totalUsers + ",totalRestorants = " + totalRestorants + ",adminWebId = " +adminWebId+ "]";
 	}
+
+	
 
 }

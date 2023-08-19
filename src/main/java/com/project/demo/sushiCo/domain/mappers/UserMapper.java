@@ -1,9 +1,8 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Component;
-
 import com.project.demo.sushiCo.domain.dto.UserDto;
 import com.project.demo.sushiCo.entity.ShippersStatus;
 import com.project.demo.sushiCo.entity.User;
@@ -69,9 +68,11 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		userDto.setUserApplId(result.getWebAplication().getId());
 		var webAppname = result.getWebAplication().getAppname();
 		userDto.setWebAppname(webAppname);
-	
 		var totalUser1 = result.getUser().stream().count();
 		userDto.setTotalUser1(totalUser1);
+		userDto.setWebAppl(result.getWebAplication());
+		var totalRst = result.getRst().stream().count();
+		userDto.setTotalRst(totalRst);
 		return userDto;
 	}
 
@@ -89,14 +90,30 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 
 	@Override
 	public List<User> toEntity(List<UserDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<User> list = new ArrayList<User>( dtoList.size() );
+        for ( UserDto userDto : dtoList ) {
+            list.add( toEntity( userDto ) );
+        }
+
+        return list;
 	}
 
 	@Override
 	public List<UserDto> toDto(List<User> entityList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( entityList == null ) {
+            return null;
+        }
+
+        List<UserDto> list = new ArrayList<UserDto>( entityList.size() );
+        for ( User us : entityList ) {
+            list.add( toDto( us ) );
+        }
+
+        return list;
 	}
 
 }

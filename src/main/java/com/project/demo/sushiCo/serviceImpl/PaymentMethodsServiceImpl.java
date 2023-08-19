@@ -25,25 +25,23 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 	}
 
 	@Override
-	public void delete(Integer id) throws Exception {
-		methodsRepository.deleteById(id);
+	public void delete(Integer Id, Integer idRestorant) throws Exception {
+		methodsRepository.delete(Id, idRestorant);
 	}
 
 	@Override
-	public PaymentMethodsDto getPayment_MethodsById(Integer Id) throws Exception {
-		return methodsMapper.toDto(methodsRepository.findById(Id)
-				.orElseThrow(() -> new RuntimeException(String.format("Payment_Method does not exist!", Id))));
+	public PaymentMethodsDto getPayment_MethodsById(Integer Id, Integer idRestorant) throws Exception {
+		return methodsMapper.toDto(methodsRepository.getPayment_MethodsById(Id, idRestorant));
 	}
 
 	@Override
-	public List<PaymentMethodsDto> getAllPayment_Methods() throws Exception {
-
+	public List<PaymentMethodsDto> getAllPayment_Methods(Integer idRestorant) throws Exception {
 		return methodsRepository.findAll().stream().map(c -> methodsMapper.toDto(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	public PaymentMethodsDto registerMethod_Payment(@Valid RegisterMethodsPaymentForm form) throws Exception {
-		var payment = getPayment_MethodsById(form.getId());
+		var payment = getPayment_MethodsById(form.getId(), form.getIdRestorant());
 		payment.setPayment_Method(form.getPayment_Method());
 		return methodsMapper.toDto(methodsRepository.save(payment));
 	}
@@ -55,15 +53,16 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 	}
 
 	@Override
-	public PaymentMethodsDto update(Integer Id, @Valid PaymentMethodsDto placesDto) throws Exception {
-		var pMethod = methodsMapper.toEntity(getPayment_MethodsById(Id));
+	public PaymentMethodsDto update(Integer Id, Integer idRestorant, @Valid PaymentMethodsDto placesDto)
+			throws Exception {
+		var pMethod = methodsMapper.toEntity(getPayment_MethodsById(Id, idRestorant));
 		var result = methodsMapper.toUpdate(placesDto, pMethod);
 		return methodsMapper.toDto(methodsRepository.save(result));
 	}
 
 	@Override
-	public PaymentMethodsDto getRestorantPMethods(Integer userId, Integer restorantId) throws Exception {
-		return methodsMapper.toDto(methodsRepository.getRestorantPMethods(userId,restorantId));
+	public PaymentMethodsDto getRestorantPMethods(Integer idRestorant) throws Exception {
+		return methodsMapper.toDto(methodsRepository.getRestorantPMethods(idRestorant));
 	}
 
 }

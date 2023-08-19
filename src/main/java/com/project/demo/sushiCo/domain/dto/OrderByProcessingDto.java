@@ -7,16 +7,17 @@ public class OrderByProcessingDto {
 	private String payments_methodR;
 	private Integer servicePId;
 	private String service_placesR;
-private Integer idRestorant;
+	private Integer idRestorant;
+
 	public OrderByProcessingDto(Integer idSession, Integer idcust, Integer paymentMId, String payments_methodR,
-			Integer servicePId, String service_placesR,Integer idRestorant) {
+			Integer servicePId, String service_placesR, Integer idRestorant) {
 		this.idSession = idSession;
 		this.idcust = idcust;
 		this.paymentMId = paymentMId;
 		this.payments_methodR = payments_methodR;
 		this.servicePId = servicePId;
 		this.service_placesR = service_placesR;
-	this.setIdRestorant(idRestorant);
+		this.setIdRestorant(idRestorant);
 	}
 
 	public OrderByProcessingDto() {
@@ -70,19 +71,19 @@ private Integer idRestorant;
 	public void setIdcust(Integer idcust) {
 		this.idcust = idcust;
 	}
-public Integer getIdRestorant() {
+
+	public Integer getIdRestorant() {
 		return idRestorant;
 	}
 
 	public void setIdRestorant(Integer idRestorant) {
 		this.idRestorant = idRestorant;
 	}
+
 	public String toString() {
 		return "OrderByProcessing[idSession = " + idSession + ",idcust = " + idcust + ",paymentMId = " + paymentMId
 				+ ",payments_methodR = " + payments_methodR + ",servicePId = " + servicePId + ",service_placesR = "
-				+ service_placesR + ",idRestorant = "+idRestorant+"]";
+				+ service_placesR + ",idRestorant = " + idRestorant + "]";
 	}
-
-	
 
 }

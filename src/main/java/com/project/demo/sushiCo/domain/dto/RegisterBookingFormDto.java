@@ -3,8 +3,6 @@ package com.project.demo.sushiCo.domain.dto;
 import java.sql.Date;
 import java.sql.Time;
 
-import lombok.AllArgsConstructor;
-@AllArgsConstructor
 public class RegisterBookingFormDto {
 	private Integer crId;
 	private String First_name;

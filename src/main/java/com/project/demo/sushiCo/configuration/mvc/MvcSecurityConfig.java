@@ -2,6 +2,7 @@ package com.project.demo.sushiCo.configuration.mvc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -10,11 +11,19 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import com.project.demo.sushiCo.configuration.SecurityUserDetailsService;
 import com.project.demo.sushiCo.entity.UserRole;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
+
+@Profile("mvc")
 @RequiredArgsConstructor
 @Configuration
 public class MvcSecurityConfig {
+
+	@PostConstruct
+    public void init(){
+        System.err.println("Security Profile Basic");
+    }
 
 	private SecurityUserDetailsService securityUserDetailsService;
 	private OnLoginSuccessHandler loginSuccessHandler;
@@ -34,23 +43,5 @@ public class MvcSecurityConfig {
 				.formLogin(form -> form.loginPage("/login").permitAll().successHandler((AuthenticationSuccessHandler) loginSuccessHandler))
 				.logout((logout) -> logout.permitAll().logoutSuccessHandler(logoutSuccessHandler)).build();
 	}
-
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

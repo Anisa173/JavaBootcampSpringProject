@@ -27,19 +27,25 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
-
 @Entity
 public class User extends BasicEntity<Integer> implements UserDetails {
 
 	private static final long serialVersionUID = 6350320748155867627L;
+//Admini administron webApplication
+	@OneToOne(mappedBy = "adminWebAplication", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private WebAplication webAppl;
 
-	// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
-		// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo
-		// restoranti
-		@OneToMany(mappedBy = "adminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-		private List<User> user1 = new ArrayList<User>();
-	
-	
+	// Admini i webPlatformes regjistron , ruan dhe mirmban databazen e
+	// N-restoranteve
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Restorant> rst = new ArrayList<Restorant>();
+
+// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
+	// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo
+	// restoranti
+	@OneToMany(mappedBy = "adminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<User> user1 = new ArrayList<User>();
+
 	// Te gjithe userat survejohen nga administratori i platformës
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "id")
@@ -138,7 +144,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 			List<BookingProcessing> bookingProcessings, List<PackageOrdered> package_Orders, List<Order> orders,
 			List<AddInBasket> addInBaskets, List<Restorant> rest, User shippers, List<User> user,
 			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant, List<Order> orders1,
-			User adminPlatforma, WebAplication webAplication,List<User> user1) {
+			User adminPlatforma, WebAplication webAplication, List<User> user1) {
 		super();
 
 		this.setFirst_name(first_name);
@@ -163,7 +169,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.setOrders1(orders1);
 		this.adminPlatforma = adminPlatforma;
 		this.webAplication = webAplication;
-	this.user1 = user1;
+		this.user1 = user1;
 	}
 
 	@Override
@@ -295,8 +301,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.dishCategories = dishCategories;
 	}
 
-	
-
 	public List<AddInBasket> getAddInBaskets() {
 		return addInBaskets;
 	}
@@ -360,23 +364,41 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	public void setWebAplication(WebAplication webAplication) {
 		this.webAplication = webAplication;
 	}
-public void setUser1(List<User> user) {
-this.user1 = user;	
-}
-public List<User> getUser1()	{
-return user1;
-}
-	public String toString() {
-		
+
+	public void setUser1(List<User> user) {
+		this.user1 = user;
+	}
+
+	public List<User> getUser1() {
+		return user1;
+	}
+public WebAplication getWebAppl() {
+		return webAppl;
+	}
+
+	public void setWebAppl(WebAplication webAppl) {
+		this.webAppl = webAppl;
+	}
+
+	public List<Restorant> getRst() {
+		return rst;
+	}
+
+	public void setRst(List<Restorant> rst) {
+		this.rst = rst;
+	}
+
 	
+	public String toString() {
+
 		return "User[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = " + address
 				+ ",phoneNo = " + address + ",email = " + email + ",password = " + password + ",personalIdentityNo = "
 				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",age = " + age + ",userRole = "
 				+ userRole + ",dishCategories = " + dishCategories + ",cardBank = " + cardBank + ",user = " + user
-				+ ",shippers = " + shippers + ",rest = " + rest + ",addInBaskets = "
-				+ addInBaskets + ",orders = " + orders + ", bookingProcessings = " + bookingProcessings
-				+ ", package_Orders = " + package_Orders + ",restorant = " + restorant + ",orders1 = " + orders1
-				+ ",adminPlatforma = " + adminPlatforma + ",webAplication = " + webAplication + ",user1 = " +user1+"]";
+				+ ",shippers = " + shippers + ",rest = " + rest + ",addInBaskets = " + addInBaskets + ",orders = "
+				+ orders + ", bookingProcessings = " + bookingProcessings + ", package_Orders = " + package_Orders
+				+ ",restorant = " + restorant + ",orders1 = " + orders1 + ",adminPlatforma = " + adminPlatforma
+				+ ",webAplication = " + webAplication + ",user1 = " + user1 + ",webAppl = " +webAppl+",rst = " +rst+"]";
 	}
 
 	@Override
@@ -417,5 +439,9 @@ return user1;
 
 		return true;
 	}
+
+	
+
+	
 
 }

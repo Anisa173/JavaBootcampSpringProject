@@ -3,18 +3,14 @@ package com.project.demo.sushiCo.domain.dto;
 import com.project.demo.sushiCo.entity.Restorant;
 import com.project.demo.sushiCo.entity.ShippersStatus;
 import com.project.demo.sushiCo.entity.UserRole;
+import com.project.demo.sushiCo.entity.WebAplication;
 
-import groovy.transform.builder.Builder;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 
-
-@Builder
-@AllArgsConstructor
 public class UserDto {
 
 	private Integer id;
@@ -42,10 +38,14 @@ public class UserDto {
 	@NotNull(message = " * Required *")
 	@Size(min = 18, message = "This should include always numbers with two characters")
 	private Integer age;
-	@NotNull(message = "This field can be null until the condition is completed!")
-	@Size(min = 4, max = 7, message = "This is at min 4 characters and at max 7 characters")
-	private String customerType;
 	/*
+	 * @NotNull(message =
+	 * "This field can be null until the condition is completed!")
+	 * 
+	 * @Size(min = 4, max = 7, message =
+	 * "This is at min 4 characters and at max 7 characters") private String
+	 * customerType; /*
+	 * 
 	 * @NotNull(message = "This is Required ")
 	 * 
 	 * @Size(message =
@@ -53,7 +53,7 @@ public class UserDto {
 	 * )
 	 */
 	private String personalIdentityNo;
-	private Double points;
+	/* private Double points; */
 	@NotNull(message = "It's required")
 	private ShippersStatus shippersStatus;
 	@NotNull(message = "It's required")
@@ -69,21 +69,23 @@ public class UserDto {
 	private Long totalPackage_Orders;
 	private Restorant restorant;
 	private Long totalOrders1;
-	private String adminIdPlatforma;
+	private Integer adminIdPlatforma;
 	private String platformaName;
-    private String userApplId ;
+	private Integer userApplId;
 	private String webAppname;
 	private Long totalUser1;
+	private WebAplication webAppl;
+	private Long totalRst ;
 	public UserDto() {
 		age = 28;
 	}
 
 	public UserDto(Integer id, String first_name, String last_name, String address, String phoneNo, String email,
-			String password, Integer age, String customerType, String personalIdentityNo, Double points,
-			ShippersStatus shippersStatus, UserRole userRole, Long totalCardBank, Long totalShippers, Integer idAdmin,
-			Long totaldishCategories, Long totalAppRests,Long totalAddInBaskets, Long totalOrders,
-			Long totalReservations, Long totalPackage_Orders, String webAppId, String webAppname, Restorant restorant,
-			Long totalOrders1, String adminIdPlatforma, String platformaName,Long totalUser1) {
+			String password, Integer age, String personalIdentityNo, ShippersStatus shippersStatus, UserRole userRole,
+			Long totalCardBank, Long totalShippers, Integer idAdmin, Long totaldishCategories, Long totalAppRests,
+			Long totalAddInBaskets, Long totalOrders, Long totalReservations, Long totalPackage_Orders,
+			Restorant restorant, Integer userApplId, String webAppname, Long totalOrders1, Integer adminIdPlatforma,
+			String platformaName, Long totalUser1,WebAplication webAppl,Long totalRst) {
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -92,9 +94,7 @@ public class UserDto {
 		this.email = email;
 		this.password = password;
 		this.age = age;
-		this.customerType = customerType;
 		this.personalIdentityNo = personalIdentityNo;
-		this.points = points;
 		this.setShippersStatus(shippersStatus);
 		this.userRole = userRole;
 		this.totalCardBank = totalCardBank;
@@ -105,13 +105,15 @@ public class UserDto {
 		this.setTotalOrders(totalOrders);
 		this.setTotalReservations(totalReservations);
 		this.setTotalPackage_Orders(totalPackage_Orders);
-		this.userApplId = webAppId;
+		this.userApplId = userApplId;
 		this.webAppname = webAppname;
 		this.restorant = restorant;
 		this.totalOrders1 = totalOrders1;
 		this.adminIdPlatforma = adminIdPlatforma;
 		this.platformaName = platformaName;
-	this.totalUser1 = totalUser1;
+		this.totalUser1 = totalUser1;
+	this.webAppl = webAppl;
+	this.totalRst = totalRst;
 	}
 
 	public Integer getId() {
@@ -178,22 +180,6 @@ public class UserDto {
 		this.age = age;
 	}
 
-	public String getCustomerType() {
-		return customerType;
-	}
-
-	public void setCustomerType(String customerType) {
-		this.customerType = customerType;
-	}
-
-	public Double getPoints() {
-		return points;
-	}
-
-	public void setPoints(Double points) {
-		this.points = points;
-	}
-
 	public String getPersonalIdentityNo() {
 		return personalIdentityNo;
 	}
@@ -258,7 +244,6 @@ public class UserDto {
 		this.totalAppRests = totalAppRests;
 	}
 
-
 	public long getTotalAddInBaskets() {
 		return totalAddInBaskets;
 	}
@@ -291,12 +276,12 @@ public class UserDto {
 		this.totalPackage_Orders = totalPackage_Orders;
 	}
 
-	public String getUserApplId() {
+	public Integer getUserApplId() {
 		return userApplId;
 	}
 
-	public void setUserApplId(String webAppId) {
-		this.userApplId = webAppId;
+	public void setUserApplId(Integer userApplId) {
+		this.userApplId = userApplId;
 	}
 
 	public String getWebAppname() {
@@ -323,11 +308,11 @@ public class UserDto {
 		this.totalOrders1 = totalOrders1;
 	}
 
-	public String getAdminIdPlatforma() {
+	public Integer getAdminIdPlatforma() {
 		return adminIdPlatforma;
 	}
 
-	public void setAdminIdPlatforma(String adminIdPlatforma) {
+	public void setAdminIdPlatforma(Integer adminIdPlatforma) {
 		this.adminIdPlatforma = adminIdPlatforma;
 	}
 
@@ -338,27 +323,42 @@ public class UserDto {
 	public void setPlatformaName(String platformaName) {
 		this.platformaName = platformaName;
 	}
-public Long getTotalUser1() {
+
+	public Long getTotalUser1() {
 		return totalUser1;
 	}
 
 	public void setTotalUser1(Long totalUser1) {
 		this.totalUser1 = totalUser1;
 	}
+public WebAplication getWebAppl() {
+		return webAppl;
+	}
 
+	public void setWebAppl(WebAplication webAppl) {
+		this.webAppl = webAppl;
+	}
+
+	public Long getTotalRst() {
+		return totalRst;
+	}
+
+	public void setTotalRst(Long totalRst) {
+		this.totalRst = totalRst;
+	}
 	public String toString() {
 		return "UserDto[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = "
 				+ address + ", phoneNo = " + phoneNo + ", email = " + email + ",password = " + password + ",age = "
-				+ age + ",customerType = " + customerType + ",points = " + points + ",personalIdentityNo = "
-				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",userRole = " + userRole
-				+ ",totalCardBank = " + totalCardBank + ",idAdmin =" + idAdmin + ",totalShippers = " + totalShippers
-				+ ",totaldishCategories = " + totaldishCategories + ",totalAppRests = " + totalAppRests
-				+ ",totalAddInBaskets = " + totalAddInBaskets + ",totalOrders ="
+				+ age + ",personalIdentityNo = " + personalIdentityNo + ",shippersStatus = " + shippersStatus
+				+ ",userRole = " + userRole + ",totalCardBank = " + totalCardBank + ",idAdmin =" + idAdmin
+				+ ",totalShippers = " + totalShippers + ",totaldishCategories = " + totaldishCategories
+				+ ",totalAppRests = " + totalAppRests + ",totalAddInBaskets = " + totalAddInBaskets + ",totalOrders ="
 				+ totalOrders + ",Long totalReservations = " + totalReservations + ",totalPackage_Orders = "
 				+ totalPackage_Orders + ",webAppId = " + userApplId + ",webAppname = " + webAppname + ",restorant = "
 				+ restorant + ",totalOrders1 = " + totalOrders1 + ",adminIdPlatforma = " + adminIdPlatforma
-				+ ",platformaName = " + platformaName + ",totalUser1 = " +totalUser1+"]";
+				+ ",platformaName = " + platformaName + ",totalUser1 = " + totalUser1 + ",webAppl = " +webAppl+ ",totalRst = " +totalRst+ "]";
 	}
 
 	
+
 }
