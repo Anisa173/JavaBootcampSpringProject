@@ -1,13 +1,19 @@
 package com.project.demo.sushiCo.service;
 
 import com.project.demo.sushiCo.entity.BasicEntity;
-
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
 public class RegisterMethodsPaymentForm extends BasicEntity<Integer> {
-	private Integer Id;
-	private String payment_Method;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Integer Id;
+@Column(name = "payment_Method")
+private String payment_Method;
 	private Integer adminIdWeb;
 	private Integer idRestorant;
 

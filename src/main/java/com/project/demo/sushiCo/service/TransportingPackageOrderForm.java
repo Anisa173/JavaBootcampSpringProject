@@ -9,45 +9,48 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class ShippingPackageOrderForm extends BasicEntity<Integer> {
+public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer registrationId;
-	@Column(name = "customerName")
-	private String customerName;
-	@Column(name = "shippersName")
-	private String shippersName;
+	@Column(name = "customerName_Surname")
+	private String customerName_Surname;
+	@Column(name = "shippersName_Surname")
+	private String shippersName_Surname;
 	@Column(name = "customerAddress")
 	private String customerAddress;
 	@Column(name = "noPhoneCustomer")
 	private String noPhoneCustomer;
 	@Column(name = "orders")
 	private Order orders;
+	@Column(name = "servicePl")
+	private String servicePl;
 	@Column(name = "sessionPayment")
 	private Double sessionPayment;
-	private Integer idShporta;
+	private Integer idPackageOrder;
 	private Integer adminRestId;
 	private Integer serviceId;
 	private Integer shippersId;
 	private Integer idCustomer;
 
-	public ShippingPackageOrderForm() {
+	public TransportingPackageOrderForm() {
 		super();
 	}
 
-	public ShippingPackageOrderForm(String customerName, String shippersName, String customerAddress,
-			String noPhoneCustomer, Order orders, Double sessionPayment, Integer idShporta, Integer adminRestId,
-			Integer serviceId, Integer shippersId, Integer idCustomer) {
+	public TransportingPackageOrderForm(String customerName, String shippersName, String customerAddress,
+			String noPhoneCustomer, Order orders, Double sessionPayment, Integer idPackageOrder, Integer adminRestId,
+			Integer serviceId, String servicePl, Integer shippersId, Integer idCustomer) {
 		super();
-		this.setCustomerName(customerName);
-		this.setShippersName(shippersName);
+		this.customerName_Surname = customerName;
+		this.setShippersName_Surname(shippersName);
 		this.setCustomerAddress(customerAddress);
 		this.noPhoneCustomer = noPhoneCustomer;
 		this.setOrders(orders);
 		this.setSessionPayment(sessionPayment);
-		this.idShporta = idShporta;
+		this.idPackageOrder = idPackageOrder;
 		this.adminRestId = adminRestId;
 		this.serviceId = serviceId;
+		this.servicePl = servicePl;
 		this.shippersId = shippersId;
 		this.idCustomer = idCustomer;
 
@@ -63,20 +66,20 @@ public class ShippingPackageOrderForm extends BasicEntity<Integer> {
 		this.registrationId = registrationId;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public String getCustomerName_Surname() {
+		return customerName_Surname;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomerName_Surname(String customerName_Surname) {
+		this.customerName_Surname = customerName_Surname;
 	}
 
-	public String getShippersName() {
-		return shippersName;
+	public String getShippersName_Surname() {
+		return shippersName_Surname;
 	}
 
-	public void setShippersName(String shippersName) {
-		this.shippersName = shippersName;
+	public void setShippersName_Surname(String shippersName_Surname) {
+		this.shippersName_Surname = shippersName_Surname;
 	}
 
 	public String getCustomerAddress() {
@@ -111,12 +114,12 @@ public class ShippingPackageOrderForm extends BasicEntity<Integer> {
 		this.sessionPayment = sessionPayment;
 	}
 
-	public Integer getIdShporta() {
-		return idShporta;
+	public Integer getIdPackageOrder() {
+		return idPackageOrder;
 	}
 
-	public void setIdShporta(Integer idShporta) {
-		this.idShporta = idShporta;
+	public void setIdPackageOrder(Integer idShporta) {
+		this.idPackageOrder = idShporta;
 	}
 
 	public Integer getAdminRestId() {
@@ -133,6 +136,14 @@ public class ShippingPackageOrderForm extends BasicEntity<Integer> {
 
 	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
+	}
+
+	public String getServicePl() {
+		return servicePl;
+	}
+
+	public void setServicePl(String servicePl) {
+		this.servicePl = servicePl;
 	}
 
 	public Integer getShippersId() {
@@ -152,9 +163,12 @@ public class ShippingPackageOrderForm extends BasicEntity<Integer> {
 	}
 
 	public String toString() {
-		return "ShippingPackageOrderForm[registrationId = " + registrationId + ",customerName = " + customerName
-				+ ",shippersName = " + shippersName + ",customerAddress = " + customerAddress + ",noPhoneCustomer = "
-				+ noPhoneCustomer + ",orders = " + orders + ",sessionPayment = " + sessionPayment + "]";
+		return "TransportingPackageOrderForm[registrationId = " + registrationId + ", customerName = "
+				+ customerName_Surname + ",shippersName = " + shippersName_Surname + ", customerAddress = "
+				+ customerAddress + ", noPhoneCustomer = " + noPhoneCustomer + ", orders = " + orders
+				+ ",idPackageOrder = " + idPackageOrder + " ,adminRestId = " + adminRestId + ",serviceId = " + serviceId
+				+ " ,servicePl = " + servicePl + " ,shippersId = " + shippersId + " ,sessionPayment = " + sessionPayment
+				+ ",idCustomer = " + idCustomer + "]";
 
 	}
 

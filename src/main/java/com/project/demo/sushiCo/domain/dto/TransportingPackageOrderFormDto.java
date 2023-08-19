@@ -2,25 +2,26 @@ package com.project.demo.sushiCo.domain.dto;
 
 import com.project.demo.sushiCo.entity.Order;
 
-public class ShippingPackageOrderFormDto {
+public class TransportingPackageOrderFormDto {
 	private Integer registrationId;
-	private String customerName;
-	private String shippersName;
+	private String customerName_Surname;
+	private String shippersName_Surname;
 	private String customerAddress;
 	private Order orders;
 	private String noPhoneCustomer;
 	private Double sessionPayment;
 
-	public ShippingPackageOrderFormDto() {
+	public TransportingPackageOrderFormDto() {
 
 	}
 
-	public ShippingPackageOrderFormDto(Integer registrationId, String customerName, String shippersName,
-			String customerAddress, Order orders, Double sessionPayment) {
+	public TransportingPackageOrderFormDto(Integer registrationId, String customerName, String shippersName,
+			String customerAddress, String noPhoneCustomer, Order orders, Double sessionPayment) {
 		this.registrationId = registrationId;
-		this.customerName = customerName;
-		this.shippersName = shippersName;
+		this.customerName_Surname = customerName;
+		this.shippersName_Surname = shippersName;
 		this.customerAddress = customerAddress;
+		this.noPhoneCustomer = noPhoneCustomer;
 		this.orders = orders;
 		this.sessionPayment = sessionPayment;
 	}
@@ -33,20 +34,20 @@ public class ShippingPackageOrderFormDto {
 		this.registrationId = registrationId;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public String getCustomerName_Surname() {
+		return customerName_Surname;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomerName_Surname(String customerName) {
+		this.customerName_Surname = customerName;
 	}
 
-	public String getShippersName() {
-		return shippersName;
+	public String getShippersName_Surname() {
+		return shippersName_Surname;
 	}
 
-	public void setShippersName(String shippersName) {
-		this.shippersName = shippersName;
+	public void setShippersName_Surname(String shippersName) {
+		this.shippersName_Surname = shippersName;
 	}
 
 	public String getCustomerAddress() {
@@ -82,8 +83,9 @@ public class ShippingPackageOrderFormDto {
 	}
 
 	public String toString() {
-		return "ShippingPackageOrderFormDto[registrationId = " + registrationId + ",customerName = " + customerName
-				+ ",shippersName = " + shippersName + ",customerAddress = " + customerAddress + ",orders = " + orders
+		return "TransportingPackageOrderFormDto[registrationId = " + registrationId + ",customerName = "
+				+ customerName_Surname + ",shippersName = " + shippersName_Surname + ",customerAddress = "
+				+ customerAddress + ",noPhoneCustomer = " + noPhoneCustomer + ",orders = " + orders
 				+ ",noPhoneCustomer = " + noPhoneCustomer + " ,sessionPayment = " + sessionPayment + "]";
 	}
 

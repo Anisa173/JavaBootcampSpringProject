@@ -1,15 +1,11 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import com.project.demo.sushiCo.entity.StatusOrderSession;
-
-
 import jakarta.validation.constraints.NotNull;
-
 
 public class PackageOrderedDto {
 	private Integer id;
 	@NotNull(message = "It's required")
-	private StatusOrderSession statusOrderSession;
+	private String statusOrderSession;
 	@NotNull(message = "It's required")
 	private Double sessionPayment;
 	private Integer shippersId;
@@ -22,7 +18,7 @@ public class PackageOrderedDto {
 
 	}
 
-	public PackageOrderedDto(Integer id, StatusOrderSession statusOrderSession, Double sessionPayment,
+	public PackageOrderedDto(Integer id, String statusOrderSession, Double sessionPayment,
 			Integer shippersId, String shippersName, Long totalOrd, Integer serviceId, String servicePlaces) {
 		this.id = id;
 		this.statusOrderSession = statusOrderSession;
@@ -42,11 +38,11 @@ public class PackageOrderedDto {
 		this.id = id;
 	}
 
-	public StatusOrderSession getStatusOrderSession() {
+	public String getStatusOrderSession() {
 		return statusOrderSession;
 	}
 
-	public void setStatusOrderSession(StatusOrderSession statusOrderSession) {
+	public void setStatusOrderSession(String statusOrderSession) {
 		this.statusOrderSession = statusOrderSession;
 	}
 

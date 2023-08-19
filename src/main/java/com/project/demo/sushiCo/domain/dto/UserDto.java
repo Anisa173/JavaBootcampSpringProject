@@ -1,10 +1,8 @@
 package com.project.demo.sushiCo.domain.dto;
 
 import com.project.demo.sushiCo.entity.Restorant;
-import com.project.demo.sushiCo.entity.ShippersStatus;
 import com.project.demo.sushiCo.entity.UserRole;
 import com.project.demo.sushiCo.entity.WebAplication;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -55,7 +53,7 @@ public class UserDto {
 	private String personalIdentityNo;
 	/* private Double points; */
 	@NotNull(message = "It's required")
-	private ShippersStatus shippersStatus;
+	private String userStatus;
 	@NotNull(message = "It's required")
 	private UserRole userRole;
 	private Long totalCardBank;
@@ -75,17 +73,18 @@ public class UserDto {
 	private String webAppname;
 	private Long totalUser1;
 	private WebAplication webAppl;
-	private Long totalRst ;
+	private Long totalRst;
+
 	public UserDto() {
 		age = 28;
 	}
 
 	public UserDto(Integer id, String first_name, String last_name, String address, String phoneNo, String email,
-			String password, Integer age, String personalIdentityNo, ShippersStatus shippersStatus, UserRole userRole,
+			String password, Integer age, String personalIdentityNo, String userStatus, UserRole userRole,
 			Long totalCardBank, Long totalShippers, Integer idAdmin, Long totaldishCategories, Long totalAppRests,
 			Long totalAddInBaskets, Long totalOrders, Long totalReservations, Long totalPackage_Orders,
 			Restorant restorant, Integer userApplId, String webAppname, Long totalOrders1, Integer adminIdPlatforma,
-			String platformaName, Long totalUser1,WebAplication webAppl,Long totalRst) {
+			String platformaName, Long totalUser1, WebAplication webAppl, Long totalRst) {
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -95,7 +94,7 @@ public class UserDto {
 		this.password = password;
 		this.age = age;
 		this.personalIdentityNo = personalIdentityNo;
-		this.setShippersStatus(shippersStatus);
+		this.setUserStatus(userStatus);
 		this.userRole = userRole;
 		this.totalCardBank = totalCardBank;
 		this.setIdAdmin(idAdmin);
@@ -112,8 +111,8 @@ public class UserDto {
 		this.adminIdPlatforma = adminIdPlatforma;
 		this.platformaName = platformaName;
 		this.totalUser1 = totalUser1;
-	this.webAppl = webAppl;
-	this.totalRst = totalRst;
+		this.webAppl = webAppl;
+		this.totalRst = totalRst;
 	}
 
 	public Integer getId() {
@@ -138,6 +137,14 @@ public class UserDto {
 
 	public void setLast_name(String last_name) {
 		this.last_name = last_name;
+	}
+
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
 	}
 
 	public String getAddress() {
@@ -186,14 +193,6 @@ public class UserDto {
 
 	public void setPersonalIdentityNo(String personalIdentityNo) {
 		this.personalIdentityNo = personalIdentityNo;
-	}
-
-	public ShippersStatus getShippersStatus() {
-		return shippersStatus;
-	}
-
-	public void setShippersStatus(ShippersStatus shippersStatus) {
-		this.shippersStatus = shippersStatus;
 	}
 
 	public UserRole getUserRole() {
@@ -331,7 +330,8 @@ public class UserDto {
 	public void setTotalUser1(Long totalUser1) {
 		this.totalUser1 = totalUser1;
 	}
-public WebAplication getWebAppl() {
+
+	public WebAplication getWebAppl() {
 		return webAppl;
 	}
 
@@ -346,19 +346,19 @@ public WebAplication getWebAppl() {
 	public void setTotalRst(Long totalRst) {
 		this.totalRst = totalRst;
 	}
+
 	public String toString() {
 		return "UserDto[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = "
 				+ address + ", phoneNo = " + phoneNo + ", email = " + email + ",password = " + password + ",age = "
-				+ age + ",personalIdentityNo = " + personalIdentityNo + ",shippersStatus = " + shippersStatus
-				+ ",userRole = " + userRole + ",totalCardBank = " + totalCardBank + ",idAdmin =" + idAdmin
-				+ ",totalShippers = " + totalShippers + ",totaldishCategories = " + totaldishCategories
-				+ ",totalAppRests = " + totalAppRests + ",totalAddInBaskets = " + totalAddInBaskets + ",totalOrders ="
-				+ totalOrders + ",Long totalReservations = " + totalReservations + ",totalPackage_Orders = "
-				+ totalPackage_Orders + ",webAppId = " + userApplId + ",webAppname = " + webAppname + ",restorant = "
-				+ restorant + ",totalOrders1 = " + totalOrders1 + ",adminIdPlatforma = " + adminIdPlatforma
-				+ ",platformaName = " + platformaName + ",totalUser1 = " + totalUser1 + ",webAppl = " +webAppl+ ",totalRst = " +totalRst+ "]";
+				+ age + ",personalIdentityNo = " + personalIdentityNo + ",userStatus = " + userStatus + ",userRole = "
+				+ userRole + ",totalCardBank = " + totalCardBank + ",idAdmin =" + idAdmin + ",totalShippers = "
+				+ totalShippers + ",totaldishCategories = " + totaldishCategories + ",totalAppRests = " + totalAppRests
+				+ ",totalAddInBaskets = " + totalAddInBaskets + ",totalOrders =" + totalOrders
+				+ ",Long totalReservations = " + totalReservations + ",totalPackage_Orders = " + totalPackage_Orders
+				+ ",webAppId = " + userApplId + ",webAppname = " + webAppname + ",restorant = " + restorant
+				+ ",totalOrders1 = " + totalOrders1 + ",adminIdPlatforma = " + adminIdPlatforma + ",platformaName = "
+				+ platformaName + ",totalUser1 = " + totalUser1 + ",webAppl = " + webAppl + ",totalRst = " + totalRst
+				+ "]";
 	}
-
-	
 
 }

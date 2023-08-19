@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.project.demo.sushiCo.domain.dto.UserDto;
-import com.project.demo.sushiCo.entity.ShippersStatus;
 import com.project.demo.sushiCo.entity.User;
 import com.project.demo.sushiCo.entity.UserRole;
 import jakarta.validation.Valid;
@@ -39,7 +38,7 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		userDto.setEmail(result.getPhoneNo());
 		userDto.setPassword(result.getPassword());
 		userDto.setPersonalIdentityNo(result.getPersonalIdentityNo());
-		userDto.setShippersStatus(ShippersStatus.fromValue(result.getShippersStatus()));
+		userDto.setUserStatus(result.getUserStatus());
 		userDto.setAge(result.getAge());
 		userDto.setUserRole(UserRole.fromValue(result.getUserRole()));
 		var totalCardBank = result.getCardBank().stream().count();

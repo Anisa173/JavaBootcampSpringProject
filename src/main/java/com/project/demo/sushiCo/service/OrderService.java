@@ -3,9 +3,11 @@ package com.project.demo.sushiCo.service;
 import java.util.List;
 import com.project.demo.sushiCo.domain.dto.OrderDto;
 
+import jakarta.validation.Valid;
+
 public interface OrderService {
 
-	OrderDto createOrder() throws Exception;
+	OrderDto createOrder(@Valid OrderDto oDto) throws Exception;
 
 	 //Admini i webAplication rendit porosite sipas kostos ASC apo DESC te grupuara  per çdo restorant
 	List<OrderDto> getOrdersByCost(Integer idCustomer,Integer adminRestId) throws Exception;
@@ -31,5 +33,7 @@ public interface OrderService {
 	// Admini i aplikacionit 'sheh' porosite sipas customerId dhe dates se
 	// proçesimit
 	List<OrderDto> getOrders() throws Exception;
+
+	
 
 }

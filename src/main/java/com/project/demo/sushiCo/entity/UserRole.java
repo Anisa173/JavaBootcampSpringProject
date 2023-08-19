@@ -16,7 +16,7 @@ public enum UserRole {
 	}
 
 	public static UserRole fromValue(UserRole userRole) {
-		return Arrays.asList(UserRole.values()).stream().filter(e -> e.value.equals(userRole)).findFirst()
+		return Arrays.asList(UserRole.values()).stream().filter(e -> userRole.equals(e.value)).findFirst()
 				.orElseThrow(() -> new RuntimeException(String.format("User's Role %s not found", userRole)));
 	}
 

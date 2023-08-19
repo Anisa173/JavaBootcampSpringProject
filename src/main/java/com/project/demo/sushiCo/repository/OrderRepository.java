@@ -10,30 +10,34 @@ import org.springframework.stereotype.Service;
 import com.project.demo.sushiCo.domain.dto.OrderDto;
 import com.project.demo.sushiCo.entity.Order;
 
+import jakarta.validation.Valid;
 
 @Service
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 	@Query("Insert Into Order(orderPrize,orderItems,orderStatus,oTimeConfirmed,oTimeProccessed,idShporta,idCustomer,adminRestId) Values(?1,?2,?3,?4,?5,"
 			+ "(Select o.idShporta From Order o Inner Join PackageOrdered p ON p.o.idShporta = p.id Where p.id =: id),"
-			+ "(Select o.idCustomer From Order o Inner Join User c ON c.o.idCustomer = c.id Where c.id =: id ),"
+			+ "(Select o.idCustomer From Order o Inner Join User c ON c.o.idCustomer = c.id Where c.id IN (Update c Set c.userStatus = 'IN-PROGRESS' Where c.id =: id )),"
 			+ "(Select o.adminRestId From Order o Inner Join User a ON a.o.adminRestId = a.id Where a.id =: id))"
-			+ "Select uc.o.orderPrize,uc.o.orderItems,uc.o.orderStatus"
-			+ "From User uc INNER JOIN AddInBasket ab ON uc.id = uc.ab.userId"
-			+ "INNER JOIN Order o ON uc.idCustomer = uc.o.oId"
-			+ "INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
-			+ "WHERE uc.o.orderItems = sum(uc.ab.addItemDish)  AND uc.o.orderStatus = 'Pending' AND uc.o.orderPrize = sum(uc.ab.amountValue) ")
+			+ "Select cst.o.orderPrize,cst.o.orderItems,cst.o.orderStatus"
+			+ "From User cst INNER JOIN AddInBasket ab ON cst.id = cst.ab.userId"
+			+ "INNER JOIN Order o ON cst.idCustomer = cst.o.oId"
+			+ "INNER JOIN Restorant r ON r.cst.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
+			+ "WHERE cst.o.orderItems = sum(cst.ab.addItemDish)  AND cst.o.orderStatus = 'Pending' AND cst.o.orderPrize = sum(cst.ab.amountValue)  ")
 
-Order createOrder();
+Order createOrder(@Valid OrderDto oDto);
+	/*
+	 * // Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i
+	 * grupon // sipas Restorantit perkates
+	 * 
+	 * @Query("Select o , r.idRestorant " +
+	 * "From User c INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
+	 * +
+	 * "INNER JOIN Order o ON c.o.oId = c.idCustomer  Group By r.c.id  Order By r.c.o.orderPrize"
+	 * ) OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
+	 */
 
-/*	// Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i grupon
-	// sipas Restorantit perkates
-	@Query("Select o , r.idRestorant "
-			+ "From User c INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-			+ "INNER JOIN Order o ON c.o.oId = c.idCustomer  Group By r.c.id  Order By r.c.o.orderPrize")
-	OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);*/
-
-	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe 
+	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe
 	// ku?... ne cilin restorant i ka kryer
 	@Query("Select r.restName , o  From User uc INNER JOIN Order o ON uc.id = uc.o.idCustomer "
 			+ "	INNER JOIN Restorant r ON r.uc.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
@@ -61,5 +65,6 @@ Order createOrder();
 			+ "Where a.id =: id ")
 	List<Order> getOrdersByCost(Integer idCustomer, Integer adminRestId);
 
+	
 
 }

@@ -10,6 +10,8 @@ import com.project.demo.sushiCo.domain.mappers.OrderMapper;
 import com.project.demo.sushiCo.repository.OrderRepository;
 import com.project.demo.sushiCo.service.OrderService;
 
+import jakarta.validation.Valid;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -23,9 +25,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDto createOrder() throws Exception {
+	public OrderDto createOrder(@Valid OrderDto oDto) throws Exception {
 		
-		return (orderMapper.toDto(orderRepository.createOrder())) ;
+		return (orderMapper.toDto(orderRepository.createOrder(oDto))) ;
 	}
 
 	// Admini i aplikacionit 'sheh' porositë sipas customerId dhe datës së

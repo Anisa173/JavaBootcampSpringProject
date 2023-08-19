@@ -1,36 +1,72 @@
 package com.project.demo.sushiCo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.project.demo.sushiCo.domain.dto.PackageOrderedDto;
-import com.project.demo.sushiCo.domain.dto.ShippingPackageOrderFormDto;
+import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import com.project.demo.sushiCo.entity.PackageOrdered;
-import com.project.demo.sushiCo.service.ShippingPackageOrderForm;
-
+import com.project.demo.sushiCo.service.TransportingPackageOrderForm;
 import jakarta.validation.Valid;
 
 @Service
 public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered, Integer> {
 
-@Query("Select shp.id, or.oId,sp.Id "	
-+ " From PackageOrdered po INNER JOIN User shp ON shp.po.shippersId = shp.id "	
-+ " INNER JOIN Order or ON po.or.idShporta = or.oId "	
-+ " INNER JOIN ServicePlaces	sp ON sp.po.serviceId = sp.Id "
-+  " Where shp.id =: ?1 AND sp.Id =: ?2 AND or.oId IN "                          
-+ " (Select c.id , a.id  From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
-+  " INNER JOIN User a ON a.o.adminRestId = a.id " 
-+ " Where c.id =: ?1 And a.id =: ?2 ) ")
+	@Query("Select shp.id, or.oId,sp.Id " + " From PackageOrdered po INNER JOIN User shp ON shp.po.shippersId = shp.id "
+			+ " INNER JOIN Order or ON po.or.idShporta = or.oId "
+			+ " INNER JOIN ServicePlaces	sp ON sp.po.serviceId = sp.Id "
+			+ " Where shp.id =: ?1 AND sp.Id =: ?2 AND or.oId IN "
+			+ " (Select c.id , a.id  From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
+			+ " INNER JOIN User a ON a.o.adminRestId = a.id " + " Where c.id =: ?1 And a.id =: ?2 ) ")
 
-ShippingPackageOrderForm getPackageOrderById(Integer adminRestId, Integer idCustomer, Integer shipperId,Integer serviceId,Integer idShporta);
+	TransportingPackageOrderForm getPackageOrderById(Integer adminRestId, Integer idCustomer, Integer shipperId,
+			Integer serviceId, Integer idShporta);
 
-PackageOrdered save(ShippingPackageOrderFormDto packOrdert);
+	PackageOrdered save(TransportingPackageOrderFormDto packOrdert);
 
-@Query(" ")
+	@Query(" Insert into PackageOrdered(statusOrderSession,sessionPayment,shippersId,serviceId) "
+			+ " Values('IN_PROGRESS',?1,( Select ship.shippersName From User ship INNER JOIN PackageOrdered pckg ON ship.pckg.shippersId = ship.id "
+			+ " INNER JOIN User a ON  a.ship.idAdmin = a.id "
+			+ " Where ship.id =: id  And pckg.id =: id  And a.id =: id),"
+			+ "( Select sp.servicePl From PackageOrdered pckg INNER JOIN ServicePlaces sp ON sp.pckg.serviceId = sp.Id Where sp.id =: ?1 And pckg.id =: id )) "
+			+ " Select pckg.sessionPayment From Order o INNER JOIN PackageOrdered pckg ON pckg.o.idShporta = pckg.id "
+			+ " INNER JOIN User c ON c.o.idCustomer = c.id "
+			+ " Where c.id =: id And c.concat(first_name, '',last_name) customerName_Surname  And pckg.id IN  "
+			+ "( Select o.orderStatus,o.oId  From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta )"
+			+ " INNER JOIN ServicePlaces sp ON  sp.pkg.serviceId = sp.Id"
+			+ " Where  pkg.sessionPayment =: (sum(o.orderPrize) + sp.shippingCost) And o.oId =: oId  And 	o.orderStatus =: 'IN_PROGRESS'	")
+	TransportingPackageOrderForm create(@Valid PackageOrderedDto packOrderedDto);
 
+	@Query(" Update PackageOrdered pck Set pck.statusOrderSession =: 'PROCESSED' Where  pck.id IN "
+			+ " ( Select t.concat(first_name, ' ',last_name)  TransporterName_Surname , sp.service_Places "
+			+ " From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta "
+			+ " INNER JOIN User t ON t.pkg.shippersId = t.id	 "
+			+ " INNER JOIN ServicePlaces sp ON sp.pkg.serviceId = sp.Id "
+			+ " Where pkg.Id =:id And t.id IN(Update User t Set t.userStatus = 'ARRIVED' Where t.id =: id) And sp.Id =: Id "
+			+ " And o.oId IN(Select c.Concat(first_name,' ',last_name)  customerName_Surname,c.address  Customer_Address,c.phoneNo ,o "
+			+ " From Order o INNER JOIN User c ON c.o.idCustomer = c.id"
+			+ " Where  c.id IN(Update User c Set c.userStatus = 'COMPLETED' Where c.id =: id) "
+			+ " And o.oId  IN (Update Order o Set o.userStatus = 'PROCESSED' Where o.oId =: oId)")
 
+	TransportingPackageOrderForm updateByStatus(@Valid PackageOrderedDto packOrderedDto, Integer Id, Integer shippersId,
+			Integer serviceId, Integer oId, Integer idCustomer);
 
-ShippingPackageOrderForm create(@Valid PackageOrderedDto packOrderedDto);
+	@Modifying
+	@Query("Update PackageOrdered pck Set pck.statusOrderSession =: 'IN_PROGRESS' Where  pck.id IN "
+			+ "	( Select t.concat(first_name, ' ',last_name)  t.transporterName_Surname , sp.service_Places "
+			+ "	From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta "
+			+ "	INNER JOIN User t ON t.pkg.shippersId = t.id  "
+			+ "	 INNER JOIN ServicePlaces sp ON sp.pkg.serviceId = sp.Id "
+			+ "	 Where pkg.Id =:id And t.id IN(Update User t Set t.userStatus = 'IN_TRANSIT' And t.transporterName_Surname =: ?1 Where t.id =: id)"
+			+ "And sp.Id IN ( UPDATE ServicePlaces sp SET sp.service_Places =: ?1 Where sp.Id =: Id ) "
+			+ "	 And o.oId IN(Select c.Concat(first_name,' ',last_name)  customerName_Surname,c.address  Customer_Address,c.phoneNo ,o  "
+			+ "	 From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
+			+ "	 Where  c.id IN( Update User c Set c.userStatus = 'WAITING' And customerName_Surname =: ?1 And c.address =: ?2 And c.phoneNo =: ?3  Where c.id =: id ) "
+			+ "	 And o.oId  IN (Update Order o Set o.oId =: oId Where o.oId =: oId)")
+
+	TransportingPackageOrderForm update(@Valid PackageOrderedDto packOrDto, Integer id, Integer shippersId,
+			Integer serviceId, Integer oId, Integer idCustomer);
 
 }

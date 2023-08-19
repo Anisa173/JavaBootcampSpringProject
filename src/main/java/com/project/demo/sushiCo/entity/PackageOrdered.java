@@ -5,8 +5,6 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,8 +34,8 @@ public class PackageOrdered extends BasicEntity<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Enumerated(EnumType.STRING)
-	private StatusOrderSession statusOrderSession;
+	@Column(name = "statusOrderSession")
+	private String statusOrderSession;
 	@Column(name = "sessionPayment")
 	private Double sessionPayment;
 
@@ -46,7 +44,7 @@ public class PackageOrdered extends BasicEntity<Integer> {
 		sessionPayment = 800000.00;
 	}
 
-	public PackageOrdered(StatusOrderSession statusOrderSession, Double sessionPayment, List<Order> ord, User user,
+	public PackageOrdered(String statusOrderSession, Double sessionPayment, List<Order> ord, User user,
 			ServicePlaces servicePlaces) {
 		super();
 		this.statusOrderSession = statusOrderSession;
@@ -65,11 +63,11 @@ public class PackageOrdered extends BasicEntity<Integer> {
 		this.id = id;
 	}
 
-	public StatusOrderSession getStatusOrderSession() {
+	public String getStatusOrderSession() {
 		return statusOrderSession;
 	}
 
-	public void setStatusOrderSession(StatusOrderSession statusOrderSession) {
+	public void setStatusOrderSession(String statusOrderSession) {
 		this.statusOrderSession = statusOrderSession;
 	}
 

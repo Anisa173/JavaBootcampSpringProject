@@ -128,8 +128,8 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	private String password;
 	@Column(name = "personalIdentityNo")
 	private String personalIdentityNo;
-	@Enumerated(EnumType.STRING)
-	private ShippersStatus shippersStatus;
+	@Column(name = "userStatus")
+	private String userStatus;
 	@Column(name = "age")
 	private Integer age;
 	@Enumerated(EnumType.STRING)
@@ -140,7 +140,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	}
 
 	public User(String first_name, String last_name, String address, String phoneNo, String email, String password,
-			String personalIdentityNo, ShippersStatus shippersStatus, Integer age, UserRole userRole,
+			String personalIdentityNo, String userStatus, Integer age, UserRole userRole,
 			List<BookingProcessing> bookingProcessings, List<PackageOrdered> package_Orders, List<Order> orders,
 			List<AddInBasket> addInBaskets, List<Restorant> rest, User shippers, List<User> user,
 			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant, List<Order> orders1,
@@ -154,7 +154,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.setEmail(email);
 		this.setPassword(password);
 		this.personalIdentityNo = personalIdentityNo;
-		this.setShippersStatus(shippersStatus);
+		this.setUserStatus(userStatus);
 		this.setAge(age);
 		this.setUserRole(userRole);
 		this.cardBank = cardBank;
@@ -237,14 +237,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.personalIdentityNo = personalIdentityNo;
 	}
 
-	public ShippersStatus getShippersStatus() {
-		return shippersStatus;
-	}
-
-	public void setShippersStatus(ShippersStatus shippersStatus) {
-		this.shippersStatus = shippersStatus;
-	}
-
 	public Integer getAge() {
 		return age;
 	}
@@ -252,7 +244,13 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+public String getUserStatus() {
+		return userStatus;
+	}
 
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
 	public UserRole getUserRole() {
 		return userRole;
 	}
@@ -393,7 +391,7 @@ public WebAplication getWebAppl() {
 
 		return "User[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = " + address
 				+ ",phoneNo = " + address + ",email = " + email + ",password = " + password + ",personalIdentityNo = "
-				+ personalIdentityNo + ",shippersStatus = " + shippersStatus + ",age = " + age + ",userRole = "
+				+ personalIdentityNo + ",shippersStatus = " + userStatus + ",age = " + age + ",userRole = "
 				+ userRole + ",dishCategories = " + dishCategories + ",cardBank = " + cardBank + ",user = " + user
 				+ ",shippers = " + shippers + ",rest = " + rest + ",addInBaskets = " + addInBaskets + ",orders = "
 				+ orders + ", bookingProcessings = " + bookingProcessings + ", package_Orders = " + package_Orders
@@ -441,7 +439,4 @@ public WebAplication getWebAppl() {
 	}
 
 	
-
-	
-
 }
