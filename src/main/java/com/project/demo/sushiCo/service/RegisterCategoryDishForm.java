@@ -2,13 +2,15 @@ package com.project.demo.sushiCo.service;
 
 import com.project.demo.sushiCo.entity.BasicEntity;
 import jakarta.persistence.Id;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class RegisterCategoryDishForm extends BasicEntity<Integer> {
 	@Id

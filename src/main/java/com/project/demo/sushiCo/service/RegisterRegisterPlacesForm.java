@@ -23,10 +23,10 @@ public class RegisterRegisterPlacesForm extends BasicEntity<Integer> {
 		super();
 	}
 
-	public RegisterRegisterPlacesForm(String servicesPlaces, Double shippingCost,Integer idRestorant ) {
+	public RegisterRegisterPlacesForm(String servicesPlaces, Double shippingCost, Integer idRestorant) {
 		super();
 		this.servicesPlaces = servicesPlaces;
-this.idRestorant = idRestorant;
+		this.idRestorant = idRestorant;
 	}
 
 	@Override
@@ -53,18 +53,18 @@ this.idRestorant = idRestorant;
 	public void setShippingCost(Double shippingCost) {
 		this.shippingCost = shippingCost;
 	}
-public Integer getIdRestorant() {
+
+	public Integer getIdRestorant() {
 		return idRestorant;
 	}
 
 	public void setIdRestorant(Integer idRestorant) {
 		this.idRestorant = idRestorant;
 	}
-	
+
 	public String toString() {
 		return "RegisterRegisterPlacesForm[id = " + id + ",servicesPlaces = " + servicesPlaces + ",shippingCost = "
-				+ shippingCost + ",idRestorant = " +idRestorant+ "]";
+				+ shippingCost + ",idRestorant = " + idRestorant + "]";
 	}
 
-	
 }

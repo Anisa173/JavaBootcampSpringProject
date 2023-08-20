@@ -1,11 +1,7 @@
 package com.project.demo.sushiCo.serviceImpl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.project.demo.sushiCo.domain.dto.RestorantTablesDto;
 import com.project.demo.sushiCo.domain.mappers.RestorantTableMapper;
 import com.project.demo.sushiCo.repository.RestorantTablesRepository;
@@ -28,28 +24,29 @@ public class RestorantTableServiceImpl implements RestorantTablesService {
 	}
 
 	@Override
-	public void delete(Integer tableId, Integer rtbId, Integer restorantId) throws Exception {
+	public void delete(Integer tableId, Integer rtbId, Integer idRestorant) throws Exception {
 
-		restorantTbRepository.delete(tableId, rtbId, restorantId);
+		restorantTbRepository.delete(tableId, rtbId, idRestorant);
 	}
 
 	@Override
-	public List<RestorantTablesDto> getAllRestorant_tables() throws Exception {
+	public RestorantTablesDto getAlltablesById(Integer rtb_id, Integer adminRId) throws Exception {
 
-		return restorantTbRepository.findAll().stream().map(c -> restorantTableMapper.toDto(c))
-				.collect(Collectors.toList());
+		return restorantTableMapper.toDto(restorantTbRepository.getAlltablesById(rtb_id, adminRId));
 	}
 
 	@Override
-	public RestorantTablesDto getRestorant_tablesById(Integer rtb_id, Integer idRestorant) throws Exception {
+	public RestorantTablesDto getRestorant_tablesById(Integer tb_id, Integer rtb_id, Integer adminRId)
+			throws Exception {
 
-		return restorantTableMapper.toDto(restorantTbRepository.getRestorant_tablesById(rtb_id, idRestorant));
+		return restorantTableMapper.toDto(restorantTbRepository.getRestorant_tablesById(tb_id, rtb_id, adminRId));
 	}
 
 	@Override
-	public RestorantTablesDto registerRestorant_tables(@Valid RegisterRestorantTablesForm registerUserForm,
-			Integer restorantId) throws Exception {
-		var tables = getRestorant_tablesById(registerUserForm.getId(), registerUserForm.getIdRestorant());
+	public RestorantTablesDto registerRestorant_tables(@Valid RegisterRestorantTablesForm registerUserForm)
+			throws Exception {
+		var tables = getRestorant_tablesById(registerUserForm.getRtb_id(), registerUserForm.getTb_id(),
+				registerUserForm.getAdminRId());
 		tables.setTableName(registerUserForm.getTableName());
 		tables.setNoTables(registerUserForm.getNoTables());
 		tables.setNoChairsT(registerUserForm.getNoChairsT());
@@ -64,9 +61,9 @@ public class RestorantTableServiceImpl implements RestorantTablesService {
 	}
 
 	@Override
-	public RestorantTablesDto update(Integer rtb_id, Integer idRestorant, @Valid RestorantTablesDto placesDto)
-			throws Exception {
-		var result = restorantTableMapper.toEntity(getRestorant_tablesById(rtb_id, idRestorant));
+	public RestorantTablesDto update(Integer tb_id, Integer rtb_id, Integer adminRId,
+			@Valid RestorantTablesDto placesDto) throws Exception {
+		var result = restorantTableMapper.toEntity(getRestorant_tablesById(tb_id, rtb_id, adminRId));
 		var upToDate = restorantTableMapper.toUpdate(placesDto, result);
 		return restorantTableMapper.toDto(restorantTbRepository.save(upToDate));
 	}

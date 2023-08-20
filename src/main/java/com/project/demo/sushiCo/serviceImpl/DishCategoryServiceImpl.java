@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
 import com.project.demo.sushiCo.domain.mappers.DishCategoryMapper;
 import com.project.demo.sushiCo.entity.DishCategory;
@@ -13,6 +15,7 @@ import com.project.demo.sushiCo.service.RegisterCategoryDishForm;
 
 import jakarta.validation.Valid;
 
+@Service
 public class DishCategoryServiceImpl implements DishCategoryService {
 
 	@Autowired

@@ -19,6 +19,7 @@ import com.project.demo.sushiCo.service.RegisterCardform;
 import com.project.demo.sushiCo.service.SelectDishesForm;
 import jakarta.validation.Valid;
 
+
 @Service
 public class AddInBasketServiceImpl implements AddInBasketService {
 	@Autowired
@@ -108,8 +109,8 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 	}
 
 	@Override
-	public void delete(Integer dId, Integer id) throws Exception {
-		basketRepository.delete(dId, id);
+	public void delete(Integer dId, Integer categoryId,Integer custId) throws Exception {
+		basketRepository.delete(dId, categoryId , custId);
 
 	}
 

@@ -3,12 +3,16 @@ package com.project.demo.sushiCo.service;
 import com.project.demo.sushiCo.entity.BasicEntity;
 import com.project.demo.sushiCo.entity.Dish;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class SelectDishesForm extends BasicEntity<Integer> {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)

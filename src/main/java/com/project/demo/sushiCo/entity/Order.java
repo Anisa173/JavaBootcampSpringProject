@@ -15,10 +15,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
-
 @Entity
-@Table(name = "Orderssss")
+@Table(name = "Order")
 public class Order extends BasicEntity<Integer> {
 
 	// Porosite e restorantit menaxhohen nga admini përkates i restorantit
@@ -59,6 +57,7 @@ public class Order extends BasicEntity<Integer> {
 	private LocalDateTime oTimeConfirmed;
 	@Column(name = "oTimeProccessed")
 	private LocalDateTime oTimeProccessed;
+	
 	public Order() {
 		super();
 	}

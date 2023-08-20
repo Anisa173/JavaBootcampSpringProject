@@ -18,6 +18,11 @@ public class DishServiceImpl implements DishService {
 	private final DishRepository dishRepository;
 	private final DishMapper dishMapper;
 
+public DishServiceImpl() {
+	dishRepository = null;
+	dishMapper = null;
+
+}
 	public DishServiceImpl(DishRepository dishRepository, DishMapper dishMapper) {
 		this.dishRepository = dishRepository;
 		this.dishMapper = dishMapper;

@@ -1,14 +1,13 @@
 package com.project.demo.sushiCo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
 import com.project.demo.sushiCo.domain.dto.BookingProcessingDto;
 import com.project.demo.sushiCo.domain.dto.RegisterBookingFormDto;
 import com.project.demo.sushiCo.entity.BookingProcessing;
 import com.project.demo.sushiCo.service.RegisterBookingForm;
-
 import jakarta.validation.Valid;
 
 @Service
@@ -30,6 +29,7 @@ public interface BookingProcessingRepository extends JpaRepository<BookingProces
 			+ "Where rt.availableTables = (rt.noTables - rt.lockedTables)")
 	RegisterBookingForm createBooking(@Valid BookingProcessingDto cReservation);
 
+	@Modifying
 	@Query("UPDATE BookingProcessing bp"
 			+ "SET bp.reservationDate =: ?1 And bp.start_reservationTime =: ?2  And bp.end_reservationTime =: ?3 And bp.noParticipants =: ?4 And bp.reservationDescription =:?5"
 			+ "Where Exists (Select rtb.tableName,rtb.lockedTables  From  BookingProcessing bp INNER JOIN User c ON c.bp.customerId = c.id "
@@ -39,6 +39,7 @@ public interface BookingProcessingRepository extends JpaRepository<BookingProces
 
 	RegisterBookingForm update(@Valid BookingProcessingDto reservation, Integer id, Integer rtb_id);
 
+	@Modifying
 	@Query("Delete From BookingProcessing  bp Inner join User c ON c.bp.customerId = c.id"
 			+ "Inner Join  RestorantTables tb ON tb.bp.restorant_tbId = tb.rtb_id "
 			+ "Where tb.rtb_id IN (Select r.idRestorant =: ?1  From rtb Inner Join Restorant r ON tb.rtb_id = tb.r.idRestorant Where tb.rtb_id =: ?1 and tb.r.idRestorant =: ?2 )")

@@ -11,7 +11,7 @@ import com.project.demo.sushiCo.repository.OrderRepository;
 import com.project.demo.sushiCo.service.OrderService;
 
 import jakarta.validation.Valid;
-
+//RequiredArgsConstructor ~ final
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -81,9 +81,14 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public void cancelUserOrder(Integer orderId, Integer customerId) throws Exception {
+	public void cancelUserOrder(Integer adminRestId, Integer idCustomer,Integer oId) throws Exception {
 
-		 orderRepository.cancelUserOrder(orderId,customerId);
+		 orderRepository.cancelUserOrder(adminRestId, idCustomer, oId);
+	}
+
+	@Override
+	public OrderDto deleteOrder(Integer adminRestId, Integer oId) throws Exception {
+		return orderMapper.toDto(orderRepository.deleteOrder(adminRestId, oId));
 	}
 
 

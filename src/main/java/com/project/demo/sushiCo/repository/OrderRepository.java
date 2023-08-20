@@ -25,7 +25,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ "INNER JOIN Restorant r ON r.cst.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
 			+ "WHERE cst.o.orderItems = sum(cst.ab.addItemDish)  AND cst.o.orderStatus = 'Pending' AND cst.o.orderPrize = sum(cst.ab.amountValue)  ")
 
-Order createOrder(@Valid OrderDto oDto);
+	Order createOrder(@Valid OrderDto oDto);
 	/*
 	 * // Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i
 	 * grupon // sipas Restorantit perkates
@@ -51,12 +51,12 @@ Order createOrder(@Valid OrderDto oDto);
 			+ "	INNER JOIN User as a ON o.adminRestId = a.id" + " Where a.id =: id  ", nativeQuery = true)
 	Order getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
 
-	// Anullon porosine e konfirmuar 'customer'
+	// Porosia anullohet nga klienti
 	@Modifying
-	@Query("UPDATE Order or SET deleted = true WHERE Exists"
-			+ "(Select or From User c INNER JOIN or ON c.id = c.or.idCustomer"
-			+ "Where c.or.orderStatus ='Cancel' AND c.id =: id ))")
-	void cancelUserOrder(Integer orderId, Integer customerId);
+	@Query(" UPDATE Order or SET deleted = true  And or.orderStatus = 'Cancel'  WHERE EXISTS "
+			+ "( Select or From or INNER JOIN User c  ON c.id = c.or.idCustomer "
+			+ "  INNER JOIN User a ON a.or.adminRestId = a.id   Where a.id =: id AND c.id =: id  And o.oId =: oId  ))")
+	void cancelUserOrder(Integer adminRestId, Integer idCustomer,Integer oId);
 
 	// Admini i restorantit rendit porosite sipas kostos ASC apo DESC te grupuara
 	// per çdo klient
@@ -65,6 +65,11 @@ Order createOrder(@Valid OrderDto oDto);
 			+ "Where a.id =: id ")
 	List<Order> getOrdersByCost(Integer idCustomer, Integer adminRestId);
 
-	
+//Porosia anullohet nga admini për arsye të pamundësisë për ta dërguar porosinë në destinacionin e kërkuar
+	@Modifying
+	@Query(" UPDATE Order or SET deleted = true And or.orderStatus = 'Cancel'  WHERE EXISTS  "
+			+ " ( Select or From or INNER JOIN User c  ON c.id = c.or.idCustomer "
+			+ "	INNER JOIN User a ON a.or.adminRestId = a.id  WHERE  or.oId =: ?1  And  a.id =: id  ) ")
+	Order deleteOrder(Integer adminRestId, Integer oId);
 
 }

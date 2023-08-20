@@ -3,13 +3,13 @@ package com.project.demo.sushiCo.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.project.demo.sushiCo.domain.dto.CardBankDto;
 import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
-import com.project.demo.sushiCo.domain.dto.UserDto;
 import com.project.demo.sushiCo.entity.AddInBasket;
 import com.project.demo.sushiCo.entity.CardBank;
 import com.project.demo.sushiCo.service.OrderByProcessing;
@@ -32,11 +32,12 @@ public interface AddInBasketRepository extends JpaRepository<AddInBasket, Intege
 
 	SelectDishesForm getDishDCategoriesByCustomerId(Integer dId, Integer categoryId, Integer custId);
 
+@Modifying
 	@Query("DELETE FROM AddInBasket  aB INNER JOIN User  c ON c.aB.custId = c.id"
-			+ "INNER JOIN Dish d ON d.aB.IDdish = d.dId" + "WHERE  Exists "
+			+ "INNER JOIN Dish d ON d.aB.IDdish = d.dId" + "WHERE c.id =: id And  d.dId IN "
 			+ "(SELECT d,dc FROM d INNER JOIN dishCategory dc ON dc.d.categoryId = dc.id"
 			+ "WHERE d.dId =: ?1 and dc.id =: ?2)")
-	void delete(Integer dId, Integer id);
+	void delete(Integer dId, Integer categoryId,Integer custId);
 
 	AddInBasket save(SelectDishesFormDto basketAdd);
 
@@ -47,11 +48,6 @@ public interface AddInBasketRepository extends JpaRepository<AddInBasket, Intege
 			+ "INNER JOIN  ServicePlaces svp ON r.idRestorant = r.svp.service_idR "
 			+ "WHERE r.idRestorant =: ?1 AND r.pm.Id =: ?2 AND r.svp.Id =: ?3)")
 	OrderByProcessing getPaymentServicesById(Integer id, Integer idRestorant, Integer pmId, Integer servPId);
-
-	@Query("INSERT INTO Cards(BankId,valid_from,expiredTime,cardSecurityCode,userCardId)"
-			+ "VALUES(?1,?2,?3,?4,(SELECT cust.c.userCardId,cust.id FROM User cust INNER JOIN CardBank c ON cust.c.userCardId = cust.id WHERE cust.id =: id ))")
-
-	UserDto createPaymentCard();
 
 	AddInBasket save(OrderByProcessingDto pmSer);
 

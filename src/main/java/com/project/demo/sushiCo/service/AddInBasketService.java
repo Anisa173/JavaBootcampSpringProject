@@ -6,8 +6,6 @@ import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
 import com.project.demo.sushiCo.domain.dto.CardBankDto;
 import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
-
-
 import jakarta.validation.Valid;
 
 public interface AddInBasketService {
@@ -22,7 +20,7 @@ public interface AddInBasketService {
 	
 	List<AddInBasketDto> getDishesByCustomerId(Integer dId, Integer categoryId, Integer custId) throws Exception;
 	
-	void delete(Integer dId,Integer id) throws Exception;
+	void delete(Integer dId, Integer categoryId,Integer custId) throws Exception;
 
 	AddInBasketDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception;
 
@@ -30,8 +28,7 @@ public interface AddInBasketService {
 			throws Exception;
 
 	CardBankDto displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception;
-
-
+	
 	//CardBankDto getCardsByCustomerId(Integer registrationId, String BankId, Integer userCardId);
 
 	CardBankDto getCardsByCustomerId(Integer registrationId, String BankId, Integer userCardId, Integer idRestorant,

@@ -1,11 +1,11 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Component;
-
 import com.project.demo.sushiCo.domain.dto.RestorantTablesDto;
 import com.project.demo.sushiCo.entity.RestorantTables;
+
 @Component
 public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantTablesDto> {
 
@@ -15,11 +15,14 @@ public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantT
 		tables.setRtb_id(dto.getRtb_id());
 		tables.setTb_id(dto.getTb_id());
 		tables.setTableName(dto.getTableName());
+		tables.setTableDescription(dto.getTableDescription());
+		tables.setNoTables(dto.getNoTables());
 		tables.setAvailableTables(dto.getAvailableTables());
 		tables.setLockedTables(dto.getLockedTables());
-		tables.setTableDescription(dto.getTableDescription());
+		tables.setNoChairsT(dto.getNoChairsT());
 		return tables;
 	}
+
 
 	@Override
 	public RestorantTablesDto toDto(RestorantTables entity) {
@@ -48,16 +51,31 @@ public class RestorantTableMapper extends BaseMapper<RestorantTables, RestorantT
 
 	@Override
 	public List<RestorantTables> toEntity(List<RestorantTablesDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<RestorantTables> list = new ArrayList<RestorantTables>( dtoList.size() );
+        for ( RestorantTablesDto rtbDto : dtoList ) {
+            list.add( toEntity( rtbDto ) );
+        }
+
+        return list;
 	}
 
 	@Override
 	public List<RestorantTablesDto> toDto(List<RestorantTables> entityList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		if ( entityList == null ) {
+            return null;
+        }
 
+        List<RestorantTablesDto> list = new ArrayList<RestorantTablesDto>( entityList.size() );
+        for ( RestorantTables rtable : entityList ) {
+            list.add( toDto( rtable ) );
+        }
+
+        return list;
+	}
 }
 
 
