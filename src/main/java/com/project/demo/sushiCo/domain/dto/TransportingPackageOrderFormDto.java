@@ -1,5 +1,8 @@
 package com.project.demo.sushiCo.domain.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.project.demo.sushiCo.entity.Order;
 
 public class TransportingPackageOrderFormDto {
@@ -7,7 +10,8 @@ public class TransportingPackageOrderFormDto {
 	private String customerName_Surname;
 	private String shippersName_Surname;
 	private String customerAddress;
-	private Order orders;
+	private List<Order> orders = new ArrayList<Order>();
+	private List<String> servicePl = new ArrayList<String>();
 	private String noPhoneCustomer;
 	private Double sessionPayment;
 
@@ -16,13 +20,15 @@ public class TransportingPackageOrderFormDto {
 	}
 
 	public TransportingPackageOrderFormDto(Integer registrationId, String customerName, String shippersName,
-			String customerAddress, String noPhoneCustomer, Order orders, Double sessionPayment) {
+			String customerAddress, List<Order> orders, List<String> servicePl, String noPhoneCustomer,
+			Double sessionPayment) {
 		this.registrationId = registrationId;
 		this.customerName_Surname = customerName;
 		this.shippersName_Surname = shippersName;
 		this.customerAddress = customerAddress;
 		this.noPhoneCustomer = noPhoneCustomer;
 		this.orders = orders;
+		this.servicePl = servicePl;
 		this.sessionPayment = sessionPayment;
 	}
 
@@ -58,12 +64,20 @@ public class TransportingPackageOrderFormDto {
 		this.customerAddress = customerAddress;
 	}
 
-	public Order getOrders() {
+	public List<Order> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(Order orders) {
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public List<String> getServicePl() {
+		return servicePl;
+	}
+
+	public void setServicePl(List<String> servicePl) {
+		this.servicePl = servicePl;
 	}
 
 	public String getNoPhoneCustomer() {
@@ -85,8 +99,8 @@ public class TransportingPackageOrderFormDto {
 	public String toString() {
 		return "TransportingPackageOrderFormDto[registrationId = " + registrationId + ",customerName = "
 				+ customerName_Surname + ",shippersName = " + shippersName_Surname + ",customerAddress = "
-				+ customerAddress + ",noPhoneCustomer = " + noPhoneCustomer + ",orders = " + orders
-				+ ",noPhoneCustomer = " + noPhoneCustomer + " ,sessionPayment = " + sessionPayment + "]";
+				+ customerAddress + ",noPhoneCustomer = " + noPhoneCustomer + ",orders = " + orders + ",servicePl = "
+				+ servicePl + ",noPhoneCustomer = " + noPhoneCustomer + " ,sessionPayment = " + sessionPayment + "]";
 	}
 
 }

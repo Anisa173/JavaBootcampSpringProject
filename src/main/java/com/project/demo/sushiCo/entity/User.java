@@ -79,7 +79,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	@OneToMany(mappedBy = "shippers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> user = new ArrayList<User>();
 
-	// Disa transportues te restorantit i pergjigjen porosive te adminit
+	// Disa transportues te restorantit i pergjigjen porosive te adminit te Restorantit
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idAdmin", referencedColumnName = "id")
 	private User shippers;
@@ -88,7 +88,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	// zgjidhet nga nje ose N-kliente
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "restorant_users", joinColumns = {
-			@JoinColumn(name = "userId", referencedColumnName = "id") }, inverseJoinColumns = {
+			@JoinColumn(name = "userId", referencedColumnName = "id" ) }, inverseJoinColumns = {
 					@JoinColumn(name = "idRest", referencedColumnName = "idRestorant") })
 	@JsonIgnoreProperties
 	private List<Restorant> rest = new ArrayList<Restorant>();

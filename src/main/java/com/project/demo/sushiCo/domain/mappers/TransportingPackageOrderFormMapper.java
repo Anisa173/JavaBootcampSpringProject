@@ -2,9 +2,13 @@ package com.project.demo.sushiCo.domain.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import com.project.demo.sushiCo.service.TransportingPackageOrderForm;
 
+@Component
 public class TransportingPackageOrderFormMapper extends BaseMapper<TransportingPackageOrderForm, TransportingPackageOrderFormDto> {
 
 	@Override
@@ -16,6 +20,7 @@ public class TransportingPackageOrderFormMapper extends BaseMapper<TransportingP
 		shpkg.setShippersName_Surname(dto.getShippersName_Surname());
 		shpkg.setNoPhoneCustomer(dto.getNoPhoneCustomer());
 		shpkg.setOrders(dto.getOrders());
+		shpkg.setServicePl(dto.getServicePl());
 		shpkg.setSessionPayment(dto.getSessionPayment());
 		return shpkg;
 	}
@@ -29,6 +34,7 @@ public class TransportingPackageOrderFormMapper extends BaseMapper<TransportingP
 		shpkg.setShippersName_Surname(entity.getShippersName_Surname());
 		shpkg.setNoPhoneCustomer(entity.getNoPhoneCustomer());
 		shpkg.setOrders(entity.getOrders());
+		shpkg.setServicePl(entity.getServicePl());
 		shpkg.setSessionPayment(entity.getSessionPayment());
 		return shpkg;
 	}
@@ -39,6 +45,7 @@ public class TransportingPackageOrderFormMapper extends BaseMapper<TransportingP
 		entity.setShippersName_Surname(dto.getShippersName_Surname());
 		entity.setCustomerAddress(dto.getCustomerAddress());
 		entity.setOrders(dto.getOrders());
+		entity.setServicePl(dto.getServicePl());
 		return entity;
 	}
 

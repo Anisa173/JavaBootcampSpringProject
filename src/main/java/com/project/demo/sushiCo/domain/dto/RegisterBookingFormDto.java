@@ -2,6 +2,8 @@ package com.project.demo.sushiCo.domain.dto;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterBookingFormDto {
 	private Integer crId;
@@ -13,7 +15,7 @@ public class RegisterBookingFormDto {
 	private Time end_reservationTime;
 	private Integer noParticipants;
 	private String reservationDescription;
-	private String tableName;
+	private List<String> tableName = new ArrayList<String>();
 	private Integer noTables;
 	private Integer lockedTables;
 	private Integer idCustomer;
@@ -21,7 +23,7 @@ public class RegisterBookingFormDto {
 
 	public RegisterBookingFormDto(Integer crId, String First_name, String Last_name, String phoneNo,
 			Date reservationDate, Time start_reservationTime, Time end_reservationTime, Integer noParticipants,
-			String reservationDescription, String tableName, Integer noTables, Integer lockedTables, Integer idCustomer,
+			String reservationDescription,List<String> tableName, Integer noTables, Integer lockedTables, Integer idCustomer,
 			Integer idRestorant) {
 		this.crId = crId;
 		this.First_name = First_name;
@@ -115,11 +117,11 @@ public class RegisterBookingFormDto {
 		this.reservationDescription = reservationDescription;
 	}
 
-	public String getTableName() {
+	public List<String> getTableName() {
 		return tableName;
 	}
 
-	public void setTableName(String tableName) {
+	public void setTableName(List<String> tableName) {
 		this.tableName = tableName;
 	}
 

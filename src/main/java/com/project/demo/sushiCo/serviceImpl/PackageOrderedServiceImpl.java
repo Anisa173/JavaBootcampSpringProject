@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.demo.sushiCo.domain.dto.PackageOrderedDto;
@@ -64,6 +66,19 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 
 		return packageOrderFMapper
 				.toDto(packageOrRepository.update(packOrDto, Id, shippersId, serviceId, oId, idCustomer));
+	}
+
+	@Override
+	public void delete(Integer id, Integer shippersId, Integer adminRId) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<PackageOrderedDto> getAllShippersPackage(Integer shippersId, Integer adminRId, Integer packageId)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

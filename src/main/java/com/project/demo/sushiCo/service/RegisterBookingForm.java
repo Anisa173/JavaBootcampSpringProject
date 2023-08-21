@@ -2,6 +2,8 @@ package com.project.demo.sushiCo.service;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.project.demo.sushiCo.entity.BasicEntity;
 
@@ -38,7 +40,7 @@ public class RegisterBookingForm extends BasicEntity<Integer> {
 	@Column(name = "reservationDescription")
 	private String reservationDescription;
 	@Column(name = "tableName")
-	private String tableName;
+	private List<String> tableName = new ArrayList<String>();
 	@Column(name = "noTables")
 	private Integer noTables;
 	@Column(name = "lockedTables")
@@ -119,11 +121,11 @@ public class RegisterBookingForm extends BasicEntity<Integer> {
 		this.reservationDescription = reservationDescription;
 	}
 
-	public String getTableName() {
+	public List<String> getTableName() {
 		return tableName;
 	}
 
-	public void setTableName(String tableName) {
+	public void setTableName(List<String> tableName) {
 		this.tableName = tableName;
 	}
 

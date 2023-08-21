@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.service;
 
+import java.util.List;
+
 import com.project.demo.sushiCo.domain.dto.PackageOrderedDto;
 import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import jakarta.validation.Valid;
@@ -19,4 +21,8 @@ public interface PackageOrderedService {
 	public TransportingPackageOrderFormDto update(@Valid PackageOrderedDto packOrDto, Integer Id, Integer shippersId,
 			Integer serviceId, Integer oId, Integer idCustomer) throws Exception;
 
+	//Kur adminiRest kancelon packO
+    public void delete(Integer id,Integer shippersId,Integer adminRId) throws Exception;
+   
+    public List<PackageOrderedDto> getAllShippersPackage(Integer shippersId,Integer adminRId,Integer packageId) throws Exception;
 }

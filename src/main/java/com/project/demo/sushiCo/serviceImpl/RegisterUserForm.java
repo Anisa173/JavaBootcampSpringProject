@@ -1,8 +1,9 @@
 package com.project.demo.sushiCo.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.project.demo.sushiCo.entity.BasicEntity;
 import com.project.demo.sushiCo.entity.UserRole;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,13 +33,42 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 	private String personalIdentityNo;
 	@Column(name = "userRole")
 	private UserRole userRole;
+	@Column(name = "rest")
+	private List<String> restName = new ArrayList<String>();
+private Integer idAdmin;
+private Integer adminRId;
+private Integer idRestorant;
+private Integer userId;
+
+public RegisterUserForm() {
+		super();
+	}
+
+	public RegisterUserForm(String first_name, String last_name, String password, String email, String address,
+			String phoneNo, Integer age, String personalIdentityNo, UserRole userRole, List<String> rest,Integer idAdmin,Integer adminRId,Integer idRestorant,Integer userId) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.phoneNo = phoneNo;
+		this.age = age;
+		this.personalIdentityNo = personalIdentityNo;
+		this.userRole = userRole;
+		this.restName = rest;
+	this.idAdmin = idAdmin;
+	this.adminRId = adminRId;
+	this.idRestorant = idRestorant;
+	this.userId = userId;
+	}
 
 	@Override
 	public Integer getId() {
 		return registrationId;
 	}
 
-	public void setId(Integer id) {
+	public void setRegistrationId(Integer id) {
 		this.registrationId = id;
 	}
 
@@ -114,10 +144,57 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		this.userRole = userRole;
 	}
 
+	public List<String> getRestName() {
+		return restName;
+	}
+
+	public void setRestName(List<String> rest) {
+		this.restName = rest;
+	}
+public Integer getIdAdmin() {
+		return idAdmin;
+	}
+
+	public void setIdAdmin(Integer idAdmin) {
+		this.idAdmin = idAdmin;
+	}
+
+	public Integer getAdminRId() {
+		
+		return adminRId;
+	}
+public Integer getIdRestorant() {
+		return idRestorant;
+	}
+
+	public void setIdRestorant(Integer idRestorant) {
+		this.idRestorant = idRestorant;
+	}
+	public void setAdminRId(Integer adminRId) {
+		this.adminRId = adminRId;
+	}
+public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 	public String toString() {
 		return "RegisterUserForm[registrationId = " + registrationId + ",first_name = " + first_name + ",last_name = "
 				+ last_name + ",password = " + password + ",email = " + email + ",address = " + address + ",phoneNo = "
 				+ phoneNo + ",age  = " + age + ",personalIdentityNo = " + personalIdentityNo + ",userRole = " + userRole
-				+ "]";
+				+ ",rest = " + restName + ",idAdmin = " +idAdmin+ ",adminRId = " +adminRId+ ",idRestorant = " +idRestorant+ ",userId = " +userId+ "]";
 	}
+/**/
+
+	
+
+	
+
+	
+	
+
+	
+
 }

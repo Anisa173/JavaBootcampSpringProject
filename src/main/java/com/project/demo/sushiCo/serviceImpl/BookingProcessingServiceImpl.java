@@ -66,8 +66,8 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 	}
 
 	@Override
-	public void deleteReservation(Integer id, Integer cR_id) throws Exception {
-		bookingRepository.deleteReservation(id, cR_id);
+	public void deleteReservation(Integer id, Integer cR_id,Integer idRestorant) throws Exception {
+		bookingRepository.deleteReservation(id, cR_id,idRestorant);
 
 	}
 

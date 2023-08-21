@@ -1,22 +1,24 @@
 package com.project.demo.sushiCo.serviceImpl;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.project.demo.sushiCo.domain.dto.RegisterUserFormDto;
 import com.project.demo.sushiCo.domain.dto.UserDto;
 import com.project.demo.sushiCo.domain.dto.UserWithFileDto;
+import com.project.demo.sushiCo.domain.mappers.RegisterUserFormMapper;
 import com.project.demo.sushiCo.domain.mappers.UserMapper;
 import com.project.demo.sushiCo.entity.User;
 import com.project.demo.sushiCo.entity.UserRole;
 import com.project.demo.sushiCo.repository.UserRepository;
 import com.project.demo.sushiCo.service.FileSystemStorageService;
 import com.project.demo.sushiCo.service.UserService;
-import groovy.util.ResourceException;
 import jakarta.validation.Valid;
 
 @Service
@@ -26,30 +28,41 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository repository;
 	private final PasswordEncoder passwordEncoder;
 	private final UserMapper userMapper;
+	private final RegisterUserFormMapper registerUserFormMapper;
 	private final FileSystemStorageService storageService;
 
 	public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder, UserMapper userMapper,
-			FileSystemStorageService storageService) {
+			RegisterUserFormMapper registerUserFormMapper, FileSystemStorageService storageService) {
 		super();
 		this.repository = repository;
 		this.passwordEncoder = passwordEncoder;
 		this.userMapper = userMapper;
+		this.registerUserFormMapper = registerUserFormMapper;
 		this.storageService = storageService;
 	}
 
 	@Override
 	public UserDto registerUserForm(@Valid RegisterUserForm registerUserForm) throws Exception {
-		var user = getUserById(registerUserForm.getId());
-		user.setFirst_name(registerUserForm.getFirst_name());
-		user.setLast_name(registerUserForm.getLast_name());
-		user.setPassword(registerUserForm.getPassword());
-		user.setEmail(registerUserForm.getEmail());
-		user.setAddress(registerUserForm.getAddress());
-		user.setPhoneNo(registerUserForm.getPhoneNo());
-		user.setAge(registerUserForm.getAge());
-		user.setPersonalIdentityNo(registerUserForm.getPersonalIdentityNo());
-		user.setUserRole(UserRole.fromValue(registerUserForm.getUserRole()));
-		return userMapper.toDto(repository.save(user));
+		var userF = getUserById(registerUserForm.getIdRestorant(), registerUserForm.getAdminRId(),
+				registerUserForm.getUserId(), registerUserForm.getIdAdmin());
+		userF.setFirst_name(registerUserForm.getFirst_name());
+		userF.setLast_name(registerUserForm.getLast_name());
+		userF.setPassword(registerUserForm.getPassword());
+		userF.setEmail(registerUserForm.getEmail());
+		userF.setAddress(registerUserForm.getAddress());
+		userF.setPhoneNo(registerUserForm.getPhoneNo());
+		userF.setAge(registerUserForm.getAge());
+		userF.setPersonalIdentityNo(registerUserForm.getPersonalIdentityNo());
+		userF.setRestName(registerUserForm.getRestName());
+		userF.setUserRole(UserRole.fromValue(registerUserForm.getUserRole()));
+		return userMapper.toDto(repository.save(userF));
+
+	}
+
+	@Override
+	public RegisterUserFormDto getUserById(Integer idRestorant, Integer adminRId, Integer userId, Integer idAdmin)
+			throws Exception {
+		return registerUserFormMapper.toDto(repository.getUserById(idRestorant, adminRId, userId, idAdmin));
 
 	}
 
@@ -77,22 +90,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto update(Integer id, @Valid UserDto userDto) throws Exception {
-		User user = userMapper.toEntity(getUserById(id));
-		var result = userMapper.toUpdate(userDto, user);
-		return userMapper.toDto(repository.save(result));
+	public RegisterUserFormDto update(Integer id, @Valid RegisterUserFormDto userDto, Integer idRestorant,
+			Integer adminRId, Integer userId, Integer idAdmin) throws Exception {
+		RegisterUserForm user = registerUserFormMapper.toEntity(getUserById(idRestorant, adminRId, userId, idAdmin));
+		RegisterUserForm result = registerUserFormMapper.toUpdate(userDto, user);
+		return registerUserFormMapper.toDto(repository.save(result));
 	}
 
+	// Admini afishon te gjithe klientet qe kane krijuar llogari ne aplikacion
 	@Override
 	public List<UserDto> getAllUser() throws Exception {
-
 		return repository.findAll().stream().map(m -> userMapper.toDto(m)).collect(Collectors.toList());
-	}
-
-	@Override
-	public UserDto getUserById(Integer id) throws Exception {
-		return userMapper.toDto(
-				repository.findById(id).orElseThrow(() -> new ResourceException(String.format("User not found!", id))));
 	}
 
 	@Override
@@ -103,8 +111,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto addIdentification(Integer userId, UserWithFileDto reqDto) throws Exception {
-		var user = getUserById(userId);
+	public UserDto addIdentification(Integer idRestorant, Integer adminRId, Integer userId, Integer idAdmin,
+			UserWithFileDto reqDto) throws Exception {
+		var user = getUserById(idRestorant, adminRId, userId, idAdmin);
 
 		String personalIdentityNo = UUID.randomUUID().toString().concat(".pdf");
 
@@ -119,14 +128,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Resource downloadIdentitficationCard(Integer userId) throws Exception {
-		var user = getUserById(userId);
+	public Resource downloadIdentitficationCard(Integer idRestorant, Integer adminRId, Integer userId, Integer idAdmin,
+			UserWithFileDto reqDto) throws Exception {
+		var user = getUserById(idRestorant, adminRId, userId, idAdmin);
 		return (Resource) storageService.loadAsResource(user.getPersonalIdentityNo());
 	}
 
+	@Override
+	public List<UserDto> getAllShippersByAdminId(Integer id) throws Exception {
 
-	
-	
-
+		return (List<UserDto>) userMapper.toDto(repository.getAllShippersByAdminId(id));
+	}
 
 }

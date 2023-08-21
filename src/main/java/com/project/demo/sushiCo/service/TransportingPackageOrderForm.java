@@ -1,5 +1,8 @@
 package com.project.demo.sushiCo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.project.demo.sushiCo.entity.BasicEntity;
 import com.project.demo.sushiCo.entity.Order;
 import jakarta.persistence.Column;
@@ -22,9 +25,9 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 	@Column(name = "noPhoneCustomer")
 	private String noPhoneCustomer;
 	@Column(name = "orders")
-	private Order orders;
+	private List<Order> orders = new ArrayList<Order>();
 	@Column(name = "servicePl")
-	private String servicePl;
+	private List<String> servicePl = new ArrayList<String>();
 	@Column(name = "sessionPayment")
 	private Double sessionPayment;
 	private Integer idPackageOrder;
@@ -38,8 +41,8 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 	}
 
 	public TransportingPackageOrderForm(String customerName, String shippersName, String customerAddress,
-			String noPhoneCustomer, Order orders, Double sessionPayment, Integer idPackageOrder, Integer adminRestId,
-			Integer serviceId, String servicePl, Integer shippersId, Integer idCustomer) {
+			String noPhoneCustomer, List<Order> orders, Double sessionPayment, Integer idPackageOrder, Integer adminRestId,
+			Integer serviceId, List<String> servicePl, Integer shippersId, Integer idCustomer) {
 		super();
 		this.customerName_Surname = customerName;
 		this.setShippersName_Surname(shippersName);
@@ -98,11 +101,11 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 		this.noPhoneCustomer = noPhoneCustomer;
 	}
 
-	public Order getOrders() {
+	public List<Order> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(Order orders) {
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
 
@@ -138,11 +141,11 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 		this.serviceId = serviceId;
 	}
 
-	public String getServicePl() {
+	public List<String> getServicePl() {
 		return servicePl;
 	}
 
-	public void setServicePl(String servicePl) {
+	public void setServicePl(List<String> servicePl) {
 		this.servicePl = servicePl;
 	}
 
@@ -168,7 +171,7 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 				+ customerAddress + ", noPhoneCustomer = " + noPhoneCustomer + ", orders = " + orders
 				+ ",idPackageOrder = " + idPackageOrder + " ,adminRestId = " + adminRestId + ",serviceId = " + serviceId
 				+ " ,servicePl = " + servicePl + " ,shippersId = " + shippersId + " ,sessionPayment = " + sessionPayment
-				+ ",idCustomer = " + idCustomer + "]";
+				+ ",idCustomer = " + idCustomer + ",orders = " +orders+ "]";
 
 	}
 
