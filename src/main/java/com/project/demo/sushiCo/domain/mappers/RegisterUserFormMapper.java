@@ -2,9 +2,13 @@ package com.project.demo.sushiCo.domain.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.project.demo.sushiCo.domain.dto.RegisterUserFormDto;
 import com.project.demo.sushiCo.serviceImpl.RegisterUserForm;
 
+@Component
 public class RegisterUserFormMapper extends BaseMapper<RegisterUserForm, RegisterUserFormDto> {
 
 	@Override

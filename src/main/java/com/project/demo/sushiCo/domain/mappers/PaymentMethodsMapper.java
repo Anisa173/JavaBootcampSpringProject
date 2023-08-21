@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.PaymentMethodsDto;
 import com.project.demo.sushiCo.entity.PaymentMethods;
+
 @Component
 public class PaymentMethodsMapper extends BaseMapper<PaymentMethods, PaymentMethodsDto>{
 

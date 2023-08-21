@@ -30,6 +30,7 @@ public class RestorantDto {
 	private Long totalUser;
 	private Long totalPayment_MethodsR;
 	private Long totalService_Places;
+	private Long totalVisitor;
 	private Integer webAppId;
 	private String applicationName;
 	private Integer adminRId;
@@ -44,7 +45,7 @@ public class RestorantDto {
 	public RestorantDto(Integer idRestorant, String restNUIS, String restName, String phoneNo, String activity_field,
 			String addressRest, String service_Places, String payment_Methods, Time startDay, Time endDay,
 			String tableDescription, Integer restorant_tbId, Long totalUser, Long totalPayment_MethodsR,
-			Long totalService_Places, Integer webAppId, String applicationName, Integer adminRId, String adminName,
+			Long totalService_Places,Long totalVisitor , Integer webAppId, String applicationName, Integer adminRId, String adminName,
 			Integer adminIdWeb) {
 
 		this.idRestorant = idRestorant;
@@ -62,6 +63,7 @@ public class RestorantDto {
 		this.setTotalUser(totalUser);
 		this.setTotalPayment_MethodsR(totalPayment_MethodsR);
 		this.setTotalService_Places(totalService_Places);
+		this.totalVisitor = totalVisitor;
 		this.setWebAppId(webAppId);
 		this.setApplicationName(applicationName);
 		this.adminRId = adminRId;
@@ -188,7 +190,13 @@ public class RestorantDto {
 	public void setTotalService_Places(Long totalService_Places) {
 		this.totalService_Places = totalService_Places;
 	}
+public Long getTotalVisitor() {
+		return totalVisitor;
+	}
 
+	public void setTotalVisitor(Long totalVisitor) {
+		this.totalVisitor = totalVisitor;
+	}
 	public Integer getWebAppId() {
 		return webAppId;
 	}
@@ -236,9 +244,11 @@ public class RestorantDto {
 				+ service_Places + ",payment_Methods = " + payment_Methods + ",startDay = " + startDay + ",endDay = "
 				+ endDay + ",tableCapacity = " + tableDescription + ",restorant_tbId = " + restorant_tbId
 				+ ",totalUser = " + totalUser + ",totalPayment_MethodsR = " + totalPayment_MethodsR
-				+ ",totalService_Places = " + totalService_Places + ",applicationName = " + applicationName
+				+ ",totalService_Places = " + totalService_Places + ",totalVisitor = " +totalVisitor+ ",applicationName = " + applicationName
 				+ ",aplicationId = " + webAppId + ",adminRId = " + adminRId + ",adminName = " + adminName
 				+ ",adminIdWeb = " + adminIdWeb + "]";
 	}
+
+	
 
 }

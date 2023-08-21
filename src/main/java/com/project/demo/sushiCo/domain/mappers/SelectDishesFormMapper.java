@@ -3,13 +3,12 @@ package com.project.demo.sushiCo.domain.mappers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
-import com.project.demo.sushiCo.domain.dto.OrderDto;
+import org.springframework.stereotype.Component;
+
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
-import com.project.demo.sushiCo.entity.AddInBasket;
-import com.project.demo.sushiCo.entity.Order;
 import com.project.demo.sushiCo.service.SelectDishesForm;
 
+@Component
 public class SelectDishesFormMapper extends BaseMapper<SelectDishesForm, SelectDishesFormDto> {
 
 	@Override
@@ -57,6 +56,13 @@ public class SelectDishesFormMapper extends BaseMapper<SelectDishesForm, SelectD
 
 	@Override
 	public List<SelectDishesFormDto> toDto(List<SelectDishesForm> entityList) {
-		
-  return null;
+		if (entityList == null) {
+			return null;
+		}
+
+		List<SelectDishesFormDto> list = new ArrayList<SelectDishesFormDto>(entityList.size());
+		for (SelectDishesForm dishIn : entityList) {
+			list.add(toDto(dishIn));
+		}
+		return list;
 }}

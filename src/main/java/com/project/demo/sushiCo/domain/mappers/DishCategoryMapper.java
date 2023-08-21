@@ -1,7 +1,7 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
 import com.project.demo.sushiCo.entity.DishCategory;
 
@@ -39,14 +39,29 @@ public class DishCategoryMapper extends BaseMapper<DishCategory, DishCategoryDto
 
 	@Override
 	public List<DishCategory> toEntity(List<DishCategoryDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if (dtoList == null) {
+			return null;
+		}
+
+		List<DishCategory> list = new ArrayList<DishCategory>(dtoList.size());
+		for (DishCategoryDto dcDto : dtoList) {
+			list.add(toEntity(dcDto));
+		}
+
+		return list;
 	}
 
 	@Override
 	public List<DishCategoryDto> toDto(List<DishCategory> entityList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		if (entityList == null) {
+			return null;
+		}
 
+		List<DishCategoryDto> list = new ArrayList<DishCategoryDto>(entityList.size());
+		for (DishCategory dc : entityList) {
+			list.add(toDto(dc));
+		}
+
+		return list;
+	}
 }

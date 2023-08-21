@@ -59,6 +59,7 @@ public class UserDto {
 	private Integer userApplId;
 	private String webAppname;
 	private Long totalUser1;
+	private Long totalRestorantV;
 	private WebAplication webAppl;
 	private Long totalRst;
 
@@ -71,7 +72,7 @@ public class UserDto {
 			Long totalCardBank, Long totalShippers, Integer idAdmin, Long totaldishCategories, Long totalAppRests,
 			Long totalAddInBaskets, Long totalOrders, Long totalReservations, Long totalPackage_Orders,
 			Restorant restorant, Integer userApplId, String webAppname, Long totalOrders1, Integer adminIdPlatforma,
-			String platformaName, Long totalUser1, WebAplication webAppl, Long totalRst) {
+			String platformaName, Long totalUser1,Long totalRestorants,WebAplication webAppl, Long totalRst) {
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -97,6 +98,7 @@ public class UserDto {
 		this.totalOrders1 = totalOrders1;
 		this.adminIdPlatforma = adminIdPlatforma;
 		this.platformaName = platformaName;
+		this.totalRestorantV = totalRestorants;
 		this.totalUser1 = totalUser1;
 		this.webAppl = webAppl;
 		this.totalRst = totalRst;
@@ -317,7 +319,13 @@ public class UserDto {
 	public void setTotalUser1(Long totalUser1) {
 		this.totalUser1 = totalUser1;
 	}
+public Long getTotalRestorantV() {
+		return totalRestorantV;
+	}
 
+	public void setTotalRestorantV(Long totalRestorantV) {
+		this.totalRestorantV = totalRestorantV;
+	}
 	public WebAplication getWebAppl() {
 		return webAppl;
 	}
@@ -344,9 +352,11 @@ public class UserDto {
 				+ ",Long totalReservations = " + totalReservations + ",totalPackage_Orders = " + totalPackage_Orders
 				+ ",webAppId = " + userApplId + ",webAppname = " + webAppname + ",restorant = " + restorant
 				+ ",totalOrders1 = " + totalOrders1 + ",adminIdPlatforma = " + adminIdPlatforma + ",platformaName = "
-				+ platformaName + ",totalUser1 = " + totalUser1 + ",webAppl = " + webAppl + ",totalRst = " + totalRst
+				+ platformaName + ",totalUser1 = " + totalUser1 + ",totalRestorantV = " +totalRestorantV+ " ,webAppl = " + webAppl + ",totalRst = " + totalRst
 				+ "]";
 	}
+
+	
 
 
 }

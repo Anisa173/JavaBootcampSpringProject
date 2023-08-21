@@ -2,9 +2,13 @@ package com.project.demo.sushiCo.domain.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.project.demo.sushiCo.domain.dto.SelectWhichYouPreferFormDto;
 import com.project.demo.sushiCo.service.SelectWhichYouPreferForm;
 
+@Component
 public class SelectWhichYouPreferMapper extends BaseMapper<SelectWhichYouPreferForm,SelectWhichYouPreferFormDto> {
 
 	@Override

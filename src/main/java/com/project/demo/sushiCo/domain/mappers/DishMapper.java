@@ -1,5 +1,6 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -49,14 +50,30 @@ public class DishMapper extends BaseMapper<Dish, DishDto> {
 
 	@Override
 	public List<Dish> toEntity(List<DishDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<Dish> list = new ArrayList<Dish>( dtoList.size() );
+        for ( DishDto dDto : dtoList ) {
+            list.add( toEntity( dDto ) );
+        }
+
+        return list;
 	}
 
 	@Override
 	public List<DishDto> toDto(List<Dish> entityList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( entityList == null ) {
+            return null;
+        }
+
+        List<DishDto> list = new ArrayList<DishDto>( entityList.size() );
+        for ( Dish dishes : entityList ) {
+            list.add( toDto( dishes ) );
+        }
+
+        return list;
 	}
 
 }

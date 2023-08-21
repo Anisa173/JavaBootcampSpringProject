@@ -14,7 +14,7 @@ import com.project.demo.sushiCo.entity.Dish;
 @Repository
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
-	@Query(" Select d From category.dish cd INNER JOIN category c on cd.categoryId = c.id where cd.dId = ?1 and cd.categoryId = ?2")
+	@Query(" Select d From dish d INNER JOIN category dc on dc.d.categoryId = c.id where d.dId = ?1 and dc.id = ?2")
 	DishDto getDishByDishCategory(Integer dId, Integer categoryId);
 
 	@Modifying

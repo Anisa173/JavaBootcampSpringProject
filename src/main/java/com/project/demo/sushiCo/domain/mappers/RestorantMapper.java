@@ -45,6 +45,8 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 		restDto.setTotalPayment_MethodsR(totalPayment_MethodsR);
 		var totalService_Places = entity.getPlaces().stream().count();
 		restDto.setTotalService_Places(totalService_Places);
+		var totalVisitor = entity.getVisitor().stream().count();
+		restDto.setTotalVisitor(totalVisitor);
 		restDto.setWebAppId(entity.getAplication().getId());
 		var applicationName = entity.getAplication().getAppname();
 		restDto.setApplicationName(applicationName);

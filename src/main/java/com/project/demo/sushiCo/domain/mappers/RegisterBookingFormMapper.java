@@ -1,9 +1,13 @@
 package com.project.demo.sushiCo.domain.mappers;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.project.demo.sushiCo.domain.dto.RegisterBookingFormDto;
 import com.project.demo.sushiCo.service.RegisterBookingForm;
 
+@Component
 public class RegisterBookingFormMapper extends BaseMapper<RegisterBookingForm,RegisterBookingFormDto> {
 
 	@Override

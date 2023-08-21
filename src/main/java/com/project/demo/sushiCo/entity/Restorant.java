@@ -25,33 +25,40 @@ public class Restorant extends BasicEntity<Integer> {
 	@JoinColumn(name = "adminIdWeb", referencedColumnName = "id")
 	private User adminWeb;
 
-	// Çdo restoranti i perket nje admin qe administron procesin e punes se restorantit
+	// Çdo restoranti i perket nje admin qe administron procesin e punes se
+	// restorantit
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminRId", referencedColumnName = "id")
 	@JsonManagedReference
 	private User admin;
 
-	//Disa restorante kryejne sherbimin ne rruge dixhitale nepermjet te njejtit aplikacion
+	// Disa restorante kryejne sherbimin ne rruge dixhitale nepermjet te njejtit
+	// aplikacion
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "webAppId", referencedColumnName = "idAppl")
 	private WebAplication aplication;
 
-	//Çdo restoranti i perket nje "mjedis fizik" i arreduar me tavolina 
+	// Çdo restoranti i perket nje "mjedis fizik" i arreduar me tavolina
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "restorant_tbId", referencedColumnName = "rtb_id")
 	@JsonManagedReference
 	private RestorantTables restorantTables;
 
-	//Shume 'kliente' zgjedhin per tu rregjistruar ne aplikacionin tone
+	// Shume 'kliente' zgjedhin per tu rregjistruar ne aplikacionin tone
 	@ManyToMany(mappedBy = "rest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties
 	private List<User> users;
 
-	//Çdo restorant lejon kryerjen e pageses se porosive nepermjet disa metodave pagese
+	// Restoranti terhiqet nga shume vizitore
+	@ManyToMany(mappedBy = "restorantV", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties
+	private List<User> visitor = new ArrayList<User>();
+
+//Çdo restorant lejon kryerjen e pageses se porosive nepermjet disa metodave pagese
 	@OneToMany(mappedBy = "restorant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PaymentMethods> payment_MethodsR = new ArrayList<PaymentMethods>();
 
-	//Çdo restorant kryen transportin e porosive ne disa zona "sherbimi"
+	// Çdo restorant kryen transportin e porosive ne disa zona "sherbimi"
 	@OneToMany(mappedBy = "restorantService", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ServicePlaces> places = new ArrayList<ServicePlaces>();
 
@@ -84,8 +91,8 @@ public class Restorant extends BasicEntity<Integer> {
 
 	public Restorant(String restNUIS, String restName, String phoneNo, String activity_field, String addressRest,
 			String service_Places, String payment_Methods, Time startDay, Time endDay, List<User> users,
-			List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places, RestorantTables restorantTables,
-			WebAplication aplication, User admin, User adminWeb) {
+			List<User> visitor, List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places,
+			RestorantTables restorantTables, WebAplication aplication, User admin, User adminWeb) {
 
 		super();
 
@@ -99,6 +106,7 @@ public class Restorant extends BasicEntity<Integer> {
 		this.startDay = startDay;
 		this.endDay = endDay;
 		this.users = users;
+		this.visitor = visitor;
 		this.payment_MethodsR = payment_MethodsR;
 		this.places = places;
 		this.setRestorantTables(restorantTables);
@@ -245,13 +253,21 @@ public class Restorant extends BasicEntity<Integer> {
 		this.adminWeb = adminWeb;
 	}
 
+	public List<User> getVisitor() {
+		return visitor;
+	}
+
+	public void setVisitor(List<User> visitor) {
+		this.visitor = visitor;
+	}
+
 	public String toString() {
 		return "RestorantService[idRestorant = " + idRestorant + ",users = " + users + ",payment_MethodsR = "
 				+ payment_MethodsR + ",places = " + places + ",restNUIS = " + restNUIS + ", restName = " + restName
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest =" + addressRest
 				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",startDay = "
 				+ startDay + ",endDay = " + endDay + ",restorantTables = " + restorantTables + ",aplication = "
-				+ aplication + ",admin = " + admin + ",adminWeb = " + adminWeb + "]";
+				+ aplication + ",admin = " + admin + ",adminWeb = " + adminWeb + ",visitor = " + visitor + "]";
 	}
 
 }
