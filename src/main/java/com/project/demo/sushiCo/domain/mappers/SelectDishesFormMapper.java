@@ -1,8 +1,13 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
+import com.project.demo.sushiCo.domain.dto.OrderDto;
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
+import com.project.demo.sushiCo.entity.AddInBasket;
+import com.project.demo.sushiCo.entity.Order;
 import com.project.demo.sushiCo.service.SelectDishesForm;
 
 public class SelectDishesFormMapper extends BaseMapper<SelectDishesForm, SelectDishesFormDto> {
@@ -26,7 +31,7 @@ public class SelectDishesFormMapper extends BaseMapper<SelectDishesForm, SelectD
 		dg.setDish(entity.getDish());
 		dg.setCustId(entity.getCustId());
 		dg.setCategoryName(entity.getCategoryName());
-		
+
 		return dg;
 	}
 
@@ -39,14 +44,19 @@ public class SelectDishesFormMapper extends BaseMapper<SelectDishesForm, SelectD
 
 	@Override
 	public List<SelectDishesForm> toEntity(List<SelectDishesFormDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if (dtoList == null) {
+			return null;
+		}
+
+		List<SelectDishesForm> list = new ArrayList<SelectDishesForm>(dtoList.size());
+		for (SelectDishesFormDto dishInDto : dtoList) {
+			list.add(toEntity(dishInDto));
+		}
+		return list;
 	}
 
 	@Override
 	public List<SelectDishesFormDto> toDto(List<SelectDishesForm> entityList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-}
+		
+  return null;
+}}

@@ -14,16 +14,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class SelectDishesForm extends BasicEntity<Integer> {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private Integer categoryId;
 	private Dish dish;
 	private Integer noItems;
 	private String categoryName;
-    private Integer custId;
+	private Integer custId;
 
-    @Override
+	@Override
 	public Integer getId() {
 		return id;
 	}
@@ -62,21 +62,21 @@ private Integer id;
 
 	public void setNoItems(Integer addItemDish) {
 		this.noItems = addItemDish;
-}
+	}
+
 	public Integer getCustId() {
 		return custId;
 	}
 
 	public void setCustId(Integer custId) {
 		this.custId = custId;
-		
+
 	}
+
 	public String toString() {
 		return "SelectDishesForm[id = " + id + ",categoryId = " + categoryId + ",dish =" + dish + ",categoryName = "
-				+ categoryName + ",noItems = " + noItems + ",custId = " +custId+ "]";
+				+ categoryName + ",noItems = " + noItems + ",custId = " + custId + "]";
 
 	}
-
-	
 
 }

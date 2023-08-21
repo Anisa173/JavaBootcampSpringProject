@@ -1,20 +1,20 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
 import com.project.demo.sushiCo.service.OrderByProcessing;
 
-public class OrderProcessingMapper extends BaseMapper<OrderByProcessing,OrderByProcessingDto> {
+public class OrderProcessingMapper extends BaseMapper<OrderByProcessing, OrderByProcessingDto> {
 	@Override
 	public OrderByProcessing toEntity(OrderByProcessingDto dto) {
-	var orderP = new OrderByProcessing();
-	orderP.setIdcust(dto.getIdcust());
-	orderP.setPaymentMId(dto.getPaymentMId());
-	orderP.setPayments_methodR(dto.getPayments_methodR());
-	orderP.setServicePId(dto.getServicePId());
-	orderP.setService_placesR(dto.getService_placesR());
-	return orderP;
+		var orderP = new OrderByProcessing();
+		orderP.setIdcust(dto.getIdcust());
+		orderP.setPaymentMId(dto.getPaymentMId());
+		orderP.setPayments_methodR(dto.getPayments_methodR());
+		orderP.setServicePId(dto.getServicePId());
+		orderP.setService_placesR(dto.getService_placesR());
+		return orderP;
 	}
 
 	@Override
@@ -25,8 +25,8 @@ public class OrderProcessingMapper extends BaseMapper<OrderByProcessing,OrderByP
 		orderP.setPayments_methodR(entity.getPayments_methodR());
 		orderP.setServicePId(entity.getServicePId());
 		orderP.setService_placesR(entity.getService_placesR());
-		return orderP;	
-		
+		return orderP;
+
 	}
 
 	@Override
@@ -38,14 +38,28 @@ public class OrderProcessingMapper extends BaseMapper<OrderByProcessing,OrderByP
 
 	@Override
 	public List<OrderByProcessing> toEntity(List<OrderByProcessingDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if (dtoList == null) {
+			return null;
+		}
+
+		List<OrderByProcessing> list = new ArrayList<OrderByProcessing>(dtoList.size());
+		for (OrderByProcessingDto ordInDto : dtoList) {
+			list.add(toEntity(ordInDto));
+		}
+		return list;
 	}
 
 	@Override
 	public List<OrderByProcessingDto> toDto(List<OrderByProcessing> entityList) {
-		// TODO Auto-generated method stub
-		return null;
+		if (entityList == null) {
+			return null;
+		}
+		List<OrderByProcessingDto> list = new ArrayList<OrderByProcessingDto>(entityList.size());
+		for (OrderByProcessing ord : entityList) {
+			list.add(toDto(ord));
+
+		}
+		return list;
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.project.demo.sushiCo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.project.demo.sushiCo.entity.BasicEntity;
 
 import jakarta.persistence.Column;
@@ -18,19 +21,19 @@ public class OrderByProcessing extends BasicEntity<Integer> {
 	@Column(name = "paymentMId")
 	private Integer paymentMId;
 	@Column(name = "payments_methodR")
-	private String payments_methodR;
+	private List<String> payments_methodR  = new ArrayList<String>();
 	@Column(name = "servicePId")
 	private Integer servicePId;
 	@Column(name = "service_placesR")
-	private String service_placesR;
+	private List<String> service_placesR = new ArrayList<String>();
 	private Integer idRestorant;
 
 	public OrderByProcessing() {
 		super();
 	}
 
-	public OrderByProcessing(Integer idcust, Integer paymentMId, String payments_methodR, Integer servicePId,
-			String service_placesR, Integer idRestorant) {
+	public OrderByProcessing(Integer idcust, Integer paymentMId, List<String> payments_methodR, Integer servicePId,
+			List<String> service_placesR, Integer idRestorant) {
 		super();
 		this.idcust = idcust;
 		this.paymentMId = paymentMId;
@@ -65,11 +68,11 @@ public class OrderByProcessing extends BasicEntity<Integer> {
 		this.paymentMId = paymentMId;
 	}
 
-	public String getPayments_methodR() {
+	public List<String> getPayments_methodR() {
 		return payments_methodR;
 	}
 
-	public void setPayments_methodR(String payments_methodR) {
+	public void setPayments_methodR(List<String> payments_methodR) {
 		this.payments_methodR = payments_methodR;
 	}
 
@@ -81,11 +84,11 @@ public class OrderByProcessing extends BasicEntity<Integer> {
 		this.servicePId = servicePId;
 	}
 
-	public String getService_placesR() {
+	public List<String> getService_placesR() {
 		return service_placesR;
 	}
 
-	public void setService_placesR(String service_placesR) {
+	public void setService_placesR(List<String> service_placesR) {
 		this.service_placesR = service_placesR;
 	}
 

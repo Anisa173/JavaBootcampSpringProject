@@ -1,16 +1,19 @@
 package com.project.demo.sushiCo.domain.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderByProcessingDto {
 	private Integer idSession;
 	private Integer idcust;
 	private Integer paymentMId;
-	private String payments_methodR;
+	private List<String> payments_methodR = new ArrayList<String>();
 	private Integer servicePId;
-	private String service_placesR;
+	private List<String> service_placesR = new ArrayList<String>();
 	private Integer idRestorant;
 
-	public OrderByProcessingDto(Integer idSession, Integer idcust, Integer paymentMId, String payments_methodR,
-			Integer servicePId, String service_placesR, Integer idRestorant) {
+	public OrderByProcessingDto(Integer idSession, Integer idcust, Integer paymentMId, List<String> payments_methodR,
+			Integer servicePId,List<String> service_placesR, Integer idRestorant) {
 		this.idSession = idSession;
 		this.idcust = idcust;
 		this.paymentMId = paymentMId;
@@ -40,11 +43,11 @@ public class OrderByProcessingDto {
 		this.paymentMId = paymentMId;
 	}
 
-	public String getPayments_methodR() {
+	public List<String> getPayments_methodR() {
 		return payments_methodR;
 	}
 
-	public void setPayments_methodR(String payments_methodR) {
+	public void setPayments_methodR(List<String> payments_methodR) {
 		this.payments_methodR = payments_methodR;
 	}
 
@@ -56,11 +59,11 @@ public class OrderByProcessingDto {
 		this.servicePId = servicePId;
 	}
 
-	public String getService_placesR() {
+	public List<String> getService_placesR() {
 		return service_placesR;
 	}
 
-	public void setService_placesR(String service_placesR) {
+	public void setService_placesR(List<String> service_placesR) {
 		this.service_placesR = service_placesR;
 	}
 
