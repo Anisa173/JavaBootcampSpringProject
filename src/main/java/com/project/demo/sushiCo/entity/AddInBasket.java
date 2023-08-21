@@ -14,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class AddInBasket extends BasicEntity<Integer> {
 
-	// Nje ose disa menu selektohen nga klenti dhe shtohen ne shporte
+	// Nje ose disa menu selektohen nga klienti dhe shtohen ne shporte
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "custId", referencedColumnName = "id")
 	private User user;

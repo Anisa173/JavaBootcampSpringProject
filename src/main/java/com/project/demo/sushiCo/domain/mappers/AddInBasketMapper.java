@@ -29,11 +29,7 @@ public class AddInBasketMapper extends BaseMapper<AddInBasket, AddInBasketDto> {
 		basketDto.setPhoneNo(phoneNo);
 		var customerName = entity.getUser().getFirst_name().concat(" ").concat(entity.getUser().getLast_name());
 		basketDto.setCustomerName(customerName);
-		basketDto.setIDdish(entity.getId());
-		var dishName = entity.getDish().getDishName();
-		basketDto.setDishName(dishName);
-		var dishPrize = entity.getDish().getDishPrize();
-		basketDto.setDishPrize(dishPrize);
+		basketDto.setDishes(entity.getDish());
 		basketDto.setdCatId(entity.getDishCategory().getId());
 		var dishType = entity.getDishCategory().getCategoryName();
 		basketDto.setDishType(dishType);

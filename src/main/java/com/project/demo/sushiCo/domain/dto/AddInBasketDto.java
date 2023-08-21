@@ -1,32 +1,34 @@
 package com.project.demo.sushiCo.domain.dto;
 
+import com.project.demo.sushiCo.entity.Dish;
+
+import jakarta.validation.constraints.NotNull;
+
 public class AddInBasketDto {
 
 	private Integer addId;
 	private Integer custId;
 	private String phoneNo;
 	private String customerName;
-	private Integer IDdish;
-	private String dishName;
-	private Double dishPrize;
+	private Dish dishes;
+	@NotNull(message = "It's required")
 	private Integer addItemsDish;
 	private Double valueAmount;
 	private Integer dCatId;
+	@NotNull(message = "It's required ! ")
 	private String dishType;
 
 	public AddInBasketDto() {
 		addItemsDish = 5;
 	}
 
-	public AddInBasketDto(Integer addId, Integer custId, String phoneNo, String customerName, Integer IDdish,
-			String dishName, Double dishPrize, Integer addItemsDish, Double valueAmount) {
+	public AddInBasketDto(Integer addId, Integer custId, String phoneNo, String customerName, Dish dish,
+			Integer addItemsDish, Double valueAmount) {
 		this.addId = addId;
 		this.setCustId(custId);
 		this.setPhoneNo(phoneNo);
 		this.setCustomerName(customerName);
-		this.setIDdish(IDdish);
-		this.setDishName(dishName);
-		this.dishPrize = dishPrize;
+		this.setDishes(dish);
 		this.addItemsDish = addItemsDish;
 		this.valueAmount = valueAmount;
 	}
@@ -71,28 +73,12 @@ public class AddInBasketDto {
 		this.customerName = customerName;
 	}
 
-	public Integer getIDdish() {
-		return IDdish;
+	public Dish getDishes() {
+		return dishes;
 	}
 
-	public void setIDdish(Integer dishId) {
-		this.IDdish = dishId;
-	}
-
-	public String getDishName() {
-		return dishName;
-	}
-
-	public void setDishName(String dishName) {
-		this.dishName = dishName;
-	}
-
-	public Double getDishPrize() {
-		return dishPrize;
-	}
-
-	public void setDishPrize(Double dishPrize) {
-		this.dishPrize = dishPrize;
+	public void setDishes(Dish dishes) {
+		this.dishes = dishes;
 	}
 
 	public Double getValueAmount() {
@@ -121,9 +107,8 @@ public class AddInBasketDto {
 
 	public String toString() {
 		return "AddInBasket[addId = " + addId + ",custId = " + custId + ",phoneNo = " + phoneNo + ",customerName = "
-				+ customerName + ",IDdish = " + IDdish + ",dishName = " + dishName + ",dishPrize = " + dishPrize
-				+ ",addItemDish = " + addItemsDish + ", valueAmount = " + valueAmount + ",dCatId = " + dCatId
-				+ ",dishType = " + dishType + "]";
+				+ customerName + ",dishes = " + dishes + ",addItemDish = " + addItemsDish + ", valueAmount = "
+				+ valueAmount + ",dCatId = " + dCatId + ",dishType = " + dishType + "]";
 	}
 
 }

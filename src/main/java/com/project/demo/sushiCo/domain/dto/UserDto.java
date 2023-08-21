@@ -16,43 +16,30 @@ public class UserDto {
 	@Size(min = 3, message = "Name should be at least 3 characters")
 	@NotBlank(message = "First_name ")
 	private String first_name;
+	@NotBlank(message = "Last_name ")
 	@NotNull(message = "* Required *")
 	@Size(min = 4, message = "Surname should be at least 4 characters")
 	private String last_name;
 	@NotBlank(message = "Zona e Sherbimit/Rruga:/Ndertesa nr: /Kati i nderteses/Apartamenti nr ")
 	@NotNull(message = " * Required *")
-	@Size(min = 20, max = 65, message = "This field should include all components such as : Country/City/Street/Apartment/Apartment no")
+	@Size(min = 20, max = 65, message = "This field should include all components such as : ServicePlace/Street/Apartment/Apartment no")
 	private String address;
-	@NotBlank(message = "+355 6000000000")
+	@NotBlank(message = "+355| 6000000000")
 	@NotNull(message = " * Required *")
 	@Size(min = 9, max = 12, message = "PhoneNo is at minimum with 9 characters and at maximin with 12 characters")
 	private String phoneNo;
+	@NotBlank(message = " thomas.johnson125@icloud.com ")
 	@NotNull(message = "It's required")
 	@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,3}")
 	private String email;
 	@NotNull(message = "It's required")
-	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", message = "Password should be at minimum with 8 characters")
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", message = "Password should be at minimum with 8 characters ,which includes num ,upperCase and lowerCase letters and special characters")
 	private String password;
+	@NotBlank(message = " 19 ")
 	@NotNull(message = " * Required *")
 	@Size(min = 18, message = "This should include always numbers with two characters")
 	private Integer age;
-	/*
-	 * @NotNull(message =
-	 * "This field can be null until the condition is completed!")
-	 * 
-	 * @Size(min = 4, max = 7, message =
-	 * "This is at min 4 characters and at max 7 characters") private String
-	 * customerType; /*
-	 * 
-	 * @NotNull(message = "This is Required ")
-	 * 
-	 * @Size(message =
-	 * "This should include eleven characters,where the first and the last character is an upperCase Letter,others are numbers"
-	 * )
-	 */
 	private String personalIdentityNo;
-	/* private Double points; */
-	@NotNull(message = "It's required")
 	private String userStatus;
 	@NotNull(message = "It's required")
 	private UserRole userRole;
@@ -60,9 +47,9 @@ public class UserDto {
 	private Long totalShippers;
 	private Integer idAdmin;
 	private Long totaldishCategories;
-	private long totalAppRests;
-	private long totalAddInBaskets;
-	private long totalOrders;
+	private Long totalAppRests;
+	private Long totalAddInBaskets;
+	private Long totalOrders;
 	private Long totalReservations;
 	private Long totalPackage_Orders;
 	private Restorant restorant;

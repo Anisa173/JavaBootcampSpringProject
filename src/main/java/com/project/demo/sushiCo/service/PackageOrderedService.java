@@ -22,7 +22,9 @@ public interface PackageOrderedService {
 			Integer serviceId, Integer oId, Integer idCustomer) throws Exception;
 
 	//Kur adminiRest kancelon packO
-    public void delete(Integer id,Integer shippersId,Integer adminRId) throws Exception;
-   
-    public List<PackageOrderedDto> getAllShippersPackage(Integer shippersId,Integer adminRId,Integer packageId) throws Exception;
+    public void delete(Integer id, Integer oId, Integer adminRestId) throws Exception;
+  
+    //Shportat e porosise se Transportuesit 
+	public List<PackageOrderedDto> getAllPackageOByshipperId(Integer shippersId, Integer adminRestId, Integer idCustomer)
+			throws Exception;
 }

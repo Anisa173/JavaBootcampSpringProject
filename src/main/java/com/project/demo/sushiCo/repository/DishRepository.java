@@ -3,18 +3,21 @@ package com.project.demo.sushiCo.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.project.demo.sushiCo.domain.dto.DishDto;
 import com.project.demo.sushiCo.entity.Dish;
 
-@Service
+@Repository
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
 	@Query(" Select d From category.dish cd INNER JOIN category c on cd.categoryId = c.id where cd.dId = ?1 and cd.categoryId = ?2")
 	DishDto getDishByDishCategory(Integer dId, Integer categoryId);
 
+	@Modifying
 	@Query("Delete From dish d inner join dishCategory c on c.d.categoryId = c.id where d.dId =: ?1 And c.id "  
 	+"IN(Select c.categoryName,a.id From c Inner Join User a ON a.c.admin_Id = a.id Where c.id = ?1 And a.id = ?2)")
 			void deleteDishByCategory(Integer id, Integer categoryId,Integer admin_Id);

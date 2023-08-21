@@ -3,17 +3,18 @@ package com.project.demo.sushiCo.serviceImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.project.demo.sushiCo.domain.dto.RestorantDto;
 import com.project.demo.sushiCo.domain.mappers.RestorantMapper;
 import com.project.demo.sushiCo.entity.Restorant;
 import com.project.demo.sushiCo.repository.RestorantRepository;
 import com.project.demo.sushiCo.service.RegisterRestorantForm;
 import com.project.demo.sushiCo.service.RestorantService;
-import jakarta.persistence.Entity;
 import jakarta.validation.Valid;
 
 
-@Entity
+@Service
 public class RestorantServiceImpl implements RestorantService {
 
 	@Autowired

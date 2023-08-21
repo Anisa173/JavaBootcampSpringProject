@@ -2,17 +2,28 @@ package com.project.demo.sushiCo.domain.dto;
 
 import java.sql.Time;
 
+import jakarta.validation.constraints.NotNull;
+
 public class RestorantDto {
 
 	private Integer idRestorant;
+	@NotNull(message = "It's Required")
 	private String restNUIS;
+	@NotNull(message = "It's Required")
 	private String restName;
+	@NotNull(message = "It's Required")
 	private String phoneNo;
+	@NotNull(message = "It's Required")
 	private String activity_field;
+	@NotNull(message = "It's Required")
 	private String addressRest;
+	@NotNull(message = "It's Required")
 	private String service_Places;
+	@NotNull(message = "It's Required")
 	private String payment_Methods;
+	@NotNull(message = "It's Required")
 	private Time startDay;
+	@NotNull(message = "It's Required")
 	private Time endDay;
 	private String tableDescription;
 	private Integer restorant_tbId;

@@ -5,13 +5,26 @@ import java.util.List;
 
 import com.project.demo.sushiCo.entity.Order;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class TransportingPackageOrderFormDto {
 	private Integer registrationId;
+	@NotBlank(message = "firstName_lastName")
+	@NotNull(message = " * It's Required! * ")
+	@Size(min = 15,max = 55  ,message = "It's at minimum with 15 characters and at maximum with 55 characters")
 	private String customerName_Surname;
+	@NotBlank(message = "firstName_lastName")
+	@NotNull(message = " * It's Required! * ")
+	@Size(min = 15,max = 55  ,message = "It's at minimum with 15 characters and at maximum with 55 characters")
 	private String shippersName_Surname;
+	@NotBlank(message = "ServicePlace/Street/Palace no/ApartmentCategory/Apartment no")
+	@NotNull(message = "It's Required")
 	private String customerAddress;
 	private List<Order> orders = new ArrayList<Order>();
 	private List<String> servicePl = new ArrayList<String>();
+	@NotNull(message = " It's Required! ")
 	private String noPhoneCustomer;
 	private Double sessionPayment;
 

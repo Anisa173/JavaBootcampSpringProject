@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.project.demo.sushiCo.entity.UserRole;
 
+import jakarta.validation.constraints.NotNull;
+
 public class RegisterUserFormDto {
 
 	private Integer registrationId;
@@ -25,7 +27,7 @@ public class RegisterUserFormDto {
 	private String personalIdentityNo;
 
 	private UserRole userRole;
-
+@NotNull(message = "It's required")
 	private List<String> restName = new ArrayList<String>();
 
 	public RegisterUserFormDto(Integer registrationId, String first_name, String last_name, String password,

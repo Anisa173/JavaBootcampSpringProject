@@ -69,16 +69,16 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 	}
 
 	@Override
-	public void delete(Integer id, Integer shippersId, Integer adminRId) throws Exception {
-		// TODO Auto-generated method stub
+	public void delete(Integer id, Integer oId, Integer adminRestId) throws Exception {
 		
+		packageOrRepository.delete(id, oId,adminRestId);
 	}
 
 	@Override
-	public List<PackageOrderedDto> getAllShippersPackage(Integer shippersId, Integer adminRId, Integer packageId)
+	public List<PackageOrderedDto> getAllPackageOByshipperId(Integer shippersId , Integer adminRestId , Integer idCustomer)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		return  (List<PackageOrderedDto>) packageOrMapper.toDto(packageOrRepository.getAllPackageOByshipperId(shippersId, adminRestId,idCustomer)) ;
 	}
 
 }

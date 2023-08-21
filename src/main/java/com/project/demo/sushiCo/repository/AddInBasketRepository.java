@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.project.demo.sushiCo.domain.dto.CardBankDto;
@@ -15,7 +16,7 @@ import com.project.demo.sushiCo.entity.CardBank;
 import com.project.demo.sushiCo.service.OrderByProcessing;
 import com.project.demo.sushiCo.service.SelectDishesForm;
 
-@Service
+@Repository
 public interface AddInBasketRepository extends JpaRepository<AddInBasket, Integer> {
 
 	@Query("SELECT addB.addItemsDish,addB.amountValue  dCost,sum(amountValue) as OrderPrize,cus.id,cus.name"

@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 
 @Service
 public interface OrderRepository extends JpaRepository<Order, Integer> {
-
+@Modifying
 	@Query("Insert Into Order(orderPrize,orderItems,orderStatus,oTimeConfirmed,oTimeProccessed,idShporta,idCustomer,adminRestId) Values(?1,?2,?3,?4,?5,"
 			+ "(Select o.idShporta From Order o Inner Join PackageOrdered p ON p.o.idShporta = p.id Where p.id =: id),"
 			+ "(Select o.idCustomer From Order o Inner Join User c ON c.o.idCustomer = c.id Where c.id IN (Update c Set c.userStatus = 'IN-PROGRESS' Where c.id =: id )),"

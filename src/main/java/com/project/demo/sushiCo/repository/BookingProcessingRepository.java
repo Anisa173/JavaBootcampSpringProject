@@ -22,6 +22,7 @@ public interface BookingProcessingRepository extends JpaRepository<BookingProces
 
 	BookingProcessing save(RegisterBookingFormDto reservation);
 
+	@Modifying
 	@Query("Insert into BookingProcessing(reservationDate,start_reservationTime,end_reservationTime,noParticipants,reservationDescription,customerId,reservationId)"
 			+ " Values(?1,?2,?3,?4,?5,(Select c.id,concat(c.First_name,'',c.Last_name)  customerName,c.phoneNo From User c inner join BookingProcessing bp ON c.id = c.bp.customerId Where c.id =: id ),"
 			+ "( Select rt.tableName,rt.availableTables,rt.lockedTables,bp.reservationId  From BookingProcessing bp Inner Join RestorantTables rt ON rt.bp.reservationId = rt.rtb_id )"

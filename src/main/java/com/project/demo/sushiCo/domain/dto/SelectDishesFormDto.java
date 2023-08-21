@@ -2,13 +2,16 @@ package com.project.demo.sushiCo.domain.dto;
 
 import com.project.demo.sushiCo.entity.Dish;
 
+import jakarta.validation.constraints.NotNull;
+
 public class SelectDishesFormDto {
 	private Integer id;
 	private Integer custId;
 	private Integer categoryId;
 	private String categoryName;
-	private Dish dish;
-	private Integer noItems;// selected
+	private Dish dish;// selected
+	@NotNull(message = "It's Required")
+	private Integer noItems;
 
 	public SelectDishesFormDto(Integer id, Integer custId, Integer categoryId, String categoryName, Dish dishes,
 			Integer noItems) {

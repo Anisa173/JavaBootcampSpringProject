@@ -3,6 +3,7 @@ package com.project.demo.sushiCo.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
@@ -11,7 +12,7 @@ import com.project.demo.sushiCo.entity.DishCategory;
 public interface DishCategoryRepository extends JpaRepository<DishCategory, Integer> {
 
 	DishCategory save(DishCategoryDto result);
-
+@Modifying
 	@Query("Delete From DishCategory dc INNER JOIN User adm ON adm.dc.admin_Id = adm.id Where adm.dc.id =: ?1 and adm.id=: ?2")
 
 	void delete(Integer id, Integer adminId);

@@ -1,10 +1,10 @@
 package com.project.demo.sushiCo.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
 import com.project.demo.sushiCo.domain.dto.PackageOrderedDto;
 import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import com.project.demo.sushiCo.entity.PackageOrdered;
@@ -27,7 +27,7 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 	PackageOrdered save(TransportingPackageOrderFormDto packOrdert);
 
 	@Query(" Insert into PackageOrdered(statusOrderSession,sessionPayment,shippersId,serviceId) "
-			+ " Values('IN_PROGRESS',?1,( Select concat(ship.first_name, ' ',ship.last_name  shippersName_Surname" 
+			+ " Values('IN_PROGRESS',?1,( Select concat(ship.first_name, ' ',ship.last_name  shippersName_Surname"
 			+ "From User ship INNER JOIN PackageOrdered pckg ON ship.pckg.shippersId = ship.id "
 			+ " INNER JOIN User a ON  a.ship.idAdmin = a.id "
 			+ " Where ship.id =: id  And pckg.id =: id  And a.id =: id),"
@@ -71,4 +71,20 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 	TransportingPackageOrderForm update(@Valid PackageOrderedDto packOrDto, Integer id, Integer shippersId,
 			Integer serviceId, Integer oId, Integer idCustomer);
 
+	@Modifying
+	@Query(" Update PackageOrdered pcO Set deleted =: true And pcO.statusOrderSession =: ' CANCEL '  "
+			+ " Where EXISTS ( Select o, pcO.id From Order o INNER JOIN pcO ON pcO.o.idShporta = pcO.id "
+			+ " INNER JOIN User c ON  c.o.idCustomer = c.id "
+			+ " INNER JOIN User a ON  a.o.adminRestId = a.id  Where  pcO.id =: ?1 And a.id =: ?2  And o.oId IN  "
+			+ " ( Update o Set o.status = 'ANULLATED' Where o.oId =: oId  )")
+
+	void delete(Integer id, Integer oId, Integer adminRestId);
+
+	@Query(" Select o.orderPrize,o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost "
+			+ " From PackageOrdered pack INNER JOIN Order o IN pack.o.idShporta = pack.id "
+			+ " INNER JOIN User sh ON sh.pack.shippersId = sh.id  " + " Where  sh.id =: ?3 And o.oId "
+			+ " IN( Select concat(c.first_name, '' ,c.last_name) Customer_Name,c.address Customer_Address "
+			+ " From o INNER JOIN User a ON a.o.adminRestId = a.id " + " INNER JOIN User c ON c.o.idCustomer = c.id  "
+			+ " Where a.id =: id and c.id =: id ) ")
+	List<PackageOrdered> getAllPackageOByshipperId(Integer shippersId, Integer adminRestId, Integer idCustomer);
 }
