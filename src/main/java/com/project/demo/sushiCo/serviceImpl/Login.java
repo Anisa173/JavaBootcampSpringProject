@@ -21,7 +21,7 @@ public class Login extends BasicEntity<Integer> {
 	@Column(name = "email")
 	private String email;
 	@Column(name = "password")
-	private CharSequence password;
+	private String password;
 	@Column(name = "userRole")
 	private UserRole userRole;
 
@@ -46,7 +46,7 @@ public class Login extends BasicEntity<Integer> {
 		return password;
 	}
 
-	public void setPassword(CharSequence password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 

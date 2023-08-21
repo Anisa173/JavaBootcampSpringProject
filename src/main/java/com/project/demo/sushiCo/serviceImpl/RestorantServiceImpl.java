@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.demo.sushiCo.domain.dto.RestorantDto;
+import com.project.demo.sushiCo.domain.dto.SelectWhichYouPreferFormDto;
 import com.project.demo.sushiCo.domain.mappers.RestorantMapper;
+import com.project.demo.sushiCo.domain.mappers.SelectWhichYouPreferMapper;
 import com.project.demo.sushiCo.entity.Restorant;
 import com.project.demo.sushiCo.repository.RestorantRepository;
 import com.project.demo.sushiCo.service.RegisterRestorantForm;
 import com.project.demo.sushiCo.service.RestorantService;
-import jakarta.validation.Valid;
+import com.project.demo.sushiCo.service.SelectWhichYouPreferForm;
 
+import jakarta.validation.Valid;
 
 @Service
 public class RestorantServiceImpl implements RestorantService {
@@ -20,10 +23,13 @@ public class RestorantServiceImpl implements RestorantService {
 	@Autowired
 	private final RestorantRepository restorantRepository;
 	private final RestorantMapper restorantMapper;
+	private final SelectWhichYouPreferMapper selectWhichYouPreferMapper;
 
-	public RestorantServiceImpl(RestorantRepository restorantRepository, RestorantMapper restorantMapper) {
+	public RestorantServiceImpl(RestorantRepository restorantRepository, RestorantMapper restorantMapper,
+			SelectWhichYouPreferMapper selectWhichYouPreferMapper) {
 		this.restorantRepository = restorantRepository;
 		this.restorantMapper = restorantMapper;
+		this.selectWhichYouPreferMapper = selectWhichYouPreferMapper;
 	}
 
 	@Override
@@ -68,5 +74,19 @@ public class RestorantServiceImpl implements RestorantService {
 	public void delete(Integer idRestorant, Integer adminIdWeb) throws Exception {
 		restorantRepository.delete(idRestorant, adminIdWeb);
 
+	}
+
+	@Override
+	public RestorantDto selectRestorant(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception {
+		var restorantSelect = getCustomerRestorantById(restorantPreference.getId(),
+				restorantPreference.getIdRestorant());
+		restorantSelect.setRestName(restorantPreference.getRestName());
+		return restorantMapper.toDto(restorantRepository.save(restorantSelect));
+	}
+
+	@Override
+	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer id, Integer idRestorant) throws Exception {
+
+		return selectWhichYouPreferMapper.toDto(restorantRepository.getCustomerRestorantById(id, idRestorant));
 	}
 }
