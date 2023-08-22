@@ -8,6 +8,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.project.demo.sushiCo.domain.dto.LoginDto;
 import com.project.demo.sushiCo.domain.dto.RegisterUserFormDto;
 import com.project.demo.sushiCo.domain.dto.UserDto;
@@ -21,6 +23,7 @@ import com.project.demo.sushiCo.service.FileSystemStorageService;
 import com.project.demo.sushiCo.service.UserService;
 import jakarta.validation.Valid;
 
+@Validated
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -70,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserForm)
+	public UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserForm,@Valid LoginDto form)
 			throws UsernameNotFoundException {
 		registerUserForm.setPassword(passwordEncoder.encode(registerUserForm.getPassword()));
 		var result = registerUserFormMapper.toEntity(registerUserForm);
@@ -107,12 +110,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.toDto(repository.save(user));
 	}
 
-	@Override
-	public UserDto registerLoginData(@Valid LoginDto form) throws Exception {
-		form.setPassword(passwordEncoder.encode(form.getPassword()));
-		var result = loginMapper.toEntity(form);
-		return userMapper.toDto(repository.save(result));
-	}
 
 	@Override
 	public UserDto updateLoginData(Integer userId, Integer registrationId, @Valid LoginDto login_form)
@@ -122,18 +119,28 @@ public class UserServiceImpl implements UserService {
 		return userMapper.toDto(repository.save(result));
 	}
 
-	// Admini afishon te gjithe klientet qe kane krijuar llogari ne aplikacion
+	// AdminWebi afishon te gjithe klientet qe kane krijuar llogari ne aplikacion
 	@Override
 	public List<UserDto> getAllUser() throws Exception {
 		return repository.findAll().stream().map(m -> userMapper.toDto(m)).collect(Collectors.toList());
 	}
 
+	//Kur nderpret marredheniet e punes admini  
 	@Override
-	public void delete(Integer id) {
+    public void deleteAdmin(Integer id) {
+	repository.deleteAdmin(id);
+	}
+//Kur shippersi nderpret marredheniet e punes
+	@Override
+	public void deleteShippers(Integer id) {
+		repository.deleteShippers(id);
+		
+	}
+	/*	public void delete(Integer id) {
 		var toDelete = repository.findById(id);
 		toDelete.get().setDeleted(false);
 		repository.save(toDelete.get());
-	}
+	}*/
 
 	@Override
 	public UserDto addIdentification(Integer idRestorant, Integer userId, Integer registrationId,
@@ -165,4 +172,7 @@ public class UserServiceImpl implements UserService {
 		return (List<UserDto>) userMapper.toDto(repository.getAllShippersByAdminId(id));
 	}
 
+	
+
+	
 }

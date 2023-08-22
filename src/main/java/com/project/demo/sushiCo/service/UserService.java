@@ -15,8 +15,6 @@ import jakarta.validation.Valid;
 
 public interface UserService {
 
-	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserForm) throws UsernameNotFoundException;
-
 	UserDto registerUserForm(@Valid RegisterUserForm registerUserForm) throws Exception;
 
 	RegisterUserFormDto getUserById(Integer idRestorant, Integer userId, Integer registrationId) throws Exception;
@@ -25,8 +23,6 @@ public interface UserService {
 			@Valid RegisterUserFormDto registerUserForm) throws Exception;
 
 	List<UserDto> getAllUser() throws Exception;
-
-	void delete(Integer id) throws Exception;
 
 	List<UserDto> getAllShippersByAdminId(Integer id) throws Exception;
 
@@ -41,5 +37,13 @@ public interface UserService {
 	LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception;
 
 	UserDto updateLoginData(Integer userId, Integer registrationId, @Valid LoginDto login_form) throws Exception;
-UserDto  registerLoginData(@Valid LoginDto form ) throws Exception;
+
+	void deleteAdmin(Integer id);
+
+    void deleteShippers(Integer id);
+
+	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserForm, @Valid LoginDto form)
+			throws UsernameNotFoundException;
+	
+
 }

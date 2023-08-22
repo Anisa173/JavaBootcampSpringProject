@@ -3,12 +3,12 @@ package com.project.demo.sushiCo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.project.demo.sushiCo.domain.dto.LoginDto;
 import com.project.demo.sushiCo.domain.dto.RegisterUserFormDto;
 import com.project.demo.sushiCo.domain.dto.UserDto;
@@ -68,17 +68,16 @@ public class UserController {
 
 	@PostMapping("/register")
 	public String saveUserRegistrationForm(Integer idRestorant, Integer registrationId, Integer userId,
-			@ModelAttribute("registration-UserForm") @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
+			@ModelAttribute("registration-UserForm")  @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
 			throws Exception {
 		if (bResult.hasErrors()) {
 			return "registration-UserForm ";
 		}
 		if (((UserService) registerUserForm).getUserById(idRestorant, registrationId, userId) == null) {
-
-			userService.registerNewUserAccount(registerUserForm);
+			userService.registerNewUserAccount(registerUserForm, null);
 		} else {
 			try {
-				userService.update(((UserService) registerUserForm).getUserById(idRestorant, registrationId, userId),
+				userService.update(((UserService) registerUserForm).getUserById(userId, registrationId, idRestorant),
 						registerUserForm);
 			} catch (Exception e) {
 				System.out.println("An error ocurred" + "==> " + e.getMessage());
@@ -88,17 +87,23 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String saveloginForm(Integer registrationId, Integer userId,
-			@ModelAttribute("login - UserForm") @Valid LoginDto loginForm, BindingResult nResult) throws Exception {
+	public String saveloginForm(Integer registrationId, Integer userId,@ModelAttribute("login - UserForm") @Valid LoginDto loginForm , BindingResult nResult) throws Exception {		
 		if (nResult.hasErrors()) {
 			return "login - UserForm";
-		}
-		if (((UserService) loginForm).getUserLogInById(userId, registrationId) == null) {
-			userService.registerLoginData(loginForm);
-		} else {
 			userService.updateLoginData(((UserService) loginForm).getUserLogInById(userId, registrationId), loginForm);
 		}
 		return "redirect:/api/user";
 	}
 
+	@DeleteMapping
+	public String deleteAdmin(@RequestParam(value = "userId", required = true) Integer id) {
+		userService.deleteAdmin(id);
+		return "redirect:/user ";
+	}
+
+	@DeleteMapping
+	public String deleteShipper(@RequestParam(value = "userId", required = true) Integer id) {
+		userService.deleteShippers(id);
+		return "redirect:/user ";
+	}
 }
