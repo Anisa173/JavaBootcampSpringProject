@@ -25,9 +25,6 @@ public class WebAplication extends BasicEntity<Integer> {
 	@OneToMany(mappedBy = "webAplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> users = new ArrayList<User>();
 
-	// Web_based Aplication permban disa restorante
-	@OneToMany(mappedBy = "aplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Restorant> restorants = new ArrayList<Restorant>();
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAppl;
@@ -40,11 +37,10 @@ public class WebAplication extends BasicEntity<Integer> {
 		super();
 	}
 
-	public WebAplication(String appname, String serialNo, List<Restorant> restorants, List<User> users) {
+	public WebAplication(String appname, String serialNo, List<User> users) {
 		super();
 		this.appname = appname;
 		this.serialNo = serialNo;
-		this.setRestorants(restorants);
 		this.users = users;
 		
 	}
@@ -81,27 +77,19 @@ public class WebAplication extends BasicEntity<Integer> {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-
-	public List<Restorant> getRestorants() {
-		return restorants;
-	}
-
-	public void setRestorants(List<Restorant> restorants) {
-		this.restorants = restorants;
-	}
-
-	public String toString() {
-		return "WebApplication[idAppl = " + idAppl + ",appname = " + appname + ",serialNo = " + serialNo + ",users = "
-				+ users + ",restorants = " + restorants + ",adminWebAplication = " + adminWebAplication+"]";
-	}
-
-	public User getAdminWebAplication() {
+public User getAdminWebAplication() {
 		return adminWebAplication;
 	}
 
 	public void setAdminWebAplication(User adminWebAplication) {
 		this.adminWebAplication = adminWebAplication;
 	}
+	public String toString() {
+		return "WebApplication[idAppl = " + idAppl + ",appname = " + appname + ",serialNo = " + serialNo + ",users = "
+				+ users + ",adminWebAplication = " + adminWebAplication+"]";
+	}
+
+	
 
 	
 }

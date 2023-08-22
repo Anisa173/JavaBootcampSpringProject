@@ -21,6 +21,7 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Restorant extends BasicEntity<Integer> {
+//Per te gjitha restorantet te dhenat mirmbahen nga administratori i platformes
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "adminIdWeb", referencedColumnName = "id")
 	private User adminWeb;
@@ -31,12 +32,6 @@ public class Restorant extends BasicEntity<Integer> {
 	@JoinColumn(name = "adminRId", referencedColumnName = "id")
 	@JsonManagedReference
 	private User admin;
-
-	// Disa restorante kryejne sherbimin ne rruge dixhitale nepermjet te njejtit
-	// aplikacion
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "webAppId", referencedColumnName = "idAppl")
-	private WebAplication aplication;
 
 	// Çdo restoranti i perket nje "mjedis fizik" i arreduar me tavolina
 	@OneToOne(cascade = CascadeType.ALL)
@@ -92,7 +87,7 @@ public class Restorant extends BasicEntity<Integer> {
 	public Restorant(String restNUIS, String restName, String phoneNo, String activity_field, String addressRest,
 			String service_Places, String payment_Methods, Time startDay, Time endDay, List<User> users,
 			List<User> visitor, List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places,
-			RestorantTables restorantTables, WebAplication aplication, User admin, User adminWeb) {
+			RestorantTables restorantTables, User admin, User adminWeb) {
 
 		super();
 
@@ -110,7 +105,6 @@ public class Restorant extends BasicEntity<Integer> {
 		this.payment_MethodsR = payment_MethodsR;
 		this.places = places;
 		this.setRestorantTables(restorantTables);
-		this.setAplication(aplication);
 		this.setAdmin(admin);
 		this.adminWeb = adminWeb;
 	}
@@ -229,14 +223,6 @@ public class Restorant extends BasicEntity<Integer> {
 		this.users = users;
 	}
 
-	public WebAplication getAplication() {
-		return aplication;
-	}
-
-	public void setAplication(WebAplication aplication) {
-		this.aplication = aplication;
-	}
-
 	public User getAdmin() {
 		return admin;
 	}
@@ -266,8 +252,8 @@ public class Restorant extends BasicEntity<Integer> {
 				+ payment_MethodsR + ",places = " + places + ",restNUIS = " + restNUIS + ", restName = " + restName
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest =" + addressRest
 				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",startDay = "
-				+ startDay + ",endDay = " + endDay + ",restorantTables = " + restorantTables + ",aplication = "
-				+ aplication + ",admin = " + admin + ",adminWeb = " + adminWeb + ",visitor = " + visitor + "]";
+				+ startDay + ",endDay = " + endDay + ",restorantTables = " + restorantTables + ",admin = " + admin
+				+ ",adminWeb = " + adminWeb + ",visitor = " + visitor + "]";
 	}
 
 }

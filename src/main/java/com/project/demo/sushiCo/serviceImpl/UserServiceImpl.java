@@ -8,13 +8,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import com.project.demo.sushiCo.domain.dto.LoginDto;
 import com.project.demo.sushiCo.domain.dto.RegisterUserFormDto;
 import com.project.demo.sushiCo.domain.dto.UserDto;
 import com.project.demo.sushiCo.domain.dto.UserWithFileDto;
+import com.project.demo.sushiCo.domain.mappers.LoginMapper;
 import com.project.demo.sushiCo.domain.mappers.RegisterUserFormMapper;
 import com.project.demo.sushiCo.domain.mappers.UserMapper;
-import com.project.demo.sushiCo.entity.User;
 import com.project.demo.sushiCo.entity.UserRole;
 import com.project.demo.sushiCo.repository.UserRepository;
 import com.project.demo.sushiCo.service.FileSystemStorageService;
@@ -30,21 +30,24 @@ public class UserServiceImpl implements UserService {
 	private final UserMapper userMapper;
 	private final RegisterUserFormMapper registerUserFormMapper;
 	private final FileSystemStorageService storageService;
+	private final LoginMapper loginMapper;
 
 	public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder, UserMapper userMapper,
-			RegisterUserFormMapper registerUserFormMapper, FileSystemStorageService storageService) {
+			RegisterUserFormMapper registerUserFormMapper, FileSystemStorageService storageService,
+			LoginMapper loginMapper) {
 		super();
 		this.repository = repository;
 		this.passwordEncoder = passwordEncoder;
 		this.userMapper = userMapper;
 		this.registerUserFormMapper = registerUserFormMapper;
 		this.storageService = storageService;
+		this.loginMapper = loginMapper;
 	}
 
 	@Override
 	public UserDto registerUserForm(@Valid RegisterUserForm registerUserForm) throws Exception {
-		var userF = getUserById(registerUserForm.getIdRestorant(), registerUserForm.getAdminRId(),
-				registerUserForm.getUserId(), registerUserForm.getIdAdmin());
+		var userF = getUserById(registerUserForm.getIdRestorant(), registerUserForm.getUserId(),
+				registerUserForm.getId());
 		userF.setFirst_name(registerUserForm.getFirst_name());
 		userF.setLast_name(registerUserForm.getLast_name());
 		userF.setPassword(registerUserForm.getPassword());
@@ -60,17 +63,32 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public RegisterUserFormDto getUserById(Integer idRestorant, Integer adminRId, Integer userId, Integer idAdmin)
+	public RegisterUserFormDto getUserById(Integer idRestorant, Integer userId, Integer registrationId)
 			throws Exception {
-		return registerUserFormMapper.toDto(repository.getUserById(idRestorant, adminRId, userId, idAdmin));
+		return registerUserFormMapper.toDto(repository.getUserById(idRestorant, registrationId, userId));
 
 	}
 
 	@Override
-	public UserDto registerNewUserAccount(@Valid UserDto userDto) throws UsernameNotFoundException {
-		userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-		var result = userMapper.toEntity(userDto);
+	public UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserForm)
+			throws UsernameNotFoundException {
+		registerUserForm.setPassword(passwordEncoder.encode(registerUserForm.getPassword()));
+		var result = registerUserFormMapper.toEntity(registerUserForm);
 		return userMapper.toDto(repository.save(result));
+	}
+
+	@Override
+	public UserDto update(Integer userId, Integer idRestorant, Integer registrationId,
+			@Valid RegisterUserFormDto registerUserForm) throws Exception {
+		var user = registerUserFormMapper.toEntity(getUserById(idRestorant, registrationId, userId));
+		var result = registerUserFormMapper.toUpdate(registerUserForm, user);
+		return userMapper.toDto(repository.save(result));
+	}
+
+	@Override
+	public LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception {
+
+		return loginMapper.toDto(repository.getUserLogInById(userId, registrationId));
 	}
 
 	private boolean emailExists(String email) {
@@ -82,7 +100,7 @@ public class UserServiceImpl implements UserService {
 		if (emailExists(form.getEmail())) {
 			throw new UsernameNotFoundException("There is an account with that email address: " + form.getEmail());
 		}
-		var user = new User();
+		var user = getUserLogInById(form.getUserId(), form.getId());
 		user.setEmail(form.getEmail());
 		user.setPassword(passwordEncoder.encode(form.getPassword()));
 		user.setUserRole(UserRole.fromValue(form.getUserRole()));
@@ -90,11 +108,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public RegisterUserFormDto update(Integer id, @Valid RegisterUserFormDto userDto, Integer idRestorant,
-			Integer adminRId, Integer userId, Integer idAdmin) throws Exception {
-		RegisterUserForm user = registerUserFormMapper.toEntity(getUserById(idRestorant, adminRId, userId, idAdmin));
-		RegisterUserForm result = registerUserFormMapper.toUpdate(userDto, user);
-		return registerUserFormMapper.toDto(repository.save(result));
+	public UserDto registerLoginData(@Valid LoginDto form) throws Exception {
+		form.setPassword(passwordEncoder.encode(form.getPassword()));
+		var result = loginMapper.toEntity(form);
+		return userMapper.toDto(repository.save(result));
+	}
+
+	@Override
+	public UserDto updateLoginData(Integer userId, Integer registrationId, @Valid LoginDto login_form)
+			throws Exception {
+		var user = loginMapper.toEntity(getUserLogInById(registrationId, userId));
+		var result = loginMapper.toUpdate(login_form, user);
+		return userMapper.toDto(repository.save(result));
 	}
 
 	// Admini afishon te gjithe klientet qe kane krijuar llogari ne aplikacion
@@ -111,9 +136,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto addIdentification(Integer idRestorant, Integer adminRId, Integer userId, Integer idAdmin,
+	public UserDto addIdentification(Integer idRestorant, Integer userId, Integer registrationId,
 			UserWithFileDto reqDto) throws Exception {
-		var user = getUserById(idRestorant, adminRId, userId, idAdmin);
+		var user = getUserById(idRestorant, userId, registrationId);
 
 		String personalIdentityNo = UUID.randomUUID().toString().concat(".pdf");
 
@@ -128,10 +153,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Resource downloadIdentitficationCard(Integer idRestorant, Integer adminRId, Integer userId, Integer idAdmin,
+	public Resource downloadIdentitficationCard(Integer idRestorant, Integer userId, Integer registrationId,
 			UserWithFileDto reqDto) throws Exception {
-		var user = getUserById(idRestorant, adminRId, userId, idAdmin);
-		return (Resource) storageService.loadAsResource(user.getPersonalIdentityNo());
+		var user = getUserById(idRestorant, userId, registrationId);
+		return (Resource) storageService.loadAsResource(((RegisterUserFormDto) user).getPersonalIdentityNo());
 	}
 
 	@Override

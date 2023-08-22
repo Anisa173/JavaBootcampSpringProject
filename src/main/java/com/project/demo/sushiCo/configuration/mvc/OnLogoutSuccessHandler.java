@@ -9,11 +9,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class OnLogoutSuccessHandler implements LogoutSuccessHandler{
+public class OnLogoutSuccessHandler implements LogoutSuccessHandler {
 
 	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-		response.sendRedirect(" ");			
+	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+		response.sendRedirect(" ");
 	}
 
 }

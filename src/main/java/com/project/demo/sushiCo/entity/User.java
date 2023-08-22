@@ -42,7 +42,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	private List<Restorant> rst = new ArrayList<Restorant>();
 
 // Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
-	// 1)klientet qe rregjistrohen 2)adminin e çdo restoranti 3)shippers-at e çdo
+	// 1)klientet qe rregjistrohen 2)adminin dhe shippers-at e çdo
 	// restoranti
 	@OneToMany(mappedBy = "adminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> user1 = new ArrayList<User>();
@@ -51,6 +51,10 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "id")
 	private User adminPlatforma;
+	
+	// Web_based Aplication permban disa restorante
+	@OneToMany(mappedBy = "aplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Restorant> restorants = new ArrayList<Restorant>();
 
 	// N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin
 	// aplikacionin tone
@@ -458,5 +462,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 		return true;
 	}
+
+	
 
 }

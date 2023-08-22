@@ -17,21 +17,23 @@ import lombok.NoArgsConstructor;
 public class Login extends BasicEntity<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idLogin;
+	private Integer registrationId;
 	@Column(name = "email")
 	private String email;
 	@Column(name = "password")
 	private String password;
 	@Column(name = "userRole")
 	private UserRole userRole;
+	private Integer userId;
 
 	@Override
 	public Integer getId() {
-		return idLogin;
+		return registrationId;
 	}
 
-	public void setIdLogin(Integer id) {
-		this.idLogin = id;
+	public void setRegistrationId(Integer registrationId2) {
+		this.registrationId = registrationId2;
+
 	}
 
 	public String getEmail() {
@@ -42,7 +44,7 @@ public class Login extends BasicEntity<Integer> {
 		this.email = email;
 	}
 
-	public CharSequence getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
@@ -58,8 +60,18 @@ public class Login extends BasicEntity<Integer> {
 		this.userRole = userRole;
 	}
 
-	public String toString() {
-		return "Login[idLogin = " + idLogin + ",email = " + email + ",password = " + password + " ]";
+	public Integer getUserId() {
+		return userId;
 	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String toString() {
+		return "Login[idLogin = " + registrationId + ",email = " + email + ",password = " + password + " ]";
+	}
+
+	
 
 }

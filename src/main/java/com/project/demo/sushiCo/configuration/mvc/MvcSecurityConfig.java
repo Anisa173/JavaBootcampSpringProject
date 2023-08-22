@@ -1,5 +1,6 @@
 package com.project.demo.sushiCo.configuration.mvc;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -32,16 +33,16 @@ public class MvcSecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/").permitAll().requestMatchers("/register")
-						.permitAll().requestMatchers("/admin/**").hasAuthority(UserRole.ADMIN.name())
-						.requestMatchers("/customer/**").hasAuthority(UserRole.CUSTOMER.name())
-						.requestMatchers("/shippers/**").hasAuthority(UserRole.SHIPPERS.name())
-						.requestMatchers("/administrator/**").hasAuthority(UserRole.ADMINISTRATOR.name()).anyRequest()
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/ ").permitAll()
+				.requestMatchers("/register").permitAll()
+						.requestMatchers("/api/admin/**").hasAuthority(UserRole.ADMIN.name())
+						.requestMatchers("/api/customer/**").hasAuthority(UserRole.CUSTOMER.name())
+						.requestMatchers("/api/shippers/**").hasAuthority(UserRole.SHIPPERS.name())
+						.requestMatchers("/api/administrator/**").hasAuthority(UserRole.ADMINISTRATOR.name()).anyRequest()
 						.authenticated())
 				.userDetailsService(securityUserDetailsService)
 				.httpBasic(Customizer.withDefaults())
 				.formLogin(form -> form.loginPage("/login").permitAll().successHandler((AuthenticationSuccessHandler) loginSuccessHandler))
 				.logout((logout) -> logout.permitAll().logoutSuccessHandler(logoutSuccessHandler)).build();
 	}
-
 }

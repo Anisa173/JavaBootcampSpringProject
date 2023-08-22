@@ -11,28 +11,17 @@ public class WebAplicationDto {
 	private Integer adminWebId;
 	private String serialNo;
 	private Long totalUsers;
-	private Long totalRestorants;
-
 
 	public WebAplicationDto() {
 
 	}
 
-	public WebAplicationDto(Integer idAppl, Long totalRestorants, String appname, String serialNo, Long totalUsers,Integer adminWebId) {
+	public WebAplicationDto(Integer idAppl, String appname, String serialNo, Long totalUsers, Integer adminWebId) {
 		this.idAppl = idAppl;
 		this.appname = appname;
 		this.serialNo = serialNo;
 		this.totalUsers = totalUsers;
-		this.totalRestorants = totalRestorants;
-	this.adminWebId = adminWebId;
-	}
-
-	public Long getTotalRestorants() {
-		return totalRestorants;
-	}
-
-	public void setTotalRestorants(Long totalRestorants) {
-		this.totalRestorants = totalRestorants;
+		this.adminWebId = adminWebId;
 	}
 
 	public Integer getIdAppl() {
@@ -77,9 +66,7 @@ public class WebAplicationDto {
 
 	public String toString() {
 		return "WebAplicationDto[idAppl = " + idAppl + ",appname = " + appname + ",serialNo = " + serialNo
-				+ ",totalUsers = " + totalUsers + ",totalRestorants = " + totalRestorants + ",adminWebId = " +adminWebId+ "]";
+				+ ",totalUsers = " + totalUsers + ",adminWebId = " + adminWebId + "]";
 	}
-
-	
 
 }

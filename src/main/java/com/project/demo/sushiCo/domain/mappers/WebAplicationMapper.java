@@ -24,8 +24,6 @@ public class WebAplicationMapper extends BaseMapper<WebAplication, WebAplication
 		aplDto.setSerialNo(entity.getSerialNo());
 		var totalUsers = entity.getUsers().stream().count();
 		aplDto.setTotalUsers(totalUsers);
-		var totalRestorants = entity.getRestorants().stream().count();
-		aplDto.setTotalRestorants(totalRestorants);
 		aplDto.setAdminWebId(entity.getAdminWebAplication().getId());
 		return aplDto;
 	}

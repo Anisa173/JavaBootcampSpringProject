@@ -25,7 +25,8 @@ public class RegisterUserFormDto {
 	private Integer age;
 
 	private String personalIdentityNo;
-
+private Integer idRestorant;
+private Integer userId;	
 	private UserRole userRole;
 @NotNull(message = "It's required")
 	private List<String> restName = new ArrayList<String>();
@@ -133,6 +134,21 @@ public class RegisterUserFormDto {
 	public List<String> getRestName() {
 		return restName;
 	}
+	public Integer getIdRestorant() {
+		return idRestorant;
+	}
+
+	public void setIdRestorant(Integer idRestorant) {
+		this.idRestorant = idRestorant;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
 	public void setRestName(List<String> restName) {
 		this.restName = restName;
@@ -143,13 +159,10 @@ public class RegisterUserFormDto {
 		return "RegisterUserFormDto[registrationId = " + registrationId + ",first_name = " + first_name
 				+ ",last_name = " + last_name + ",last_name = " + last_name + ",password = " + password + ",email = "
 				+ email + ",address = " + address + ",phoneNo = " + phoneNo + ",age = " + phoneNo
-				+ ",personalIdentityNo = " + personalIdentityNo + ",userRole = " + userRole + ",restName = " + restName + " ]";
+				+ ",personalIdentityNo = " + personalIdentityNo + ",userId = " +userId+ ",restorantId = " +idRestorant+ ",userRole = " + userRole + ",restName = " + restName + " ]";
 	}
 
-	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 }

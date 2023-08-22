@@ -42,6 +42,8 @@ public class RegisterUserFormMapper extends BaseMapper<RegisterUserForm, Registe
 		rgUser.setPersonalIdentityNo(entity.getPersonalIdentityNo());
 		rgUser.setUserRole(entity.getUserRole());
 		rgUser.setRestName(entity.getRestName());
+		rgUser.setUserId(entity.getUserId());
+		rgUser.setIdRestorant(entity.getIdRestorant());
 		return rgUser;
 	}
 

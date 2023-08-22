@@ -35,10 +35,8 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 	private UserRole userRole;
 	@Column(name = "rest")
 	private List<String> restName = new ArrayList<String>();
-	private Integer idAdmin;
-	private Integer adminRId;
-	private Integer idRestorant;
 	private Integer userId;
+	private Integer idRestorant;
 
 	public RegisterUserForm() {
 		super();
@@ -46,7 +44,7 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 
 	public RegisterUserForm(String first_name, String last_name, String password, String email, String address,
 			String phoneNo, Integer age, String personalIdentityNo, UserRole userRole, List<String> rest,
-			Integer idAdmin, Integer adminRId, Integer idRestorant, Integer userId) {
+			Integer idRestorant, Integer userId) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -58,8 +56,6 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		this.personalIdentityNo = personalIdentityNo;
 		this.userRole = userRole;
 		this.restName = rest;
-		this.idAdmin = idAdmin;
-		this.adminRId = adminRId;
 		this.idRestorant = idRestorant;
 		this.userId = userId;
 	}
@@ -153,19 +149,6 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		this.restName = rest;
 	}
 
-	public Integer getIdAdmin() {
-		return idAdmin;
-	}
-
-	public void setIdAdmin(Integer idAdmin) {
-		this.idAdmin = idAdmin;
-	}
-
-	public Integer getAdminRId() {
-
-		return adminRId;
-	}
-
 	public Integer getIdRestorant() {
 		return idRestorant;
 	}
@@ -174,25 +157,19 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		this.idRestorant = idRestorant;
 	}
 
-	public void setAdminRId(Integer adminRId) {
-		this.adminRId = adminRId;
-	}
-
 	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserId(Integer id) {
+		this.userId = id;
 	}
 
 	public String toString() {
 		return "RegisterUserForm[registrationId = " + registrationId + ",first_name = " + first_name + ",last_name = "
 				+ last_name + ",password = " + password + ",email = " + email + ",address = " + address + ",phoneNo = "
 				+ phoneNo + ",age  = " + age + ",personalIdentityNo = " + personalIdentityNo + ",userRole = " + userRole
-				+ ",rest = " + restName + ",idAdmin = " + idAdmin + ",adminRId = " + adminRId + ",idRestorant = "
-				+ idRestorant + ",userId = " + userId + "]";
+				+ ",rest = " + restName + ",idRestorant = " + idRestorant + ",userId = " + userId + "]";
 	}
-	/**/
 
 }

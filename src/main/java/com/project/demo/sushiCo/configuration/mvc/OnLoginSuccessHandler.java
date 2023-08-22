@@ -1,4 +1,4 @@
-package com.project.demo.sushiCo.configuration.mvc;
+ package com.project.demo.sushiCo.configuration.mvc;
 
 import java.io.IOException;
 import org.springframework.security.core.Authentication;
@@ -17,8 +17,8 @@ public class OnLoginSuccessHandler extends SavedRequestAwareAuthenticationSucces
 	private static final SimpleGrantedAuthority ADMIN_ROLE = new SimpleGrantedAuthority(UserRole.ADMIN.name());
 	private static final SimpleGrantedAuthority CUSTOMER_ROLE = new SimpleGrantedAuthority(UserRole.CUSTOMER.name());
 	private static final SimpleGrantedAuthority SHIPPERS_ROLE = new SimpleGrantedAuthority(UserRole.SHIPPERS.name());
-	private static final SimpleGrantedAuthority ADMINISTRATOR_ROLE = new SimpleGrantedAuthority(
-			UserRole.ADMINISTRATOR.name());
+	private static final SimpleGrantedAuthority ADMINISTRATOR_ROLE = new SimpleGrantedAuthority(UserRole.ADMINISTRATOR.name());
+			
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
