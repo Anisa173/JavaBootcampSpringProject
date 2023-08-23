@@ -51,10 +51,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminIdPlatforma", referencedColumnName = "id")
 	private User adminPlatforma;
-	
-	// Web_based Aplication permban disa restorante
-	@OneToMany(mappedBy = "aplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Restorant> restorants = new ArrayList<Restorant>();
 
 	// N-kliente zgjedhin te regjistrohen,logohen apo preferojne te perdorin
 	// aplikacionin tone

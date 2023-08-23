@@ -97,9 +97,9 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String saveloginForm(
-			@ModelAttribute("login-form") @Valid LoginDto loginForm, BindingResult nResult, Integer userId1,
+	public String saveloginForm(@ModelAttribute("login-form") @Valid LoginDto loginForm, BindingResult nResult, Integer userId1,
 			Integer registrationId1) throws Exception {
+			 
 		if (nResult.hasErrors()) {
 			return "login-form";
 		}
