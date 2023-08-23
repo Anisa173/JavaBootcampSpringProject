@@ -42,7 +42,7 @@ public class UserController {
 		return " tailwindcss/user - list ";
 	}
 
-	@GetMapping("/api/user/userRegisterView")
+	@GetMapping("/api/user/register")
 	public String getUserRegistrationView(Model model,
 			@RequestParam(value = "usersId", required = false) Integer adminIdWeb, Integer registrationId,
 			Integer userId, Integer idRestorant) throws Exception {
@@ -56,12 +56,11 @@ public class UserController {
 			model.addAttribute("userForm", userService.getUserById(idRestorant, userId, registrationId));
 			model.addAttribute("viewTittle", " UserR_Data Update ");
 		}
-		return "tailwindcss/user-registration";
+		return "tailwindcss/register-view";
 	}
 
-	@GetMapping("/api/user/userLoginView")
-	public String getUserLoginView(Model model,
-			@RequestParam(value = "usersId", required = false) Integer registrationId, Integer userId)
+	@GetMapping("/api/user/login")
+	public String getUserLoginView(Model model,@RequestParam(value = "usersId", required = false) Integer registrationId, Integer userId)
 			throws Exception {
 		if ((userId == null) && (registrationId == null)) {
 			var loginForm = new Login();
@@ -73,7 +72,7 @@ public class UserController {
 			model.addAttribute("viewTittle", " Login_Data Update");
 
 		}
-		return "tailwindcss/user-login";
+		return "tailwindcss/login-form";
 	}
 
 	@PostMapping("/register")
@@ -84,7 +83,7 @@ public class UserController {
 			return "registration-UserForm ";
 		}
 		if (((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId) == null) {
-			userService.registerNewUserAccount(registerUserForm, idRestorant, userId);
+			userService.registerNewUserAccount(registerUserForm, idRestorant, userId,registrationId);
 		} else {
 			try {
 				userService.update(((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId),
@@ -98,11 +97,11 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String saveloginForm(Integer registrationId, Integer userId,
-			@ModelAttribute("login - UserForm") @Valid LoginDto loginForm, BindingResult nResult, Integer userId1,
+	public String saveloginForm(
+			@ModelAttribute("login-form") @Valid LoginDto loginForm, BindingResult nResult, Integer userId1,
 			Integer registrationId1) throws Exception {
 		if (nResult.hasErrors()) {
-			return "login - UserForm";
+			return "login-form";
 		}
 		if (((UserService) loginForm).getUserLogInById(userId1, registrationId1) != null) {
 			userService.updateLoginData(((UserService) loginForm).getUserLogInById(userId1, registrationId1),
@@ -122,4 +121,5 @@ public class UserController {
 		userService.deleteShippers(id);
 		return "redirect:/user ";
 	}
+
 }

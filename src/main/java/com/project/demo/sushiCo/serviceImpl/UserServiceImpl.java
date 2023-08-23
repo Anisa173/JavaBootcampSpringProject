@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId)
+	public UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId,Integer registrationId)
 			throws UsernameNotFoundException {
 
 		registerUserF.setPassword(passwordEncoder.encode(registerUserF.getPassword()));

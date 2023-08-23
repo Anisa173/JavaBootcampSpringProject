@@ -34,7 +34,7 @@ public interface UserService {
 	UserDto registerUserForm(@Valid RegisterUserForm registerUserForm, Integer userId, Integer registrationId,
 			Integer idRestorant) throws Exception;
 
-	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId)
+	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId,Integer registrationId)
 			throws UsernameNotFoundException;
 
 	RegisterUserFormDto update(@Valid RegisterUserFormDto registerUserForm,
@@ -45,6 +45,10 @@ public interface UserService {
 	LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception;
 
 	LoginDto updateLoginData(@Valid LoginDto loginForm1, @Valid LoginDto loginForm) throws Exception;
+
+
+
+	
 
 	
 	
