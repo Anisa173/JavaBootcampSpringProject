@@ -2,6 +2,7 @@ package com.project.demo.sushiCo.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.project.demo.sushiCo.domain.dto.RegisterBookingFormDto;
 import com.project.demo.sushiCo.domain.dto.BookingProcessingDto;
@@ -13,6 +14,7 @@ import com.project.demo.sushiCo.service.RegisterBookingForm;
 
 import jakarta.validation.Valid;
 
+@Validated
 @Service
 public class BookingProcessingServiceImpl implements BookingProcessingService {
 

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.project.demo.sushiCo.domain.dto.DishDto;
 import com.project.demo.sushiCo.domain.mappers.DishMapper;
 import com.project.demo.sushiCo.entity.Dish;
@@ -11,6 +13,7 @@ import com.project.demo.sushiCo.repository.DishRepository;
 import com.project.demo.sushiCo.service.DishService;
 import jakarta.validation.Valid;
 
+@Validated
 @Service
 public class DishServiceImpl implements DishService {
 

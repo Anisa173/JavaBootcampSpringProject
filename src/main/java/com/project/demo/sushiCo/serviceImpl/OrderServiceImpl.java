@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.project.demo.sushiCo.domain.dto.OrderDto;
 import com.project.demo.sushiCo.domain.mappers.OrderMapper;
 import com.project.demo.sushiCo.repository.OrderRepository;
@@ -12,6 +14,8 @@ import com.project.demo.sushiCo.service.OrderService;
 
 import jakarta.validation.Valid;
 //RequiredArgsConstructor ~ final
+
+@Validated
 @Service
 public class OrderServiceImpl implements OrderService {
 

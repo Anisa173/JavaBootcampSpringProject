@@ -15,13 +15,6 @@ import jakarta.validation.Valid;
 
 public interface UserService {
 
-	UserDto registerUserForm(@Valid RegisterUserForm registerUserForm) throws Exception;
-
-	RegisterUserFormDto getUserById(Integer idRestorant, Integer userId, Integer registrationId) throws Exception;
-
-	UserDto update(Integer userId, Integer idRestorant, Integer registrationId,
-			@Valid RegisterUserFormDto registerUserForm) throws Exception;
-
 	List<UserDto> getAllUser() throws Exception;
 
 	List<UserDto> getAllShippersByAdminId(Integer id) throws Exception;
@@ -32,18 +25,28 @@ public interface UserService {
 	Resource downloadIdentitficationCard(Integer idRestorant, Integer userId, Integer registrationId,
 			UserWithFileDto reqDto) throws Exception;
 
-	UserDto login(@Valid Login form) throws Exception;
+	void deleteAdmin(Integer id);
+
+	void deleteShippers(Integer id);
+
+	RegisterUserFormDto getUserById(Integer userId, Integer registrationId, Integer idRestorant) throws Exception;
+
+	UserDto registerUserForm(@Valid RegisterUserForm registerUserForm, Integer userId, Integer registrationId,
+			Integer idRestorant) throws Exception;
+
+	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId)
+			throws UsernameNotFoundException;
+
+	RegisterUserFormDto update(@Valid RegisterUserFormDto registerUserForm,
+			@Valid RegisterUserFormDto registerUserForm2) throws Exception;
+
+	UserDto login(@Valid Login form, Integer userId, Integer registrationId) throws Exception;
 
 	LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception;
 
-	UserDto updateLoginData(Integer userId, Integer registrationId, @Valid LoginDto login_form) throws Exception;
+	LoginDto updateLoginData(@Valid LoginDto loginForm1, @Valid LoginDto loginForm) throws Exception;
 
-	void deleteAdmin(Integer id);
-
-    void deleteShippers(Integer id);
-
-	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserForm, @Valid LoginDto form)
-			throws UsernameNotFoundException;
+	
 	
 
 }

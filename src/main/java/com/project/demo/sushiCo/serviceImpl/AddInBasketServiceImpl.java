@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
 import com.project.demo.sushiCo.domain.dto.CardBankDto;
 import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
@@ -19,7 +21,7 @@ import com.project.demo.sushiCo.service.RegisterCardform;
 import com.project.demo.sushiCo.service.SelectDishesForm;
 import jakarta.validation.Valid;
 
-
+@Validated
 @Service
 public class AddInBasketServiceImpl implements AddInBasketService {
 	@Autowired

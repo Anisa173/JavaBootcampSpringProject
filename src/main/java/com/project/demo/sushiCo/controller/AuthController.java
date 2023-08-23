@@ -36,12 +36,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") @Valid RegisterUserForm user, BindingResult bindingResult) throws Exception{
+    public String register(@ModelAttribute("user") @Valid RegisterUserForm user, BindingResult bindingResult,Integer registrationId) throws Exception{
         if(bindingResult.hasErrors()){
             return "auth/register-view";
         }
-        var u = userService.registerUserForm(user);
-        return "redirect:/users/details/"+u.getId();
+        var u = userService.registerUserForm(user, null, null, null);
+        return "redirect:/users/details/"+( u.getId());
     }
 }
 

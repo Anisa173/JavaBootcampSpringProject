@@ -34,7 +34,7 @@ public class MvcSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/ ").permitAll()
-				.requestMatchers("/register").permitAll()
+				.requestMatchers(" /register ").permitAll()
 						.requestMatchers("/api/admin/**").hasAuthority(UserRole.ADMIN.name())
 						.requestMatchers("/api/customer/**").hasAuthority(UserRole.CUSTOMER.name())
 						.requestMatchers("/api/shippers/**").hasAuthority(UserRole.SHIPPERS.name())

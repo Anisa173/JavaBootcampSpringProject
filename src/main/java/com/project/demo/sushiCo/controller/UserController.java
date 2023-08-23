@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.demo.sushiCo.domain.dto.LoginDto;
 import com.project.demo.sushiCo.domain.dto.RegisterUserFormDto;
-import com.project.demo.sushiCo.domain.dto.UserDto;
-import com.project.demo.sushiCo.entity.User;
 import com.project.demo.sushiCo.service.RestorantService;
 import com.project.demo.sushiCo.service.UserService;
 import com.project.demo.sushiCo.serviceImpl.Login;
@@ -30,6 +28,18 @@ public class UserController {
 		super();
 		this.userService = userService;
 		this.restService = restService;
+	}
+
+	@GetMapping
+	public String getUserReviewList(Model model) throws Exception {
+		model.addAttribute(" user ", userService.getAllUser());
+		return " tailwindcss/user - list ";
+	}
+
+	@GetMapping
+	public String getShipperReviewList(Model model, Integer id) throws Exception {
+		model.addAttribute(" shippers ", userService.getAllShippersByAdminId(id));
+		return " tailwindcss/user - list ";
 	}
 
 	@GetMapping("/api/user/userRegisterView")
@@ -67,18 +77,19 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public String saveUserRegistrationForm(Integer idRestorant, Integer registrationId, Integer userId,
-			@ModelAttribute("registration-UserForm")  @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
+	public String saveUserRegistrationForm(Integer userId, Integer idRestorant, Integer registrationId,
+			@ModelAttribute("registration-UserForm") @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
 			throws Exception {
 		if (bResult.hasErrors()) {
 			return "registration-UserForm ";
 		}
-		if (((UserService) registerUserForm).getUserById(idRestorant, registrationId, userId) == null) {
-			userService.registerNewUserAccount(registerUserForm, null);
+		if (((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId) == null) {
+			userService.registerNewUserAccount(registerUserForm, idRestorant, userId);
 		} else {
 			try {
-				userService.update(((UserService) registerUserForm).getUserById(userId, registrationId, idRestorant),
+				userService.update(((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId),
 						registerUserForm);
+
 			} catch (Exception e) {
 				System.out.println("An error ocurred" + "==> " + e.getMessage());
 			}
@@ -87,10 +98,15 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String saveloginForm(Integer registrationId, Integer userId,@ModelAttribute("login - UserForm") @Valid LoginDto loginForm , BindingResult nResult) throws Exception {		
+	public String saveloginForm(Integer registrationId, Integer userId,
+			@ModelAttribute("login - UserForm") @Valid LoginDto loginForm, BindingResult nResult, Integer userId1,
+			Integer registrationId1) throws Exception {
 		if (nResult.hasErrors()) {
 			return "login - UserForm";
-			userService.updateLoginData(((UserService) loginForm).getUserLogInById(userId, registrationId), loginForm);
+		}
+		if (((UserService) loginForm).getUserLogInById(userId1, registrationId1) != null) {
+			userService.updateLoginData(((UserService) loginForm).getUserLogInById(userId1, registrationId1),
+					loginForm);
 		}
 		return "redirect:/api/user";
 	}

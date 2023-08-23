@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.project.demo.sushiCo.domain.dto.PaymentMethodsDto;
 import com.project.demo.sushiCo.domain.mappers.PaymentMethodsMapper;
 import com.project.demo.sushiCo.repository.PaymentMethodsRepository;
@@ -12,6 +14,7 @@ import com.project.demo.sushiCo.service.PaymentMethodsService;
 import com.project.demo.sushiCo.service.RegisterMethodsPaymentForm;
 import jakarta.validation.Valid;
 
+@Validated
 @Service
 public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 
