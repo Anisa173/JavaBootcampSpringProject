@@ -56,10 +56,10 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 	}
 
 	@Override
-	public PaymentMethodsDto update(Integer Id, Integer idRestorant, @Valid PaymentMethodsDto placesDto)
+	public PaymentMethodsDto update(@Valid PaymentMethodsDto pmForm, @Valid PaymentMethodsDto paymentDto,Integer Id,Integer idRestorant)
 			throws Exception {
 		var pMethod = methodsMapper.toEntity(getPayment_MethodsById(Id, idRestorant));
-		var result = methodsMapper.toUpdate(placesDto, pMethod);
+		var result = methodsMapper.toUpdate(paymentDto, pMethod);
 		return methodsMapper.toDto(methodsRepository.save(result));
 	}
 
@@ -67,5 +67,6 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 	public PaymentMethodsDto getRestorantPMethods(Integer idRestorant) throws Exception {
 		return methodsMapper.toDto(methodsRepository.getRestorantPMethods(idRestorant));
 	}
+
 
 }

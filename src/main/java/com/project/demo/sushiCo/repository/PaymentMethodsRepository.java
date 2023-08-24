@@ -20,7 +20,7 @@ public interface PaymentMethodsRepository extends JpaRepository<PaymentMethods, 
 
 	@Query(" Select pm.Id,r.idRestorant From PaymentMethods pm INNER JOIN Restorant r ON r.pm.paymentId = r.idRestorant "
 			+ " Where pm.Id =: Id And r.idRestorant =: idRestorant ")
-	PaymentMethods getPayment_MethodsById(Integer id, Integer idRestorant);
+	PaymentMethods getPayment_MethodsById(Integer Id, Integer idRestorant);
 
 	@Modifying
 	@Query(" Delete From PaymentMethods pm Inner Join Restorant r ON r.pm.paymentId = r.idRestorant Where pm.Id =: ?1 and r.idRestorant =: ?2 ")

@@ -18,7 +18,9 @@ public interface UserService {
 	List<UserDto> getAllUser() throws Exception;
 
 	List<UserDto> getAllShippersByAdminId(Integer id) throws Exception;
-
+	
+	List<UserDto> getShippersAdmin(Integer id) throws Exception;
+	
 	UserDto addIdentification(Integer idRestorant, Integer userId, Integer registrationId, UserWithFileDto reqDto)
 			throws Exception;
 
@@ -37,18 +39,16 @@ public interface UserService {
 	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId,Integer registrationId)
 			throws UsernameNotFoundException;
 
-	RegisterUserFormDto update(@Valid RegisterUserFormDto registerUserForm,
+	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto registerUserForm,
 			@Valid RegisterUserFormDto registerUserForm2) throws Exception;
 
 	UserDto login(@Valid Login form, Integer userId, Integer registrationId) throws Exception;
 
 	LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception;
 
-	LoginDto updateLoginData(@Valid LoginDto loginForm1, @Valid LoginDto loginForm) throws Exception;
+	LoginDto updateLoginData(Integer userId, @Valid LoginDto loginForm1, @Valid LoginDto loginForm) throws Exception;
 
-
-
-	
+	List<UserDto> getAllCustomers(Integer userId) throws Exception;
 
 	
 	

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum UserRole {
 
-	CUSTOMER("Customer"), ADMIN("Admin"), SHIPPERS("Shippers"),ADMINISTRATOR("Administrator") ;
+	CUSTOMER("Customer"), ADMIN("Admin"), SHIPPERS("Shippers"),ADMINISTRATOR("Administrator") , VISITOR("Visitor") ;
 
 	private String value;
 

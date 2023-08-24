@@ -3,7 +3,6 @@ package com.project.demo.sushiCo.domain.mappers;
 import java.util.ArrayList;
 import java.util.List;
 import com.project.demo.sushiCo.domain.dto.LoginDto;
-import com.project.demo.sushiCo.entity.User;
 import com.project.demo.sushiCo.serviceImpl.Login;
 
 public class LoginMapper extends BaseMapper<Login,LoginDto> {

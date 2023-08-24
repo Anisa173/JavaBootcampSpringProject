@@ -13,13 +13,19 @@ public interface PaymentMethodsService {
 
 	PaymentMethodsDto create(@Valid PaymentMethodsDto methodsDto) throws Exception;
 
-	PaymentMethodsDto update(Integer Id, Integer idRestorant, @Valid PaymentMethodsDto placesDto) throws Exception;
-
 	PaymentMethodsDto getPayment_MethodsById(Integer Id, Integer idRestorant) throws Exception;
 
 	PaymentMethodsDto getRestorantPMethods(Integer restorantId) throws Exception;
 
 	void delete(Integer Id, Integer idRestorant) throws Exception;
+
+	PaymentMethodsDto update(@Valid PaymentMethodsDto pmForm, @Valid PaymentMethodsDto paymentDto, Integer Id,
+			Integer idRestoran) throws Exception;
+
+
+	//PaymentMethodsDto update(Integer Id, Integer idRestorant, @Valid PaymentMethodsDto placesDto) throws Exception;
+
+	
 
 	
 

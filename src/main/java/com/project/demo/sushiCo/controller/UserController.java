@@ -3,7 +3,6 @@ package com.project.demo.sushiCo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,27 +29,15 @@ public class UserController {
 		this.restService = restService;
 	}
 
-	@GetMapping
-	public String getUserReviewList(Model model) throws Exception {
-		model.addAttribute(" user ", userService.getAllUser());
-		return " tailwindcss/user - list ";
-	}
-
-	@GetMapping
-	public String getShipperReviewList(Model model, Integer id) throws Exception {
-		model.addAttribute(" shippers ", userService.getAllShippersByAdminId(id));
-		return " tailwindcss/user - list ";
-	}
-
-	@GetMapping("/api/user/register")
+	@GetMapping("/api/user/register - view")
 	public String getUserRegistrationView(Model model,
-			@RequestParam(value = "usersId", required = false) Integer adminIdWeb, Integer registrationId,
+			@RequestParam(value = "usersId", required = false) Integer registrationId,
 			Integer userId, Integer idRestorant) throws Exception {
-		model.addAttribute("restorantList", restService.getAllRestorants(adminIdWeb));
+		model.addAttribute("restorantList", restService.getAllRestorants(userId));
 		if ((userId == null) && (registrationId == null)) {
 			var registerUserForm = new RegisterUserForm();
 			registerUserForm.setRegistrationId(registrationId);
-			model.addAttribute("UserForm", registerUserForm);
+			model.addAttribute("userForm", registerUserForm);
 			model.addAttribute("viewTittle", "User Registration");
 		} else {
 			model.addAttribute("userForm", userService.getUserById(idRestorant, userId, registrationId));
@@ -77,23 +64,23 @@ public class UserController {
 
 	@PostMapping("/register")
 	public String saveUserRegistrationForm(Integer userId, Integer idRestorant, Integer registrationId,
-			@ModelAttribute("registration-UserForm") @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
+			@ModelAttribute("userForm") @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
 			throws Exception {
 		if (bResult.hasErrors()) {
-			return "registration-UserForm ";
+			return "register - view ";
 		}
 		if (((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId) == null) {
 			userService.registerNewUserAccount(registerUserForm, idRestorant, userId,registrationId);
 		} else {
 			try {
-				userService.update(((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId),
+				userService.update(userId, idRestorant, ((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId),
 						registerUserForm);
 
 			} catch (Exception e) {
 				System.out.println("An error ocurred" + "==> " + e.getMessage());
 			}
 		}
-		return "redirect:/api/user";
+		return "redirect:/api/User/login";
 	}
 
 	@PostMapping("/login")
@@ -104,22 +91,9 @@ public class UserController {
 			return "login-form";
 		}
 		if (((UserService) loginForm).getUserLogInById(userId1, registrationId1) != null) {
-			userService.updateLoginData(((UserService) loginForm).getUserLogInById(userId1, registrationId1),
+			userService.updateLoginData(userId1, ((UserService) loginForm).getUserLogInById(userId1, registrationId1),
 					loginForm);
 		}
-		return "redirect:/api/user";
+		return "redirect:/api/Customer/SelectWhichYouPreferForm";
 	}
-
-	@DeleteMapping
-	public String deleteAdmin(@RequestParam(value = "userId", required = true) Integer id) {
-		userService.deleteAdmin(id);
-		return "redirect:/user ";
-	}
-
-	@DeleteMapping
-	public String deleteShipper(@RequestParam(value = "userId", required = true) Integer id) {
-		userService.deleteShippers(id);
-		return "redirect:/user ";
-	}
-
 }

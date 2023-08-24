@@ -57,7 +57,7 @@ public class AuthController {
 			return "auth/register-view";
 		}
 
-		var m = userService.update(registerUserForm, registerUserForm1);
+		var m = userService.update(idRestorant, userId, registerUserForm, registerUserForm1);
 		return "redirect:/users/details/" + (((UserService) m).getUserById(userId, registrationId, idRestorant));
 
 	}
@@ -68,7 +68,7 @@ public class AuthController {
 		if (nResult.hasErrors()) {
 			return "auth/login-form";
 		}
-		var log = userService.updateLoginData(loginForm, loginForm1);
+		var log = userService.updateLoginData(userId1, loginForm, loginForm1);
 		return "redirect:/users/details/" + (((UserService) log).getUserLogInById(userId1, registrationId1));
 	}
 }

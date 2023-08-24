@@ -56,7 +56,6 @@ public class RestorantMapper extends BaseMapper<Restorant, RestorantDto> {
 
 	@Override
 	public Restorant toUpdate(RestorantDto rest, Restorant dto) {
-
 		rest.setRestNUIS(dto.getRestNUIS());
 		rest.setRestName(dto.getRestName());
 		rest.setPhoneNo(dto.getPhoneNo());

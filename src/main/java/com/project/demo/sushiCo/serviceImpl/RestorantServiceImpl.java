@@ -36,7 +36,7 @@ public class RestorantServiceImpl implements RestorantService {
 
 	@Override
 	public RestorantDto registerRestorant(@Valid RegisterRestorantForm registerForm) throws Exception {
-		var restorant = getRestorantsById(registerForm.getId(), registerForm.getAdminIdWeb());
+		var restorant = getRestorantsById(registerForm.getId());
 		restorant.setRestNUIS(registerForm.getRestNUIS());
 		restorant.setRestName(registerForm.getRestName());
 		restorant.setPhoneNo(registerForm.getPhoneNo());
@@ -48,15 +48,15 @@ public class RestorantServiceImpl implements RestorantService {
 	}
 
 	@Override
+	public RestorantDto getRestorantsById(Integer idRestorant) throws Exception {
+		return restorantMapper.toDto(restorantRepository.getRestorantsById(idRestorant));
+	}
+
+	@Override
 	public RestorantDto create(@Valid RestorantDto restorantDto) throws Exception {
 		var result = restorantMapper.toEntity(restorantDto);
 		return restorantMapper.toDto(restorantRepository.save(result));
 
-	}
-
-	@Override
-	public RestorantDto getRestorantsById(Integer idRestorant, Integer adminIdWeb) throws Exception {
-		return restorantMapper.toDto(restorantRepository.getRestorantsById(idRestorant, adminIdWeb));
 	}
 
 	@Override
@@ -65,9 +65,10 @@ public class RestorantServiceImpl implements RestorantService {
 	}
 
 	@Override
-	public RestorantDto update(Integer idRestorant, Integer adminIdWeb, @Valid RestorantDto restorantDto)
+	public RestorantDto update(@Valid RestorantDto restorantDto, @Valid RestorantDto restForm, Integer id)
 			throws Exception {
-		Restorant restorant = restorantMapper.toEntity(getRestorantsById(idRestorant, adminIdWeb));
+
+		Restorant restorant = restorantMapper.toEntity(getRestorantsById(id));
 		var result = restorantMapper.toUpdate(restorantDto, restorant);
 		return restorantMapper.toDto(restorantRepository.save(result));
 	}
@@ -79,16 +80,46 @@ public class RestorantServiceImpl implements RestorantService {
 	}
 
 	@Override
-	public RestorantDto selectRestorant(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception {
-		var restorantSelect = getCustomerRestorantById(restorantPreference.getId(),
+	public SelectWhichYouPreferFormDto selectRestorantByCustomer(@Valid SelectWhichYouPreferForm restorantPreference)
+			throws Exception {
+		var restorantSelect = getCustomerRestorantById(restorantPreference.getId(), restorantPreference.getUserId(),
 				restorantPreference.getIdRestorant());
-		restorantSelect.setRestName(restorantPreference.getRestName());
-		return restorantMapper.toDto(restorantRepository.save(restorantSelect));
+		restorantSelect.setRest(restorantPreference.getRest());
+		return selectWhichYouPreferMapper.toDto(restorantRepository.save(restorantSelect));
 	}
 
 	@Override
-	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer id, Integer idRestorant) throws Exception {
-
-		return selectWhichYouPreferMapper.toDto(restorantRepository.getCustomerRestorantById(id, idRestorant));
+	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer id, Integer userId, Integer idRestorant)
+			throws Exception {
+		return selectWhichYouPreferMapper.toDto(restorantRepository.getCustomerRestorantById(id, userId, idRestorant));
 	}
+
+	@Override
+	public SelectWhichYouPreferFormDto selectRestorantByVisitor(@Valid SelectWhichYouPreferForm restorantPreference)
+			throws Exception {
+		var restorantSelect = getRestorantById1(restorantPreference.getId());
+		restorantSelect.setRest(restorantPreference.getRest());
+		return selectWhichYouPreferMapper.toDto(restorantRepository.save(restorantSelect));
+	}
+
+	@Override
+	public SelectWhichYouPreferFormDto getRestorantById1(Integer idRestorant) throws Exception {
+
+		return selectWhichYouPreferMapper.toDto(restorantRepository.getRestorantById1(idRestorant));
+	}
+
+	@Override
+	public SelectWhichYouPreferFormDto createSelectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference,@Valid RestorantDto restorantSelected)
+		throws Exception{	
+		return  selectWhichYouPreferMapper.toDto(restorantRepository.createSelectRestorant(selectRPreference,restorantSelected));
+	}
+
+	@Override
+	public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception {
+		
+		return restorantMapper.toDto(restorantRepository.getRestorantDetails(idRestorant));
+	}
+
+	
+
 }

@@ -15,21 +15,25 @@ public class SelectWhichYouPreferMapper extends BaseMapper<SelectWhichYouPreferF
 	public SelectWhichYouPreferForm toEntity(SelectWhichYouPreferFormDto dto) {
 		var selectPref = new SelectWhichYouPreferForm();
 	selectPref.setIdSelect(dto.getIdSelect());
-	selectPref.setRestName(dto.getRestName());	
-		return  selectPref;
+	selectPref.setRest(dto.getRest());	
+	selectPref.setIdRestorant(dto.getIdRestorant());
+	selectPref.setUserId(dto.getUserId());
+	return  selectPref;
 	}
 
 	@Override
 	public SelectWhichYouPreferFormDto toDto(SelectWhichYouPreferForm entity) {
 		var selectPref = new SelectWhichYouPreferFormDto();
 		selectPref.setIdSelect(entity.getId());
-		selectPref.setRestName(entity.getRestName());	
-			return  selectPref;
+		selectPref.setRest(entity.getRest());	
+		selectPref.setIdRestorant(entity.getIdRestorant());
+		selectPref.setUserId(entity.getUserId());
+		return  selectPref;
 	}
 
 	@Override
 	public SelectWhichYouPreferForm toUpdate(SelectWhichYouPreferFormDto dto, SelectWhichYouPreferForm entity) {
-	entity.setRestName(dto.getRestName());
+	entity.setRest(dto.getRest());
 		return entity;
 	}
 

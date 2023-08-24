@@ -1,6 +1,7 @@
 package com.project.demo.sushiCo.domain.dto;
 
 import java.sql.Time;
+import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -229,4 +230,5 @@ public class RestorantDto {
 				+ adminRId + ",adminName = " + adminName + ",adminIdWeb = " + adminIdWeb + "]";
 	}
 
+	
 }

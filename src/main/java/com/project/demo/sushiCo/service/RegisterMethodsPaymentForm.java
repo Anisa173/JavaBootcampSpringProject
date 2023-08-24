@@ -9,32 +9,45 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 public class RegisterMethodsPaymentForm extends BasicEntity<Integer> {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Integer Id;
-@Column(name = "payment_Method")
-private String payment_Method;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer registrationId;
+	@Column(name = "Id")
+	private Integer Id;
+	@Column(name = "payment_Method")
+	private String payment_Method;
+	@Column(name = "adminIdWeb")
 	private Integer adminIdWeb;
+	@Column(name = "idRestorant")
 	private Integer idRestorant;
 
 	public RegisterMethodsPaymentForm() {
 		super();
 	}
 
-	public RegisterMethodsPaymentForm(String payment_Method, Integer adminIdWeb) {
+	public RegisterMethodsPaymentForm(String payment_Method, Integer adminIdWeb, Integer idRestorant) {
 		super();
 		this.payment_Method = payment_Method;
 		this.adminIdWeb = adminIdWeb;
+		this.idRestorant = idRestorant;
 	}
 
-	@Override
+@Override
 	public Integer getId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(Integer registrationId) {
+		this.registrationId = registrationId;
+	}	
+	public Integer getId1() {
 		return Id;
 	}
 
 	public void setId(Integer Id) {
 		this.Id = Id;
 	}
+
 
 	public String getPayment_Method() {
 		return payment_Method;
@@ -61,8 +74,9 @@ private String payment_Method;
 	}
 
 	public String toString() {
-		return "RegisterMethodsPaymentForm[Id = " + Id + ",payment_Method = " + payment_Method + ",adminIdWeb = "
-				+ adminIdWeb + "]";
+		return "RegisterMethodsPaymentForm[registrationId = " +registrationId+ ",Id = " + Id + ",payment_Method = " + payment_Method + ",adminIdWeb = "
+				+ adminIdWeb + ",idRestorant = " + idRestorant + "]";
 	}
 
+	
 }

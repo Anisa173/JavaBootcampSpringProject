@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.demo.sushiCo.entity.BasicEntity;
+import com.project.demo.sushiCo.entity.Restorant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,18 +17,20 @@ public class SelectWhichYouPreferForm extends BasicEntity<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idSelect;
-	@Column(name = "restName")
-	private List<String> restName = new ArrayList<String>();
+	@Column(name = "rest")
+	private List<Restorant> rest = new ArrayList<Restorant>();
 	private Integer idRestorant;
+	private Integer userId;
 
 	public SelectWhichYouPreferForm() {
 		super();
 	}
 
-	public SelectWhichYouPreferForm(List<String> restName, Integer idRestorant) {
+	public SelectWhichYouPreferForm(List<Restorant> rest, Integer idRestorant, Integer userId) {
 		super();
-		this.restName = restName;
+		this.rest = rest;
 		this.idRestorant = idRestorant;
+		this.userId = userId;
 	}
 
 	@Override
@@ -39,12 +42,12 @@ public class SelectWhichYouPreferForm extends BasicEntity<Integer> {
 		this.idSelect = id;
 	}
 
-	public List<String> getRestName() {
-		return restName;
+	public List<Restorant> getRest() {
+		return rest;
 	}
 
-	public void setRestName(List<String> restName) {
-		this.restName = restName;
+	public void setRest(List<Restorant> rest) {
+		this.rest = rest;
 
 	}
 
@@ -56,9 +59,16 @@ public class SelectWhichYouPreferForm extends BasicEntity<Integer> {
 		this.idRestorant = idRestorant;
 	}
 
-	public String toString() {
-		return "SelectWhichYouPreferMapper[idSelect = " + idSelect + ", restName = " + restName + ",idRestorant = "
-				+ idRestorant + "]";
+	public Integer getUserId() {
+		return userId;
 	}
 
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String toString() {
+		return "SelectWhichYouPreferMapper[idSelect = " + idSelect + ", restName = " + rest + ",idRestorant = "
+				+ idRestorant + ",userId = " + userId + "]";
+	}
 }

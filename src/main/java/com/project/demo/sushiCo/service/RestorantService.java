@@ -9,20 +9,30 @@ import jakarta.validation.Valid;
 
 public interface RestorantService {
 
-public	RestorantDto registerRestorant(@Valid RegisterRestorantForm registerForm) throws Exception;
+	public RestorantDto registerRestorant(@Valid RegisterRestorantForm registerForm) throws Exception;
 
-public	RestorantDto create(@Valid RestorantDto restorantDto) throws Exception;
+	public RestorantDto create(@Valid RestorantDto restorantDto) throws Exception;
 
-public	RestorantDto getRestorantsById(Integer idRestorant, Integer adminIdWeb) throws Exception;
+	public void delete(Integer idRestorant, Integer adminIdWeb) throws Exception;
 
-public	RestorantDto update(Integer idRestorant, Integer adminIdWeb, @Valid RestorantDto restorantDto) throws Exception;
+	public List<RestorantDto> getAllRestorants(Integer adminIdWeb) throws Exception;
 
-public	void delete(Integer idRestorant, Integer adminIdWeb) throws Exception;
+	public SelectWhichYouPreferFormDto selectRestorantByVisitor(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
 
-public	List<RestorantDto> getAllRestorants(Integer adminIdWeb) throws Exception;
+	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer id,Integer userId, Integer idRestorant) throws Exception;
 
-public RestorantDto selectRestorant(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
+    public SelectWhichYouPreferFormDto getRestorantById1(Integer idRestorant) throws Exception;
+	
+	public RestorantDto getRestorantsById(Integer idRestorant) throws Exception;
 
-public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer id,Integer idRestorant) throws Exception;
+	public RestorantDto update(@Valid RestorantDto restorantDto, @Valid RestorantDto restForm, Integer id)
+			throws Exception;
 
+	public  SelectWhichYouPreferFormDto selectRestorantByCustomer(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
+
+	public SelectWhichYouPreferFormDto createSelectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference, @Valid RestorantDto restorantSelected) throws Exception;
+
+public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception;
+	
 }
+

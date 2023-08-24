@@ -9,21 +9,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class RegisterRegisterPlacesForm extends BasicEntity<Integer> {
+public class RegisterServicePlacesForm extends BasicEntity<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer registrationId;
+	private Integer Id;
 	@Column(name = "servicesPlaces")
 	private String servicesPlaces;
 	@Column(name = "shippingCost")
 	private Double shippingCost;
 	private Integer idRestorant;
 
-	public RegisterRegisterPlacesForm() {
+	public RegisterServicePlacesForm() {
 		super();
 	}
 
-	public RegisterRegisterPlacesForm(String servicesPlaces, Double shippingCost, Integer idRestorant) {
+	public RegisterServicePlacesForm(String servicesPlaces, Double shippingCost, Integer idRestorant) {
 		super();
 		this.servicesPlaces = servicesPlaces;
 		this.idRestorant = idRestorant;
@@ -31,11 +32,19 @@ public class RegisterRegisterPlacesForm extends BasicEntity<Integer> {
 
 	@Override
 	public Integer getId() {
-		return id;
+		return registrationId;
+	}
+
+	public void setRegistrationId(Integer registrationId) {
+		this.registrationId = registrationId;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.Id = id;
+	}
+
+	public Integer getId1() {
+		return Id;
 	}
 
 	public String getServicesPlaces() {
@@ -63,8 +72,8 @@ public class RegisterRegisterPlacesForm extends BasicEntity<Integer> {
 	}
 
 	public String toString() {
-		return "RegisterRegisterPlacesForm[id = " + id + ",servicesPlaces = " + servicesPlaces + ",shippingCost = "
-				+ shippingCost + ",idRestorant = " + idRestorant + "]";
+		return "RegisterServicePlacesForm[registrationId = " + registrationId + ",id = " + Id + ",servicesPlaces = "
+				+ servicesPlaces + ",shippingCost = " + shippingCost + ",idRestorant = " + idRestorant + "]";
 	}
 
 }

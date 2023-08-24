@@ -83,9 +83,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public RegisterUserFormDto update(@Valid RegisterUserFormDto registerUserForm,
+	public RegisterUserFormDto update(Integer userId,Integer idRestorant,@Valid RegisterUserFormDto registerUserForm,
 			@Valid RegisterUserFormDto registerUserForm2) throws Exception {
-		return registerUserFormMapper.toDto(((UserRepository) repository).update(registerUserForm));
+		return registerUserFormMapper.toDto(((UserRepository) repository).update(userId, idRestorant, registerUserForm));
 	}
 
 	@Override
@@ -111,9 +111,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public LoginDto updateLoginData(@Valid LoginDto loginForm1,@Valid LoginDto loginForm)
+	public LoginDto updateLoginData(Integer userId,@Valid LoginDto loginForm1,@Valid LoginDto loginForm)
 			throws Exception {
-		return loginMapper.toDto(repository.updateLoginData(loginForm1));
+		return loginMapper.toDto(repository.updateLoginData(userId, loginForm1));
 	}
 
 
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 		return repository.findAll().stream().map(m -> userMapper.toDto(m)).collect(Collectors.toList());
 	}
 
-	// Kur nderpret marredheniet e punes admini
+	// Kur nderpret marredheniet e punes admini i restorantit
 	@Override
 	public void deleteAdmin(Integer id) {
 		repository.deleteAdmin(id);
@@ -164,5 +164,18 @@ public class UserServiceImpl implements UserService {
 
 		return (List<UserDto>) userMapper.toDto(repository.getAllShippersByAdminId(id));
 	}
+
+	@Override
+	public List<UserDto> getAllCustomers(Integer userId) throws Exception {
+		
+		return (List<UserDto>) userMapper.toDto(repository.getAllCustomers());
+	}
+
+	@Override
+	public List<UserDto> getShippersAdmin(Integer id) throws Exception {
+		return  userMapper.toDto(repository.getShippersAdmin(id));
+	}
+
+	
 
 }

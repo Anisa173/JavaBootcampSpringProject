@@ -20,6 +20,7 @@ public class WebAplication extends BasicEntity<Integer> {
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminWebId", referencedColumnName = "id")
 	private User adminWebAplication;
+	
 	// Ne aplikacion zgjedhin te regjistrohen,logohen apo preferojne ta perdorin
 	// N-klientë,admin,shippersa
 	@OneToMany(mappedBy = "webAplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
