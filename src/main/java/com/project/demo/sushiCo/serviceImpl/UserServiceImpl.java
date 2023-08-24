@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 		userF.setPhoneNo(registerUserForm.getPhoneNo());
 		userF.setAge(registerUserForm.getAge());
 		userF.setPersonalIdentityNo(registerUserForm.getPersonalIdentityNo());
-		userF.setRestName(registerUserForm.getRestName());
+		userF.setRestorant(registerUserForm.getRestorant());
 		userF.setUserRole(UserRole.fromValue(registerUserForm.getUserRole()));
 		return userMapper.toDto(repository.save(userF));
 

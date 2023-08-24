@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			+ " INNER JOIN User a ON adw.c.adminIdPlatforma = adw.id "
 			+ " INNER JOIN User sh ON adw.sh.adminIdPlatforma = adw.id "
 			+ " INNER JOIN  Restorant r ON adw.r.adminIdWeb = adw.id "
-			+ " Where adw.id =: ?1 And c.id =: ?2 And a.id IN( Select sh.id,r.idRestorant,a.id  From User a INNER JOIN r ON  a.id = a.r.adminRId"
+			+ " Where adw.id =: ?1 And c.id =: ?2 And a.id IN( Select sh.id,r.restorantName,a.id  From User a INNER JOIN r ON  a.id = a.r.adminRId"
 			+ "	INNER JOIN User sh ON a.id = a.sh.idAdmin"
 			+ " Where a.id =: ?1  And sh.id =: ?2 And r.idRestorant =: ?3  )")
 	RegisterUserForm getUserById(Integer idRestorant, Integer registrationId, Integer userId);

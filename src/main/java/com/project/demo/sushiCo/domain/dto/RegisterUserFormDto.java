@@ -2,6 +2,8 @@ package com.project.demo.sushiCo.domain.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.project.demo.sushiCo.entity.Restorant;
 import com.project.demo.sushiCo.entity.UserRole;
 
 import jakarta.validation.constraints.NotNull;
@@ -25,15 +27,15 @@ public class RegisterUserFormDto {
 	private Integer age;
 
 	private String personalIdentityNo;
-private Integer idRestorant;
-private Integer userId;	
+	private Integer idRestorant;
+	private Integer userId;
 	private UserRole userRole;
-@NotNull(message = "It's required")
-	private List<String> restName = new ArrayList<String>();
+	@NotNull(message = "It's required")
+	private List<Restorant> restorant = new ArrayList<Restorant>();
 
 	public RegisterUserFormDto(Integer registrationId, String first_name, String last_name, String password,
 			String email, String address, String phoneNo, Integer age, String personalIdentityNo, UserRole userRole,
-			List<String> rest) {
+			List<Restorant> rest) {
 		this.registrationId = registrationId;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -44,7 +46,7 @@ private Integer userId;
 		this.age = age;
 		this.personalIdentityNo = personalIdentityNo;
 		this.userRole = userRole;
-		this.restName = rest;
+		this.restorant = rest;
 	}
 
 	public RegisterUserFormDto() {
@@ -131,9 +133,10 @@ private Integer userId;
 		this.userRole = userRole;
 	}
 
-	public List<String> getRestName() {
-		return restName;
+	public List<Restorant> getRestorant() {
+		return restorant;
 	}
+
 	public Integer getIdRestorant() {
 		return idRestorant;
 	}
@@ -150,21 +153,16 @@ private Integer userId;
 		this.userId = userId;
 	}
 
-	public void setRestName(List<String> restName) {
-		this.restName = restName;
+	public void setRestorant(List<Restorant> rest) {
+		this.restorant = rest;
 	}
-	
 
 	public String toString() {
 		return "RegisterUserFormDto[registrationId = " + registrationId + ",first_name = " + first_name
 				+ ",last_name = " + last_name + ",last_name = " + last_name + ",password = " + password + ",email = "
 				+ email + ",address = " + address + ",phoneNo = " + phoneNo + ",age = " + phoneNo
-				+ ",personalIdentityNo = " + personalIdentityNo + ",userId = " +userId+ ",restorantId = " +idRestorant+ ",userRole = " + userRole + ",restName = " + restName + " ]";
+				+ ",personalIdentityNo = " + personalIdentityNo + ",userId = " + userId + ",restorantId = "
+				+ idRestorant + ",userRole = " + userRole + ",restName = " + restorant + " ]";
 	}
 
-
-
-
-
-	
 }

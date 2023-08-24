@@ -24,7 +24,7 @@ public class RegisterUserFormMapper extends BaseMapper<RegisterUserForm, Registe
 		rgUser.setAge(dto.getAge());
 		rgUser.setPersonalIdentityNo(dto.getPersonalIdentityNo());
 		rgUser.setUserRole(dto.getUserRole());
-		rgUser.setRestName(dto.getRestName());
+		rgUser.setRestorant(dto.getRestorant());
 		return rgUser;
 	}
 
@@ -41,7 +41,7 @@ public class RegisterUserFormMapper extends BaseMapper<RegisterUserForm, Registe
 		rgUser.setAge(entity.getAge());
 		rgUser.setPersonalIdentityNo(entity.getPersonalIdentityNo());
 		rgUser.setUserRole(entity.getUserRole());
-		rgUser.setRestName(entity.getRestName());
+		rgUser.setRestorant(entity.getRestorant());
 		rgUser.setUserId(entity.getUserId());
 		rgUser.setIdRestorant(entity.getIdRestorant());
 		return rgUser;
@@ -55,7 +55,7 @@ public class RegisterUserFormMapper extends BaseMapper<RegisterUserForm, Registe
 		rgUser.setPhoneNo(dto.getPhoneNo());
 		rgUser.setPersonalIdentityNo(dto.getPersonalIdentityNo());
 		rgUser.setUserRole(dto.getUserRole());
-		rgUser.setRestName(dto.getRestName());
+		rgUser.setRestorant(dto.getRestorant());
 
 		return rgUser;
 	}

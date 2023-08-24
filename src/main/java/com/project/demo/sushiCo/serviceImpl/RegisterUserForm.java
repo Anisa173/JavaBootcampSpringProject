@@ -3,6 +3,7 @@ package com.project.demo.sushiCo.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import com.project.demo.sushiCo.entity.BasicEntity;
+import com.project.demo.sushiCo.entity.Restorant;
 import com.project.demo.sushiCo.entity.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,8 +34,8 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 	private String personalIdentityNo;
 	@Column(name = "userRole")
 	private UserRole userRole;
-	@Column(name = "rest")
-	private List<String> restName = new ArrayList<String>();
+	@Column(name = "restorant")
+	private List<Restorant> restorant = new ArrayList<Restorant>();
 	private Integer userId;
 	private Integer idRestorant;
 
@@ -43,7 +44,7 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 	}
 
 	public RegisterUserForm(String first_name, String last_name, String password, String email, String address,
-			String phoneNo, Integer age, String personalIdentityNo, UserRole userRole, List<String> rest,
+			String phoneNo, Integer age, String personalIdentityNo, UserRole userRole, List<Restorant> rest,
 			Integer idRestorant, Integer userId) {
 		super();
 		this.first_name = first_name;
@@ -55,7 +56,7 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		this.age = age;
 		this.personalIdentityNo = personalIdentityNo;
 		this.userRole = userRole;
-		this.restName = rest;
+		this.restorant = rest;
 		this.idRestorant = idRestorant;
 		this.userId = userId;
 	}
@@ -141,12 +142,12 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		this.userRole = userRole;
 	}
 
-	public List<String> getRestName() {
-		return restName;
+	public List<Restorant> getRestorant() {
+		return restorant;
 	}
 
-	public void setRestName(List<String> rest) {
-		this.restName = rest;
+	public void setRestorant(List<Restorant> rest) {
+		this.restorant = rest;
 	}
 
 	public Integer getIdRestorant() {
@@ -169,7 +170,7 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		return "RegisterUserForm[registrationId = " + registrationId + ",first_name = " + first_name + ",last_name = "
 				+ last_name + ",password = " + password + ",email = " + email + ",address = " + address + ",phoneNo = "
 				+ phoneNo + ",age  = " + age + ",personalIdentityNo = " + personalIdentityNo + ",userRole = " + userRole
-				+ ",rest = " + restName + ",idRestorant = " + idRestorant + ",userId = " + userId + "]";
+				+ ",rest = " + restorant + ",idRestorant = " + idRestorant + ",userId = " + userId + "]";
 	}
 
 }
