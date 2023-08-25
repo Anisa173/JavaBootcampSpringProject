@@ -1,12 +1,9 @@
 package com.project.demo.sushiCo.serviceImpl;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
 import com.project.demo.sushiCo.domain.mappers.DishCategoryMapper;
 import com.project.demo.sushiCo.entity.DishCategory;
@@ -49,28 +46,21 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 	}
 
 	@Override
-	public DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto, Integer id,Integer adminId) throws Exception {
+	public DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto,@Valid DishCategoryDto regDishCategForm, Integer id,Integer adminId) throws Exception {
 		var dishCategory = dishCategoryMapper.toEntity(getDishCategoryById(id,adminId));
 		var dishResult = dishCategoryMapper.toUpdate(dishCategoryDto, (DishCategory) dishCategory);
 		return dishCategoryMapper.toDto(dishCategoryRepository.save(dishResult));
 	}
 
 	@Override
-	public List<DishCategoryDto> getDishCategory() throws Exception {
-		return dishCategoryRepository.findAll().stream().map(a -> dishCategoryMapper.toDto(a))
-				.collect(Collectors.toList());
-	}
-
-	@Override
 	public DishCategoryDto getDishCategoryById(Integer id,Integer adminId) throws Exception {
-
 		return dishCategoryMapper.toDto(dishCategoryRepository.getDishCategoryById(id,adminId));
 	}
 
 	@Override
 	public List<DishCategoryDto> getDishCategorybyRestorant(Integer adminId) throws Exception {
-		
 		return dishCategoryRepository.getDishCategorybyRestorant(adminId);
 	}
+
 
 }

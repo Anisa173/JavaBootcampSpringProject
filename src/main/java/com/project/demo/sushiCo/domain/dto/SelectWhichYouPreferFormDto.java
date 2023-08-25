@@ -1,14 +1,11 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.project.demo.sushiCo.entity.Restorant;
 
 public class SelectWhichYouPreferFormDto {
 
 	private Integer idSelect;
-	private List<Restorant> rest = new ArrayList<Restorant>();
+	private Restorant rest ;
 	private Integer idRestorant;
 	private Integer userId;
 
@@ -16,7 +13,7 @@ public class SelectWhichYouPreferFormDto {
 
 	}
 
-	public SelectWhichYouPreferFormDto(Integer idSelect, List<Restorant> restName, Integer idRestorant,
+	public SelectWhichYouPreferFormDto(Integer idSelect, Restorant restName, Integer idRestorant,
 			Integer userId) {
 		this.setIdSelect(idSelect);
 		this.setRest(restName);
@@ -32,11 +29,11 @@ public class SelectWhichYouPreferFormDto {
 		this.idSelect = idSelect;
 	}
 
-	public List<Restorant> getRest() {
+	public Restorant getRest() {
 		return rest;
 	}
 
-	public void setRest(List<Restorant> restName) {
+	public void setRest(Restorant restName) {
 		this.rest = restName;
 	}
 

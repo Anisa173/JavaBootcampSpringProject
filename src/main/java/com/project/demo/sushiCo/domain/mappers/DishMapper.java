@@ -29,8 +29,8 @@ public class DishMapper extends BaseMapper<Dish, DishDto> {
 		dishDto.setDishPrize(entity.getDishPrize());
 		dishDto.setDishDescription(entity.getDishDescription());
 		dishDto.setCategoryId(entity.getCategory().getId());
-		var dishType = entity.getCategory().getCategoryName();		
-		dishDto.setDishType(dishType);
+		var dishCategory = entity.getCategory().getCategoryName();		
+		dishDto.setDishCategory(dishCategory);
 		dishDto.setOrderId(entity.getOrder().getId());
 		var orderItems = entity.getOrder().getId();
 		dishDto.setOrderItems(orderItems);

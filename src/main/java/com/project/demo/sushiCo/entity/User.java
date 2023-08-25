@@ -94,13 +94,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 					@JoinColumn(name = "idRest", referencedColumnName = "idRestorant") })
 	@JsonIgnoreProperties
 	private List<Restorant> rest = new ArrayList<Restorant>();
-//Vizitori preferon te informohet mbi shume restorante
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "restorantVisitors", joinColumns = {
-			@JoinColumn(name = "visitorsId", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "restVisitorsId", referencedColumnName = "idRestorant") })
-	@JsonIgnoreProperties
-	private List<Restorant> restorantV = new ArrayList<Restorant>();
 
 // Klienti shton ne shporte disa menu duke selektuar edhe numrin e artikujve per
 	// cdo menu
@@ -152,7 +145,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 			String personalIdentityNo, String userStatus, Integer age, UserRole userRole,
 			List<BookingProcessing> bookingProcessings, List<PackageOrdered> package_Orders, List<Order> orders,
 			List<AddInBasket> addInBaskets, List<Restorant> rest, User shippers, List<User> user,
-			List<Restorant> restorantV, List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant,
+			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant,
 			List<Order> orders1, User adminPlatforma, WebAplication webAplication, List<User> user1) {
 		super();
 
@@ -169,7 +162,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.cardBank = cardBank;
 		this.dishCategories = dishCategories;
 		this.setRest(rest);
-		this.restorantV = restorantV;
 		this.setShippers(shippers);
 		this.setAddInBaskets(addInBaskets);
 		this.setOrders(orders);
@@ -349,14 +341,6 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	public void setRestorant(Restorant restorant) {
 		this.restorant = restorant;
-	}
-
-	public List<Restorant> getRestorantV() {
-		return restorantV;
-	}
-
-	public void setRestorantV(List<Restorant> restorantV) {
-		this.restorantV = restorantV;
 	}
 
 	public List<Order> getOrders1() {

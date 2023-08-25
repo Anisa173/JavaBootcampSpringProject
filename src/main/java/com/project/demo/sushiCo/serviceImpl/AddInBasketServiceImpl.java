@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
-import com.project.demo.sushiCo.domain.dto.CardBankDto;
+import com.project.demo.sushiCo.domain.dto.RegisterCardBankDto;
 import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
 import com.project.demo.sushiCo.domain.mappers.AddInBasketMapper;
@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 
 @Validated
 @Service
-public class AddInBasketServiceImpl implements AddInBasketService {
+public class AddInBasketServiceImpl<SelectedDishFormDto> implements AddInBasketService {
 	@Autowired
 	private final AddInBasketRepository basketRepository;
 	private final AddInBasketMapper basketMapper;
@@ -41,8 +41,8 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 	}
 
 	@Override
-	public AddInBasketDto selectDishes(@Valid SelectDishesForm selectForm, Integer custId) throws Exception {
-		var basketAdd = getDishDCategoriesByCustomerId(selectForm.getId(), selectForm.getCategoryId(),
+	public AddInBasketDto selectDishes(@Valid SelectDishesForm selectForm) throws Exception {
+		var basketAdd = getDishDCategoriesByCustomerId(selectForm.getDId(), selectForm.getCategoryId(),
 				selectForm.getCustId());
 		basketAdd.setCategoryName(selectForm.getCategoryName());
 		basketAdd.setDish(selectForm.getDish());
@@ -58,62 +58,98 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 	}
 
 	@Override
-	public List<AddInBasketDto> getDishesByCustomerId(Integer dId, Integer categoryId, Integer custId) throws Exception {
+	public List<AddInBasketDto> getDishesByCustomerId(Integer dId, Integer categoryId, Integer custId)
+			throws Exception {
 		return basketMapper.toDto(basketRepository.getDishesByCustomerId(dId, categoryId, custId));
 	}
 
 	@Override
 	public AddInBasketDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception {
-		var pmSer = getPaymentServicesById(byProcessingform.getIdcust(), byProcessingform.getPaymentMId(),
-				byProcessingform.getServicePId(), byProcessingform.getIdRestorant());
+		var pmSer = getPaymentServicesCustomById(byProcessingform.getIdcust(), byProcessingform.getIdRestorant(),
+				byProcessingform.getPmId(), byProcessingform.getServPId());
 		pmSer.setPayments_methodR(byProcessingform.getPayments_methodR());
 		pmSer.setService_placesR(byProcessingform.getService_placesR());
 		return basketMapper.toDto(basketRepository.save(pmSer));
 	}
 
 	@Override
-	public OrderByProcessingDto getPaymentServicesById(Integer idcust, Integer idRestorant, Integer pmId,
+	public OrderByProcessingDto getPaymentServicesCustomById(Integer custId, Integer idRestorant, Integer pmId,
 			Integer servPId) throws Exception {
-
-		return orderMapper.toDto(basketRepository.getPaymentServicesById(idcust, idRestorant, pmId, servPId));
+		return orderMapper.toDto(basketRepository.getPaymentServicesCustomById(custId, idRestorant, pmId, servPId));
 	}
 
 	@Override
-	public CardBankDto getCardsByCustomerId(Integer registrationId, String BankId, Integer userCardId,
-			Integer idRestorant, Integer pmId) {
+	public RegisterCardBankDto getCardsByCustomerId(Integer registrationId, Integer custId, Integer idRestorant, Integer pmId,
+			Integer servPId) {
 
 		return cardFormMapper
-				.toDto(basketRepository.getCardsByCustomerId(registrationId, BankId, userCardId, idRestorant, pmId));
+				.toDto(basketRepository.getCardsByCustomerId(registrationId, custId, idRestorant, pmId ,servPId));
 	}
 
 	@Override
-	public CardBankDto displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception {
-		var cardB = getCardsByCustomerId(cardBankForm.getId(), cardBankForm.getBankId(), cardBankForm.getUserCardId(),
-				cardBankForm.getIdRestorant(), cardBankForm.getPmId());
+	public AddInBasketDto displayCardForm(@Valid RegisterCardform cardBankForm) throws Exception {
+		var cardB = getCardsByCustomerId(cardBankForm.getId(), cardBankForm.getCustId(), cardBankForm.getIdRestorant(),
+				cardBankForm.getPmId(), cardBankForm.getServPId());
 		cardB.setBankId(cardBankForm.getBankId());
 		cardB.setValid_from(cardBankForm.getValid_from());
 		cardB.setExpiredTime(cardBankForm.getExpiredTime());
 		cardB.setCardSecurityCode(cardBankForm.getCardSecurityCode());
-		return cardFormMapper.toDto(basketRepository.save(cardB));
+		return basketMapper.toDto(basketRepository.save(cardB));
 	}
 
 	@Override
-	public AddInBasketDto create(@Valid AddInBasketDto inBasketDto) throws Exception {
-		var addBasket = basketMapper.toEntity(inBasketDto);
+	public AddInBasketDto create(@Valid SelectDishesFormDto inBasketDto) throws Exception {
+		var addBasket = dishFormMapper.toEntity(inBasketDto);
 		return basketMapper.toDto(basketRepository.save(addBasket));
 	}
 
 	@Override
-	public AddInBasketDto update(@Valid AddInBasketDto inBasketDto, Integer id) throws Exception {
-		var basketAdd = basketMapper.toEntity(inBasketDto);
-		var result = basketMapper.toUpdate(inBasketDto, basketAdd);
+	public AddInBasketDto update(@Valid SelectDishesFormDto selectDishesInBasket,
+			@Valid SelectDishesFormDto selectDishesFormDto, Integer dId, Integer categoryId, Integer customerId)
+			throws Exception {
+		var basketAdd = dishFormMapper.toEntity(getDishDCategoriesByCustomerId(dId, categoryId, customerId));
+		var result = dishFormMapper.toUpdate(selectDishesInBasket, basketAdd);
 		return basketMapper.toDto(basketRepository.save(result));
 	}
 
+	/*
+	 * @Override public void delete(Integer dId, Integer categoryId, Integer custId)
+	 * throws Exception { basketRepository.delete(dId, categoryId, custId); }
+	 */
+
 	@Override
-	public void delete(Integer dId, Integer categoryId,Integer custId) throws Exception {
-		basketRepository.delete(dId, categoryId , custId);
+	public void delete(SelectDishesFormDto selectDishesFormDto, SelectDishesFormDto selectDishesInBasket,
+			Integer custId) throws Exception {
+		basketRepository.delete(selectDishesFormDto, selectDishesInBasket, custId);
 
 	}
 
+	@Override
+	public OrderByProcessingDto createByProcessing(@Valid OrderByProcessingDto processingFormDto) throws Exception {
+		var processO = orderMapper.toEntity(processingFormDto);
+		return orderMapper.toDto(basketRepository.save(processO));
+	}
+
+	@Override
+	public OrderByProcessingDto updateByProcessing(@Valid OrderByProcessingDto byProcessingform,
+			@Valid OrderByProcessingDto orderByProcessForm, Integer custId, Integer idRestorant, Integer pmId,
+			Integer servPId) throws Exception {
+		var processOrder = orderMapper.toEntity(getPaymentServicesCustomById(custId, idRestorant, pmId, servPId));
+		var result = orderMapper.toUpdate(byProcessingform, processOrder);
+		return orderMapper.toDto(basketRepository.save(result));
+	}
+
+	@Override
+	public RegisterCardBankDto createOrderPaymentDetails(@Valid RegisterCardBankDto regCardForm) throws Exception {
+		var paymentCard = cardFormMapper.toEntity(regCardForm);
+		return cardFormMapper.toDto(basketRepository.save(paymentCard));
+	}
+
+	@Override
+	public void deleteCardPaymentDetails(RegisterCardBankDto cardsByCustomerId,Integer custId, Integer idRestorant, Integer pmId,
+			Integer servPId,Integer registrationId,	@Valid RegisterCardBankDto regCardBank)  throws Exception{
+		
+		basketRepository.deleteCardPaymentDetails(regCardBank,registrationId,custId,idRestorant,pmId,servPId);
+		
+	}
 }

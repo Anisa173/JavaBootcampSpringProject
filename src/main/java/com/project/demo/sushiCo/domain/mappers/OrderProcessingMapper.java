@@ -10,9 +10,7 @@ public class OrderProcessingMapper extends BaseMapper<OrderByProcessing, OrderBy
 	public OrderByProcessing toEntity(OrderByProcessingDto dto) {
 		var orderP = new OrderByProcessing();
 		orderP.setIdcust(dto.getIdcust());
-		orderP.setPaymentMId(dto.getPaymentMId());
 		orderP.setPayments_methodR(dto.getPayments_methodR());
-		orderP.setServicePId(dto.getServicePId());
 		orderP.setService_placesR(dto.getService_placesR());
 		return orderP;
 	}
@@ -21,9 +19,7 @@ public class OrderProcessingMapper extends BaseMapper<OrderByProcessing, OrderBy
 	public OrderByProcessingDto toDto(OrderByProcessing entity) {
 		var orderP = new OrderByProcessingDto();
 		orderP.setIdcust(entity.getId());
-		orderP.setPaymentMId(entity.getPaymentMId());
 		orderP.setPayments_methodR(entity.getPayments_methodR());
-		orderP.setServicePId(entity.getServicePId());
 		orderP.setService_placesR(entity.getService_placesR());
 		return orderP;
 

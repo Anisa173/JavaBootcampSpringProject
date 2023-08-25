@@ -15,7 +15,7 @@ public interface ServicePlacesRepository extends JpaRepository<ServicePlaces, In
 
 	ServicePlaces save(ServicePlacesDto serviceP);
 
-	@Query(value = " SELECT sp.service_Places "
+	@Query(value = " SELECT sp.service_Places , sp.shippingCost  "
 			+ " FROM Restorant as r INNER JOIN ServicePlaces as sp ON r.idRestorant = sp.service_idR "
 			+ " WHERE r.idRestorant =: ? ", nativeQuery = true)
 	List<ServicePlaces> getRestorantPServices(Integer idRestorant);

@@ -19,7 +19,7 @@ public interface RestorantService {
 
 	public SelectWhichYouPreferFormDto selectRestorantByVisitor(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
 
-	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer id,Integer userId, Integer idRestorant) throws Exception;
+	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer userId, Integer idRestorant) throws Exception;
 
     public SelectWhichYouPreferFormDto getRestorantById1(Integer idRestorant) throws Exception;
 	
@@ -30,9 +30,12 @@ public interface RestorantService {
 
 	public  SelectWhichYouPreferFormDto selectRestorantByCustomer(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
 
-	public SelectWhichYouPreferFormDto createSelectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference, @Valid RestorantDto restorantSelected) throws Exception;
-
 public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception;
-	
+
+public  SelectWhichYouPreferFormDto selectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference) throws Exception;
+
+public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferFormDto selectRPreference, @Valid SelectWhichYouPreferFormDto restorantSelected,Integer idSelect)
+		throws Exception;
+
 }
 

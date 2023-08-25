@@ -82,16 +82,15 @@ public class RestorantServiceImpl implements RestorantService {
 	@Override
 	public SelectWhichYouPreferFormDto selectRestorantByCustomer(@Valid SelectWhichYouPreferForm restorantPreference)
 			throws Exception {
-		var restorantSelect = getCustomerRestorantById(restorantPreference.getId(), restorantPreference.getUserId(),
+		var restorantSelect = getCustomerRestorantById(restorantPreference.getUserId(),
 				restorantPreference.getIdRestorant());
 		restorantSelect.setRest(restorantPreference.getRest());
 		return selectWhichYouPreferMapper.toDto(restorantRepository.save(restorantSelect));
 	}
 
 	@Override
-	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer id, Integer userId, Integer idRestorant)
-			throws Exception {
-		return selectWhichYouPreferMapper.toDto(restorantRepository.getCustomerRestorantById(id, userId, idRestorant));
+	public SelectWhichYouPreferFormDto getCustomerRestorantById(Integer userId, Integer idRestorant) throws Exception {
+		return selectWhichYouPreferMapper.toDto(restorantRepository.getCustomerRestorantById(userId, idRestorant));
 	}
 
 	@Override
@@ -109,17 +108,22 @@ public class RestorantServiceImpl implements RestorantService {
 	}
 
 	@Override
-	public SelectWhichYouPreferFormDto createSelectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference,@Valid RestorantDto restorantSelected)
-		throws Exception{	
-		return  selectWhichYouPreferMapper.toDto(restorantRepository.createSelectRestorant(selectRPreference,restorantSelected));
+	public SelectWhichYouPreferFormDto selectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference)
+			throws Exception {
+		return selectWhichYouPreferMapper.toDto(restorantRepository.selectRestorant(selectRPreference));
+	}
+
+	@Override
+	public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferFormDto selectRPreference,
+			@Valid SelectWhichYouPreferFormDto restorantSelected, Integer idSelect) throws Exception {
+
+		return selectWhichYouPreferMapper.toDto(restorantRepository.updateRprefered(selectRPreference, idSelect));
 	}
 
 	@Override
 	public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception {
-		
+
 		return restorantMapper.toDto(restorantRepository.getRestorantDetails(idRestorant));
 	}
-
-	
 
 }

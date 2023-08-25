@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.project.demo.sushiCo.domain.dto.CardBankDto;
+import com.project.demo.sushiCo.domain.dto.RegisterCardBankDto;
 import com.project.demo.sushiCo.domain.mappers.CardBankMapper;
 import com.project.demo.sushiCo.repository.CardBankRepository;
 import com.project.demo.sushiCo.service.CardBankService;
@@ -23,7 +23,7 @@ public class CardBankServiceImpl implements CardBankService {
 	}
 
 	@Override
-	public CardBankDto createPaymentCard(@Valid CardBankDto cBankDto) {
+	public RegisterCardBankDto createPaymentCard(@Valid RegisterCardBankDto cBankDto) {
 
 		return cBankMapper.toDto(cBankRepository.createPaymentCard(cBankDto));
 	}

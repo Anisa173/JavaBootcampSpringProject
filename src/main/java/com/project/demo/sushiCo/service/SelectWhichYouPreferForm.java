@@ -1,11 +1,7 @@
 package com.project.demo.sushiCo.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.project.demo.sushiCo.entity.BasicEntity;
 import com.project.demo.sushiCo.entity.Restorant;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +14,7 @@ public class SelectWhichYouPreferForm extends BasicEntity<Integer> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idSelect;
 	@Column(name = "rest")
-	private List<Restorant> rest = new ArrayList<Restorant>();
+	private Restorant rest ;
 	private Integer idRestorant;
 	private Integer userId;
 
@@ -26,7 +22,7 @@ public class SelectWhichYouPreferForm extends BasicEntity<Integer> {
 		super();
 	}
 
-	public SelectWhichYouPreferForm(List<Restorant> rest, Integer idRestorant, Integer userId) {
+	public SelectWhichYouPreferForm(Restorant rest, Integer idRestorant, Integer userId) {
 		super();
 		this.rest = rest;
 		this.idRestorant = idRestorant;
@@ -42,11 +38,11 @@ public class SelectWhichYouPreferForm extends BasicEntity<Integer> {
 		this.idSelect = id;
 	}
 
-	public List<Restorant> getRest() {
+	public Restorant getRest() {
 		return rest;
 	}
 
-	public void setRest(List<Restorant> rest) {
+	public void setRest(Restorant rest) {
 		this.rest = rest;
 
 	}

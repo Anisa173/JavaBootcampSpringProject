@@ -1,5 +1,7 @@
 package com.project.demo.sushiCo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +18,7 @@ public interface PaymentMethodsRepository extends JpaRepository<PaymentMethods, 
 	@Query(" SELECT pm.payment_Method, rest.idRestorant "
 			+ " FROM Restorant rest INNER JOIN PaymentMethods pm ON rest.idRestorant = rest.pm.paymentId "
 			+ " WHERE rest.idRestorant =: ?2 ")
-	PaymentMethods getRestorantPMethods(Integer restorantId);
+	List<PaymentMethods> getRestorantPMethods(Integer restorantId);
 
 	@Query(" Select pm.Id,r.idRestorant From PaymentMethods pm INNER JOIN Restorant r ON r.pm.paymentId = r.idRestorant "
 			+ " Where pm.Id =: Id And r.idRestorant =: idRestorant ")

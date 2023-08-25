@@ -15,7 +15,7 @@ public class DishDto {
 	private String dishDescription;
 	private Integer categoryId;
 	@NotNull(message = "It's required!")
-	private String dishType;
+	private String dishCategory;
 	private Integer orderId;
 	private Integer orderItems;
 	private Long totalItemsInBasket;
@@ -33,7 +33,7 @@ public class DishDto {
 		this.dishDescription = dishDescription;
 		this.dishPrize = dishPrize;
 		this.categoryId = categoryId;
-		this.dishType = dishType;
+		this.dishCategory = dishType;
 		this.setOrderId(orderId);
 		this.setOrderItems(orderItems);
 		this.setTotalItemsInBasket(totalItemsInBasket);
@@ -103,18 +103,22 @@ public class DishDto {
 		this.totalItemsInBasket = totalItemsInBasket2;
 	}
 
-	public String getDishType() {
-		return dishType;
+	public String getDishCategory() {
+		return dishCategory;
 	}
 
-	public void setDishType(String dishType) {
-		this.dishType = dishType;
+	public void setDishCategory(String dishType) {
+		this.dishCategory = dishType;
 	}
 
 	public String toString() {
 		return "DishDto[dId = " + dId + ",dishName = " + dishName + ",dishPrize = " + dishPrize + ",dishDescription = "
-				+ dishDescription + ",dishType = " + dishType + ",categoryId = " +categoryId+ ",orderId = " + orderId + ",orderItems = " + orderItems + ",totalItemsInBasket = "
+				+ dishDescription + ",dishType = " + dishCategory + ",categoryId = " +categoryId+ ",orderId = " + orderId + ",orderItems = " + orderItems + ",totalItemsInBasket = "
 				+ totalItemsInBasket + "]";
 	}
+
+	
+
+	
 
 }

@@ -1,51 +1,42 @@
-package com.project.demo.sushiCo.serviceImpl;
+package com.project.demo.sushiCo.domain.dto;
 
-import com.project.demo.sushiCo.entity.BasicEntity;
 import com.project.demo.sushiCo.entity.DishCategory;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-public class RegisterDishForm extends BasicEntity<Integer> {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RegisterDishFormDto {
 	private Integer idRegistration;
 	private Integer dId;
-	@Column(name = "dishName")
 	private String dishName;
-	@Column(name = "dishPrize")
 	private Double dishPrize;
-	@Column(name = "dishDescription")
 	private String dishDescription;
-	@Column(name = "dishType")
 	private DishCategory dishType;
 	private Integer adminId;
 	private Integer categoryId;
-	
-	@Override
-	public Integer getId() {
+
+	public RegisterDishFormDto() {
+
+	}
+
+	public RegisterDishFormDto(Integer idRegistration, Integer dId, String dishName, Double dishPrize,
+			String dishDescription, DishCategory dishType, Integer adminId, Integer categoryId) {
+
+	}
+
+	public Integer getIdRegistration() {
 		return idRegistration;
 	}
 
-	public void setIdRegistration(Integer id) {
-		this.idRegistration = id;
+	public void setIdRegistration(Integer idRegistration) {
+		this.idRegistration = idRegistration;
 	}
-    public Integer getDId() {
+
+	public Integer getDId() {
 		return dId;
 	}
 
 	public void setDId(Integer dId) {
 		this.dId = dId;
 	}
+
 	public String getDishName() {
 		return dishName;
 	}
@@ -95,9 +86,9 @@ public class RegisterDishForm extends BasicEntity<Integer> {
 	}
 
 	public String toString() {
-		return "RegisterDishForm[idRegistration = " + idRegistration + ",dishName = " + dishName + ",dishPrize = "
-				+ dishPrize + ",dishDescription = " + dishDescription + ",dishType = " + dishType + ",adminId = "
-				+ adminId + ",categoryId = " + categoryId + " ]";
+		return "RegisterDishFormDto[idRegistration = " + idRegistration + ",dId = " + dId + ",dishName = " + dishName
+				+ ",dishPrize = " + dishPrize + ",dishDescription = " + dishDescription + ", dishType = " + dishType
+				+ ",adminId = " + adminId + ",categoryId = " + categoryId + "]";
 	}
 
 	

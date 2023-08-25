@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.project.demo.sushiCo.domain.dto.DishDto;
+import com.project.demo.sushiCo.domain.dto.RegisterDishFormDto;
 import com.project.demo.sushiCo.domain.mappers.DishMapper;
+import com.project.demo.sushiCo.domain.mappers.RegisterDishFormMapper;
 import com.project.demo.sushiCo.entity.Dish;
 import com.project.demo.sushiCo.repository.DishRepository;
 import com.project.demo.sushiCo.service.DishService;
@@ -20,15 +22,12 @@ public class DishServiceImpl implements DishService {
 	@Autowired
 	private final DishRepository dishRepository;
 	private final DishMapper dishMapper;
+private final RegisterDishFormMapper regDishMapper;
 
-public DishServiceImpl() {
-	dishRepository = null;
-	dishMapper = null;
-
-}
-	public DishServiceImpl(DishRepository dishRepository, DishMapper dishMapper) {
+	public DishServiceImpl(DishRepository dishRepository, DishMapper dishMapper,RegisterDishFormMapper regDishMapper) {
 		this.dishRepository = dishRepository;
 		this.dishMapper = dishMapper;
+	this.regDishMapper = regDishMapper;
 	}
 
 	@Override
@@ -38,32 +37,40 @@ public DishServiceImpl() {
 
 	@Override
 	public DishDto register(@Valid RegisterDishForm form) throws Exception {
-		var dishes = getDishByDishCategory(form.getId(), form.getCategoryId(),form.getAdminId());
+		var dishes = getDishByDishCategory(form.getCategoryId(),form.getAdminId(),form.getDId());
 		dishes.setDishName(form.getDishName());
 		dishes.setDishPrize(form.getDishPrize());
 		dishes.setDishDescription(form.getDishDescription());
-		dishes.setCategoryId(form.getCategoryId());
-		dishes.setDishType(form.getDishType());//selective
+		dishes.setDishType(form.getDishType());
 		return dishMapper.toDto(dishRepository.save(dishes));
 	}
 
+	/*regDish.setIdRegistration(entity.getId());
+		regDish.setDId(entity.getDId());
+		regDish.setDishName(entity.getDishName());
+		regDish.setDishPrize(entity.getDishPrize());
+		regDish.setDishDescription(entity.getDishDescription());
+		regDish.setDishType(entity.getDishType());
+		regDish.setAdminId(entity.getAdminId());
+		regDish.setCategoryId(entity.getCategoryId());*/
+
 	@Override
-	public DishDto create(@Valid DishDto dishDto) throws Exception {
-		var dishDto1 = dishMapper.toEntity(dishDto);
-		return dishMapper.toDto(dishRepository.save(dishDto1));
+	public RegisterDishFormDto create(@Valid RegisterDishFormDto dishDto) throws Exception {
+		var dishDto1 = regDishMapper.toEntity(dishDto);
+		return regDishMapper.toDto(dishRepository.save(dishDto1));
 	}
 
 	@Override
-	public DishDto update(@Valid DishDto dishDto, Integer dId, Integer categoryId,Integer adminId) throws Exception {
-		Dish dishes = dishMapper.toEntity(getDishByDishCategory(dId, categoryId,adminId));
-		var uptodate = dishMapper.toUpdate(dishDto, dishes);
-		return dishMapper.toDto(dishRepository.save(uptodate));
+	public RegisterDishFormDto update(@Valid RegisterDishFormDto dishDto,@Valid RegisterDishFormDto regDishForm , Integer dId, Integer categoryId,Integer adminId) throws Exception {
+		var dishes = regDishMapper.toEntity(getDishByDishCategory(dId, categoryId,adminId));
+		var uptodate = regDishMapper.toUpdate(dishDto, dishes);
+		return regDishMapper.toDto(dishRepository.save(uptodate));
 	}
 
 	@Override
-	public DishDto getDishByDishCategory(Integer dId, Integer categoryId,Integer adminId) throws Exception {
+	public RegisterDishFormDto getDishByDishCategory(Integer dId, Integer categoryId,Integer adminId) throws Exception {
 
-		return dishMapper.toDto(dishRepository.getDishByDishCategory(dId, categoryId,adminId));
+		return regDishMapper.toDto(dishRepository.getDishByDishCategory(dId, categoryId,adminId));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -81,9 +88,9 @@ public DishServiceImpl() {
 	}
 
 	@Override
-	public List<DishDto> getDishesByDishCategory(Integer idCategoria, Integer adminId) throws Exception {
+	public List<DishDto> getDishesByDishCategory(Integer categoryId, Integer adminId) throws Exception {
 	
-		return dishRepository.getDishesByDishCategory(idCategoria, adminId);
+		return dishRepository.getDishesByDishCategory(categoryId, adminId);
 	}
 
 }

@@ -41,8 +41,6 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		userDto.setUserStatus(result.getUserStatus());
 		userDto.setAge(result.getAge());
 		userDto.setUserRole(UserRole.fromValue(result.getUserRole()));
-		var totalRestorantV = result.getRestorantV().stream().count();
-		userDto.setTotalRestorantV(totalRestorantV);
 		var totalCardBank = result.getCardBank().stream().count();
 		userDto.setTotalCardBank(totalCardBank);
 		var totalShippers = result.getUser().stream().count();

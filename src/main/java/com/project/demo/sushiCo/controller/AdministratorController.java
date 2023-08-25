@@ -42,7 +42,7 @@ public class AdministratorController {
 	}
 
 	@GetMapping
-	public String getAdministratorIndexView(Authentication auth, Model model) {
+	public String getAdministratorIndexView(Authentication auth, Model model) throws Exception {
 		model.addAttribute("isAuthenticated", auth != null);
 		return "index";
 	}
@@ -60,13 +60,13 @@ public class AdministratorController {
 	}
 
 	@DeleteMapping
-	public String deleteAdmin(@RequestParam(value = "userId", required = true) Integer id) {
+	public String deleteAdmin(@RequestParam(value = "userId", required = true) Integer id) throws Exception {
 		userService.deleteAdmin(id);
 		return "redirect:/user ";
 	}
 
 	@DeleteMapping
-	public String deleteShipper(@RequestParam(value = "userId", required = true) Integer id) {
+	public String deleteShipper(@RequestParam(value = "userId", required = true) Integer id) throws Exception {
 		userService.deleteShippers(id);
 		return "redirect:/user ";
 	}

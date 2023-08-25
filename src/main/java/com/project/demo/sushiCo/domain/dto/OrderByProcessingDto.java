@@ -1,24 +1,20 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.project.demo.sushiCo.entity.PaymentMethods;
+import com.project.demo.sushiCo.entity.ServicePlaces;
 
 public class OrderByProcessingDto {
 	private Integer idSession;
 	private Integer idcust;
-	private Integer paymentMId;
-	private List<String> payments_methodR = new ArrayList<String>();
-	private Integer servicePId;
-	private List<String> service_placesR = new ArrayList<String>();
+	private PaymentMethods payments_methodR;
+	private ServicePlaces service_placesR;
 	private Integer idRestorant;
 
-	public OrderByProcessingDto(Integer idSession, Integer idcust, Integer paymentMId, List<String> payments_methodR,
-			Integer servicePId,List<String> service_placesR, Integer idRestorant) {
+	public OrderByProcessingDto(Integer idSession, Integer idcust, PaymentMethods payments_methodR,
+			ServicePlaces service_placesR, Integer idRestorant) {
 		this.idSession = idSession;
 		this.idcust = idcust;
-		this.paymentMId = paymentMId;
 		this.payments_methodR = payments_methodR;
-		this.servicePId = servicePId;
 		this.service_placesR = service_placesR;
 		this.setIdRestorant(idRestorant);
 	}
@@ -35,35 +31,19 @@ public class OrderByProcessingDto {
 		this.idSession = idSession;
 	}
 
-	public Integer getPaymentMId() {
-		return paymentMId;
-	}
-
-	public void setPaymentMId(Integer paymentMId) {
-		this.paymentMId = paymentMId;
-	}
-
-	public List<String> getPayments_methodR() {
+	public PaymentMethods getPayments_methodR() {
 		return payments_methodR;
 	}
 
-	public void setPayments_methodR(List<String> payments_methodR) {
+	public void setPayments_methodR(PaymentMethods payments_methodR) {
 		this.payments_methodR = payments_methodR;
 	}
 
-	public Integer getServicePId() {
-		return servicePId;
-	}
-
-	public void setServicePId(Integer servicePId) {
-		this.servicePId = servicePId;
-	}
-
-	public List<String> getService_placesR() {
+	public ServicePlaces getService_placesR() {
 		return service_placesR;
 	}
 
-	public void setService_placesR(List<String> service_placesR) {
+	public void setService_placesR(ServicePlaces service_placesR) {
 		this.service_placesR = service_placesR;
 	}
 
@@ -84,9 +64,8 @@ public class OrderByProcessingDto {
 	}
 
 	public String toString() {
-		return "OrderByProcessing[idSession = " + idSession + ",idcust = " + idcust + ",paymentMId = " + paymentMId
-				+ ",payments_methodR = " + payments_methodR + ",servicePId = " + servicePId + ",service_placesR = "
-				+ service_placesR + ",idRestorant = " + idRestorant + "]";
+		return "OrderByProcessing[idSession = " + idSession + ",idcust = " + idcust + ",payments_methodR = "
+				+ payments_methodR + ",service_placesR = " + service_placesR + ",idRestorant = " + idRestorant + "]";
 	}
 
 }

@@ -29,7 +29,6 @@ public class RestorantDto {
 	private Long totalUser;
 	private Long totalPayment_MethodsR;
 	private Long totalService_Places;
-	private Long totalVisitor;
 	private Integer adminRId;
 	private String adminName;
 	private Integer adminIdWeb;
@@ -42,7 +41,7 @@ public class RestorantDto {
 	public RestorantDto(Integer idRestorant, String restNUIS, String restName, String phoneNo, String activity_field,
 			String addressRest, String service_Places, String payment_Methods, Time startDay, Time endDay,
 			String tableDescription, Integer restorant_tbId, Long totalUser, Long totalPayment_MethodsR,
-			Long totalService_Places, Long totalVisitor, Integer adminRId, String adminName, Integer adminIdWeb) {
+			Long totalService_Places, Integer adminRId, String adminName, Integer adminIdWeb) {
 
 		this.idRestorant = idRestorant;
 		this.setRestNUIS(restNUIS);
@@ -59,7 +58,6 @@ public class RestorantDto {
 		this.setTotalUser(totalUser);
 		this.setTotalPayment_MethodsR(totalPayment_MethodsR);
 		this.setTotalService_Places(totalService_Places);
-		this.totalVisitor = totalVisitor;
 		this.adminRId = adminRId;
 		this.adminName = adminName;
 		this.adminIdWeb = adminIdWeb;
@@ -185,14 +183,6 @@ public class RestorantDto {
 		this.totalService_Places = totalService_Places;
 	}
 
-	public Long getTotalVisitor() {
-		return totalVisitor;
-	}
-
-	public void setTotalVisitor(Long totalVisitor) {
-		this.totalVisitor = totalVisitor;
-	}
-
 	public Integer getAdminRId() {
 		return adminRId;
 	}
@@ -224,9 +214,8 @@ public class RestorantDto {
 				+ service_Places + ",payment_Methods = " + payment_Methods + ",startDay = " + startDay + ",endDay = "
 				+ endDay + ",tableCapacity = " + tableDescription + ",restorant_tbId = " + restorant_tbId
 				+ ",totalUser = " + totalUser + ",totalPayment_MethodsR = " + totalPayment_MethodsR
-				+ ",totalService_Places = " + totalService_Places + ",totalVisitor = " + totalVisitor + ",adminRId = "
-				+ adminRId + ",adminName = " + adminName + ",adminIdWeb = " + adminIdWeb + "]";
+				+ ",totalService_Places = " + totalService_Places + ",adminRId = " + adminRId + ",adminName = "
+				+ adminName + ",adminIdWeb = " + adminIdWeb + "]";
 	}
 
-	
 }

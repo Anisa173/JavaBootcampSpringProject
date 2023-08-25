@@ -31,8 +31,8 @@ public class UserController {
 
 	@GetMapping("/api/user/register - view")
 	public String getUserRegistrationView(Model model,
-			@RequestParam(value = "usersId", required = false) Integer registrationId,
-			Integer userId, Integer idRestorant) throws Exception {
+			@RequestParam(value = "usersId", required = false) Integer registrationId, Integer userId,
+			Integer idRestorant) throws Exception {
 		model.addAttribute("restorantList", restService.getAllRestorants(userId));
 		if ((userId == null) && (registrationId == null)) {
 			var registerUserForm = new RegisterUserForm();
@@ -46,8 +46,31 @@ public class UserController {
 		return "tailwindcss/register-view";
 	}
 
+	@PostMapping("/register")
+	public String saveUserRegistrationForm(Integer userId, Integer idRestorant, Integer registrationId,
+			@ModelAttribute("userForm") @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
+			throws Exception {
+		if (bResult.hasErrors()) {
+			return "register - view ";
+		}
+		if (((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId) == null) {
+			userService.registerNewUserAccount(registerUserForm, idRestorant, userId, registrationId);
+		} else {
+			try {
+				userService.update(userId, idRestorant,
+						((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId),
+						registerUserForm);
+
+			} catch (Exception e) {
+				System.out.println("An error ocurred" + "==> " + e.getMessage());
+			}
+		}
+		return "redirect:/api/User/login";
+	}
+
 	@GetMapping("/api/user/login")
-	public String getUserLoginView(Model model,@RequestParam(value = "usersId", required = false) Integer registrationId, Integer userId)
+	public String getUserLoginView(Model model,
+			@RequestParam(value = "usersId", required = false) Integer registrationId, Integer userId)
 			throws Exception {
 		if ((userId == null) && (registrationId == null)) {
 			var loginForm = new Login();
@@ -62,31 +85,10 @@ public class UserController {
 		return "tailwindcss/login-form";
 	}
 
-	@PostMapping("/register")
-	public String saveUserRegistrationForm(Integer userId, Integer idRestorant, Integer registrationId,
-			@ModelAttribute("userForm") @Valid RegisterUserFormDto registerUserForm, BindingResult bResult)
-			throws Exception {
-		if (bResult.hasErrors()) {
-			return "register - view ";
-		}
-		if (((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId) == null) {
-			userService.registerNewUserAccount(registerUserForm, idRestorant, userId,registrationId);
-		} else {
-			try {
-				userService.update(userId, idRestorant, ((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId),
-						registerUserForm);
-
-			} catch (Exception e) {
-				System.out.println("An error ocurred" + "==> " + e.getMessage());
-			}
-		}
-		return "redirect:/api/User/login";
-	}
-
 	@PostMapping("/login")
-	public String saveloginForm(@ModelAttribute("login-form") @Valid LoginDto loginForm, BindingResult nResult, Integer userId1,
-			Integer registrationId1) throws Exception {
-			 
+	public String saveloginForm(@ModelAttribute("login-form") @Valid LoginDto loginForm, BindingResult nResult,
+			Integer userId1, Integer registrationId1) throws Exception {
+
 		if (nResult.hasErrors()) {
 			return "login-form";
 		}

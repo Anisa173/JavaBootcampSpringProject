@@ -1,10 +1,13 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
 import com.project.demo.sushiCo.domain.dto.PaymentMethodsDto;
+import com.project.demo.sushiCo.entity.AddInBasket;
 import com.project.demo.sushiCo.entity.PaymentMethods;
 
 @Component
@@ -40,14 +43,31 @@ public class PaymentMethodsMapper extends BaseMapper<PaymentMethods, PaymentMeth
 
 	@Override
 	public List<PaymentMethods> toEntity(List<PaymentMethodsDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<PaymentMethods> list = new ArrayList<PaymentMethods>( dtoList.size() );
+        for ( PaymentMethodsDto pmInDto : dtoList ) {
+            list.add( toEntity( pmInDto ) );
+        }
+
+        return list;
+
 	}
 
 	@Override
 	public List<PaymentMethodsDto> toDto(List<PaymentMethods> entityList) {
-		// TODO Auto-generated method stub
-		return null;
+		if ( entityList == null ) {
+            return null;
+        }
+
+        List<PaymentMethodsDto> list = new ArrayList<PaymentMethodsDto>( entityList.size() );
+        for ( PaymentMethods pmIn : entityList ) {
+            list.add( toDto( pmIn ) );
+        }
+
+        return list;
 	}
 
 }

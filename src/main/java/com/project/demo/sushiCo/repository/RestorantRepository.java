@@ -24,9 +24,9 @@ public interface RestorantRepository extends JpaRepository<Restorant, Integer> {
 			+ " ( Update Restorant r Set deleted = true Where r.idRestorant =: ?1 And aw.adminIdWeb =: ?2 ) ")
 	void delete(Integer idRestorant, Integer adminIdWeb);
 
-	@Query(" Select c.id , r.restName   From User c INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-			+ " Where r.idRestorant = : idRestorant And  c.id =: id ")
-	SelectWhichYouPreferForm getCustomerRestorantById(Integer id, Integer userId, Integer idRestorant);
+	@Query(" Select c.id , r.restName   From  Restorant r INNER JOIN User c ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
+			+ " INNER JOIN  User a ON  a.r.adminRId = a.id  " + " Where r.idRestorant = : idRestorant And  c.id =: id ")
+	SelectWhichYouPreferForm getCustomerRestorantById(Integer userId, Integer idRestorant);
 
 	SelectWhichYouPreferForm save(SelectWhichYouPreferFormDto restorantSelect);
 
@@ -36,10 +36,13 @@ public interface RestorantRepository extends JpaRepository<Restorant, Integer> {
 
 	SelectWhichYouPreferForm save(SelectWhichYouPreferForm selectR);
 
-	@Query("Insert Into SelectWhichYouPreferForm(List<Restorant>,idRestorant,userId) VALUES(( Select r From Restorant r),( Select r From Restorant r Where idRestorant =: idRestorant),null) ")
+	@Query(" Insert Into SelectWhichYouPreferForm(Restorant,idRestorant,userId)" 
++ " VALUES(( Select r.idRestorant From Restorant r),( Select r From Restorant r Where idRestorant =: idRestorant)," 
++ " ( Select r,c.id From Restorant r INNER JOIN User c ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest Where c.id =: id )) ") 	
+	SelectWhichYouPreferForm selectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference);
 
-	SelectWhichYouPreferForm createSelectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference,
-			@Valid RestorantDto restorantSelected);
+	@Query("Update SelectWhichYouPreferForm sR Set sR.rest =: rest Where idSelect =: idSelect ")
+	SelectWhichYouPreferForm updateRprefered(@Valid SelectWhichYouPreferFormDto selectRPreference, Integer idSelect);
 
 	@Query("Select r.phoneNo,r.address,r.activity_field ,pm.payment_Method,sp.service_Places,sp.shippingCost Shipping_Cost"
 			+ " From Restorant r INNER JOIN PaymentMethods pm ON r.idRestorant = r.pm.paymentId "

@@ -1,16 +1,19 @@
 package com.project.demo.sushiCo.domain.mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.project.demo.sushiCo.domain.dto.CardBankDto;
+import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
+import com.project.demo.sushiCo.domain.dto.RegisterCardBankDto;
+import com.project.demo.sushiCo.entity.AddInBasket;
 import com.project.demo.sushiCo.entity.CardBank;
 @Component
-public class CardBankMapper extends BaseMapper<CardBank , CardBankDto> {
+public class CardBankMapper extends BaseMapper<CardBank , RegisterCardBankDto> {
 
 	@Override
-	public CardBank toEntity(CardBankDto dto) {
+	public CardBank toEntity(RegisterCardBankDto dto) {
 		CardBank card = new CardBank();
 		card.setBankId(dto.getBankId());
 		card.setValid_from(dto.getValid_from());
@@ -20,9 +23,9 @@ public class CardBankMapper extends BaseMapper<CardBank , CardBankDto> {
 	}
 
 	@Override
-	public CardBankDto toDto(CardBank entity) {
-		CardBankDto cardsDto = new CardBankDto();
-		cardsDto.setId(entity.getId());
+	public RegisterCardBankDto toDto(CardBank entity) {
+		RegisterCardBankDto cardsDto = new RegisterCardBankDto();
+		cardsDto.setRegistrationId(entity.getId());
 		cardsDto.setBankId(entity.getBankId());
 		cardsDto.setValid_from(entity.getValid_from());
 		cardsDto.setExpiredTime(entity.getExpiredTime());
@@ -34,21 +37,38 @@ public class CardBankMapper extends BaseMapper<CardBank , CardBankDto> {
 	}
 
 	@Override
-	public CardBank toUpdate(CardBankDto dto, CardBank entity) {
+	public CardBank toUpdate(RegisterCardBankDto dto, CardBank entity) {
 		
 		return null;
 	}
 
 	@Override
-	public List<CardBank> toEntity(List<CardBankDto> dtoList) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CardBank> toEntity(List<RegisterCardBankDto> dtoList) {
+		if ( dtoList == null ) {
+            return null;
+        }
+
+        List<CardBank> list = new ArrayList<CardBank>( dtoList.size() );
+        for ( RegisterCardBankDto cbDto : dtoList ) {
+            list.add( toEntity( cbDto ) );
+        }
+
+        return list;
+
 	}
 
 	@Override
-	public List<CardBankDto> toDto(List<CardBank> entityList) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RegisterCardBankDto> toDto(List<CardBank> entityList) {
+		if ( entityList == null ) {
+            return null;
+        }
+
+        List<RegisterCardBankDto> list = new ArrayList<RegisterCardBankDto>( entityList.size() );
+        for ( CardBank cb : entityList ) {
+            list.add( toDto( cb ) );
+        }
+
+        return list;
 	}
 
 }

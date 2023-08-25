@@ -44,11 +44,6 @@ public class Restorant extends BasicEntity<Integer> {
 	@JsonIgnoreProperties
 	private List<User> users;
 
-	// Restoranti terhiqet nga shume vizitore
-	@ManyToMany(mappedBy = "restorantV", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties
-	private List<User> visitor = new ArrayList<User>();
-
 //Çdo restorant lejon kryerjen e pageses se porosive nepermjet disa metodave pagese
 	@OneToMany(mappedBy = "restorant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PaymentMethods> payment_MethodsR = new ArrayList<PaymentMethods>();
@@ -86,7 +81,7 @@ public class Restorant extends BasicEntity<Integer> {
 
 	public Restorant(String restNUIS, String restName, String phoneNo, String activity_field, String addressRest,
 			String service_Places, String payment_Methods, Time startDay, Time endDay, List<User> users,
-			List<User> visitor, List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places,
+			List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places,
 			RestorantTables restorantTables, User admin, User adminWeb) {
 
 		super();
@@ -101,7 +96,6 @@ public class Restorant extends BasicEntity<Integer> {
 		this.startDay = startDay;
 		this.endDay = endDay;
 		this.users = users;
-		this.visitor = visitor;
 		this.payment_MethodsR = payment_MethodsR;
 		this.places = places;
 		this.setRestorantTables(restorantTables);
@@ -239,13 +233,6 @@ public class Restorant extends BasicEntity<Integer> {
 		this.adminWeb = adminWeb;
 	}
 
-	public List<User> getVisitor() {
-		return visitor;
-	}
-
-	public void setVisitor(List<User> visitor) {
-		this.visitor = visitor;
-	}
 
 	public String toString() {
 		return "RestorantService[idRestorant = " + idRestorant + ",users = " + users + ",payment_MethodsR = "
@@ -253,7 +240,7 @@ public class Restorant extends BasicEntity<Integer> {
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest =" + addressRest
 				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",startDay = "
 				+ startDay + ",endDay = " + endDay + ",restorantTables = " + restorantTables + ",admin = " + admin
-				+ ",adminWeb = " + adminWeb + ",visitor = " + visitor + "]";
+				+ ",adminWeb = " + adminWeb + "]";
 	}
 
 }

@@ -5,15 +5,18 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import com.project.demo.sushiCo.domain.dto.DishDto;
+import com.project.demo.sushiCo.domain.dto.RegisterDishFormDto;
 import com.project.demo.sushiCo.entity.Dish;
+import com.project.demo.sushiCo.serviceImpl.RegisterDishForm;
 
-@Repository
+@Service
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
-	@Query(" Select d From dish d INNER JOIN category dc on dc.d.categoryId = c.id where d.dId = ?1 and dc.id = ?2")
-	DishDto getDishByDishCategory(Integer dId, Integer categoryId);
+	@Query(" Select d.dId From DishCategory dc INNER JOIN Dish d  on dc.d.categoryId = dc.id"
++ " INNER JOIN User a ON a.dc.admin_Id = a.id Where d.dId =:?1 And dc.id =: ?2 And a.id =: ?3 "	)
+	RegisterDishForm getDishByDishCategory(Integer dId, Integer categoryId,Integer adminId);
 
 	@Modifying
 	@Query("Delete From dish d inner join dishCategory c on c.d.categoryId = c.id where d.dId =: ?1 And c.id "  
@@ -30,20 +33,26 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
 			+ "Where a.id =: id)")
 	List<Dish> getDishByPreferences();
 
-	@Query("Select d , max(d.totalAddInBasket)  maxCustomerNo,"
-			+ "From Dish d INNER JOIN AddInBasket addB ON d.dId = d.addB.IDdish "
-			+ "INNER JOIN DishCategory dc ON dc.d.categoryId = dc.id"
-			+ "Where dc.id IN(Select dc.categoryName From DishCategory dc Inner join User a ON a.dc.admin_Id = a.id\"\r\n"
-			+ "Where a.id =: ?1 And dc.categoryName =: ?2)")
+	@Query(" Select d , max(d.totalAddInBasket)  maxCustomerNo, "
+			+ " From Dish d INNER JOIN AddInBasket addB ON d.dId = d.addB.IDdish "
+			+ " INNER JOIN DishCategory dc ON dc.d.categoryId = dc.id "
+			+ " Where dc.id IN(Select dc.categoryName From DishCategory dc Inner join User a ON a.dc.admin_Id = a.id  "
+			+ " Where a.id =: ?1 And dc.categoryName =: ?2) ")
 	Dish getMaxPreference(Integer idDish);
 
-	@Query(value = "Select d.dId , dc.id ,a.id From DishCategory as dc INNER JOIN Dish as d ON dc.id = d.categoryId"
+/*	@Query(value = "Select d.dId , dc.id ,a.id From DishCategory as dc INNER JOIN Dish as d ON dc.id = d.categoryId"
 			+ "INNER JOIN User a ON dc.admin_Id = a.id  "
 			+ "Where d.dId = ? and a.id = ? and dc.id = ?", nativeQuery = true)
-	Dish getDishByDishCategory(Integer dId, Integer categoryId, Integer adminId);
+	Dish getDishByDishCategory(Integer dId, Integer categoryId, Integer adminId);*/
 
 	@Query("Select d,dc.categoryName From DishCategory  dc INNER JOIN User a ON a.dc.admin_Id = a.id "
 			+ " INNER JOIN Dish  d ON dc.id = dc.d.categoryId  Where dc.id =: ?1 And a.id =: ?2")
-	List<DishDto> getDishesByDishCategory(Integer idCategoria, Integer adminId);
+	List<DishDto> getDishesByDishCategory(Integer categoryId, Integer adminId);
+
+	Dish save(RegisterDishFormDto dishes);
+
+	RegisterDishForm save(RegisterDishForm uptodate);
+
+
 
 }

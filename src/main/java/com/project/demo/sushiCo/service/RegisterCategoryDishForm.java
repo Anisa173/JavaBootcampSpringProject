@@ -15,18 +15,27 @@ import jakarta.persistence.GenerationType;
 public class RegisterCategoryDishForm extends BasicEntity<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
+	private Integer registrationId;
+	private Integer id;
 	@Column(name = "categoryName")
 	private String categoryName;
 	private Integer admin_Id;
 
 	@Override
 	public Integer getId() {
-		return getId();
+		return registrationId;
+	}
+
+	public void setRegistrationId(Integer id) {
+		this.registrationId = id;
+	}
+
+	public Integer getId1() {
+		return id;
 	}
 
 	public void setId(Integer id) {
-		this.Id = id;
+		this.id = id;
 	}
 
 	public String getCategoryName() {
@@ -46,7 +55,7 @@ public class RegisterCategoryDishForm extends BasicEntity<Integer> {
 	}
 
 	public String toString() {
-		return "RegisterCategoryDishForm[Id = " + Id + ",categoryName = " + categoryName + ",admin_Id = " + admin_Id
-				+ "]";
+		return "RegisterCategoryDishForm[registrationId = " + registrationId + ",Id = " + id + ",categoryName = "
+				+ categoryName + ",admin_Id = " + admin_Id + "]";
 	}
 }

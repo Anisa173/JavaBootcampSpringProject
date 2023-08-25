@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "dish")
+@Table(name = "Dish")
 public class Dish extends BasicEntity<Integer> {
    
 //Disa dishes i perkasin nje kategorie

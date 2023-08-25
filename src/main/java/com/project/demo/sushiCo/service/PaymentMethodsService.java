@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 
 public interface PaymentMethodsService {
 
-
 	List<PaymentMethodsDto> getAllPayment_Methods(Integer idRestorant) throws Exception;
 
 	PaymentMethodsDto registerMethod_Payment(@Valid RegisterMethodsPaymentForm form) throws Exception;
@@ -15,7 +14,7 @@ public interface PaymentMethodsService {
 
 	PaymentMethodsDto getPayment_MethodsById(Integer Id, Integer idRestorant) throws Exception;
 
-	PaymentMethodsDto getRestorantPMethods(Integer restorantId) throws Exception;
+	List<PaymentMethodsDto> getRestorantPMethods(Integer restorantId) throws Exception;
 
 	void delete(Integer Id, Integer idRestorant) throws Exception;
 

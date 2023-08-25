@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -31,7 +30,8 @@ public class RegisterCardform extends BasicEntity<Integer> {
 	private Integer cardSecurityCode;
 	private Integer idRestorant;
 	private Integer pmId;
-	private Integer userCardId;
+	private Integer custId;
+	private Integer servPId;
 
 	@Override
 	public Integer getId() {
@@ -91,18 +91,27 @@ public class RegisterCardform extends BasicEntity<Integer> {
 		this.pmId = pmId;
 	}
 
-	public Integer getUserCardId() {
-		return userCardId;
+	public Integer getCustId() {
+		return custId;
 	}
 
-	public void setUserCardId(Integer userCardId) {
-		this.userCardId = userCardId;
+	public void setCustId(Integer Id) {
+		this.custId = Id;
+	}
+
+	public Integer getServPId() {
+
+		return servPId;
+	}
+
+	public void setServPId(Integer servPId) {
+		this.servPId = servPId;
 	}
 
 	public String toString() {
 		return "RegisterCardform[registrationId = " + registrationId + ",BankId = " + BankId + ",valid_from = "
 				+ valid_from + ",expiredTime = " + expiredTime + ",cardSecurityCode = " + cardSecurityCode
-				+ ",idRestorant = " + idRestorant + ",userCardId = " + userCardId + " ]";
+				+ ",idRestorant = " + idRestorant + ",custId = " + custId + ",servPId = " + servPId + " ]";
 	}
 
 }

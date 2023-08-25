@@ -22,6 +22,7 @@ public class SelectDishesForm extends BasicEntity<Integer> {
 	private Integer noItems;
 	private String categoryName;
 	private Integer custId;
+	private Integer dId;
 
 	@Override
 	public Integer getId() {
@@ -73,9 +74,17 @@ public class SelectDishesForm extends BasicEntity<Integer> {
 
 	}
 
+	public Integer getDId() {
+		return dId;
+	}
+
+	public void setdId(Integer dId) {
+		this.dId = dId;
+	}
+
 	public String toString() {
 		return "SelectDishesForm[id = " + id + ",categoryId = " + categoryId + ",dish =" + dish + ",categoryName = "
-				+ categoryName + ",noItems = " + noItems + ",custId = " + custId + "]";
+				+ categoryName + ",noItems = " + noItems + ",custId = " + custId + ",dId = " + dId + "]";
 
 	}
 
