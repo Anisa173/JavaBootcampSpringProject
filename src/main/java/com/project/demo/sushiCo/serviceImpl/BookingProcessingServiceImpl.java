@@ -76,6 +76,12 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 		return registerBookMapper.toDto(bookingRepository.update(regBooking));
 	}
 
+	@Override
+	public RegisterBookingFormDto getAllCustomerReservationById(Integer id, Integer cR_Id) throws Exception {
+		
+		return registerBookMapper.toDto(bookingRepository.getAllCustomerReservation(id,cR_Id));
+	}
+
 
 
 

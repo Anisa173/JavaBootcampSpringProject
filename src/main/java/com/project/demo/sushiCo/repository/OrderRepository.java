@@ -77,5 +77,11 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	+ " Order By o.oId " )
 	List<Order> getOrders();
 
+@Query(" Select o From Order o INNER JOIN User a ON a.o.adminRestId = a.id "
++ " INNER JOIN User c ON c.o.idCustomer = c.id "
++ " Group By c.id  " 
++ " Where a.id =: id  ")
+List<Order> getOrderById(Integer userId);
+
 	
 }

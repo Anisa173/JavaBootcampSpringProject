@@ -10,20 +10,23 @@ public class TransportingPackageOrderFormDto {
 	private Integer registrationId;
 	@NotBlank(message = "firstName_lastName")
 	@NotNull(message = " * It's Required! * ")
-	@Size(min = 15,max = 55  ,message = "It's at minimum with 15 characters and at maximum with 55 characters")
+	@Size(min = 15, max = 55, message = "It's at minimum with 15 characters and at maximum with 55 characters")
 	private String customerName_Surname;
 	@NotBlank(message = "firstName_lastName")
 	@NotNull(message = " * It's Required! * ")
-	@Size(min = 15,max = 55  ,message = "It's at minimum with 15 characters and at maximum with 55 characters")
+	@Size(min = 15, max = 55, message = "It's at minimum with 15 characters and at maximum with 55 characters")
 	private String shippersName_Surname;
 	@NotBlank(message = "ServicePlace/Street/Palace no/ApartmentCategory/Apartment no")
 	@NotNull(message = "It's Required")
 	private String customerAddress;
-	private Order orders ;
-	private ServicePlaces servicePl ;
+	private Order orders;
+	private ServicePlaces servicePl;
 	@NotNull(message = " It's Required! ")
 	private String noPhoneCustomer;
 	private Double sessionPayment;
+	private Integer idShporta;
+	private Integer userId;
+	private Integer serviceId;
 
 	public TransportingPackageOrderFormDto() {
 
@@ -31,7 +34,7 @@ public class TransportingPackageOrderFormDto {
 
 	public TransportingPackageOrderFormDto(Integer registrationId, String customerName, String shippersName,
 			String customerAddress, Order orders, ServicePlaces servicePl, String noPhoneCustomer,
-			Double sessionPayment) {
+			Double sessionPayment, Integer idShporta, Integer userId, Integer serviceId) {
 		this.registrationId = registrationId;
 		this.customerName_Surname = customerName;
 		this.shippersName_Surname = shippersName;
@@ -40,6 +43,9 @@ public class TransportingPackageOrderFormDto {
 		this.orders = orders;
 		this.servicePl = servicePl;
 		this.sessionPayment = sessionPayment;
+		this.idShporta = idShporta;
+		this.userId = userId;
+		this.serviceId = serviceId;
 	}
 
 	public Integer getRegistrationId() {
@@ -106,11 +112,41 @@ public class TransportingPackageOrderFormDto {
 		this.sessionPayment = sessionPayment;
 	}
 
+	public Integer getIdShporta() {
+		return idShporta;
+	}
+
+	public void setIdShporta(Integer idShporta) {
+		this.idShporta = idShporta;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(Integer serviceId) {
+		this.serviceId = serviceId;
+	}
+
 	public String toString() {
 		return "TransportingPackageOrderFormDto[registrationId = " + registrationId + ",customerName = "
 				+ customerName_Surname + ",shippersName = " + shippersName_Surname + ",customerAddress = "
 				+ customerAddress + ",noPhoneCustomer = " + noPhoneCustomer + ",orders = " + orders + ",servicePl = "
-				+ servicePl + ",noPhoneCustomer = " + noPhoneCustomer + " ,sessionPayment = " + sessionPayment + "]";
+				+ servicePl + ",noPhoneCustomer = " + noPhoneCustomer + " ,sessionPayment = " + sessionPayment
+				+ ",packageOrderId = " + idShporta + ",userId = " + userId + ",serviceId = " + serviceId + "]";
+	}
+
+	public void IdShporta(Integer idShporta2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

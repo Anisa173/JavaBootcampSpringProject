@@ -36,6 +36,9 @@ public class TransportingPackageOrderFormMapper extends BaseMapper<TransportingP
 		shpkg.setOrders(entity.getOrders());
 		shpkg.setServicePl(entity.getServicePl());
 		shpkg.setSessionPayment(entity.getSessionPayment());
+		shpkg.setUserId(entity.getUserId());
+		shpkg.setServiceId(entity.getServiceId());
+		shpkg.setIdShporta(entity.getIdShporta());
 		return shpkg;
 	}
 
@@ -43,6 +46,7 @@ public class TransportingPackageOrderFormMapper extends BaseMapper<TransportingP
 	public TransportingPackageOrderForm toUpdate(TransportingPackageOrderFormDto dto, TransportingPackageOrderForm entity) {
 		entity.setCustomerName_Surname(dto.getCustomerName_Surname());
 		entity.setShippersName_Surname(dto.getShippersName_Surname());
+		entity.setNoPhoneCustomer(dto.getNoPhoneCustomer());
 		entity.setCustomerAddress(dto.getCustomerAddress());
 		entity.setOrders(dto.getOrders());
 		entity.setServicePl(dto.getServicePl());

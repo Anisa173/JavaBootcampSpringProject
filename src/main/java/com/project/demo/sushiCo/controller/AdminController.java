@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
 import com.project.demo.sushiCo.domain.dto.RegisterDishFormDto;
 import com.project.demo.sushiCo.domain.dto.RestorantTablesDto;
+import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import com.project.demo.sushiCo.service.DishCategoryService;
 import com.project.demo.sushiCo.service.DishService;
 import com.project.demo.sushiCo.service.OrderService;
+import com.project.demo.sushiCo.service.PackageOrderedService;
 import com.project.demo.sushiCo.service.RegisterCategoryDishForm;
 import com.project.demo.sushiCo.service.RegisterRestorantTablesForm;
 import com.project.demo.sushiCo.service.RestorantTablesService;
+import com.project.demo.sushiCo.service.TransportingPackageOrderForm;
 import com.project.demo.sushiCo.serviceImpl.RegisterDishForm;
 
 import jakarta.validation.Valid;
@@ -33,13 +36,15 @@ public class AdminController {
 	private final DishService dService;
 	private final OrderService oService;
 	private final RestorantTablesService rtbService;
+	private final PackageOrderedService pcgService;
 
 	public AdminController(DishCategoryService dcService, DishService dService, OrderService oService,
-			RestorantTablesService rtbService) {
+			RestorantTablesService rtbService, PackageOrderedService pcgService) {
 		this.dcService = dcService;
 		this.dService = dService;
 		this.oService = oService;
 		this.rtbService = rtbService;
+		this.pcgService = pcgService;
 	}
 
 	@GetMapping
@@ -203,19 +208,39 @@ public class AdminController {
 		return "redirect:/restorantTables ";
 	}
 
-@GetMapping("/packageOrder - view")
-public String getPackageOrderForm(Model model,@RequestParam(value =" ", required = false)) throws Exception{	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("/packageOrder - view")
+	public String getPackageOrderForm(Model model,
+			@RequestParam(value = " idPackagedOrder ", required = false) Integer registrationId, Integer userId,
+			Integer serviceId, Integer idShporta) throws Exception {
+		model.addAttribute(" order ", oService.getOrdersById(userId));
+		if (registrationId == null) {
+			var packReg = new TransportingPackageOrderForm();
+			packReg.setRegistrationId(registrationId);
+			model.addAttribute("packageOrderForm", packReg);
+			model.addAttribute("viewTitle", "PackageOrder Created");
+		} else {
+			model.addAttribute("packageOrderForm", pcgService.getPackageOrderById(userId, serviceId, idShporta));
+			model.addAttribute("viewTitle", " PackageOrder Updated");
+		}
+		return "tailwindcss/packageOrder - view";
 	}
-	
+
+	@PostMapping("/register")
+	public String savePackageOrderCreated(
+			@ModelAttribute("packageOrderForm") @Valid TransportingPackageOrderFormDto shippingPackOrder,
+			BindingResult br, Integer idShporta, Integer serviceId, Integer oId, Integer userId) throws Exception {
+		if (br.hasErrors()) {
+			return "packageOrder - view ";
+		}
+		if (((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta) == null) {
+			pcgService.create(shippingPackOrder);
+		} else {
+			pcgService.update(
+					((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta),
+					shippingPackOrder, idShporta, serviceId, oId, userId);
+		}
+
+		return "redirect:/packageOrder ";
+	}
+
 }

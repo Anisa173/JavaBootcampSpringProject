@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
@@ -16,11 +17,13 @@ import com.project.demo.sushiCo.domain.dto.RegisterBookingFormDto;
 import com.project.demo.sushiCo.domain.dto.RegisterCardBankDto;
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
 import com.project.demo.sushiCo.domain.dto.SelectWhichYouPreferFormDto;
+import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import com.project.demo.sushiCo.service.AddInBasketService;
 import com.project.demo.sushiCo.service.BookingProcessingService;
 import com.project.demo.sushiCo.service.DishService;
 import com.project.demo.sushiCo.service.OrderByProcessing;
 import com.project.demo.sushiCo.service.OrderService;
+import com.project.demo.sushiCo.service.PackageOrderedService;
 import com.project.demo.sushiCo.service.PaymentMethodsService;
 import com.project.demo.sushiCo.service.RegisterBookingForm;
 import com.project.demo.sushiCo.service.RegisterCardform;
@@ -51,10 +54,12 @@ public class CustomerController {
 	private final PaymentMethodsService pmethodService;
 	private final ServicePlacesService sPlacesService;
 	private final OrderService oService;
+	private final PackageOrderedService pcgService;
 
+	
 	public CustomerController(RestorantTablesService rTablesService, RestorantService restService,
 			DishService dishService, AddInBasketService addInBasketService, BookingProcessingService bpService,
-			PaymentMethodsService pmethodService, ServicePlacesService sPlacesService, OrderService oService) {
+			PaymentMethodsService pmethodService, ServicePlacesService sPlacesService, OrderService oService,PackageOrderedService pcgService) {
 		this.rTablesService = rTablesService;
 		this.restService = restService;
 		this.dishService = dishService;
@@ -63,6 +68,7 @@ public class CustomerController {
 		this.pmethodService = pmethodService;
 		this.sPlacesService = sPlacesService;
 		this.oService = oService;
+	this.pcgService = pcgService;
 	}
 
 	@GetMapping("/selectRestorant - view")
@@ -222,6 +228,15 @@ public class CustomerController {
 		return "redirect/order ";
 	}
 
+@PutMapping("/")
+public String confirmOrderProcessed(@RequestParam(value = "orderId ",required = true) @Valid TransportingPackageOrderFormDto shippingPackOrder,Integer userId,Integer serviceId,Integer idShporta,Integer oId) throws Exception {	
+
+	pcgService.updateByStatus(((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta),shippingPackOrder, idShporta, serviceId, oId, userId);	
+
+	return "redirect:/order ";
+}
+
+
 	@DeleteMapping
 	public String delete(@RequestParam(value = "orderId ", required = true) Integer idCustomer, Integer adminRestId,
 			Integer oId) throws Exception {
@@ -306,5 +321,17 @@ public class CustomerController {
 		bpService.deleteReservation(id, cR_id, idRestorant);
 		return "redirect:/bookingProcessing";
 	}
+@GetMapping
+public String getRestorantCustReservations(Model model,@RequestParam(value = "customerReservationId " ,required = false) Integer id,Integer cR_Id,Integer rtb_id)  throws Exception {
+	
+model.addAttribute("bookingProcessing",bpService.getCustomerReservationById(id, cR_Id,rtb_id));
+return "redirect:/bookingProcessing" ;
+}
+@GetMapping
+public String getAllReservations(Model model,@RequestParam(value = "customerReservationId " ,required = false) Integer id,Integer cR_Id)  throws Exception {
+	model.addAttribute("bookingProcessing",bpService.getAllCustomerReservationById( id,cR_Id));
+return "redirect:/bookingProcessing ";
+}
+
 
 }

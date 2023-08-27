@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-import com.project.demo.sushiCo.domain.dto.PackageOrderedDto;
 import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import com.project.demo.sushiCo.entity.PackageOrdered;
 import com.project.demo.sushiCo.service.TransportingPackageOrderForm;
@@ -21,8 +20,8 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ " (Select c.id , a.id  From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
 			+ " INNER JOIN User a ON a.o.adminRestId = a.id " + " Where c.id =: ?1 And a.id =: ?2 ) ")
 
-	TransportingPackageOrderForm getPackageOrderById(Integer adminRestId, Integer idCustomer, Integer shipperId,
-			Integer serviceId, Integer idShporta);
+	TransportingPackageOrderForm getPackageOrderById(Integer userId, Integer serviceId, Integer idShporta);
+
 
 	PackageOrdered save(TransportingPackageOrderFormDto packOrdert);
 
@@ -38,7 +37,7 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ "( Select o From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta )"
 			+ " INNER JOIN ServicePlaces sp ON  sp.pkg.serviceId = sp.Id"
 			+ " Where  sp.pkg.sessionPayment =: (sum(o.orderPrize) + sp.shippingCost) ")
-	TransportingPackageOrderForm create(@Valid PackageOrderedDto packOrderedDto);
+	TransportingPackageOrderForm create(@Valid TransportingPackageOrderFormDto shippingPackOrder);
 
 //customer
 	@Modifying
@@ -52,25 +51,24 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ " From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
 			+ " Where  c.id IN(Update User c Set c.userStatus = 'COMPLETED' Where c.id =: id) "
 			+ " And o.oId  IN (Update Order o Set o.orderStatus = 'PROCESSED' Where o.oId =: oId)")
-
-	TransportingPackageOrderForm updateByStatus(@Valid PackageOrderedDto packOrderedDto, Integer Id, Integer shippersId,
-			Integer serviceId, Integer oId, Integer idCustomer);
+	TransportingPackageOrderForm updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto, Integer id, Integer serviceId,
+			Integer oId, Integer userId);
 //Admini
 	@Modifying
 	@Query("Update PackageOrdered pck Set pck.statusOrderSession =: 'IN_PROGRESS' Where  pck.id IN "
 			+ "	( Select concat(t.first_name, ' ',t.last_name)  transporterName_Surname , sp.service_Places  ServicePlaces"
-			+ "	From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta "
+			+ "	 From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta "
 			+ "	 INNER JOIN User t ON t.pkg.shippersId = t.id  "
 			+ "	 INNER JOIN ServicePlaces sp ON sp.pkg.serviceId = sp.Id "
 			+ "	 Where pkg.Id =:id And t.id IN(Update User t Set t.userStatus = 'IN_TRANSIT' And  transporterName_Surname =: ?1 Where t.id =: id)"
 			+ "  And  sp.Id IN ( UPDATE ServicePlaces sp SET sp.service_Places =: ?1 Where sp.Id =: Id ) "
-			+ "	 And  o.oId IN( Select Concat(c.first_name,' ',c.last_name)  customerName_Surname,c.address  Customer_Address,c.phoneNo , o  "
+			+ "	 And  o.oId IN( Select Concat(c.first_name,' ',c.last_name)  customerName_Surname , c.address  Customer_Address , c.phoneNo , o  "
 			+ "	 From  Order o INNER JOIN User c ON c.o.idCustomer = c.id "
-			+ "	 Where  c.id IN( Update User c Set c.userStatus = 'WAITING' And customerName_Surname =: ?1 And c.address =: ?2 And c.phoneNo =: ?3  Where c.id =: id ) "
+			+ "	 Where  c.id IN ( Update User c Set c.userStatus = 'WAITING' And customerName_Surname =: ?1 And c.address =: ?2 And c.phoneNo =: ?3  Where c.id =: id ) "
 			+ "	 And o.oId  IN ( Update Order o Set o.orderStatus = 'IN_PROGRESS'  Where o.oId =: oId)")
 
-	TransportingPackageOrderForm update(@Valid PackageOrderedDto packOrDto, Integer id, Integer shippersId,
-			Integer serviceId, Integer oId, Integer idCustomer);
+	TransportingPackageOrderForm update(@Valid TransportingPackageOrderFormDto packOrDto, Integer idShporta, Integer serviceId,
+			Integer oId, Integer userId);
 //Admini
 	@Modifying
 	@Query(" Update PackageOrdered pcO Set deleted =: true And pcO.statusOrderSession =: ' CANCEL '  "
@@ -87,5 +85,8 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ " IN( Select concat(c.first_name, '' ,c.last_name) Customer_Name,c.address Customer_Address "
 			+ " From o INNER JOIN User a ON a.o.adminRestId = a.id " + " INNER JOIN User c ON c.o.idCustomer = c.id  "
 			+ " Where a.id =: id and c.id =: id ) ")
-	List<PackageOrdered> getAllPackageOByshipperId(Integer shippersId, Integer adminRestId, Integer idCustomer);
+	List<PackageOrdered> getAllPackageOByshipperId(Integer userId);
+
+
+	
 }

@@ -32,8 +32,8 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 
 	@Override
 	public PackageOrderedDto register(@Valid TransportingPackageOrderForm packageForm) throws Exception {
-		var packOrdert = getPackageOrderById(packageForm.getId(), packageForm.getIdPackageOrder(),
-				packageForm.getAdminRestId(), packageForm.getIdCustomer(), packageForm.getShippersId());
+		var packOrdert = getPackageOrderById(packageForm.getIdShporta(), packageForm.getUserId(),
+				packageForm.getServiceId());
 		packOrdert.setCustomerName_Surname(packageForm.getCustomerName_Surname());
 		packOrdert.setShippersName_Surname(packageForm.getShippersName_Surname());
 		packOrdert.setCustomerAddress(packageForm.getCustomerAddress());
@@ -44,31 +44,31 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 	}
 
 	@Override
-	public TransportingPackageOrderFormDto create(@Valid PackageOrderedDto packOrderedDto) throws Exception {
-		return packageOrderFMapper.toDto(packageOrRepository.create(packOrderedDto));
+	public TransportingPackageOrderFormDto create(@Valid TransportingPackageOrderFormDto shippingPackOrder)
+			throws Exception {
+		return packageOrderFMapper.toDto(packageOrRepository.create(shippingPackOrder));
 	}
 
 	@Override
-	public TransportingPackageOrderFormDto getPackageOrderById(Integer adminRestId, Integer idCustomer,
-			Integer shipperId, Integer serviceId, Integer idShporta) {
-		return packageOrderFMapper.toDto(
-				packageOrRepository.getPackageOrderById(adminRestId, idCustomer, shipperId, serviceId, idShporta));
+	public TransportingPackageOrderFormDto getPackageOrderById(Integer userId, Integer serviceId, Integer idShporta) {
+		return packageOrderFMapper.toDto(packageOrRepository.getPackageOrderById(userId, serviceId, idShporta));
+
 	}
 
 	@Override
-	public TransportingPackageOrderFormDto updateByStatus(@Valid PackageOrderedDto packOrderedDto, Integer Id,
-			Integer shippersId, Integer serviceId, Integer oId, Integer idCustomer) throws Exception {
+	public TransportingPackageOrderFormDto updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto,@Valid TransportingPackageOrderFormDto shippingPackOrder2 , Integer Id,
+			Integer serviceId, Integer oId, Integer userId) throws Exception {
 
 		return packageOrderFMapper
-				.toDto(packageOrRepository.updateByStatus(packOrderedDto, Id, shippersId, serviceId, oId, idCustomer));
+				.toDto(packageOrRepository.updateByStatus(packOrderedDto, Id, serviceId, oId, userId));
 	}
 
 	@Override
-	public TransportingPackageOrderFormDto update(@Valid PackageOrderedDto packOrDto, Integer Id, Integer shippersId,
-			Integer serviceId, Integer oId, Integer idCustomer) throws Exception {
+	public TransportingPackageOrderFormDto update(@Valid TransportingPackageOrderFormDto packOrDto,
+			@Valid TransportingPackageOrderFormDto shippingPackOrder, Integer idShporta, Integer serviceId, Integer oId,
+			Integer userId) throws Exception {
 
-		return packageOrderFMapper
-				.toDto(packageOrRepository.update(packOrDto, Id, shippersId, serviceId, oId, idCustomer));
+		return packageOrderFMapper.toDto(packageOrRepository.update(packOrDto, idShporta, serviceId, oId, userId));
 	}
 
 	@Override
@@ -76,13 +76,11 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 
 		packageOrRepository.delete(id, oId, adminRestId);
 	}
-
-	@Override
-	public List<PackageOrderedDto> getAllPackageOByshipperId(Integer shippersId, Integer adminRestId,
-			Integer idCustomer) throws Exception {
+@Override
+	public List<PackageOrderedDto> getAllPackageOByshipperId(Integer userId) throws Exception {
 
 		return (List<PackageOrderedDto>) packageOrMapper
-				.toDto(packageOrRepository.getAllPackageOByshipperId(shippersId, adminRestId, idCustomer));
+				.toDto(packageOrRepository.getAllPackageOByshipperId(userId));
 	}
 
 }

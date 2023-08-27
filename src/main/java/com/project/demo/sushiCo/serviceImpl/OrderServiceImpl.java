@@ -88,4 +88,10 @@ public class OrderServiceImpl implements OrderService {
 		orderRepository.deleteOrder(adminRestId, oId);
 	}
 
+	@Override
+	public List<OrderDto> getOrdersById(Integer userId) throws Exception {
+		
+		return orderMapper.toDto(orderRepository.getOrderById(userId));
+	}
+
 }

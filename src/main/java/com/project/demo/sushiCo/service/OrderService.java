@@ -13,8 +13,9 @@ public interface OrderService {
 
 	OrderDto createOrder(@Valid OrderDto oDto) throws Exception;
 
+	//Admini i restorantit liston te gjitha porosite e restorantit te grupuara sipas customerId,nënkupton te renditura sipas kohes se kryerjes 
+    List<OrderDto> getOrdersById(Integer userId) throws Exception;
 	
-
 	// Cdo klient te shohe porosite qe ka kryer në çdo restorant ne kete aplikacion
 	List<OrderDto> getOrdersByRestorantId(Integer customerId, Integer idRest, String restName) throws Exception;
 
