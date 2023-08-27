@@ -90,4 +90,10 @@ public List<TransportingPackageOrderFormDto> getAllPackageOByshipperId(Integer u
 			.toDto((packageOrRepository).getAllPackageOByshipperId(userId)) ;
 }
 
+@Override
+public List<TransportingPackageOrderFormDto> getPackageOrdersByServiceP(Integer Id) throws Exception {
+	
+	return packageOrderFMapper.toDto(packageOrRepository.getPackageOrdersByServiceP(Id));
+}
+
 }

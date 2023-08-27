@@ -33,4 +33,7 @@ public interface PackageOrderedService {
 	List<TransportingPackageOrderFormDto> getAllPackageOByCustomerId(Integer userId) throws Exception;
     //Te gjitha shportat e te gjithe klienteve
 	List<TransportingPackageOrderFormDto> getAllPackageOByshipperId(Integer userId) throws Exception;
+//Shippersit i duhet te listoje pakot qe duhet te degoje ne nje destinacion te caktuar
+List<TransportingPackageOrderFormDto> getPackageOrdersByServiceP(Integer Id) throws Exception ;
+	
 }

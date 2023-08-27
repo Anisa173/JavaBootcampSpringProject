@@ -95,6 +95,17 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 		+ "	Where a.id =: id  Group By c.id) ")
      List<TransportingPackageOrderForm> getAllPackageOByshipperId(Integer userId);
 
+	@Query(" Select o.orderPrize,o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost ,sp.servicePl Service_Places   "
++ " From PackageOrdered pc INNER JOIN Order o ON pc.id = pc.o.idShporta "
++ " INNER JOIN User sh ON  sh.pc.shippersId = sh.id "
++ " INNER JOIN ServicePlaces sp ON sp.pc.serviceId = sp.Id "
++ "	Where sp.Id =: Id And o.oId IN  "
++ "( Select concat(c.first_name, ' ' ,c.last_name) customerName_Surname From Order o INNER JOIN User c ON o.oId = o.c.idCustomer "
++ " Group By c.id "	)
+	List<TransportingPackageOrderForm> getPackageOrdersByServiceP(Integer Id);
+
+
+
 
 	
 }
