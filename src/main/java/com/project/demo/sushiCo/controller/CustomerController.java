@@ -56,10 +56,10 @@ public class CustomerController {
 	private final OrderService oService;
 	private final PackageOrderedService pcgService;
 
-	
 	public CustomerController(RestorantTablesService rTablesService, RestorantService restService,
 			DishService dishService, AddInBasketService addInBasketService, BookingProcessingService bpService,
-			PaymentMethodsService pmethodService, ServicePlacesService sPlacesService, OrderService oService,PackageOrderedService pcgService) {
+			PaymentMethodsService pmethodService, ServicePlacesService sPlacesService, OrderService oService,
+			PackageOrderedService pcgService) {
 		this.rTablesService = rTablesService;
 		this.restService = restService;
 		this.dishService = dishService;
@@ -68,7 +68,7 @@ public class CustomerController {
 		this.pmethodService = pmethodService;
 		this.sPlacesService = sPlacesService;
 		this.oService = oService;
-	this.pcgService = pcgService;
+		this.pcgService = pcgService;
 	}
 
 	@GetMapping("/selectRestorant - view")
@@ -228,14 +228,17 @@ public class CustomerController {
 		return "redirect/order ";
 	}
 
-@PutMapping("/")
-public String confirmOrderProcessed(@RequestParam(value = "orderId ",required = true) @Valid TransportingPackageOrderFormDto shippingPackOrder,Integer userId,Integer serviceId,Integer idShporta,Integer oId) throws Exception {	
+	@PutMapping("/")
+	public String confirmOrderProcessed(
+			@RequestParam(value = "orderId ", required = true) @Valid TransportingPackageOrderFormDto shippingPackOrder,
+			Integer userId, Integer serviceId, Integer idShporta, Integer oId) throws Exception {
 
-	pcgService.updateByStatus(((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta),shippingPackOrder, idShporta, serviceId, oId, userId);	
+		pcgService.updateByStatus(
+				((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta),
+				shippingPackOrder, idShporta, serviceId, oId, userId);
 
-	return "redirect:/order ";
-}
-
+		return "redirect:/order ";
+	}
 
 	@DeleteMapping
 	public String delete(@RequestParam(value = "orderId ", required = true) Integer idCustomer, Integer adminRestId,
@@ -321,17 +324,20 @@ public String confirmOrderProcessed(@RequestParam(value = "orderId ",required = 
 		bpService.deleteReservation(id, cR_id, idRestorant);
 		return "redirect:/bookingProcessing";
 	}
-@GetMapping
-public String getRestorantCustReservations(Model model,@RequestParam(value = "customerReservationId " ,required = false) Integer id,Integer cR_Id,Integer rtb_id)  throws Exception {
-	
-model.addAttribute("bookingProcessing",bpService.getCustomerReservationById(id, cR_Id,rtb_id));
-return "redirect:/bookingProcessing" ;
-}
-@GetMapping
-public String getAllReservations(Model model,@RequestParam(value = "customerReservationId " ,required = false) Integer id,Integer cR_Id)  throws Exception {
-	model.addAttribute("bookingProcessing",bpService.getAllCustomerReservationById( id,cR_Id));
-return "redirect:/bookingProcessing ";
-}
 
+	@GetMapping
+	public String getRestorantCustReservations(Model model,Integer id, Integer cR_Id, Integer rtb_id)
+			throws Exception {
+
+		model.addAttribute("bookingProcessing", bpService.getCustomerReservationById(id, cR_Id, rtb_id));
+		return "redirect:/bookingProcessing";
+	}
+
+	@GetMapping
+	public String getAllReservations(Model model, Integer id, Integer cR_Id)
+			throws Exception {
+		model.addAttribute("bookingProcessing", bpService.getAllCustomerReservationById(id, cR_Id));
+		return "redirect:/bookingProcessing ";
+	}
 
 }

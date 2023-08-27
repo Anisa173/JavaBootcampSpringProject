@@ -77,10 +77,17 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 		packageOrRepository.delete(id, oId, adminRestId);
 	}
 @Override
-	public List<PackageOrderedDto> getAllPackageOByshipperId(Integer userId) throws Exception {
+	public List<TransportingPackageOrderFormDto> getAllPackageOByCustomerId(Integer userId) throws Exception {
 
-		return (List<PackageOrderedDto>) packageOrMapper
-				.toDto(packageOrRepository.getAllPackageOByshipperId(userId));
+		return packageOrderFMapper
+				.toDto(packageOrRepository.getAllPackageOByCustomerId(userId));
 	}
+
+@Override
+public List<TransportingPackageOrderFormDto> getAllPackageOByshipperId(Integer userId) throws Exception {
+	
+	return packageOrderFMapper
+			.toDto((packageOrRepository).getAllPackageOByshipperId(userId)) ;
+}
 
 }

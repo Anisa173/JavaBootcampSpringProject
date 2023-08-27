@@ -79,13 +79,21 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 
 	void delete(Integer id, Integer oId, Integer adminRestId);
 
-	@Query(" Select o.orderPrize,o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost "
-			+ " From PackageOrdered pack INNER JOIN Order o IN pack.o.idShporta = pack.id "
-			+ " INNER JOIN User sh ON sh.pack.shippersId = sh.id  " + " Where  sh.id =: ?3 And o.oId "
-			+ " IN( Select concat(c.first_name, '' ,c.last_name) Customer_Name,c.address Customer_Address "
+	@Query("  Select o.orderPrize,o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost  "
+			+ " From PackageOrdered pack INNER JOIN Order o IN pack.o.idShporta = pack.id  "
+			+ " INNER JOIN User sh ON sh.pack.shippersId = sh.id  " + " Where  sh.id =: ?3 And o.oId  "
+			+ " IN( Select concat(c.first_name, '' ,c.last_name)  Customer_Name , c.address Customer_Address  "
 			+ " From o INNER JOIN User a ON a.o.adminRestId = a.id " + " INNER JOIN User c ON c.o.idCustomer = c.id  "
 			+ " Where a.id =: id and c.id =: id ) ")
-	List<PackageOrdered> getAllPackageOByshipperId(Integer userId);
+	List<TransportingPackageOrderForm> getAllPackageOByCustomerId(Integer userId);
+
+	@Query(" Select o.orderPrize,o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost  "
+		+ "	 From PackageOrdered pack INNER JOIN Order o IN pack.o.idShporta = pack.id  "
+		+ "	 INNER JOIN User sh ON sh.pack.shippersId = sh.id  " + " Where  sh.id =: ?3 And o.oId  "
+		+ "	 IN( Select concat(c.first_name, '' ,c.last_name)  Customer_Name , c.address Customer_Address  "
+		+ "	 From o INNER JOIN User a ON a.o.adminRestId = a.id " + " INNER JOIN User c ON c.o.idCustomer = c.id  "
+		+ "	Where a.id =: id  Group By c.id) ")
+     List<TransportingPackageOrderForm> getAllPackageOByshipperId(Integer userId);
 
 
 	

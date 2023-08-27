@@ -29,8 +29,8 @@ public interface PackageOrderedService {
 			@Valid TransportingPackageOrderFormDto shippingPackOrder, Integer Id, Integer serviceId, Integer oId,
 			Integer userId) throws Exception;
 
-	// Shportat e porosise se Transportuesit
-	List<PackageOrderedDto> getAllPackageOByshipperId(Integer userId) throws Exception;
-
-
+	// Shportat e porosise se Transportuesit per nje klient 
+	List<TransportingPackageOrderFormDto> getAllPackageOByCustomerId(Integer userId) throws Exception;
+    //Te gjitha shportat e te gjithe klienteve
+	List<TransportingPackageOrderFormDto> getAllPackageOByshipperId(Integer userId) throws Exception;
 }
