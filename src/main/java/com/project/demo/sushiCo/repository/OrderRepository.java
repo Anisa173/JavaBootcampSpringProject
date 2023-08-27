@@ -6,24 +6,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
 import com.project.demo.sushiCo.domain.dto.OrderDto;
 import com.project.demo.sushiCo.entity.Order;
-
 import jakarta.validation.Valid;
 
 @Service
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 @Modifying
-	@Query("Insert Into Order(orderPrize,orderItems,orderStatus,oTimeConfirmed,oTimeProccessed,idShporta,idCustomer,adminRestId) Values(?1,?2,?3,?4,?5,"
-			+ "(Select o.idShporta From Order o Inner Join PackageOrdered p ON p.o.idShporta = p.id Where p.id =: id),"
-			+ "(Select o.idCustomer From Order o Inner Join User c ON c.o.idCustomer = c.id Where c.id IN (Update c Set c.userStatus = 'IN-PROGRESS' Where c.id =: id )),"
-			+ "(Select o.adminRestId From Order o Inner Join User a ON a.o.adminRestId = a.id Where a.id =: id))"
-			+ "Select cst.o.orderPrize,cst.o.orderItems,cst.o.orderStatus"
-			+ "From User cst INNER JOIN AddInBasket ab ON cst.id = cst.ab.userId"
-			+ "INNER JOIN Order o ON cst.idCustomer = cst.o.oId"
-			+ "INNER JOIN Restorant r ON r.cst.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
-			+ "WHERE cst.o.orderItems = sum(cst.ab.addItemDish)  AND cst.o.orderStatus = 'Pending' AND cst.o.orderPrize = sum(cst.ab.amountValue)  ")
+	@Query(" Insert Into Order(orderPrize,orderItems,orderStatus,oTimeConfirmed,oTimeProccessed,idShporta,idCustomer,adminRestId) Values(?1,?2,?3,?4,?5, "
+			+ " (Select o.idShporta From Order o Inner Join PackageOrdered p ON p.o.idShporta = p.id Where p.id =: id), "
+			+ " (Select o.idCustomer From Order o Inner Join User c ON c.o.idCustomer = c.id Where c.id IN (Update c Set c.userStatus = 'IN-PROGRESS' Where c.id =: id )), "
+			+ " (Select o.adminRestId From Order o Inner Join User a ON a.o.adminRestId = a.id Where a.id =: id)) "
+			+ " Select cst.o.orderPrize,cst.o.orderItems,cst.o.orderStatus "
+			+ " From User cst INNER JOIN AddInBasket ab ON cst.id = cst.ab.userId "
+			+ " INNER JOIN Order o ON cst.idCustomer = cst.o.oId "
+			+ " INNER JOIN Restorant r ON r.cst.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
+			+ " WHERE cst.o.orderItems =: sum(cst.ab.addItemDish)  AND cst.o.orderStatus =: 'Pending' AND cst.o.orderPrize =: sum(cst.ab.amountValue) And r.idRestorant =: idRestorant  ")
 
 	Order createOrder(@Valid OrderDto oDto);
 	/*
@@ -46,10 +44,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 	// Admini i restorantit kerkon te gjeneroje porosine me koston me te madhe dhe
 	// me te vogel si edhe kush e kreu ate
-	@Query(value = "Select c.customerName , max(o.orderPrize) as MaxPrize,min(o.orderPrize) as MinPrize,o.orderId"
-			+ "From Order as o INNER JOIN User as c ON o.idCustomer = c.id"
+	@Query(value = " Select CONCAT(c.first_name, ' ' ,c.last_name) as CustomerName , max(o.orderPrize) as MaxPrize, min(o.orderPrize) as MinPrize , o.orderId"
+			+ " From Order as o INNER JOIN User as c ON o.idCustomer = c.id"
 			+ "	INNER JOIN User as a ON o.adminRestId = a.id" + " Where a.id =: id  ", nativeQuery = true)
-	Order getOrderMaxByCustomerId(Integer idRestorant, Integer custId);
+	List<Order> getOrderMaxMinByCustomerId(Integer idRestorant, Integer userId);
 
 	// Porosia anullohet nga klienti
 	@Modifying
@@ -63,13 +61,21 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	@Query("Select o  From Order o INNER JOIN User c ON c.o.idCustomer = c.id"
 			+ "INNER JOIN User a ON a.o.adminRestId = a.id" + "Order By c.o.orderPrize ASC  Group By c.id"
 			+ "Where a.id =: id ")
-	List<Order> getOrdersByCost(Integer idCustomer, Integer adminRestId);
+	List<Order> getOrdersByCost(Integer id);
 
-//Porosia anullohet nga admini për arsye të pamundësisë për ta dërguar porosinë në destinacionin e kërkuar
+//Porosia anullohet nga admini për arsye të rradhës së gjatë
 	@Modifying
 	@Query(" UPDATE Order or SET deleted = true And or.orderStatus = 'Cancel'  WHERE EXISTS  "
 			+ " ( Select or From or INNER JOIN User c  ON c.id = c.or.idCustomer "
 			+ "	INNER JOIN User a ON a.or.adminRestId = a.id  WHERE  or.oId =: ?1  And  a.id =: id  ) ")
-	Order deleteOrder(Integer adminRestId, Integer oId);
+	void deleteOrder(Integer adminRestId, Integer oId);
 
+
+	@Query(" Select o , c.id From User c Inner Join User adw ON  adw.c.adminIdPlatforma = adw.id "
+	+ " INNER JOIN Order o ON  c.id = c.o.idCustomer "
+	+ " Group BY c.id "
+	+ " Order By o.oId " )
+	List<Order> getOrders();
+
+	
 }

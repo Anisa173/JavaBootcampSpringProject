@@ -22,10 +22,9 @@ public class RegisterBookingFormMapper extends BaseMapper<RegisterBookingForm,Re
 	regB.setEnd_reservationTime(dto.getEnd_reservationTime());
 	regB.setNoParticipants(dto.getNoParticipants());
 	regB.setReservationDescription(dto.getReservationDescription());
-	regB.setTableName(dto.getTableName());
-	regB.setNoTables(dto.getNoTables());
-	regB.setLockedTables(dto.getLockedTables());
+	regB.setTables(dto.getTables());
 	regB.setIdCustomer(dto.getIdCustomer());
+	regB.setRtb_id(dto.getRtb_id());
 	return regB;
 	}
 
@@ -41,10 +40,9 @@ public class RegisterBookingFormMapper extends BaseMapper<RegisterBookingForm,Re
 		regB.setEnd_reservationTime(entity.getEnd_reservationTime());
 		regB.setNoParticipants(entity.getNoParticipants());
 		regB.setReservationDescription(entity.getReservationDescription());
-		regB.setTableName(entity.getTableName());
-		regB.setNoTables(entity.getNoTables());
-		regB.setLockedTables(entity.getLockedTables());
+		regB.setTables(entity.getTables());
 		regB.setIdCustomer(entity.getIdCustomer());
+		regB.setRtb_id(entity.getRtb_id());
 		return regB;
 	}
 
@@ -55,9 +53,7 @@ public class RegisterBookingFormMapper extends BaseMapper<RegisterBookingForm,Re
 		regB.setEnd_reservationTime(entity.getEnd_reservationTime());
 		regB.setNoParticipants(entity.getNoParticipants());
 		regB.setReservationDescription(entity.getReservationDescription());
-		regB.setTableName(entity.getTableName());
-		regB.setNoTables(entity.getNoTables());
-		regB.setLockedTables(entity.getLockedTables());
+		regB.setTables(entity.getTables());
 		return regB;
 	}
 

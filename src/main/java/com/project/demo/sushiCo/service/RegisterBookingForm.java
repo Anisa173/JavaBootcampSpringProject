@@ -2,11 +2,8 @@ package com.project.demo.sushiCo.service;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.project.demo.sushiCo.entity.BasicEntity;
-
+import com.project.demo.sushiCo.entity.RestorantTables;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,14 +36,10 @@ public class RegisterBookingForm extends BasicEntity<Integer> {
 	private Integer noParticipants;
 	@Column(name = "reservationDescription")
 	private String reservationDescription;
-	@Column(name = "tableName")
-	private List<String> tableName = new ArrayList<String>();
-	@Column(name = "noTables")
-	private Integer noTables;
-	@Column(name = "lockedTables")
-	private Integer lockedTables;
+	@Column(name = "tables")
+	private RestorantTables tables;
 	private Integer idCustomer;
-	private Integer idRestorant;
+	private Integer rtb_id;
 
 	@Override
 	public Integer getId() {
@@ -121,30 +114,6 @@ public class RegisterBookingForm extends BasicEntity<Integer> {
 		this.reservationDescription = reservationDescription;
 	}
 
-	public List<String> getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(List<String> tableName) {
-		this.tableName = tableName;
-	}
-
-	public Integer getNoTables() {
-		return noTables;
-	}
-
-	public void setNoTables(Integer noTables) {
-		this.noTables = noTables;
-	}
-
-	public Integer getLockedTables() {
-		return lockedTables;
-	}
-
-	public void setLockedTables(Integer lockedTables) {
-		this.lockedTables = lockedTables;
-	}
-
 	public Integer getIdCustomer() {
 		return idCustomer;
 	}
@@ -154,22 +123,32 @@ public class RegisterBookingForm extends BasicEntity<Integer> {
 
 	}
 
-	public Integer getIdRestorant() {
-		return idRestorant;
+	public RestorantTables getTables() {
+		return tables;
 	}
 
-	public void setIdRestorant(Integer idRestorant) {
-		this.idRestorant = idRestorant;
+	public void setTables(RestorantTables tables) {
+		this.tables = tables;
 	}
+public Integer getRtb_id() {
+		return rtb_id;
+	}
+
+	public void setRtb_id(Integer rtb_id) {
+		this.rtb_id = rtb_id;
+	}
+
+	
 
 	public String toString() {
 		return "RegisterBookingForm[crId = " + crId + ",first_name = " + first_name + ",last_name = " + last_name
 				+ ",phoneNo = " + phoneNo + ",reservationDate = " + reservationDate + ",start_reservationTime = "
 				+ start_reservationTime + ",start_reservationTime = " + start_reservationTime
 				+ ",end_reservationTime = " + end_reservationTime + ",noParticipants = " + noParticipants
-				+ ",reservationDescription = " + reservationDescription + ",tableName = " + tableName + ",noTables = "
-				+ noTables + ",lockedTables = " + lockedTables + ",idCustomer = " + idCustomer + ",idRestorant = "
-				+ idRestorant + "]";
+				+ ",reservationDescription = " + reservationDescription + ",tables = " + tables + ",idCustomer = "
+				+ idCustomer + ",idRestorant = " + rtb_id + "]";
 	}
+
+	
 
 }

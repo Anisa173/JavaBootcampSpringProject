@@ -1,10 +1,8 @@
 package com.project.demo.sushiCo.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.project.demo.sushiCo.entity.BasicEntity;
 import com.project.demo.sushiCo.entity.Order;
+import com.project.demo.sushiCo.entity.ServicePlaces;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,9 +23,9 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 	@Column(name = "noPhoneCustomer")
 	private String noPhoneCustomer;
 	@Column(name = "orders")
-	private List<Order> orders = new ArrayList<Order>();
+	private Order orders ;
 	@Column(name = "servicePl")
-	private List<String> servicePl = new ArrayList<String>();
+	private ServicePlaces servicePl ;
 	@Column(name = "sessionPayment")
 	private Double sessionPayment;
 	private Integer idPackageOrder;
@@ -41,8 +39,8 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 	}
 
 	public TransportingPackageOrderForm(String customerName, String shippersName, String customerAddress,
-			String noPhoneCustomer, List<Order> orders, Double sessionPayment, Integer idPackageOrder, Integer adminRestId,
-			Integer serviceId, List<String> servicePl, Integer shippersId, Integer idCustomer) {
+			String noPhoneCustomer, Order orders, Double sessionPayment, Integer idPackageOrder, Integer adminRestId,
+			Integer serviceId, ServicePlaces servicePl, Integer shippersId, Integer idCustomer) {
 		super();
 		this.customerName_Surname = customerName;
 		this.setShippersName_Surname(shippersName);
@@ -101,11 +99,11 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 		this.noPhoneCustomer = noPhoneCustomer;
 	}
 
-	public List<Order> getOrders() {
+	public Order getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(Order orders) {
 		this.orders = orders;
 	}
 
@@ -141,11 +139,11 @@ public class TransportingPackageOrderForm extends BasicEntity<Integer> {
 		this.serviceId = serviceId;
 	}
 
-	public List<String> getServicePl() {
+	public ServicePlaces getServicePl() {
 		return servicePl;
 	}
 
-	public void setServicePl(List<String> servicePl) {
+	public void setServicePl(ServicePlaces servicePl) {
 		this.servicePl = servicePl;
 	}
 

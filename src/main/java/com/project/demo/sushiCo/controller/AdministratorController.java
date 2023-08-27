@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.project.demo.sushiCo.domain.dto.OrderDto;
 import com.project.demo.sushiCo.domain.dto.PaymentMethodsDto;
 import com.project.demo.sushiCo.domain.dto.RestorantDto;
 import com.project.demo.sushiCo.domain.dto.ServicePlacesDto;
+import com.project.demo.sushiCo.service.OrderService;
 import com.project.demo.sushiCo.service.PaymentMethodsService;
 import com.project.demo.sushiCo.service.RegisterMethodsPaymentForm;
 import com.project.demo.sushiCo.service.RegisterRestorantForm;
@@ -32,13 +34,15 @@ public class AdministratorController {
 	private final RestorantService restService;
 	private final PaymentMethodsService pmService;
 	private final ServicePlacesService sPlacesService;
+	private final OrderService oService;
 
 	public AdministratorController(UserService userService, RestorantService restService,
-			PaymentMethodsService pmService, ServicePlacesService sPlacesService) {
+			PaymentMethodsService pmService, ServicePlacesService sPlacesService, OrderService oService) {
 		this.userService = userService;
 		this.restService = restService;
 		this.pmService = pmService;
 		this.sPlacesService = sPlacesService;
+		this.oService = oService;
 	}
 
 	@GetMapping
@@ -174,4 +178,24 @@ public class AdministratorController {
 		return "redirect:/restorant ";
 	}
 
+	@GetMapping
+	public String getOrderConfirmed(Model model, @Valid OrderDto oDto) throws Exception {
+		model.addAttribute("order", oService.createOrder(oDto));
+		return "redirect:/order";
+	}
+
+// Admini i aplikacionit 'sheh' porositë sipas customerId dhe datës së proçesimit per arsye analitike	
+	@GetMapping
+	public String getOrderListReview(Model model) throws Exception {
+		model.addAttribute("order", oService.getOrders());
+		return "redirect:/user";
+	}
+
+
+	
+	
+	
+	
+	
+	
 }

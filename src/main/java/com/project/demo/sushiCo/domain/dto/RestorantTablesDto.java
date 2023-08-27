@@ -6,29 +6,25 @@ import com.project.demo.sushiCo.entity.Restorant;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
 public class RestorantTablesDto {
 
 	private Integer rtb_id;
-
 	private Integer tb_id;
-@NotNull(message = "It's not required ")
+	@NotNull(message = "It's not required ")
 	private String tableName;
-@NotNull(message = "It's Required")
+	@NotNull(message = "It's Required")
 	private Integer noTables;
-	
 	private Integer availableTables;
-	@NotNull(message  = "It's required !")
+	@NotNull(message = "It's required !")
 	private Integer lockedTables;
-	@Size(min = 140 ,max = 300, message = " It's at minimum with 140 character and at maximum with 300 characters")
+	@Size(min = 140, max = 300, message = " It's at minimum with 140 character and at maximum with 300 characters")
 	@NotNull(message = "It's required")
 	private String tableDescription;
-@NotNull(message = "It's Required ")
+	@NotNull(message = "It's Required ")
 	private Integer noChairsT;
-
 	private BookingProcessing reservation;
-
 	private Restorant aRest;
+	private Integer adminRId;
 
 	public RestorantTablesDto() {
 
@@ -36,7 +32,7 @@ public class RestorantTablesDto {
 
 	public RestorantTablesDto(Integer rtb_id, Integer tb_id, String tableName, Integer noTables,
 			Integer availableTables, Integer lockedTables, String tableDescription, Integer noChairsT,
-			BookingProcessing reservation,Restorant aRest) {
+			BookingProcessing reservation, Restorant aRest, Integer adminRId) {
 		this.rtb_id = rtb_id;
 		this.tb_id = tb_id;
 		this.tableName = tableName;
@@ -47,7 +43,7 @@ public class RestorantTablesDto {
 		this.noChairsT = noChairsT;
 		this.reservation = reservation;
 		this.aRest = aRest;
-
+		this.adminRId = adminRId;
 	}
 
 	public Integer getRtb_id() {
@@ -130,12 +126,19 @@ public class RestorantTablesDto {
 		this.aRest = aRest2;
 	}
 
+	public Integer getAdminRId() {
+		return adminRId;
+	}
+
+	public void setAdminRId(Integer adminRId) {
+		this.adminRId = adminRId;
+	}
+
 	public String toString() {
 		return "return[rtb_id = " + rtb_id + ",tb_id = " + tb_id + ",tableName = " + tableName + ",noTables = "
 				+ noTables + ",availableTables = " + availableTables + ",unAvailableTables = " + lockedTables
-				+ ",description = " + tableDescription + ",noChairsT = " + noChairsT + ",reservation = " + reservation + ",aRest = " + aRest + "]";
+				+ ",description = " + tableDescription + ",noChairsT = " + noChairsT + ",reservation = " + reservation
+				+ ",aRest = " + aRest + ",adminRId = " + adminRId + "]";
 	}
-
-	
 
 }

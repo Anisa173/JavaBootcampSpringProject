@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.project.demo.sushiCo.domain.dto.RestorantTablesDto;
 import com.project.demo.sushiCo.domain.mappers.RestorantTableMapper;
+import com.project.demo.sushiCo.entity.RestorantTables;
 import com.project.demo.sushiCo.repository.RestorantTablesRepository;
 import com.project.demo.sushiCo.service.RegisterRestorantTablesForm;
 import com.project.demo.sushiCo.service.RestorantTablesService;
@@ -33,9 +34,9 @@ public class RestorantTableServiceImpl implements RestorantTablesService {
 	}
 
 	@Override
-	public RestorantTablesDto getAlltablesById(Integer rtb_id, Integer adminRId) throws Exception {
+	public RestorantTablesDto getRestorantTablesDetails(Integer rtb_id, Integer adminRId) throws Exception {
 
-		return restorantTableMapper.toDto(restorantTbRepository.getAlltablesById(rtb_id, adminRId));
+		return restorantTableMapper.toDto(restorantTbRepository.getRestorantTablesDetails(rtb_id, adminRId));
 	}
 
 	@Override
@@ -65,10 +66,21 @@ public class RestorantTableServiceImpl implements RestorantTablesService {
 
 	@Override
 	public RestorantTablesDto update(Integer tb_id, Integer rtb_id, Integer adminRId,
-			@Valid RestorantTablesDto placesDto) throws Exception {
+			@Valid RestorantTablesDto placesDto,@Valid RestorantTablesDto restTdto) throws Exception {
 		var result = restorantTableMapper.toEntity(getRestorant_tablesById(tb_id, rtb_id, adminRId));
 		var upToDate = restorantTableMapper.toUpdate(placesDto, result);
 		return restorantTableMapper.toDto(restorantTbRepository.save(upToDate));
 	}
 
+	@Override
+	public RestorantTablesDto getAlltablesById(Integer rtb_id, Integer adminRId) {
+		
+		return restorantTableMapper.toDto(restorantTbRepository.getAlltablesById(rtb_id,adminRId));
+	}
+
+	
+
+	
+
+	
 }

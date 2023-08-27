@@ -34,7 +34,7 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 	public BookingProcessingDto register(@Valid RegisterBookingForm bookingForm, Integer idCustomer) throws Exception {
 
 		var reservation = getCustomerReservationById(bookingForm.getId(), bookingForm.getIdCustomer(),
-				bookingForm.getIdRestorant());
+				bookingForm.getRtb_id());
 		reservation.setFirst_name(bookingForm.getFirst_name());
 		reservation.setLast_name(bookingForm.getLast_name());
 		reservation.setPhoneNo(bookingForm.getPhoneNo());
@@ -43,34 +43,40 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 		reservation.setEnd_reservationTime(bookingForm.getEnd_reservationTime());
 		reservation.setNoParticipants(bookingForm.getNoParticipants());
 		reservation.setReservationDescription(bookingForm.getReservationDescription());
-		reservation.setTableName(bookingForm.getTableName());
-		reservation.setNoTables(bookingForm.getNoTables());
-		reservation.setLockedTables(bookingForm.getLockedTables());
+		reservation.setTables(bookingForm.getTables());
+		
 		return bookingMapper.toDto(bookingRepository.save(reservation));
 	}
 
 	@Override
-	public RegisterBookingFormDto getCustomerReservationById(Integer idCustomer, Integer cR_Id, Integer idRestorant)
+	public RegisterBookingFormDto getCustomerReservationById(Integer idCustomer, Integer cR_Id, Integer rtb_id)
 			throws Exception {
-		return registerBookMapper.toDto(bookingRepository.getCustomerReservationById(idCustomer, cR_Id, idRestorant));
+		return registerBookMapper.toDto(bookingRepository.getCustomerReservationById(idCustomer, cR_Id, rtb_id));
 	}
 
 	@Override
-	public RegisterBookingFormDto createBooking(@Valid BookingProcessingDto cReservation) throws Exception {
+	public RegisterBookingFormDto createBooking(@Valid RegisterBookingFormDto regBooking) throws Exception {
 
-		return registerBookMapper.toDto(bookingRepository.createBooking(cReservation));
+		return registerBookMapper.toDto(bookingRepository.createBooking(regBooking));
 	}
 
-	@Override
-	public RegisterBookingFormDto update(@Valid BookingProcessingDto reservation, Integer id, Integer rtb_id)
-			throws Exception {
-		return registerBookMapper.toDto(bookingRepository.update(reservation, id, rtb_id));
-	}
 
 	@Override
 	public void deleteReservation(Integer id, Integer cR_id,Integer idRestorant) throws Exception {
 		bookingRepository.deleteReservation(id, cR_id,idRestorant);
 
 	}
+
+
+
+	@Override
+	public RegisterBookingFormDto update(@Valid RegisterBookingFormDto regBooking,
+			@Valid RegisterBookingFormDto customerReservationById) throws Exception {
+	
+		return registerBookMapper.toDto(bookingRepository.update(regBooking));
+	}
+
+
+
 
 }

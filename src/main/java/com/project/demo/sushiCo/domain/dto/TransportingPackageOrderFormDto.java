@@ -1,10 +1,7 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.project.demo.sushiCo.entity.Order;
-
+import com.project.demo.sushiCo.entity.ServicePlaces;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,8 +19,8 @@ public class TransportingPackageOrderFormDto {
 	@NotBlank(message = "ServicePlace/Street/Palace no/ApartmentCategory/Apartment no")
 	@NotNull(message = "It's Required")
 	private String customerAddress;
-	private List<Order> orders = new ArrayList<Order>();
-	private List<String> servicePl = new ArrayList<String>();
+	private Order orders ;
+	private ServicePlaces servicePl ;
 	@NotNull(message = " It's Required! ")
 	private String noPhoneCustomer;
 	private Double sessionPayment;
@@ -33,7 +30,7 @@ public class TransportingPackageOrderFormDto {
 	}
 
 	public TransportingPackageOrderFormDto(Integer registrationId, String customerName, String shippersName,
-			String customerAddress, List<Order> orders, List<String> servicePl, String noPhoneCustomer,
+			String customerAddress, Order orders, ServicePlaces servicePl, String noPhoneCustomer,
 			Double sessionPayment) {
 		this.registrationId = registrationId;
 		this.customerName_Surname = customerName;
@@ -77,19 +74,19 @@ public class TransportingPackageOrderFormDto {
 		this.customerAddress = customerAddress;
 	}
 
-	public List<Order> getOrders() {
+	public Order getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(Order orders) {
 		this.orders = orders;
 	}
 
-	public List<String> getServicePl() {
+	public ServicePlaces getServicePl() {
 		return servicePl;
 	}
 
-	public void setServicePl(List<String> servicePl) {
+	public void setServicePl(ServicePlaces servicePl) {
 		this.servicePl = servicePl;
 	}
 

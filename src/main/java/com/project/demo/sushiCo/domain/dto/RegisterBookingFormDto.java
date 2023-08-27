@@ -2,8 +2,7 @@ package com.project.demo.sushiCo.domain.dto;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
+import com.project.demo.sushiCo.entity.RestorantTables;
 
 public class RegisterBookingFormDto {
 	private Integer crId;
@@ -15,16 +14,14 @@ public class RegisterBookingFormDto {
 	private Time end_reservationTime;
 	private Integer noParticipants;
 	private String reservationDescription;
-	private List<String> tableName = new ArrayList<String>();
-	private Integer noTables;
-	private Integer lockedTables;
+	private RestorantTables tables;
 	private Integer idCustomer;
-	private Integer idRestorant;
+	private Integer rtb_id;
 
 	public RegisterBookingFormDto(Integer crId, String First_name, String Last_name, String phoneNo,
 			Date reservationDate, Time start_reservationTime, Time end_reservationTime, Integer noParticipants,
-			String reservationDescription,List<String> tableName, Integer noTables, Integer lockedTables, Integer idCustomer,
-			Integer idRestorant) {
+			String reservationDescription, RestorantTables tableName, Integer noTables, Integer lockedTables,
+			Integer idCustomer, Integer rtb_id) {
 		this.crId = crId;
 		this.First_name = First_name;
 		this.Last_name = Last_name;
@@ -34,15 +31,13 @@ public class RegisterBookingFormDto {
 		this.end_reservationTime = end_reservationTime;
 		this.noParticipants = noParticipants;
 		this.reservationDescription = reservationDescription;
-		this.tableName = tableName;
-		this.noTables = noTables;
-		this.lockedTables = lockedTables;
+		this.tables = tableName;
 		this.idCustomer = idCustomer;
-		this.idRestorant = idRestorant;
+		this.setRtb_id(rtb_id);
 	}
 
 	public RegisterBookingFormDto() {
-		
+
 	}
 
 	public Integer getCrId() {
@@ -117,28 +112,12 @@ public class RegisterBookingFormDto {
 		this.reservationDescription = reservationDescription;
 	}
 
-	public List<String> getTableName() {
-		return tableName;
+	public RestorantTables getTables() {
+		return tables;
 	}
 
-	public void setTableName(List<String> tableName) {
-		this.tableName = tableName;
-	}
-
-	public Integer getNoTables() {
-		return noTables;
-	}
-
-	public void setNoTables(Integer noTables) {
-		this.noTables = noTables;
-	}
-
-	public Integer getLockedTables() {
-		return lockedTables;
-	}
-
-	public void setLockedTables(Integer lockedTables) {
-		this.lockedTables = lockedTables;
+	public void setTables(RestorantTables tableName) {
+		this.tables = tableName;
 	}
 
 	public Integer getIdCustomer() {
@@ -148,23 +127,24 @@ public class RegisterBookingFormDto {
 	public void setIdCustomer(Integer idCustomer) {
 		this.idCustomer = idCustomer;
 	}
-
-	public Integer getIdRestorant() {
-		return idRestorant;
+public Integer getRtb_id() {
+		return rtb_id;
 	}
 
-	public void setIdRestorant(Integer idRestorant) {
-		this.idRestorant = idRestorant;
+	public void setRtb_id(Integer rtb_id) {
+		this.rtb_id = rtb_id;
 	}
-
 	public String toString() {
 		return "RegisterBookingFormDto[crId = " + crId + ", First_name = " + First_name + ",Last_name = " + Last_name
 				+ ",phoneNo = " + phoneNo + ", reservationDate = " + reservationDate + ",start_reservationTime = "
 				+ start_reservationTime + ", end_reservationTime = " + end_reservationTime + ",noParticipants = "
-				+ noParticipants + ", reservationDescription = " + reservationDescription + ",tableName = " + tableName
-				+ ", noTables = " + noTables + ", lockedTables = " + lockedTables + ",idCustomer = " + idCustomer
-				+ ",idRestorant = " + idRestorant + "]";
+				+ noParticipants + ", reservationDescription = " + reservationDescription + ",tableName = " + tables
+				+ ",idCustomer = " + idCustomer + ",id = " + rtb_id+ "]";
 
 	}
+
+	
+
+	
 
 }

@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.demo.sushiCo.domain.dto.DishCategoryDto;
 import com.project.demo.sushiCo.domain.dto.RegisterDishFormDto;
+import com.project.demo.sushiCo.domain.dto.RestorantTablesDto;
 import com.project.demo.sushiCo.service.DishCategoryService;
 import com.project.demo.sushiCo.service.DishService;
+import com.project.demo.sushiCo.service.OrderService;
 import com.project.demo.sushiCo.service.RegisterCategoryDishForm;
+import com.project.demo.sushiCo.service.RegisterRestorantTablesForm;
+import com.project.demo.sushiCo.service.RestorantTablesService;
 import com.project.demo.sushiCo.serviceImpl.RegisterDishForm;
 
 import jakarta.validation.Valid;
@@ -26,10 +31,15 @@ public class AdminController {
 	@Autowired
 	private final DishCategoryService dcService;
 	private final DishService dService;
+	private final OrderService oService;
+	private final RestorantTablesService rtbService;
 
-	public AdminController(DishCategoryService dcService, DishService dService) {
+	public AdminController(DishCategoryService dcService, DishService dService, OrderService oService,
+			RestorantTablesService rtbService) {
 		this.dcService = dcService;
 		this.dService = dService;
+		this.oService = oService;
+		this.rtbService = rtbService;
 	}
 
 	@GetMapping
@@ -66,7 +76,8 @@ public class AdminController {
 	}
 
 	@GetMapping("/delete")
-	public String delete(@RequestParam(value = " ", required = true) Integer id, Integer adminId) throws Exception {
+	public String delete(@RequestParam(value = " categoryId ", required = true) Integer id, Integer adminId)
+			throws Exception {
 		dcService.delete(id, adminId);
 
 		return " redirect:/dishcategory";
@@ -96,6 +107,7 @@ public class AdminController {
 		return "tailwindcss/registration - form ";
 	}
 
+	@PostMapping("/register")
 	public String saveRegistrationDish(@ModelAttribute("dishForm") @Valid RegisterDishFormDto regDishForm,
 			BindingResult bResult, Integer dId, Integer categoryId, Integer adminId) throws Exception {
 		if (bResult.hasErrors()) {
@@ -110,4 +122,100 @@ public class AdminController {
 		}
 		return "redirect:/Dish ";
 	}
+
+	@GetMapping
+	public String getDishesRequiredListReview(Model model, Integer adminId) throws Exception {
+		model.addAttribute("dish", dService.getDishByPreferences(adminId));
+		return "redirect:/dish ";
+	}
+
+	@GetMapping
+	public String getRestDishMostRequired(Model model, Integer dId, Integer id) throws Exception {
+		model.addAttribute("dish", dService.getMaxPreference(dId, id));
+		return "redirect:/dish";
+	}
+
+	@GetMapping
+	public String getDishList(Model model, Integer categoryId, Integer adminId) throws Exception {
+		model.addAttribute("dish", dService.getDishesByDishCategory(categoryId, adminId));
+		return "redirect:/dish";
+	}
+
+	@GetMapping("/delete")
+	public String deleteOrder(@RequestParam(value = "OrderId", required = true) Integer adminRestId, Integer oId)
+			throws Exception {
+		oService.deleteOrder(adminRestId, oId);
+		return "redirect:/orderList ";
+	}
+
+	// Admini i restorantit rendit porosite sipas kostos ASC apo DESC te grupuara
+	// per çdo klient
+	@GetMapping
+	public String getOrdersList(Model model, Integer id) throws Exception {
+		model.addAttribute("Order", oService.getOrdersByCost(id));
+		return "redirect:/order";
+	}
+
+	// Admini i restorantit kërkon të gjenerojë porosinë me koston më të madhe ose
+	// më të vogël si edhe kush e kryer atë
+	@GetMapping
+	public String getOrderEconomicValues(Model model, Integer idRestorant, Integer userId) throws Exception {
+		model.addAttribute("Order", oService.getOrderMaxMinByCustomerId(idRestorant, userId));
+		return "redirect:/orderList ";
+	}
+
+	@GetMapping("/register-view")
+	public String getRstTablesRegistrationView(Model model,
+			@RequestParam(value = "restorantTableId ", required = false) Integer idRegistration, Integer tb_id,
+			Integer rtb_id, Integer adminRId) throws Exception {
+		if ((idRegistration == null) && (rtb_id == null)) {
+			var restTable = new RegisterRestorantTablesForm();
+			restTable.setIdRegistration(idRegistration);
+			model.addAttribute("rTableForm", restTable);
+			model.addAttribute("viewTitle", "Restorant_Table Register");
+		} else {
+			model.addAttribute("rTableForm", rtbService.getRestorant_tablesById(tb_id, rtb_id, adminRId));
+			model.addAttribute("viewTitle", "Update Restorant_Table ");
+		}
+		return "tailwindcss/register - view ";
+	}
+
+	@PostMapping("/register")
+	public String saveTableRestForm(@ModelAttribute("rTableForm") @Valid RestorantTablesDto restTdto,
+			BindingResult bResult, Integer tb_id, Integer rtb_id, Integer adminRId) throws Exception {
+		if (bResult.hasErrors()) {
+			return "redirect:/register - view";
+		}
+		if (((RestorantTablesService) restTdto).getRestorant_tablesById(tb_id, rtb_id, adminRId) == null) {
+			rtbService.create(restTdto);
+		} else {
+			rtbService.update(tb_id, rtb_id, adminRId,
+					((RestorantTablesService) restTdto).getRestorant_tablesById(tb_id, rtb_id, adminRId), restTdto);
+		}
+
+		return "redirect:/restorantTables ";
+	}
+
+	@DeleteMapping
+	public String delete(@RequestParam(value = "tableId", required = true) Integer tableId, Integer rtbId,
+			Integer idRestorant) throws Exception {
+		rtbService.delete(tableId, rtbId, idRestorant);
+		return "redirect:/restorantTables ";
+	}
+
+@GetMapping("/packageOrder - view")
+public String getPackageOrderForm(Model model,@RequestParam(value =" ", required = false)) throws Exception{	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	
 }

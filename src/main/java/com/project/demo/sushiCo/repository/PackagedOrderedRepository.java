@@ -40,6 +40,7 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ " Where  sp.pkg.sessionPayment =: (sum(o.orderPrize) + sp.shippingCost) ")
 	TransportingPackageOrderForm create(@Valid PackageOrderedDto packOrderedDto);
 
+//customer
 	@Modifying
 	@Query(" Update PackageOrdered pck Set pck.statusOrderSession =: 'PROCESSED' Where  pck.id IN "
 			+ " ( Select concat(t.first_name,' ',t.last_name)  shippersName_Surname , sp.service_Places  ServicePlaces "
@@ -54,7 +55,7 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 
 	TransportingPackageOrderForm updateByStatus(@Valid PackageOrderedDto packOrderedDto, Integer Id, Integer shippersId,
 			Integer serviceId, Integer oId, Integer idCustomer);
-
+//Admini
 	@Modifying
 	@Query("Update PackageOrdered pck Set pck.statusOrderSession =: 'IN_PROGRESS' Where  pck.id IN "
 			+ "	( Select concat(t.first_name, ' ',t.last_name)  transporterName_Surname , sp.service_Places  ServicePlaces"
@@ -70,7 +71,7 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 
 	TransportingPackageOrderForm update(@Valid PackageOrderedDto packOrDto, Integer id, Integer shippersId,
 			Integer serviceId, Integer oId, Integer idCustomer);
-
+//Admini
 	@Modifying
 	@Query(" Update PackageOrdered pcO Set deleted =: true And pcO.statusOrderSession =: ' CANCEL '  "
 			+ " Where EXISTS ( Select o, pcO.id From Order o INNER JOIN pcO ON pcO.o.idShporta = pcO.id "

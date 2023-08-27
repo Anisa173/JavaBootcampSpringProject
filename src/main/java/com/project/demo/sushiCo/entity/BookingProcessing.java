@@ -23,7 +23,7 @@ import jakarta.persistence.OneToOne;
 		@JoinColumn(name = "customerId", referencedColumnName = "id")
 		private User user;
 
-        //Cdo rezervim kryhet ne te njejtin restorant fhe ne te njejten vendododhje
+        //Çdo rezervim kryhet ne te njejtin restorant dhe ne te njejten vendododhje
 		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 		@JoinColumn(name = "reservationId", referencedColumnName = "rtb_id")
 		@JsonManagedReference
@@ -62,7 +62,7 @@ import jakarta.persistence.OneToOne;
 		@Override
 		public Integer getId() {
 
-			return cR_Id;
+			return  cR_Id;
 		}
 
 		public void setcR_Id(Integer cR_Id) {

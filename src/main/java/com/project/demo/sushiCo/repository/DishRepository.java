@@ -25,20 +25,20 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
 
 	Dish save(DishDto dishes);
 
-	@Query(" Select d , d.totalAddInBasket  noCustomer,sum(d.addB.addItemsDish) TotalNoItems,sum(d.addB.amountValue) TotalValue "
-			+ "From Dish d INNER JOIN AddInBasket addB ON d.dId = d.addB.IDdish "
-			+ "INNER JOIN DishCategory dc ON dc.d.categoryId = dc.id Order By d.totalAddInBasket ASC "
-			+ "Where d.addB.amountValue = (d.dishPrize * d.addB.addItemsDish) And dc.id IN"
-			+ "(Select dc.categoryName From DishCategory dc Inner join User a ON a.dc.admin_Id = a.id"
-			+ "Where a.id =: id)")
-	List<Dish> getDishByPreferences();
+	@Query(" Select d , d.totalItemsInBasket noCustomer,sum(d.addB.addItemsDish) TotalNoItems,sum(d.addB.amountValue)  TotalValue "
+			+ " From Dish d INNER JOIN AddInBasket addB ON d.dId = d.addB.IDdish "
+			+ " INNER JOIN DishCategory dc ON dc.d.categoryId = dc.id Order By d.totalItemsInBasket ASC "
+			+ " Where d.addB.amountValue =: (d.dishPrize * d.addB.addItemsDish) And dc.id IN "
+			+ " (Select dc.categoryName From DishCategory dc Inner join User a ON a.dc.admin_Id = a.id"
+			+ " Where a.id =: id) ")
+	List<Dish> getDishByPreferences(Integer adminId);
 
-	@Query(" Select d , max(d.totalAddInBasket)  maxCustomerNo, "
+	@Query(" Select d , dc.categoryName , max(d.totalAddInBasket)  maxCustomerNo, "
 			+ " From Dish d INNER JOIN AddInBasket addB ON d.dId = d.addB.IDdish "
 			+ " INNER JOIN DishCategory dc ON dc.d.categoryId = dc.id "
 			+ " Where dc.id IN(Select dc.categoryName From DishCategory dc Inner join User a ON a.dc.admin_Id = a.id  "
 			+ " Where a.id =: ?1 And dc.categoryName =: ?2) ")
-	Dish getMaxPreference(Integer idDish);
+	Dish getMaxPreference(Integer dId,Integer id);
 
 /*	@Query(value = "Select d.dId , dc.id ,a.id From DishCategory as dc INNER JOIN Dish as d ON dc.id = d.categoryId"
 			+ "INNER JOIN User a ON dc.admin_Id = a.id  "

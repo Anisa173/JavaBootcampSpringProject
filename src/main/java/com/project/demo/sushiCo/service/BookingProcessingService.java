@@ -12,14 +12,14 @@ public interface BookingProcessingService {
 	public RegisterBookingFormDto getCustomerReservationById(Integer idCustomer, Integer cR_Id, Integer idRestorant)
 			throws Exception;
 
-	public RegisterBookingFormDto createBooking(@Valid BookingProcessingDto cReservation) throws Exception;
-
-	public RegisterBookingFormDto update(@Valid BookingProcessingDto reservation, Integer id, Integer rtb_id)
-			throws Exception;
+	public RegisterBookingFormDto createBooking(@Valid RegisterBookingFormDto regBooking) throws Exception;
 
 	public void deleteReservation(Integer id, Integer cR_id,Integer idRestorant) throws Exception;
 
-	
+ public RegisterBookingFormDto update(@Valid RegisterBookingFormDto regBooking,@Valid RegisterBookingFormDto customerReservationById) throws Exception;
 
-	
+
+
+
+
 }

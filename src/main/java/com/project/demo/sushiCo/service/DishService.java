@@ -20,15 +20,17 @@ public interface DishService {
 	// Admini i restorantit kerkon te gjeneroje listen me dishes sipas preferences
 	// nga konsumatoret per cdo dish ne rendin rrites,pra sa te kerkuara jane secila
 	// dish
-	List<DishDto> getDishByPreferences() throws Exception;
+	List<DishDto> getDishByPreferences(Integer adminId) throws Exception;
 
     //Admini i restorantit kerkon te gjeneroje menunë e cila eshte kerkuar me shume nga konsumatoret
-	DishDto getMaxPreference(Integer IdDish) throws Exception;
+	DishDto getMaxPreference(Integer dId,Integer id) throws Exception;
 
 	RegisterDishFormDto create(@Valid RegisterDishFormDto dishDto) throws Exception;
 
 	RegisterDishFormDto update(@Valid RegisterDishFormDto dishDto, @Valid RegisterDishFormDto regDishForm, Integer dId,
 			Integer categoryId, Integer adminId) throws Exception;
+
+
 
 
 	

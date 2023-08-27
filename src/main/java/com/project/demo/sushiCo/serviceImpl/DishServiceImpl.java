@@ -75,16 +75,16 @@ private final RegisterDishFormMapper regDishMapper;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DishDto> getDishByPreferences() throws Exception {
+	public List<DishDto> getDishByPreferences(Integer adminId) throws Exception {
 		
-		return ((List<DishDto>) dishMapper.toDto((Dish) dishRepository.getDishByPreferences()));
+		return ((List<DishDto>) dishMapper.toDto((Dish) dishRepository.getDishByPreferences(adminId)));
 	}
 
 
 	@Override
-	public DishDto getMaxPreference(Integer IdDish) throws Exception {
+	public DishDto getMaxPreference(Integer dId,Integer id) throws Exception {
 		
-		return dishMapper.toDto(dishRepository.getMaxPreference(IdDish));
+		return dishMapper.toDto(dishRepository.getMaxPreference(dId,id));
 	}
 
 	@Override
