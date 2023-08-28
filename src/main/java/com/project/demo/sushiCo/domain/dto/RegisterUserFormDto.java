@@ -1,8 +1,5 @@
 package com.project.demo.sushiCo.domain.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.project.demo.sushiCo.entity.Restorant;
 import com.project.demo.sushiCo.entity.UserRole;
 
@@ -31,11 +28,11 @@ public class RegisterUserFormDto {
 	private Integer userId;
 	private UserRole userRole;
 	@NotNull(message = "It's required")
-	private List<Restorant> restorant = new ArrayList<Restorant>();
+	private Restorant restorant ;
 
 	public RegisterUserFormDto(Integer registrationId, String first_name, String last_name, String password,
 			String email, String address, String phoneNo, Integer age, String personalIdentityNo, UserRole userRole,
-			List<Restorant> rest) {
+			Restorant rest) {
 		this.registrationId = registrationId;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -133,9 +130,13 @@ public class RegisterUserFormDto {
 		this.userRole = userRole;
 	}
 
-	public List<Restorant> getRestorant() {
+	public Restorant getRestorant() {
 		return restorant;
 	}
+public void setRestorant(Restorant rest) {
+		this.restorant = rest;
+	}
+
 
 	public Integer getIdRestorant() {
 		return idRestorant;
@@ -153,10 +154,7 @@ public class RegisterUserFormDto {
 		this.userId = userId;
 	}
 
-	public void setRestorant(List<Restorant> rest) {
-		this.restorant = rest;
-	}
-
+	
 	public String toString() {
 		return "RegisterUserFormDto[registrationId = " + registrationId + ",first_name = " + first_name
 				+ ",last_name = " + last_name + ",last_name = " + last_name + ",password = " + password + ",email = "

@@ -89,6 +89,14 @@
                         <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class= "mt-2 text-sm text-red-600 font-medium" ></p>
 
                     </div>   
+                   <div>
+				 <label th:for = "restorant" class="block mb-2 text-sm font-medium text-gray-900">Select the restorant you prefer!</label>
+				 <select th:field = "*{restorant.restName}"  class="block py-2 px-2 w-full text-sm border-2 border-gray-800 ">
+					<option selected></option>
+					<option th:each = "e : ${restorant}" th:value="${e.idRestorant}" th:text="${e.restName}"></option>
+				</select>
+			       </div>
+                   
                      <div>
                         <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Identify as</label>
                         <select th:field="*{userRole}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">

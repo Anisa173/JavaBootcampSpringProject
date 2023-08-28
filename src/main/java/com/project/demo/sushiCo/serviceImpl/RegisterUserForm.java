@@ -35,7 +35,7 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 	@Column(name = "userRole")
 	private UserRole userRole;
 	@Column(name = "restorant")
-	private List<Restorant> restorant = new ArrayList<Restorant>();
+	private Restorant restorant;
 	private Integer userId;
 	private Integer idRestorant;
 
@@ -44,7 +44,7 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 	}
 
 	public RegisterUserForm(String first_name, String last_name, String password, String email, String address,
-			String phoneNo, Integer age, String personalIdentityNo, UserRole userRole, List<Restorant> rest,
+			String phoneNo, Integer age, String personalIdentityNo, UserRole userRole, Restorant rest,
 			Integer idRestorant, Integer userId) {
 		super();
 		this.first_name = first_name;
@@ -142,11 +142,11 @@ public class RegisterUserForm extends BasicEntity<Integer> {
 		this.userRole = userRole;
 	}
 
-	public List<Restorant> getRestorant() {
+	public Restorant getRestorant() {
 		return restorant;
 	}
 
-	public void setRestorant(List<Restorant> rest) {
+	public void setRestorant(Restorant rest) {
 		this.restorant = rest;
 	}
 
