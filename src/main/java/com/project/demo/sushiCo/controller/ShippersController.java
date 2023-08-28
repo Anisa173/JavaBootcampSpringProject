@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.demo.sushiCo.service.PackageOrderedService;
 
-
 @Controller
 @RequestMapping("/Shippers")
 public class ShippersController {
@@ -38,10 +37,11 @@ public class ShippersController {
 		model.addAttribute("packageOrdered", pckgService.getAllPackageOByshipperId(userId));
 		return "redirect:/packageOrdered ";
 	}
-@GetMapping
-public String getAllPackageByServiceP(Model model,Integer Id) throws Exception {
-	model.addAttribute("packageOrdered", pckgService.getPackageOrdersByServiceP(Id));	
 
-return "redirect:/packageOrdered ";
-}
+	@GetMapping
+	public String getAllPackageByServiceP(Model model, Integer Id) throws Exception {
+		model.addAttribute("packageOrdered", pckgService.getPackageOrdersByServiceP(Id));
+
+		return "redirect:/packageOrdered ";
+	}
 }

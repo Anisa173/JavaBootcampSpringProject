@@ -22,7 +22,6 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 
 	TransportingPackageOrderForm getPackageOrderById(Integer userId, Integer serviceId, Integer idShporta);
 
-
 	PackageOrdered save(TransportingPackageOrderFormDto packOrdert);
 
 	@Query(" Insert into PackageOrdered(statusOrderSession,sessionPayment,shippersId,serviceId) "
@@ -51,8 +50,9 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ " From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
 			+ " Where  c.id IN(Update User c Set c.userStatus = 'COMPLETED' Where c.id =: id) "
 			+ " And o.oId  IN (Update Order o Set o.orderStatus = 'PROCESSED' Where o.oId =: oId)")
-	TransportingPackageOrderForm updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto, Integer id, Integer serviceId,
-			Integer oId, Integer userId);
+	TransportingPackageOrderForm updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto, Integer id,
+			Integer serviceId, Integer oId, Integer userId);
+
 //Admini
 	@Modifying
 	@Query("Update PackageOrdered pck Set pck.statusOrderSession =: 'IN_PROGRESS' Where  pck.id IN "
@@ -67,8 +67,9 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ "	 Where  c.id IN ( Update User c Set c.userStatus = 'WAITING' And customerName_Surname =: ?1 And c.address =: ?2 And c.phoneNo =: ?3  Where c.id =: id ) "
 			+ "	 And o.oId  IN ( Update Order o Set o.orderStatus = 'IN_PROGRESS'  Where o.oId =: oId)")
 
-	TransportingPackageOrderForm update(@Valid TransportingPackageOrderFormDto packOrDto, Integer idShporta, Integer serviceId,
-			Integer oId, Integer userId);
+	TransportingPackageOrderForm update(@Valid TransportingPackageOrderFormDto packOrDto, Integer idShporta,
+			Integer serviceId, Integer oId, Integer userId);
+
 //Admini
 	@Modifying
 	@Query(" Update PackageOrdered pcO Set deleted =: true And pcO.statusOrderSession =: ' CANCEL '  "
@@ -88,24 +89,19 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 	List<TransportingPackageOrderForm> getAllPackageOByCustomerId(Integer userId);
 
 	@Query(" Select o.orderPrize,o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost  "
-		+ "	 From PackageOrdered pack INNER JOIN Order o IN pack.o.idShporta = pack.id  "
-		+ "	 INNER JOIN User sh ON sh.pack.shippersId = sh.id  " + " Where  sh.id =: ?3 And o.oId  "
-		+ "	 IN( Select concat(c.first_name, '' ,c.last_name)  Customer_Name , c.address Customer_Address  "
-		+ "	 From o INNER JOIN User a ON a.o.adminRestId = a.id " + " INNER JOIN User c ON c.o.idCustomer = c.id  "
-		+ "	Where a.id =: id  Group By c.id) ")
-     List<TransportingPackageOrderForm> getAllPackageOByshipperId(Integer userId);
+			+ "	 From PackageOrdered pack INNER JOIN Order o IN pack.o.idShporta = pack.id  "
+			+ "	 INNER JOIN User sh ON sh.pack.shippersId = sh.id  " + " Where  sh.id =: ?3 And o.oId  "
+			+ "	 IN( Select concat(c.first_name, '' ,c.last_name)  Customer_Name , c.address Customer_Address  "
+			+ "	 From o INNER JOIN User a ON a.o.adminRestId = a.id " + " INNER JOIN User c ON c.o.idCustomer = c.id  "
+			+ "	Where a.id =: id  Group By c.id) ")
+	List<TransportingPackageOrderForm> getAllPackageOByshipperId(Integer userId);
 
 	@Query(" Select o.orderPrize,o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost ,sp.servicePl Service_Places   "
-+ " From PackageOrdered pc INNER JOIN Order o ON pc.id = pc.o.idShporta "
-+ " INNER JOIN User sh ON  sh.pc.shippersId = sh.id "
-+ " INNER JOIN ServicePlaces sp ON sp.pc.serviceId = sp.Id "
-+ "	Where sp.Id =: Id And o.oId IN  "
-+ "( Select concat(c.first_name, ' ' ,c.last_name) customerName_Surname From Order o INNER JOIN User c ON o.oId = o.c.idCustomer "
-+ " Group By c.id "	)
+			+ " From PackageOrdered pc INNER JOIN Order o ON pc.id = pc.o.idShporta "
+			+ " INNER JOIN User sh ON  sh.pc.shippersId = sh.id "
+			+ " INNER JOIN ServicePlaces sp ON sp.pc.serviceId = sp.Id " + "	Where sp.Id =: Id And o.oId IN  "
+			+ "( Select concat(c.first_name, ' ' ,c.last_name) customerName_Surname From Order o INNER JOIN User c ON o.oId = o.c.idCustomer "
+			+ " Group By c.id ")
 	List<TransportingPackageOrderForm> getPackageOrdersByServiceP(Integer Id);
 
-
-
-
-	
 }

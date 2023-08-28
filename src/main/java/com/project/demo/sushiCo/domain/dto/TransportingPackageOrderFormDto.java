@@ -144,9 +144,5 @@ public class TransportingPackageOrderFormDto {
 				+ ",packageOrderId = " + idShporta + ",userId = " + userId + ",serviceId = " + serviceId + "]";
 	}
 
-	public void IdShporta(Integer idShporta2) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }

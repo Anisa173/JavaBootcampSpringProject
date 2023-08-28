@@ -75,7 +75,7 @@ public class UserController {
 		if ((userId == null) && (registrationId == null)) {
 			var loginForm = new Login();
 			loginForm.setRegistrationId(registrationId);
-			model.addAttribute("LoginForm", loginForm);
+			model.addAttribute("loginForm", loginForm);
 			model.addAttribute("viewTittle", " Login ");
 		} else {
 			model.addAttribute("loginForm", userService.getUserLogInById(userId, registrationId));
@@ -86,7 +86,7 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String saveloginForm(@ModelAttribute("login-form") @Valid LoginDto loginForm, BindingResult nResult,
+	public String saveloginForm(@ModelAttribute("loginForm") @Valid LoginDto loginForm, BindingResult nResult,
 			Integer userId1, Integer registrationId1) throws Exception {
 
 		if (nResult.hasErrors()) {

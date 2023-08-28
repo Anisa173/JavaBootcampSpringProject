@@ -56,8 +56,9 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 	}
 
 	@Override
-	public TransportingPackageOrderFormDto updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto,@Valid TransportingPackageOrderFormDto shippingPackOrder2 , Integer Id,
-			Integer serviceId, Integer oId, Integer userId) throws Exception {
+	public TransportingPackageOrderFormDto updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto,
+			@Valid TransportingPackageOrderFormDto shippingPackOrder2, Integer Id, Integer serviceId, Integer oId,
+			Integer userId) throws Exception {
 
 		return packageOrderFMapper
 				.toDto(packageOrRepository.updateByStatus(packOrderedDto, Id, serviceId, oId, userId));
@@ -76,24 +77,23 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 
 		packageOrRepository.delete(id, oId, adminRestId);
 	}
-@Override
+
+	@Override
 	public List<TransportingPackageOrderFormDto> getAllPackageOByCustomerId(Integer userId) throws Exception {
 
-		return packageOrderFMapper
-				.toDto(packageOrRepository.getAllPackageOByCustomerId(userId));
+		return packageOrderFMapper.toDto(packageOrRepository.getAllPackageOByCustomerId(userId));
 	}
 
-@Override
-public List<TransportingPackageOrderFormDto> getAllPackageOByshipperId(Integer userId) throws Exception {
-	
-	return packageOrderFMapper
-			.toDto((packageOrRepository).getAllPackageOByshipperId(userId)) ;
-}
+	@Override
+	public List<TransportingPackageOrderFormDto> getAllPackageOByshipperId(Integer userId) throws Exception {
 
-@Override
-public List<TransportingPackageOrderFormDto> getPackageOrdersByServiceP(Integer Id) throws Exception {
-	
-	return packageOrderFMapper.toDto(packageOrRepository.getPackageOrdersByServiceP(Id));
-}
+		return packageOrderFMapper.toDto((packageOrRepository).getAllPackageOByshipperId(userId));
+	}
+
+	@Override
+	public List<TransportingPackageOrderFormDto> getPackageOrdersByServiceP(Integer Id) throws Exception {
+
+		return packageOrderFMapper.toDto(packageOrRepository.getPackageOrdersByServiceP(Id));
+	}
 
 }
