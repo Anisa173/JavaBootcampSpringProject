@@ -53,7 +53,7 @@ public class AdminController {
 		return "index";
 	}
 
-	@GetMapping("/register-view")
+	@GetMapping("/categoryDish/register-view")
 	public String getDcategRegistrReview(Model model, @RequestParam(value = "dcId", required = false) Integer id,
 			Integer adminId) throws Exception {
 		if (id == null) {
@@ -66,7 +66,7 @@ public class AdminController {
 		return "tailwindcss/registration - form ";
 	}
 
-	@PostMapping("/api/register")
+	@PostMapping("/categoryDish/register")
 	public String registerCategory(@ModelAttribute("dish_categoryForm") @Valid DishCategoryDto dcDto,
 			BindingResult result, Integer id, Integer adminId) throws Exception {
 		if (result.hasErrors()) {
@@ -80,7 +80,7 @@ public class AdminController {
 		return "redirect:/DishCategory ";
 	}
 
-	@GetMapping("/delete")
+	@GetMapping("/categoryDish/delete")
 	public String delete(@RequestParam(value = " categoryId ", required = true) Integer id, Integer adminId)
 			throws Exception {
 		dcService.delete(id, adminId);
@@ -94,7 +94,7 @@ public class AdminController {
 		return "redirect:/dishcategory ";
 	}
 
-	@GetMapping("/register-view")
+	@GetMapping("/dish/register-view")
 	public String getDishRegistrationReview(Model model,
 			@RequestParam(value = "dishId", required = false) Integer idRegistration, Integer dId, Integer categoryId,
 			Integer adminId) throws Exception {
@@ -112,7 +112,7 @@ public class AdminController {
 		return "tailwindcss/registration - form ";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/dish/register")
 	public String saveRegistrationDish(@ModelAttribute("dishForm") @Valid RegisterDishFormDto regDishForm,
 			BindingResult bResult, Integer dId, Integer categoryId, Integer adminId) throws Exception {
 		if (bResult.hasErrors()) {
@@ -146,7 +146,7 @@ public class AdminController {
 		return "redirect:/dish";
 	}
 
-	@GetMapping("/delete")
+	@GetMapping("/order/delete")
 	public String deleteOrder(@RequestParam(value = "OrderId", required = true) Integer adminRestId, Integer oId)
 			throws Exception {
 		oService.deleteOrder(adminRestId, oId);
@@ -169,7 +169,7 @@ public class AdminController {
 		return "redirect:/orderList ";
 	}
 
-	@GetMapping("/register-view")
+	@GetMapping("/restorantTables/register-view")
 	public String getRstTablesRegistrationView(Model model,
 			@RequestParam(value = "restorantTableId ", required = false) Integer idRegistration, Integer tb_id,
 			Integer rtb_id, Integer adminRId) throws Exception {
@@ -185,7 +185,7 @@ public class AdminController {
 		return "tailwindcss/register - view ";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/restorantTables/register")
 	public String saveTableRestForm(@ModelAttribute("rTableForm") @Valid RestorantTablesDto restTdto,
 			BindingResult bResult, Integer tb_id, Integer rtb_id, Integer adminRId) throws Exception {
 		if (bResult.hasErrors()) {
@@ -208,7 +208,7 @@ public class AdminController {
 		return "redirect:/restorantTables ";
 	}
 
-	@GetMapping("/packageOrder - view")
+	@GetMapping("/packageOrdered/packageOrder - view")
 	public String getPackageOrderForm(Model model,
 			@RequestParam(value = " idPackagedOrder ", required = false) Integer registrationId, Integer userId,
 			Integer serviceId, Integer idShporta) throws Exception {
@@ -225,7 +225,7 @@ public class AdminController {
 		return "tailwindcss/packageOrder - view";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/packageOrdered/register")
 	public String savePackageOrderCreated(
 			@ModelAttribute("packageOrderForm") @Valid TransportingPackageOrderFormDto shippingPackOrder,
 			BindingResult br, Integer idShporta, Integer serviceId, Integer oId, Integer userId) throws Exception {

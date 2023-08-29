@@ -54,38 +54,38 @@ public class AdministratorController {
 	@GetMapping
 	public String getUserReviewList(Model model) throws Exception {
 		model.addAttribute(" user ", userService.getAllUser());
-		return " tailwindcss/user - list ";
+		return " tailwindcss/user/List ";
 	}
 
 	@GetMapping
 	public String getShipperReviewList(Model model, Integer id) throws Exception {
 		model.addAttribute(" shippers ", userService.getAllShippersByAdminId(id));
-		return " tailwindcss/user - list ";
+		return " tailwindcss/user/list ";
 	}
 
 	@DeleteMapping
 	public String deleteAdmin(@RequestParam(value = "userId", required = true) Integer id) throws Exception {
 		userService.deleteAdmin(id);
-		return "redirect:/user ";
+		return "redirect:/user/List ";
 	}
 
 	@DeleteMapping
 	public String deleteShipper(@RequestParam(value = "userId", required = true) Integer id) throws Exception {
 		userService.deleteShippers(id);
-		return "redirect:/user ";
+		return "redirect:/user/List ";
 	}
 
 	@GetMapping
 	public String getCustomersReviewList(Model model, Integer id) throws Exception {
 		model.addAttribute(" customer ", userService.getAllCustomers(id));
-		return "redirect/user";
+		return "redirect/user/List";
 	}
 
-	@GetMapping("/api/register - view")
+	@GetMapping("/restorant/register - view")
 	public String getRestorantRegistrationView(Model model,
 			@RequestParam(value = "userId", required = false) Integer idRestorant) throws Exception {
 		if (idRestorant == null) {
-			model.addAttribute("restorantForm ", new RegisterRestorantForm());
+			model.addAttribute("restorantForm", new RegisterRestorantForm());
 			model.addAttribute("viewTitle", "Restorant Registration");
 		} else {
 			model.addAttribute("restorantForm", restService.getRestorantsById(idRestorant));
@@ -95,7 +95,7 @@ public class AdministratorController {
 		return "tailwindcss/registration - form";
 	}
 
-	@PostMapping("/api/register")
+	@PostMapping("/restorant/register")
 	public String register(@ModelAttribute("restorantForm") @Valid RestorantDto restForm, BindingResult bResult,
 			Integer idRestorant) throws Exception {
 		if (bResult.hasErrors()) {
@@ -106,10 +106,10 @@ public class AdministratorController {
 		} else {
 			restService.update(((RestorantService) restForm).getRestorantsById(idRestorant), restForm, idRestorant);
 		}
-		return "redirect:/Restorant";
+		return "redirect:/restorant";
 	}
 
-	@GetMapping("/api/register - view")
+	@GetMapping("/paymentMethods/register - view")
 	public String getPmRegistrationView(Model model, @RequestParam(value = "paymentM_Id", required = false) Integer Id,
 			Integer idRestorant) throws Exception {
 		if (Id == null) {
@@ -122,7 +122,7 @@ public class AdministratorController {
 		return "tailwindcss/registration - form ";
 	}
 
-	@PostMapping("/api/register")
+	@PostMapping("/paymentMethods/register")
 	public String saveRestorantPmForm(@ModelAttribute("payment_methodForm") @Valid PaymentMethodsDto pmForm,
 			BindingResult bResult, Integer Id, Integer idRestorant) throws Exception {
 		if (bResult.hasErrors()) {
@@ -137,7 +137,7 @@ public class AdministratorController {
 		return "redirect:/paymentMethods ";
 	}
 
-	@GetMapping("/api/register - view")
+	@GetMapping("/servicePlaces/register - view")
 	public String getRestServPRegistartionView(Model model,
 			@RequestParam(value = "serviceP_Id", required = false) Integer Id, Integer idRestorant) throws Exception {
 		if (Id == null) {
@@ -150,7 +150,7 @@ public class AdministratorController {
 		return "tailwindcss/registration - form ";
 	}
 
-	@PostMapping("/api/register")
+	@PostMapping("/servicePlaces/register")
 	public String saveRestorantSpForm(@ModelAttribute("service_PlForm") @Valid ServicePlacesDto sPlaces,
 			BindingResult bResult, Integer Id, Integer idRestorant) throws Exception {
 		if (bResult.hasErrors()) {
@@ -175,7 +175,7 @@ public class AdministratorController {
 	@GetMapping
 	public String getRestorantsReviewlist(Model model, Integer adminIdWeb) throws Exception {
 		model.addAttribute(" restorant ", restService.getAllRestorants(adminIdWeb));
-		return "redirect:/restorant ";
+		return "redirect:/restorant/List ";
 	}
 
 	@GetMapping
@@ -191,11 +191,13 @@ public class AdministratorController {
 		return "redirect:/user";
 	}
 
+	@DeleteMapping("/restorant/delete/idRestorant")
+	public String delete(@RequestParam(value = "idRestorant", required = true) Integer idRestorant, Integer adminIdWeb)
+			throws Exception {
 
-	
-	
-	
-	
-	
-	
+		restService.delete(idRestorant, adminIdWeb);
+
+		return "redirect:/restorantList";
+	}
+
 }

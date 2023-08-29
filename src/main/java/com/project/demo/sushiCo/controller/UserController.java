@@ -29,7 +29,7 @@ public class UserController {
 		this.restService = restService;
 	}
 
-	@GetMapping("/api/user/register - view")
+	@GetMapping("/register - view")
 	public String getUserRegistrationView(Model model,
 			@RequestParam(value = "usersId", required = false) Integer registrationId, Integer userId,
 			Integer idRestorant) throws Exception {
@@ -68,7 +68,7 @@ public class UserController {
 		return "redirect:/api/User/login";
 	}
 
-	@GetMapping("/api/user/login")
+	@GetMapping("/login - view")
 	public String getUserLoginView(Model model,
 			@RequestParam(value = "usersId", required = false) Integer registrationId, Integer userId)
 			throws Exception {
@@ -96,6 +96,6 @@ public class UserController {
 			userService.updateLoginData(userId1, ((UserService) loginForm).getUserLogInById(userId1, registrationId1),
 					loginForm);
 		}
-		return "redirect:/api/Customer/SelectWhichYouPreferForm";
+		return "redirect:/SelectWhichYouPreferForm";
 	}
 }

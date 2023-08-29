@@ -44,7 +44,7 @@ public class VisitorController {
 		this.bpService = bpService;
 	}
 
-	@GetMapping("/selectRestorant - view")
+	@GetMapping("/restorant/selectRestorant - view")
 	public String getRestorantSelectedFormReview(Model model,
 			@RequestParam(value = "restorantId", required = false) Integer idSelect, Integer idRestorant,
 			Integer adminIdWeb) throws Exception {
@@ -61,7 +61,7 @@ public class VisitorController {
 		return "tailwindcss/selected - form";
 	}
 
-	@PostMapping("/select")
+	@PostMapping("/restorant/select")
 	public String saveSelectedPreference(
 			@ModelAttribute("restorantPreferenceForm") @Valid SelectWhichYouPreferFormDto restorantSelected,
 			Integer idRestorant, Integer idSelect, BindingResult nResult) throws Exception {
@@ -84,7 +84,7 @@ public class VisitorController {
 		return "redirect:/dishCategory";
 	}
 
-	@GetMapping("/selectDish - form")
+	@GetMapping("/addInBasket/selectDish - form")
 	public String getAddInBasketView(Model model,
 			@RequestParam(value = "idSession ", required = false) Integer categoryId, Integer adminId,
 			Integer customerId, Integer dId, Integer id) throws Exception {
@@ -98,13 +98,12 @@ public class VisitorController {
 			model.addAttribute("AddInBasket",
 					addInBasketService.getDishDCategoriesByCustomerId(dId, categoryId, customerId));
 			model.addAttribute("viewTitle", "Update Selected Items");
-
 		}
 
 		return "tailwindcss/selected - form ";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/addInBasket/register")
 	public String saveSelectedDishesInBasket(
 			@ModelAttribute("AddInBasket") @Valid SelectDishesFormDto selectDishesInBasket, BindingResult result,
 			Integer categoryId, Integer adminId, Integer customerId, Integer dId, Integer id) throws Exception {
@@ -120,7 +119,7 @@ public class VisitorController {
 			addInBasketService.delete(((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
 					categoryId, customerId), selectDishesInBasket, dId);
 		}
-		return "redirect:/user/register-view";
+		return "redirect:/register-view";
 	}
 
 	// Rezervoni në restorantin tonë/RestorantTables details~ informacion
@@ -130,7 +129,7 @@ public class VisitorController {
 		return "redirect:/RegisterBookingForm";
 	}
 
-	@GetMapping("/reservation - view")
+	@GetMapping("/bookingProcessing/reservation - view")
 	public String getCustomerReservationView(Model model,
 			@RequestParam(value = " restorantTableId ", required = false) Integer idCustomer, Integer cR_Id,
 			Integer idRestorant, Integer rtb_id, Integer crId) throws Exception {
@@ -150,7 +149,7 @@ public class VisitorController {
 		return "tailwindcss/reservation - view ";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/bookingProcessing/register")
 	public String registerCustomerReservationForm(
 			@ModelAttribute("customerReservationForm") @Valid RegisterBookingFormDto regBooking, BindingResult bresult,
 			Integer idCustomer, Integer cR_Id, Integer rtb_id) throws Exception {

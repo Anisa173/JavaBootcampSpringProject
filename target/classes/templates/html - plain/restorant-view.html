@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width = device - width , initial-scale = 1.0 ">
+</head>
+
+<body layout:fragment="page-content-plain">
+	<div
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#{view.restorant.list.title},'true','/administrator/restorant/register - view')">
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Restorant NUIS</th>
+					<th>Restorant Name</th>
+					<th>Phone Number</th>
+					<th>Activity Field</th>
+					<th>Address</th>
+					<th>Start_Time of Day</th>
+					<th>End_Time of Day</th>
+					<th>EDIT</th>
+					<th>DELETE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${restorantForm}">
+					<td th:text="${user.idRestorant}">ID</td>
+					<td th:text="${user.restNUIS}">Restorant NUIS</td>
+					<td th:text="${user.restName}">Restorant Name</td>
+					<td th:text="${user.phoneNo}">Phone Number</td>
+					<td th:text="${user.activity_field}">Activity Field</td>
+					<td th:text="${user.addressRest}">Address</td>
+					<td th:text="${user.startDay}">Start_Time of Day</td>
+					<td th:text="${user.endDay}">End_Time of Day</td>
+					<td><a
+							th:href="@{/administrator/restorant/register - view(idRestorant = ${user.idRestorant})}">Edit</a>
+					</td>
+					<td><a th:href="@{/administrator/restorant/delete/(idRestorant = ${user.idRestorant})}">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

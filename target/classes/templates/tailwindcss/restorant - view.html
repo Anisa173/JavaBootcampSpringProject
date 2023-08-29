@@ -1,0 +1,124 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout "
+	layout:decorate="~{layout/layout}"> 
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<!--Code block Menu starts -->
+
+<body layout:fragment="page-content">
+	<!--Code block header starts-->
+<div class="bg-gray-800  shadow-lg py-5 px-7">
+<div th:replace="fragments/page-heading :: pageHeadingFragment('User','true','/user/login')"></div>
+<div th:replace="fragments/page-heading :: pageHeadingFragment('User','true','/user/register-view')"></div>
+		<nav class="flex justify-between">
+			<div class="flex items-center space-x-3 lg:pr-16 pr-6">
+				<img class="cursor-pointer bg-white p-1 rounded-full"
+					src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/e7/a9/3f/e7a93fad-9653-3ff1-d902-069c1aedb6ff/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png"
+					alt="square" />
+			</div>
+			<div class=" w-full md:block md:w-auto" id="navbar-default">
+				<ul class="font-medium flex  p-4 mt-4 rounded-lg   md:space-x-8 md:mt-0 md:border-0 ">
+					<li>
+						<a th:href="@{/user/register}" class="block py-2 pl-3 pr-4 text-white  rounded "
+							aria-current="page">Do you have an account ?</br>Sign up</a>
+					</li>
+					<li>
+						<a th:href="@{/user/login}" class="block py-2 pl-3 pr-4 text-white  rounded "
+							aria-current="page">Log_iN</a>
+					</li>
+					<li>
+						<a th:href="@{/}" class="block py-2 pl-3 pr-4 text-white  rounded " aria-current="page">Enter as
+							a guest</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!--Code block MENU end-->
+	<div class="sm:px-6 w-full">
+
+		<div class="bg-white py-4 ">
+			<div class="sm:flex items-center justify-between">
+				<div class="flex items-center">
+					<div class="text-xl text-black rounded-full">
+						<p class="text-2xl text-black uppercase ">Restorants</p>
+					</div>
+				</div>
+				<button
+					class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-800 hover:bg-gray-600 focus:outline-none rounded">
+					<a th:href="@{/administrator/restorant/register - view}" class="text-sm font-medium leading-none text-white">Add Restorant</a>
+				</button>
+			</div>
+
+		</div>
+	</div>
+	<!--Code block table start -->
+	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+		<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+			<thead class="text-xs text-black uppercase bg-gray-200  ">
+				<tr>
+					<th scope="col" class="px-6 py-3">
+						idRestorant
+					</th>
+					<th scope="col" class="px-6 py-3">
+						restNUIS
+					</th>
+					<th scope="col" class="px-6 py-3">
+						restName
+					</th>
+					<th scope="col" class="px-6 py-3">
+						phoneNo
+					</th>
+					<th scope="col" class="px-6 py-3">
+						activity_field
+					</th>
+
+					<th scope="col" class="px-6 py-3">
+						addressRest
+					</th>
+					<th scope="col" class="px-6 py-3">
+						startDay
+					</th>
+					<th scope="col" class="px-6 py-3">
+						endDay
+					</th>
+
+					<th scope="col" class="px-6 py-3">
+						<span class="sr-only">Edit</span>
+					</th>
+					<th scope="col" class="px-6 py-3">
+						<span class="sr-only">Delete</span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user:${restorantForm}" class="hover:bg-white border-b ">
+					<td th:text="${user.idRestorant}" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+						Id</td>
+					<td th:text="${user.restNUIS}" class="px-6 py-4 text-gray-900">No NUIS</td>
+					<td th:text="${user.restName}" class="px-6 py-4 text-gray-900">Restorant Name</td>
+					<td th:text="${user.phoneNo}" class="px-6 py-4 text-gray-900">Phone Number</td>
+					<td th:text="${user.activity_field}" class="px-6 py-4 text-gray-900">Activity Field</td>
+					<td th:text="${user.addressRest}" class="px-6 py-4 text-gray-900">Address</td>
+					<td th:text="${user.startDay}" class="px-6 py-4 text-gray-900">Start_time of Day</td>
+					<td th:text="${user.endDay}" class="px-6 py-4 text-gray-900">End_time of Day</td>
+					<td class="px-6 py-4 text-right">
+						<a href="@{/administrator/restorant/register - view(userId = ${user.idRestorant})}"
+							class="font-medium text-black hover:underline">Edit</a>
+					</td>
+					<td class="px-6 py-4 text-right ">
+						<a href="@{/administrator/restorant/delete/(idRestorant = ${user.idRestorant})}"
+							class="font-medium text-black hover:underline">Delete</a>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

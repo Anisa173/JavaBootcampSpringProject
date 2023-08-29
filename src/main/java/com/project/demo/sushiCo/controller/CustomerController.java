@@ -71,7 +71,7 @@ public class CustomerController {
 		this.pcgService = pcgService;
 	}
 
-	@GetMapping("/selectRestorant - view")
+	@GetMapping("/restorant/selectRestorant - view")
 	public String getRestorantSelectedFormReview(Model model,
 			@RequestParam(value = "restorantId", required = false) Integer idSelect, Integer userId,
 			Integer idRestorant) throws Exception {
@@ -87,7 +87,7 @@ public class CustomerController {
 		return "tailwindcss/selected - form";
 	}
 
-	@PostMapping("/select")
+	@PostMapping("/restorant/select")
 	public String saveSelectedPreference(
 			@ModelAttribute("restorantPreferenceForm") @Valid SelectWhichYouPreferFormDto restorantSelected,
 			Integer userId, Integer idRestorant, Integer idSelect, BindingResult nResult) throws Exception {
@@ -110,7 +110,7 @@ public class CustomerController {
 		return " redirect:/dishCategory";
 	}
 
-	@GetMapping("/selectDish - form")
+	@GetMapping("/addInBasket/selectDish - form")
 	public String getAddInBasketView(Model model, @RequestParam(value = " ", required = false) Integer categoryId,
 			Integer adminId, Integer customerId, Integer dId, Integer id) throws Exception {
 		model.addAttribute("dish ", dishService.getDishesByDishCategory(categoryId, adminId));
@@ -129,7 +129,7 @@ public class CustomerController {
 		return "tailwindcss/selected - form ";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/addInBasket/register")
 	public String saveSelectedDishesInBasket(
 			@ModelAttribute("AddInBasket") @Valid SelectDishesFormDto selectDishesInBasket, BindingResult result,
 			Integer categoryId, Integer adminId, Integer customerId, Integer dId) throws Exception {
@@ -150,7 +150,7 @@ public class CustomerController {
 		return "redirect:/user/addInBasket";
 	}
 
-	@GetMapping("/orderProcessing - view")
+	@GetMapping("/order/orderProcessing - view")
 	public String getOrderProcessingView(Model model, @RequestParam(value = "idSession", required = false) Integer dId,
 			Integer categoryId, Integer custId, Integer idRestorant, Integer idSession, Integer pmId, Integer servPId)
 			throws Exception {
@@ -170,7 +170,7 @@ public class CustomerController {
 		return "tailwindcss/order_processed - view";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/order/register")
 	public String saveOrderDetails(
 			@ModelAttribute("order_processingForm") @Valid OrderByProcessingDto orderByProcessForm,
 			BindingResult bResult, Integer custId, Integer idRestorant, Integer pmId, Integer servPId)
@@ -228,11 +228,9 @@ public class CustomerController {
 		return "redirect/order ";
 	}
 
-	@PutMapping("/")
-	public String confirmOrderProcessed(
-			@RequestParam(value = "orderId ", required = true) @Valid TransportingPackageOrderFormDto shippingPackOrder,
+	@PutMapping("/{idShporta}")
+	public String confirmOrderProcessed(@RequestParam(value = "orderId ", required = true) @Valid TransportingPackageOrderFormDto shippingPackOrder,
 			Integer userId, Integer serviceId, Integer idShporta, Integer oId) throws Exception {
-
 		pcgService.updateByStatus(
 				((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta),
 				shippingPackOrder, idShporta, serviceId, oId, userId);
@@ -279,7 +277,7 @@ public class CustomerController {
 		return "redirect:/RegisterBookingForm";
 	}
 
-	@GetMapping("/reservation - view")
+	@GetMapping("/bookingProcessing/reservation - view")
 	public String getCustomerReservationView(Model model,
 			@RequestParam(value = " restorantTableId ", required = false) Integer idCustomer, Integer cR_Id,
 			Integer idRestorant, Integer rtb_id, Integer crId) throws Exception {
@@ -299,7 +297,7 @@ public class CustomerController {
 		return "tailwindcss/reservation - view ";
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/bookingProcessing/register")
 	public String registerCustomerReservationForm(
 			@ModelAttribute("customerReservationForm") @Valid RegisterBookingFormDto regBooking, BindingResult bresult,
 			Integer idCustomer, Integer cR_Id, Integer rtb_id) throws Exception {
