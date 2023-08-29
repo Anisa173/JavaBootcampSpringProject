@@ -1,131 +1,141 @@
-<!Doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" layout:decorate="~{layout/layout}">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="https://flowbite.com/docs/flowbite.min.js"></script>
-
 </head>
 
-<!--Code block Menu starts -->
-
-<body layout:fragment="page-content">
-	<!--Code block header starts-->
-	<div class="bg-gray-800  shadow-lg py-5 px-7">
-		<div th:replace="fragments/page-heading :: pageHeadingFragment('User','true','/user/register-view')"></div>
-		<nav class="flex justify-between">
-			<div class="flex items-center space-x-3 lg:pr-16 pr-6">
-				<img class="cursor-pointer bg-white p-1 rounded-full"
-					src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/e7/a9/3f/e7a93fad-9653-3ff1-d902-069c1aedb6ff/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png"
-					alt="square" />
-			</div>
-			<div class=" w-full md:block md:w-auto" id="navbar-default">
-				<ul class="font-medium flex  p-4 mt-4 rounded-lg   md:space-x-8 md:mt-0 md:border-0 ">
-					<li>
-						<a th:href="@{/user/register}" class="block py-2 pl-3 pr-4 text-white  rounded "
-							aria-current="page">Do you have an account ?</br>Sign up</a>
-					</li>
-					<li>
-						<a th:href="@{/user/login}" class="block py-2 pl-3 pr-4 text-white  rounded "
-							aria-current="page">Log_iN</a>
-					</li>
-					<li>
-						<a th:href="@{/}" class="block py-2 pl-3 pr-4 text-white  rounded " aria-current="page">Enter as
-							a guest</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
+<body layout:fragment="page-content-plain">
+	<div th:replace="fragments/administratorSidebar"></div>
+	<div
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#(view.cars.registration.title),'true','/administrator/restorant/register')">
 	</div>
 	<!--Code block MENU end-->
-	
-	<form class="space-y-4 md:space-y-6" th:action="@{/users/details/{id}(id=${userForm.id})}" th:method="POST", th:object="${userForm}">
-                    <div>
-                        <input th:field="*{id}" type="hidden"/>
-                    </div>
-                    <div>
-                        <label th:for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">First_name</label>
-                        <input type="text" th:field="*{first_name}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2" placeholder="first_name" required="">
-                        <span th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}" class="mt-2 text-sm text-red-600 font-medium"></span>
-                    </div>
-                    <div>
-                        <label th:for="last_name" class="block mb-2 text-sm font-medium text-gray-900">Last_name</label>
-                        <input type="text" th:field = "*{last_name}" placeholder = "last_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
-                    </div>
-                     <div>
-                        <label th:for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                        <input type="password" th:field = "*{password}" placeholder = "••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
-                    </div>
-                    <div>
-                        <label th:for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                        <input type="text" th:field = "*{email}" placeholder = "email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
-                    </div>
-                     <div>
-                        <label th:for="address" class="block mb-2 text-sm font-medium text-gray-900">Address</label>
-                        <input type="text" th:field = "*{address}" placeholder = "address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
-                    </div>    
-                     <div>
-                        <label th:for="phoneNo" class="block mb-2 text-sm font-medium text-gray-900">phoneNo</label>
-                        <input type="text" th:field = "*{phoneNo}" placeholder = "phoneNo" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
-                    </div>      
-                     <div>
-                        <label th:for= "age" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
-                        <input type="text" th:field = "*{age}" placeholder = "age" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
-                    </div>    
-                    <div>
-                        <label th:for= "personalIdentityNo" class="block mb-2 text-sm font-medium text-gray-900">Enter your Identity Card</label>
-                        <input type="text" th:field = "*{personalIdentityNo}" placeholder = "Browser from directory" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('personalIdentityNo')}" th:errors="*{personalIdentityNo}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
 
-                    </div>    
-                     <div>
-                        <label th:for= "age" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
-                        <input type="text" th:field = "*{age}" placeholder = "age" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
-                        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class= "mt-2 text-sm text-red-600 font-medium" ></span>
+	<form class="space-y-4 md:space-y-6" th:action="@{/administrator/user/register-view(id=${userForm.id})}"
+		th:method="POST" , th:object="${userForm}">
+		<div>
+			<input th:field="*{id}" type="hidden" />
+		</div>
+		<div>
+			<label th:for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">First_name</label>
+			<input type="text" th:field="*{first_name}"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
+				placeholder="first_name" required="">
+			<span th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
+		</div>
+		<div>
+			<label th:for="last_name" class="block mb-2 text-sm font-medium text-gray-900">Last_name</label>
+			<input type="text" th:field="*{last_name}" placeholder="last_name"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
+		</div>
+		<div>
+			<label th:for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+			<input type="password" th:field="*{password}" placeholder="••••••••"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
+		</div>
+		<div>
+			<label th:for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+			<input type="text" th:field="*{email}" placeholder="email"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
+		</div>
+		<div>
+			<label th:for="address" class="block mb-2 text-sm font-medium text-gray-900">Address</label>
+			<input type="text" th:field="*{address}" placeholder="address"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
+		</div>
+		<div>
+			<label th:for="phoneNo" class="block mb-2 text-sm font-medium text-gray-900">phoneNo</label>
+			<input type="text" th:field="*{phoneNo}" placeholder="phoneNo"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
+		</div>
+		<div>
+			<label th:for="age" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
+			<input type="text" th:field="*{age}" placeholder="age"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
+		</div>
+		<div>
+			<label th:for="personalIdentityNo" class="block mb-2 text-sm font-medium text-gray-900">Enter your Identity
+				Card</label>
+			<input type="text" th:field="*{personalIdentityNo}" placeholder="Browser from directory"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('personalIdentityNo')}" th:errors="*{personalIdentityNo}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
 
-                    </div>   
-                   <div>
-				 <label th:for = "restorant" class="block mb-2 text-sm font-medium text-gray-900">Select the restorant you prefer!</label>
-				 <select th:field = "*{restorant.restName}"  class="block py-2 px-2 w-full text-sm border-2 border-gray-800 ">
-					<option selected></option>
-					<option th:each = "e : ${restorant}" th:value="${e.idRestorant}" th:text="${e.restName}"></option>
-				</select>
-			    <span th:if="@{#fields.hasErrors(restorantList.restName)}" th:errors= "*{restorantList.restName}" ></span>
-			
-			       </div>
-                   
-                     <div>
-                        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Identify as</label>
-                        <select th:field="*{userRole}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option th:value="CUSTOMER">Customer</option>
-                            <option th:value="ADMIN">Admin</option>
-                            <option th:value = "ADMINISTRATOR">Administrator</option>
-                            <option th:value = "SHIPPERS">Shippers</option>
-                        </select>
-                 
-                    </div>
-                        <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required="">
-                        </div>
-                        <div class="ml-3 text-sm">
-                            <label for="terms" class="font-light text-gray-500">I accept the <a class="font-medium text-primary-600 hover:underline" href="#">Terms and Conditions</a></label>
-                        </div>
-                        </div>
-                    <button type="submit" class="w-full text-white bg-gray-900 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
-                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Already have an account? <a th:href="@{/login}" class="font-medium text-gray-600 hover:underline">Login here</a>
-                    </p>
-                </form>
-               </body>
-              </html>
+		</div>
+		<div>
+			<label th:for="age" class="block mb-2 text-sm font-medium text-gray-900">Age</label>
+			<input type="text" th:field="*{age}" placeholder="age"
+				class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+				required="">
+			<span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
+				class="mt-2 text-sm text-red-600 font-medium"></span>
 
-       
+		</div>
+		<div>
+			<label th:for="restorant" class="block mb-2 text-sm font-medium text-gray-900">Select the restorant you
+				prefer!</label>
+			<select th:field="*{restorant.restName}" class="block py-2 px-2 w-full text-sm border-2 border-gray-800 ">
+				<option selected></option>
+				<option th:each="e : ${restorant}" th:value="${e.idRestorant}" th:text="${e.restName}"></option>
+			</select>
+			<span th:if="@{#fields.hasErrors(restorantList.restName)}" th:errors="*{restorantList.restName}"></span>
+
+		</div>
+
+		<div>
+			<label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Identify as</label>
+			<select th:field="*{userRole}"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+				<option th:value="CUSTOMER">Customer</option>
+				<option th:value="ADMIN">Admin</option>
+				<option th:value="ADMINISTRATOR">Administrator</option>
+				<option th:value="SHIPPERS">Shippers</option>
+			</select>
+
+		</div>
+		<div class="flex items-start">
+			<div class="flex items-center h-5">
+				<input id="terms" aria-describedby="terms" type="checkbox"
+					class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
+					required="">
+			</div>
+			<div class="ml-3 text-sm">
+				<label for="terms" class="font-light text-gray-500">I accept the <a
+						class="font-medium text-primary-600 hover:underline" href="#">Terms and Conditions</a></label>
+			</div>
+		</div>
+		<button type="submit"
+			class="w-full text-white bg-gray-900 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+		<p class="text-sm font-light text-gray-500 dark:text-gray-400">
+			Already have an account? <a th:href="@{/login}" class="font-medium text-gray-600 hover:underline">Login
+				here</a>
+		</p>
+	</form>
+</body>
+
+</html>

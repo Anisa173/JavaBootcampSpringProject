@@ -53,7 +53,7 @@ public class AdministratorController {
 
 	@GetMapping
 	public String getUserReviewList(Model model) throws Exception {
-		model.addAttribute(" user ", userService.getAllUser());
+		model.addAttribute(" userList ", userService.getAllUser());
 		return " tailwindcss/user/List ";
 	}
 
@@ -184,7 +184,7 @@ public class AdministratorController {
 		return "redirect:/order";
 	}
 
-// Admini i aplikacionit 'sheh' porositë sipas customerId dhe datës së proçesimit per arsye analitike	
+    // Admini i aplikacionit 'sheh' porositë sipas customerId dhe datës së proçesimit per arsye analitike	
 	@GetMapping
 	public String getOrderListReview(Model model) throws Exception {
 		model.addAttribute("order", oService.getOrders());
@@ -194,7 +194,6 @@ public class AdministratorController {
 	@DeleteMapping("/restorant/delete/idRestorant")
 	public String delete(@RequestParam(value = "idRestorant", required = true) Integer idRestorant, Integer adminIdWeb)
 			throws Exception {
-
 		restService.delete(idRestorant, adminIdWeb);
 
 		return "redirect:/restorantList";

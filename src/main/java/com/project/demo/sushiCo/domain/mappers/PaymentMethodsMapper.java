@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-
-import com.project.demo.sushiCo.domain.dto.AddInBasketDto;
 import com.project.demo.sushiCo.domain.dto.PaymentMethodsDto;
-import com.project.demo.sushiCo.entity.AddInBasket;
 import com.project.demo.sushiCo.entity.PaymentMethods;
 
 @Component

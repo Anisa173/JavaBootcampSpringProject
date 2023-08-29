@@ -18,8 +18,6 @@ import lombok.NoArgsConstructor;
 public class RegisterRestorantForm extends BasicEntity<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-    @Column(name = "idRestorant")
 	private Integer idRestorant;
 	@Column(name = "restNUIS")
 	private String restNUIS;
@@ -39,15 +37,9 @@ public class RegisterRestorantForm extends BasicEntity<Integer> {
 
 	@Override
 	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-public Integer getIdRestorant() {
 		return idRestorant;
 	}
+
 
 	public void setIdRestorant(Integer idRestorant) {
 		this.idRestorant = idRestorant;
@@ -117,7 +109,7 @@ public Integer getIdRestorant() {
 	}
 
 	public String toString() {
-		return "RegisterRestorantForm[id = " + id + ",idRestorant = " +idRestorant+ ",restNUIS = " + restNUIS + ",restName = " + restName
+		return "RegisterRestorantForm[idRestorant = " +idRestorant+ ",restNUIS = " + restNUIS + ",restName = " + restName
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest = " + addressRest
 				+ ",startDay = " + startDay + ",endDay = " + endDay + ",adminIdWeb = " + adminIdWeb + "]";
 	}

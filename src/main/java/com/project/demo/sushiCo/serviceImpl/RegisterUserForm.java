@@ -1,7 +1,5 @@
 package com.project.demo.sushiCo.serviceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.project.demo.sushiCo.entity.BasicEntity;
 import com.project.demo.sushiCo.entity.Restorant;
 import com.project.demo.sushiCo.entity.UserRole;

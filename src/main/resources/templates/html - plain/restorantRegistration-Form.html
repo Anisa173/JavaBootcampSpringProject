@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width = device - width  initial-scale = 1.0">
+</head>
+
+<body layout:fragment="page-content-plain">
+	<div th:replace="fragments/administratorSidebar"></div>
+	<div
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#(view.cars.registration.title),'true','/administrator/restorant/register')">
+	</div>
+	<form th:action="@{/administrator/restorant/register" }" th:object="${restorantForm}" th:method=" POST">
+		/*<tr th:each="user : ${restorantForm}">
+			<td th:text="${user.idRestorant}">ID</td>
+			<td th:text="${user.restNUIS}">Restorant NUIS</td>
+			<td th:text="${user.restName}">Restorant Name</td>
+			<td th:text="${user.phoneNo}">Phone Number</td>
+			<td th:text="${user.activity_field}">Activity Field</td>
+			<td th:text="${user.addressRest}">Address</td>
+			<td th:text="${user.startDay}">Start_Time of Day</td>
+			<td th:text="${user.endDay}">End_Time of Day</td>
+			<td><a */ <div>
+					<input th:field="*{idRestorant}" type="hidden" />
+					</div>
+					<div>
+						<input th:field="*{restNUIS}" type="text" placeholder="Restorant NUIS" />
+						<span th:if="${#fields.hasErrors(restNUIS)}" th:errors="*{restNUIS}"></span>
+					</div>
+					<div>
+						<input th:field="*{restName}" type="text" placeholder="restName" />
+						<span th:if="@{#fields.hasErrors(restName)}" th:errors="*{restName}"></span>
+					</div>
+					<div>
+						<input th:field="*{phoneNo}" type="text" placeholder="Restorant phoneNo" />
+						<span th:if="${#fields.hasErrors(phoneNo)}" th:errors="*{phoneNo}"></span>
+					</div>
+					<div>
+						<input th:field="*{activity_field}" type="text" placeholder="Restorant activityField" />
+						<span th:if="${#fields.hasErrors(activity_field)}" th:errors="*{activity_field}"></span>
+					</div>
+					<div>
+						<input th:field="*{addressRest}" type="text" placeholder="Restorant addressRest" />
+						<span th:if="${#fields.hasErrors(addressRest)}" th:errors="*{addressRest}"></span>
+					</div>
+					<div>
+						<input th:field="*{startDay}" type="text" placeholder="Restorant startDay" />
+						<span th:if="${#fields.hasErrors(startDay)}" th:errors="*{startDay}"></span>
+					</div>
+					<div>
+						<input th:field="*{endDay}" type="text" placeholder="Restorant endDay" />
+						<span th:if="${#fields.hasErrors(endDay)}" th:errors="*{endDay}"></span>
+					</div>
+
+					<button th:type="submit">Submit</button>
+					<!--<input type = "button" th:value = "#{form.submit}" /> --!>
+	</form>
+</body>
+
+</html>

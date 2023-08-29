@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
 	<meta charset="UTF-8">
@@ -99,7 +99,7 @@
 			<ul sec:authorize="hasAuthority('SHIPPERS')" th:replace="fragments/shippers-sidebar :: shippersSidebar">
 			</ul>
 		</div>
-	</aside>
+	</aside> 
 </body>
 
 </html>

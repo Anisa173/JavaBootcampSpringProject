@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width = device - width , initial-scale = 1.0 ">
+</head>
+
+<body layout:fragment="page-content-plain">
+	<div th:replace="fragments/administratorSidebar"></div>
+	<div
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#{view.paymentMethods.list.title},'true','/administrator/paymentMethods/register - view')">
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Restorant Payment_Methods</th>
+					<th>EDIT</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${payment_methodForm}">
+					<td th:text="${user.Id}">Id</td>
+					<td th:text="${user.payment_Method}">Restorant Payment_Methods</td>
+					<td>
+						<a th:href="@{/administrator/paymentMethods/register - view(paymentM_Id = ${user.Id})}">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>
