@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.project.demo.sushiCo.domain.dto.OrderDto;
 import com.project.demo.sushiCo.entity.Order;
+
 @Component
 public class OrderMapper extends BaseMapper<Order, OrderDto> {
 

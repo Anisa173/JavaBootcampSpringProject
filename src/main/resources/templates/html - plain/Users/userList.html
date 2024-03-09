@@ -28,6 +28,8 @@
 					<th>PersonalIdentity_No</th>
 					<th>User Role</th>
 					<th>Restorant Name</th>
+				    <th>DELETE Shipper</th>
+				<th>DELETE Admin</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,6 +46,17 @@
 					<td th:text="${user.personalIdentityNo}">PersonalIdentity_No</td>
 					<td th:text="${user.userRole}">Identified user as</td>
 					<td th:text="${user.restorant.restName}"></td>
+		<td>
+						<a
+							th:href="@{/administrator/user/deleteShipper(userId = ${user.id})}"
+							class="font-medium text-black hover:underline">Delete Shipper</a>
+					</td>
+	<td>
+						<a
+							th:href="@{/administrator/user/deleteAdmin(userId = ${user.id})}"
+							class="font-medium text-black hover:underline">Delete Admin</a>
+					</td>
+	
 				</tr>
 			</tbody>
 		</table>

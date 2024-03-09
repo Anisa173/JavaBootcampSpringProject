@@ -10,7 +10,7 @@
 <body layout:fragment="page-content-plain">
 	<div th:replace="fragments/administratorSidebar"></div>
 	<div
-		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#(view.cars.registration.title),'true','/administrator/restorant/register')">
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#(view.restorant.registration.title),'true','/administrator/restorant/register')">
 	</div>
 	<form th:action="@{/administrator/restorant/register" }" th:object="${restorantForm}" th:method=" POST">
 		/*<tr th:each="user : ${restorantForm}">

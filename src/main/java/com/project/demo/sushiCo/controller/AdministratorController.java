@@ -53,32 +53,32 @@ public class AdministratorController {
 
 	@GetMapping
 	public String getUserReviewList(Model model) throws Exception {
-		model.addAttribute(" userList ", userService.getAllUser());
-		return " tailwindcss/user/List ";
+		model.addAttribute(" user ", userService.getAllUser());
+		return " tailwindcss/user - List ";
 	}
 
 	@GetMapping
 	public String getShipperReviewList(Model model, Integer id) throws Exception {
-		model.addAttribute(" shippers ", userService.getAllShippersByAdminId(id));
-		return " tailwindcss/user/list ";
+		model.addAttribute("shippers", userService.getAllShippersByAdminId(id));
+		return " tailwindcss/user -list ";
 	}
 
 	@DeleteMapping
 	public String deleteAdmin(@RequestParam(value = "userId", required = true) Integer id) throws Exception {
 		userService.deleteAdmin(id);
-		return "redirect:/user/List ";
+		return "redirect:/user -List ";
 	}
 
 	@DeleteMapping
 	public String deleteShipper(@RequestParam(value = "userId", required = true) Integer id) throws Exception {
 		userService.deleteShippers(id);
-		return "redirect:/user/List ";
+		return "redirect:/user -List ";
 	}
 
 	@GetMapping
 	public String getCustomersReviewList(Model model, Integer id) throws Exception {
 		model.addAttribute(" customer ", userService.getAllCustomers(id));
-		return "redirect/user/List";
+		return "redirect/user -List";
 	}
 
 	@GetMapping("/restorant/register - view")
@@ -175,7 +175,7 @@ public class AdministratorController {
 	@GetMapping
 	public String getRestorantsReviewlist(Model model, Integer adminIdWeb) throws Exception {
 		model.addAttribute(" restorant ", restService.getAllRestorants(adminIdWeb));
-		return "redirect:/restorant/List ";
+		return "redirect:/restorant -List ";
 	}
 
 	@GetMapping
@@ -184,7 +184,8 @@ public class AdministratorController {
 		return "redirect:/order";
 	}
 
-    // Admini i aplikacionit 'sheh' porositë sipas customerId dhe datës së proçesimit per arsye analitike	
+	// Admini i aplikacionit 'sheh' porositë sipas customerId dhe datës së
+	// proçesimit per arsye analitike
 	@GetMapping
 	public String getOrderListReview(Model model) throws Exception {
 		model.addAttribute("order", oService.getOrders());
@@ -195,7 +196,6 @@ public class AdministratorController {
 	public String delete(@RequestParam(value = "idRestorant", required = true) Integer idRestorant, Integer adminIdWeb)
 			throws Exception {
 		restService.delete(idRestorant, adminIdWeb);
-
 		return "redirect:/restorantList";
 	}
 

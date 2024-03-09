@@ -13,14 +13,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
-
 @Entity
 public class WebAplication extends BasicEntity<Integer> {
 //Platforma Web administrohet nga admini
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminWebId", referencedColumnName = "id")
 	private User adminWebAplication;
-	
+
 	// Ne aplikacion zgjedhin te regjistrohen,logohen apo preferojne ta perdorin
 	// N-klientë,admin,shippersa
 	@OneToMany(mappedBy = "webAplication", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -43,7 +42,7 @@ public class WebAplication extends BasicEntity<Integer> {
 		this.appname = appname;
 		this.serialNo = serialNo;
 		this.users = users;
-		
+
 	}
 
 	@Override
@@ -78,19 +77,18 @@ public class WebAplication extends BasicEntity<Integer> {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-public User getAdminWebAplication() {
+
+	public User getAdminWebAplication() {
 		return adminWebAplication;
 	}
 
 	public void setAdminWebAplication(User adminWebAplication) {
 		this.adminWebAplication = adminWebAplication;
 	}
+
 	public String toString() {
 		return "WebApplication[idAppl = " + idAppl + ",appname = " + appname + ",serialNo = " + serialNo + ",users = "
-				+ users + ",adminWebAplication = " + adminWebAplication+"]";
+				+ users + ",adminWebAplication = " + adminWebAplication + "]";
 	}
 
-	
-
-	
 }

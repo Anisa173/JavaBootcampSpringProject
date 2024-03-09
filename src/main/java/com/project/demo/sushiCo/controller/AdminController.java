@@ -232,7 +232,7 @@ public class AdminController {
 		if (br.hasErrors()) {
 			return "packageOrder - view ";
 		}
-		if (((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta) == null) {
+		if ((pcgService).getPackageOrderById(userId, serviceId, idShporta) == null) {
 			pcgService.create(shippingPackOrder);
 		} else {
 			pcgService.update(
