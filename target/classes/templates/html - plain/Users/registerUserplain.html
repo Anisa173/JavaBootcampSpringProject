@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-plain}">
+<head> <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body layout:fragment="page-content-plain">
+
+<div th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#{view.user.list.title},'true', '/user/register-view')">
+
+</div>
+<div>
+        <table>
+            <thead>
+            <tr><th>Id</th>
+                <th >First Name</th>
+                <th >Last Name</th>
+<th>Address</th>
+<th>PhoneNo</th>
+<th>UserName</th>
+<th>Password</th>
+<th>personalIdentityNo</th>
+<th>Age</th>
+<th>Identify User as </th>
+<th>Choose your restorant!</th>    ///admin,shippers
+<th >Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each= "user : ${userForm}">
+                <td th:text="${user.id}">Id</td>
+                <td th:text="${user.first_name}">firstName</td>
+                <td th:text="${user.last_name}">lastName</td>
+                <td th:text="${user.address}">Address</td>
+                <td th:text="${user.phoneNo}">PhoneNo</td>
+                <td th:text="${user.email}">Username</td>
+                <td th:text="${user.password}">Password</td>
+                <td th:text="${user.personalIdentityNo}">Insert your IdentityCard</td>
+                <td th:text="${user.age}">Age</td>
+                <td th:text="${user.userRole}">Identify User as</td>
+                <td th:text="${user.restorant.restName}">Choose your Restorant</td>
+                <td>
+                    <a  th:href= "@{/user/register-view(userId = ${user.id})}" >Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</div>
+</body>
+</html>

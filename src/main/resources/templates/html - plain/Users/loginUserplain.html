@@ -1,0 +1,38 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-plain}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body layout:fragment="page-content-plain">
+	<div
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#{view.user.list.title},'true', '/user/login-view')">
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Edit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${loginForm}">
+					<td th:text="${user.id}">Id</td>
+					<td th:text="${user.email}">Username</td>
+					<td th:text="${user.password}">Password</td>
+					<td>
+						<a th:href="@{/user/login-view(userId = ${user.id})}">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

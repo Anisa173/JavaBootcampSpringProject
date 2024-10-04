@@ -12,9 +12,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import com.project.demo.sushiCo.configuration.StorageProperties;
 import com.project.demo.sushiCo.service.StorageService;
 
+import net.javacrumbs.shedlock.spring.annotation.EnableSchedulerLock;
+
 @EnableJpaRepositories
 @EnableConfigurationProperties(StorageProperties.class)
 @EnableScheduling
+@EnableSchedulerLock(defaultLockAtMostFor = "PT30S")
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @SpringBootApplication
 public class Application {
@@ -30,16 +33,5 @@ public class Application {
 			storageService.init();
 		};
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 }
