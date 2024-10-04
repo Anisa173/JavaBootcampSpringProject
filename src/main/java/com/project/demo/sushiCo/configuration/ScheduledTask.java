@@ -17,7 +17,11 @@ public class ScheduledTask {
 		System.out.println("Task's delay should be 2 sek ");
 	}
 
+<<<<<<< HEAD
 	@Scheduled(cron = " 0 30 11-23 ** TUE-SUN ")
+=======
+	@Scheduled(cron = " 0 30 11-23 ** TUE-SUN")
+>>>>>>> 928e8d487bff5ab06e559826c0c655c13e643407
 	public void performDaylyTask() {
 		System.out.println("The tasks will be executed from 11:30 until 23:30 everyday TUESDAY-SUNDAY!");
 	}

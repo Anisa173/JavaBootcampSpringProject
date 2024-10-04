@@ -1,9 +1,6 @@
 package com.project.demo.sushiCo.entity;
 
 import java.sql.Date;
-
-
-import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,11 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
 
 
-@Builder
-@AllArgsConstructor
 @Entity
 public class CardBank extends BasicEntity<Integer> {
 
