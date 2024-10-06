@@ -26,9 +26,13 @@ import jakarta.validation.Valid;
 public class AddInBasketServiceImpl<SelectedDishFormDto> implements AddInBasketService {
 	@Autowired
 	private final AddInBasketRepository basketRepository;
+	@Autowired
 	private final AddInBasketMapper basketMapper;
+	@Autowired
 	private final SelectDishesFormMapper dishFormMapper;
+	@Autowired
 	private final OrderProcessingMapper orderMapper;
+	@Autowired
 	private final CardBankMapper cardFormMapper;
 
 	public AddInBasketServiceImpl(AddInBasketRepository basketRepository, AddInBasketMapper basketMapper,

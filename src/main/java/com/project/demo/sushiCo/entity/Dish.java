@@ -26,17 +26,18 @@ import lombok.AllArgsConstructor;
 @Table(name = "Dish")
 public class Dish extends BasicEntity<Integer> {
    
-//Disa dishes i perkasin nje kategorie
+    //Disa dishes i përkasin një kategorie
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private DishCategory category;
 
-	//Nje apo disa dishes mund te pergjidhen nga 'customers' per nje porosi
+	// Një apo disa dishes me një numër të caktuar artikujsh mund të përgjidhen nga 'customers' për një porosi
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderId", referencedColumnName = "oId")
 	private Order order;
-//
-	@OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+	//Nje Dish mund të zgjidhet nga një ose disa klientë(customers) në të njëjtën kohë
+	@OneToMany(mappedBy = "dish", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 	private List<AddInBasket> addInBasket = new ArrayList<AddInBasket>();
 
 	@Id

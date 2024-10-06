@@ -12,11 +12,11 @@
 <body layout:fragment="page-content-plain">
 	<div th:replace="fragments/administratorSidebar"></div>
 	<div
-		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#(view.cars.registration.title),'true','/administrator/restorant/register')">
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#(view.user.registration.title),'true','/user/register')">
 	</div>
 	<!--Code block MENU end-->
 
-	<form class="space-y-4 md:space-y-6" th:action="@{/administrator/user/register-view(id=${userForm.id})}"
+	<form class="space-y-4 md:space-y-6" th:action="@{/user/register-view(id=${userForm.id})}"
 		th:method="POST" , th:object="${userForm}">
 		<div>
 			<input th:field="*{id}" type="hidden" />

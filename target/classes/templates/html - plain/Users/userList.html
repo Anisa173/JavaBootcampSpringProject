@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width = device - width , initial-scale = 1.0 ">
+</head>
+
+<body layout:fragment="page-content-plain">
+	<div th:replace="fragments/administratorSidebar"></div>
+	<div
+		th:replace="fragments/page-heading-plain :: pageHeadingFragmentPlain(#{view.user.list.title},'true','/administrator/user/register - view')">
+	</div>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>First_name</th>
+					<th>Last_name</th>
+					<th>Password</th>
+					<th>Username</th>
+					<th>Address</th>
+					<th>PhoneNo</th>
+					<th>Age</th>
+					<th>PersonalIdentity_No</th>
+					<th>User Role</th>
+					<th>Restorant Name</th>
+				    <th>DELETE Shipper</th>
+				<th>DELETE Admin</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each = "user : ${user}">
+					<td th:text="${user.Id}">Id</td>
+					<td th:text="${user.first_name}">First_name</td>
+					<td th:text="${user.last_name}">Last_name</td>
+					<td th:text="${user.password}">Password</td>
+					<td th:text="${user.email}">Username</td>
+					<td th:text="${user.address}">Address</td>
+					<td th:text="${user.phoneNo}">PhoneNo</td>
+					<td th:text="${user.age}">Age</td>
+					<td th:text="${user.personalIdentityNo}">PersonalIdentity_No</td>
+					<td th:text="${user.userRole}">Identified user as</td>
+					<td th:text="${user.restorant.restName}"></td>
+		<td>
+						<a
+							th:href="@{/administrator/user/deleteShipper(userId = ${user.id})}"
+							class="font-medium text-black hover:underline">Delete Shipper</a>
+					</td>
+	<td>
+						<a
+							th:href="@{/administrator/user/deleteAdmin(userId = ${user.id})}"
+							class="font-medium text-black hover:underline">Delete Admin</a>
+					</td>
+	
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

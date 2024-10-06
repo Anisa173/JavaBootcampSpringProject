@@ -14,7 +14,7 @@ public class SelectWhichYouPreferForm extends BasicEntity<Integer> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idSelect;
 	@Column(name = "rest")
-	private Restorant rest ;
+	private Restorant rest;
 	private Integer idRestorant;
 	private Integer userId;
 

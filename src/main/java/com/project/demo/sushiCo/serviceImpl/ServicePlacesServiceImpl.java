@@ -39,13 +39,15 @@ public class ServicePlacesServiceImpl implements ServicePlacesService {
 		var result = servicePlacesMapper.toEntity(placesDto);
 		return servicePlacesMapper.toDto(servicePlacesRepository.save(result));
 	}
+
     @Override
-	public ServicePlacesDto update(Integer idRestorant,Integer Id,@Valid ServicePlacesDto sPlaces, @Valid ServicePlacesDto placesDto) throws Exception {
-		return servicePlacesMapper.toDto(servicePlacesRepository.update(idRestorant,Id,placesDto,sPlaces));
-
+	public ServicePlacesDto update(Integer idRestorant, Integer Id, @Valid ServicePlacesDto placesDto)
+			throws Exception {
+		// TODO Auto-generated method stub
+    	return servicePlacesMapper.toDto(servicePlacesRepository.update(idRestorant,Id,placesDto));
 	}
-
-	@Override
+    
+    @Override
 	public ServicePlacesDto registerPlaces(@Valid RegisterServicePlacesForm registerForm) throws Exception {
 		var serviceP = getService_PlacesById(registerForm.getId(),registerForm.getIdRestorant());
 		serviceP.setService_Places(registerForm.getServicesPlaces());
@@ -58,4 +60,6 @@ public class ServicePlacesServiceImpl implements ServicePlacesService {
 		
 		return servicePlacesMapper.toDto(servicePlacesRepository.getRestorantPServices(restorantId));
 	}
+
+	
 }

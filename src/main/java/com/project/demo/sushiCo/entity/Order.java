@@ -28,12 +28,12 @@ public class Order extends BasicEntity<Integer> {
 	@OneToMany(mappedBy = "order" ,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<PaymentMethods> p_methods;
 
-	// Nje porosi permban disa menu
+	// Nje porosi permban disa menu 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Dish> dish = new ArrayList<Dish>();
 
 	// Nje ose disa porosi permban nje shporte porosie
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "idShporta", referencedColumnName = "id")
 	private PackageOrdered packageOrdered;
 
@@ -62,12 +62,15 @@ public class Order extends BasicEntity<Integer> {
 		super();
 	}
 
-	public Order(Double orderPrize, Integer orderItems, String orderStatus, List<Dish> dish, PackageOrdered packageOrdered, User user,
-			List<PaymentMethods> p_methods) {
+	public Order(Double orderPrize, Integer orderItems, String orderStatus,LocalDateTime oTimeConfirmed,LocalDateTime oTimeProccessed, 
+			User adminUser,List<Dish> dish, PackageOrdered packageOrdered, User user,List<PaymentMethods> p_methods) {
 		super();
 		this.orderPrize = orderPrize;
 		this.orderItems = orderItems;
 		this.orderStatus = orderStatus;
+		this.oTimeConfirmed = oTimeConfirmed;
+		this.oTimeProccessed = oTimeProccessed;
+		this.setAdminUser(adminUser);
 		this.dish = dish;
 		this.packageOrdered = packageOrdered;
 		this.user = user;
@@ -154,12 +157,22 @@ public class Order extends BasicEntity<Integer> {
 	public void setOTimeProccessed(LocalDateTime oTimeProccessed) {
 		this.oTimeProccessed = oTimeProccessed;
 	}
+    public User getAdminUser() {
+		return adminUser;
+	}
 
+	public void setAdminUser(User adminUser) {
+		this.adminUser = adminUser;
+	}
+
+
+	
 	public String toString() {
 		return "Order[oId = " + oId + ",orderPrize = " + orderPrize + ",orderItems = " + orderItems + ",orderStatus ="
 				+ orderStatus + ",dish = " + dish + ",packageOrdered = " + packageOrdered + ",user = " + user + ",p_methods = "
-				+ p_methods + ",oTimeConfirmed = " +oTimeConfirmed+ ",oTimeProccessed = " +oTimeProccessed+ "]";
+				+ p_methods + ", oTimeConfirmed = " +oTimeConfirmed+ ", oTimeProccessed = " +oTimeProccessed+ ",adminUser = "+adminUser+"]";
 	}
 
+	
 	
 }

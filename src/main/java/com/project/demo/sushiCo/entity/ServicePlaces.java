@@ -17,7 +17,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class ServicePlaces extends BasicEntity<Integer> {
 
-	// Në çdo zonë sherbimi dergohen 1 ose N-shporta porosie gjate punes ditore
+	//Në çdo zonë sherbimi dergohen 1 ose N-shporta porosie gjate punes ditore
 	@OneToMany(mappedBy = "servicePlaces", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PackageOrdered> pckO = new ArrayList<PackageOrdered>();
 
@@ -38,7 +38,7 @@ public class ServicePlaces extends BasicEntity<Integer> {
 		super();
 	}
 
-	public ServicePlaces(String service_Places, Restorant restorant, List<PackageOrdered> pckO, Double shippingCost) {
+	public ServicePlaces(String service_Places, Double shippingCost, Restorant restorant, List<PackageOrdered> pckO) {
 		super();
 		this.service_Places = service_Places;
 		this.restorantService = restorant;

@@ -39,17 +39,22 @@ public interface UserService {
 	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId,Integer registrationId)
 			throws UsernameNotFoundException;
 
-	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto registerUserForm,
-			@Valid RegisterUserFormDto registerUserForm2) throws Exception;
+	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm)
+			throws Exception;
 
 	UserDto login(@Valid Login form, Integer userId, Integer registrationId) throws Exception;
 
 	LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception;
 
-	LoginDto updateLoginData(Integer userId, @Valid LoginDto loginForm1, @Valid LoginDto loginForm) throws Exception;
+	LoginDto updateLoginData(Integer userId, @Valid LoginDto loginForm) throws Exception;
 
 	List<UserDto> getAllCustomers(Integer userId) throws Exception;
 
+	
+
+	
+
+	
 	
 	
 

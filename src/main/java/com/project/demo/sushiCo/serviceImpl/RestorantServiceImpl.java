@@ -24,7 +24,9 @@ public class RestorantServiceImpl implements RestorantService {
 
 	@Autowired
 	private final RestorantRepository restorantRepository;
+	@Autowired
 	private final RestorantMapper restorantMapper;
+	@Autowired
 	private final SelectWhichYouPreferMapper selectWhichYouPreferMapper;
 
 	public RestorantServiceImpl(RestorantRepository restorantRepository, RestorantMapper restorantMapper,

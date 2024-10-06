@@ -4,7 +4,6 @@ package com.project.demo.sushiCo.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,9 +18,9 @@ public class AddInBasket extends BasicEntity<Integer> {
 	@JoinColumn(name = "custId", referencedColumnName = "id")
 	private User user;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	/*@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "dCatId ", referencedColumnName = "id")
-	private DishCategory dishCategory;
+	private DishCategory dishCategory;*/
 
 	// Nje menu mund te selektohet nga shume kliente
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -89,17 +88,10 @@ public class AddInBasket extends BasicEntity<Integer> {
 		this.valueAmount = valueAmount;
 	}
 
-	public DishCategory getDishCategory() {
-		return dishCategory;
-	}
-
-	public void setDishCategory(DishCategory dishCategory) {
-		this.dishCategory = dishCategory;
-	}
-
+	
 	public String toString() {
 		return "AddInBasket[addId = " + addId + ", addItemDish = " + addItemsDish + ",user = " + user + ",dish = "
-				+ dish + ",valueAmount = " + valueAmount + ",dishCategory = " + dishCategory + "]";
+				+ dish + ",valueAmount = " + valueAmount + "]";
 	}
 
 }

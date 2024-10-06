@@ -24,9 +24,13 @@ public class RegisterUserFormDto {
 	private Integer age;
 
 	private String personalIdentityNo;
+	
 	private Integer idRestorant;
+	
 	private Integer userId;
+	
 	private UserRole userRole;
+	
 	@NotNull(message = "It's required")
 	private Restorant restorant ;
 

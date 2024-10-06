@@ -2,7 +2,6 @@ package com.project.demo.sushiCo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,24 +12,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 
 
-@Builder
-@AllArgsConstructor
 @Entity
 public class DishCategory extends BasicEntity<Integer> {
 
-	// DishCategory menaxhohen nga Admini i çdo restoranti
+	//DishCategory menaxhohen nga Admini i çdo restoranti
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "admin_Id", referencedColumnName = "id")
 	private User user;
 
-	// Nje kategori Dishes mund te perzgjidhet nga me shume se nje konsumator
+	//Nje kategori Dishes mund te perzgjidhet nga me shume se nje konsumator(customer)
 	@OneToMany(mappedBy = "dishCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<AddInBasket> addInBasket = new ArrayList<AddInBasket>();
 
-	// Çdo dishCategory përmban N-dishes
+	//Çdo dishCategory përmban N-dishes
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Dish> dishes = new ArrayList<Dish>();
 

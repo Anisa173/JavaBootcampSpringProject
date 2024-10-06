@@ -18,12 +18,12 @@ import jakarta.persistence.OneToOne;
 @Entity
 	public class BookingProcessing extends BasicEntity<Integer> {
 	
-		//Nje apo disa rezervime mund te kryehen nga i njejti klient gjate punes ditore
+		//Nje apo disa rezervime mund te kryhen nga i njejti klient gjate punes ditore te restorantit
 		@ManyToOne(cascade = CascadeType.ALL)
 		@JoinColumn(name = "customerId", referencedColumnName = "id")
 		private User user;
 
-        //Çdo rezervim kryhet ne te njejtin restorant dhe ne te njejten vendododhje
+        //Çdo rezervim kryhet ne te njejtin restorant dhe ne te njejten vendodhje
 		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 		@JoinColumn(name = "reservationId", referencedColumnName = "rtb_id")
 		@JsonManagedReference
@@ -117,7 +117,7 @@ import jakarta.persistence.OneToOne;
 			this.user = user;
 		}
 
-	public RestorantTables getTables() {
+	    public RestorantTables getTables() {
 			return tables;
 		}
 

@@ -13,19 +13,19 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class PaymentMethods extends BasicEntity<Integer> {
 
-	// Nepermjet seciles prej metodave te pageses kryhen nje ose disa porosi ne cdo
-	// restorant
+	//Nepermjet seciles prej metodave te pageses kryhen nje ose disa porosi ne çdo
+	//restorant
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderMethodId", referencedColumnName = "oId")
 	private Order order;
-	
+	//Restoranti ka nenshkruar marreveshje me administratorin e platformes qe ti mundesohet 
+	//sherbimi klienteve nepermjet disa metodave te pageses(me cash apo ne ato me cart )
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "paymentId", referencedColumnName = "idRestorant")
 	private Restorant restorant;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Integer Id;
 	@Column(name = "payment_Method")
 	private String payment_Method;

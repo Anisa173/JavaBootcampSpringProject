@@ -28,18 +28,23 @@ import jakarta.validation.Valid;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private final UserRepository repository;
+	private final UserRepository Urepository;
+	@Autowired
 	private final PasswordEncoder passwordEncoder;
+	@Autowired
 	private final UserMapper userMapper;
+	@Autowired
 	private final RegisterUserFormMapper registerUserFormMapper;
+	@Autowired
 	private final FileSystemStorageService storageService;
+	@Autowired
 	private final LoginMapper loginMapper;
 
 	public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder, UserMapper userMapper,
 			RegisterUserFormMapper registerUserFormMapper, FileSystemStorageService storageService,
 			LoginMapper loginMapper) {
 		super();
-		this.repository = repository;
+		this.Urepository = repository;
 		this.passwordEncoder = passwordEncoder;
 		this.userMapper = userMapper;
 		this.registerUserFormMapper = registerUserFormMapper;
@@ -62,14 +67,13 @@ public class UserServiceImpl implements UserService {
 		userF.setPersonalIdentityNo(registerUserForm.getPersonalIdentityNo());
 		userF.setRestorant(registerUserForm.getRestorant());
 		userF.setUserRole(UserRole.fromValue(registerUserForm.getUserRole()));
-		return userMapper.toDto(repository.save(userF));
-
+		return userMapper.toDto(Urepository.save(userF));
 	}
 
 	@Override
 	public RegisterUserFormDto getUserById(Integer userId, Integer registrationId, Integer idRestorant)
 			throws Exception {
-		return registerUserFormMapper.toDto(repository.getUserById(userId, registrationId, idRestorant));
+		return registerUserFormMapper.toDto(Urepository.getUserById(userId, registrationId, idRestorant));
 
 	}
 
@@ -79,19 +83,18 @@ public class UserServiceImpl implements UserService {
 
 		registerUserF.setPassword(passwordEncoder.encode(registerUserF.getPassword()));
 		var result = registerUserFormMapper.toEntity(registerUserF);
-		return userMapper.toDto(repository.save(result));
+		return userMapper.toDto(Urepository.save(result));
 	}
 
 	@Override
-	public RegisterUserFormDto update(Integer userId,Integer idRestorant,@Valid RegisterUserFormDto registerUserForm,
-			@Valid RegisterUserFormDto registerUserForm2) throws Exception {
-		return registerUserFormMapper.toDto(((UserRepository) repository).update(userId, idRestorant, registerUserForm));
+	public RegisterUserFormDto update(Integer userId,Integer idRestorant,@Valid RegisterUserFormDto regUserForm ) throws Exception {
+		return registerUserFormMapper.toDto(((UserRepository) Urepository).update(userId, idRestorant,regUserForm));
 	}
 
 	@Override
 	public LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception {
 
-		return loginMapper.toDto(repository.getUserLogInById(userId, registrationId));
+		return loginMapper.toDto(Urepository.getUserLogInById(userId, registrationId));
 	}
 
 	@Override
@@ -103,36 +106,36 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(form.getEmail());
 		user.setPassword(passwordEncoder.encode(form.getPassword()));
 		user.setUserRole(UserRole.fromValue(form.getUserRole()));
-		return userMapper.toDto(repository.save(user));
+		return userMapper.toDto(Urepository.save(user));
 	}
 
 	private boolean emailExists(String email) {
-		return (repository.findByEmail(email) != null);
+		return (Urepository.findByEmail(email) != null);
 	}
 
 	@Override
-	public LoginDto updateLoginData(Integer userId,@Valid LoginDto loginForm1,@Valid LoginDto loginForm)
+	public LoginDto updateLoginData(Integer userId,@Valid LoginDto loginForm)
 			throws Exception {
-		return loginMapper.toDto(repository.updateLoginData(userId, loginForm1));
+		return loginMapper.toDto(Urepository.updateLoginData(userId, loginForm));
 	}
 
 
 	// AdminWebi afishon te gjithe userat qe kane krijuar llogari ne aplikacion
 	@Override
 	public List<UserDto> getAllUser() throws Exception {
-		return repository.findAll().stream().map(m -> userMapper.toDto(m)).collect(Collectors.toList());
+		return Urepository.findAll().stream().map(m -> userMapper.toDto(m)).collect(Collectors.toList());
 	}
 
 	// Kur nderpret marredheniet e punes admini i restorantit
 	@Override
 	public void deleteAdmin(Integer id) {
-		repository.deleteAdmin(id);
+		Urepository.deleteAdmin(id);
 	}
 
 //Kur shippersi nderpret marredheniet e punes
 	@Override
 	public void deleteShippers(Integer id) {
-		repository.deleteShippers(id);
+		Urepository.deleteShippers(id);
 	}
 
 	@Override
@@ -149,7 +152,7 @@ public class UserServiceImpl implements UserService {
 		user.setAge(reqDto.getAge());
 		user.setPersonalIdentityNo(personalIdentityNo);
 
-		return userMapper.toDto(repository.save(user));
+		return userMapper.toDto(Urepository.save(user));
 	}
 
 	@Override
@@ -162,18 +165,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDto> getAllShippersByAdminId(Integer id) throws Exception {
 
-		return (List<UserDto>) userMapper.toDto(repository.getAllShippersByAdminId(id));
+		return (List<UserDto>) userMapper.toDto(Urepository.getAllShippersByAdminId(id));
 	}
 
 	@Override
 	public List<UserDto> getAllCustomers(Integer userId) throws Exception {
 		
-		return (List<UserDto>) userMapper.toDto(repository.getAllCustomers());
+		return (List<UserDto>) userMapper.toDto(Urepository.getAllCustomers());
 	}
 
 	@Override
 	public List<UserDto> getShippersAdmin(Integer id) throws Exception {
-		return  userMapper.toDto(repository.getShippersAdmin(id));
+		return  userMapper.toDto(Urepository.getShippersAdmin(id));
 	}
 
 	

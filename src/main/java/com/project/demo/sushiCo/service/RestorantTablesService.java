@@ -13,12 +13,10 @@ public interface RestorantTablesService {
 
 	RestorantTablesDto getRestorant_tablesById(Integer tb_id, Integer rtb_id, Integer adminRId) throws Exception;
 
-	RestorantTablesDto update(Integer tb_id, Integer rtb_id, Integer adminRId, @Valid RestorantTablesDto placesDto,@Valid RestorantTablesDto restTdto)
+	RestorantTablesDto update(Integer tb_id, Integer rtb_id, Integer adminRId, @Valid RestorantTablesDto placesDto)
 			throws Exception;
 
 	//Klienti perpara se te kryej rezervimin duhet te informohet mbi tavolinat e diponueshme,nr e karrigeve , llojet e eventeve qe zhvillohen ne cilin lloj te tavolinave
 	RestorantTablesDto getRestorantTablesDetails(Integer rtb_id, Integer adminRId) throws Exception;
 
-
-	RestorantTablesDto getAlltablesById(Integer rtb_id, Integer adminRId);
 }

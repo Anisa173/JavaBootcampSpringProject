@@ -32,18 +32,18 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 
 	private static final long serialVersionUID = 6350320748155867627L;
 
-	// Admini administron webApplication
+	// Administratori administron webApplication
 	@OneToOne(mappedBy = "adminWebAplication", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private WebAplication webAppl;
 
-	// Admini i webPlatformes regjistron , ruan dhe mirmban databazen e
+	// Administratori i webPlatformes regjistron , ruan dhe mirmban databazen e
 	// N-restoranteve
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "adminWeb",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Restorant> rst = new ArrayList<Restorant>();
 
-// Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
+    // Admini i webApplication menaxhon te gjithe "userat" qe regjistrohen si :
 	// 1)klientet qe rregjistrohen 2)adminin dhe shippers-at e çdo
-	// restoranti
+	//   restoranti
 	@OneToMany(mappedBy = "adminPlatforma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> user1 = new ArrayList<User>();
 
@@ -58,11 +58,11 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	@JoinColumn(name = "userApplId ", referencedColumnName = "idAppl ")
 	private WebAplication webAplication;
 
-	// Cdo admin menaxhon porosite e restorantit te tij
+	// Cdo adminRestoranti menaxhon porosite e restorantit te tij
 	@OneToMany(mappedBy = "adminUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Order> orders1 = new ArrayList<Order>();
 
-	// Secilit admin i perket nje restorant
+	// Secilit adminRestoranti i perket nje restorant
 	@OneToOne(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonBackReference
 	private Restorant restorant;
@@ -95,8 +95,8 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	@JsonIgnoreProperties
 	private List<Restorant> rest = new ArrayList<Restorant>();
 
-// Klienti shton ne shporte disa menu duke selektuar edhe numrin e artikujve per
-	// cdo menu
+    //Klienti shton ne shporte disa menu duke selektuar edhe numrin e artikujve per
+	// çdo menu
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AddInBasket> addInBaskets = new ArrayList<AddInBasket>();
 
@@ -109,7 +109,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<BookingProcessing> bookingProcessings = new ArrayList<BookingProcessing>();
 
-	// Nje shippers-i i urdherohet te dergoje disa shporta porosie
+	// Nje shippers-i i urdherohet te dergoje disa shporta_porosie
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PackageOrdered> package_Orders = new ArrayList<PackageOrdered>();
 
@@ -146,7 +146,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 			List<BookingProcessing> bookingProcessings, List<PackageOrdered> package_Orders, List<Order> orders,
 			List<AddInBasket> addInBaskets, List<Restorant> rest, User shippers, List<User> user,
 			List<CardBank> cardBank, List<DishCategory> dishCategories, Restorant restorant,
-			List<Order> orders1, User adminPlatforma, WebAplication webAplication, List<User> user1) {
+			List<Order> orders1, User adminPlatforma, WebAplication webAplication, List<User> user1,List<Restorant> rst,WebAplication webAppl) {
 		super();
 
 		this.setFirst_name(first_name);
@@ -172,6 +172,9 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.adminPlatforma = adminPlatforma;
 		this.webAplication = webAplication;
 		this.user1 = user1;
+	    this.rst = rst; 
+	    this.webAppl=webAppl;
+	
 	}
 
 	@Override
@@ -391,19 +394,7 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		this.rst = rst;
 	}
 
-	public String toString() {
-
-		return "User[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = " + address
-				+ ",phoneNo = " + address + ",email = " + email + ",password = " + password + ",personalIdentityNo = "
-				+ personalIdentityNo + ",shippersStatus = " + userStatus + ",age = " + age + ",userRole = " + userRole
-				+ ",dishCategories = " + dishCategories + ",cardBank = " + cardBank + ",user = " + user + ",shippers = "
-				+ shippers + ",rest = " + rest + ",addInBaskets = " + addInBaskets + ",orders = " + orders
-				+ ", bookingProcessings = " + bookingProcessings + ", package_Orders = " + package_Orders
-				+ ",restorant = " + restorant + ",orders1 = " + orders1 + ",adminPlatforma = " + adminPlatforma
-				+ ",webAplication = " + webAplication + ",user1 = " + user1 + ",webAppl = " + webAppl + ",rst = " + rst
-				+ "]";
-	}
-
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -443,6 +434,18 @@ public class User extends BasicEntity<Integer> implements UserDetails {
 		return true;
 	}
 
-	
+	public String toString() {
+
+		return "User[id = " + id + ",first_name = " + first_name + ",last_name = " + last_name + ",address = " + address
+				+ ",phoneNo = " + address + ",email = " + email + ",password = " + password + ",personalIdentityNo = "
+				+ personalIdentityNo + ",shippersStatus = " + userStatus + ",age = " + age + ",userRole = " + userRole
+				+ ",dishCategories = " + dishCategories + ",cardBank = " + cardBank + ",user = " + user + ",shippers = "
+				+ shippers + ",rest = " + rest + ",addInBaskets = " + addInBaskets + ",orders = " + orders
+				+ ", bookingProcessings = " + bookingProcessings + ", package_Orders = " + package_Orders
+				+ ",restorant = " + restorant + ",orders1 = " + orders1 + ",adminPlatforma = " + adminPlatforma
+				+ ",webAplication = " + webAplication + ",user1 = " + user1 + ",webAppl = " + webAppl + ",rst = " + rst
+				+ "]";
+	}
+
 
 }

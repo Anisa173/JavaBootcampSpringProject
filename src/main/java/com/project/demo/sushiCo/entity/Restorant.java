@@ -21,12 +21,12 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Restorant extends BasicEntity<Integer> {
-//Per te gjitha restorantet te dhenat mirmbahen nga administratori i platformes
+//Per te gjitha restorantet te dhenat e secilit regjistrohen dhe mirmbahen nga administratori i platformës
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "adminIdWeb", referencedColumnName = "id")
 	private User adminWeb;
 
-	// Çdo restoranti i perket nje admin qe administron procesin e punes se
+	// Çdo restoranti i perket nje admin qe administron proçesin e punës se
 	// restorantit
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adminRId", referencedColumnName = "id")
@@ -44,7 +44,7 @@ public class Restorant extends BasicEntity<Integer> {
 	@JsonIgnoreProperties
 	private List<User> users;
 
-//Çdo restorant lejon kryerjen e pageses se porosive nepermjet disa metodave pagese
+    //Çdo restorant lejon kryerjen e pageses se porosive nepermjet dy formave , me kesh dhe me karte
 	@OneToMany(mappedBy = "restorant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PaymentMethods> payment_MethodsR = new ArrayList<PaymentMethods>();
 
@@ -66,10 +66,6 @@ public class Restorant extends BasicEntity<Integer> {
 	private String activity_field;
 	@Column(name = "addressRest")
 	private String addressRest;
-	@Column(name = "service_Places")
-	private String service_Places;
-	@Column(name = "payment_Methods")
-	private String payment_Methods;
 	@Column(name = "startDay")
 	private Time startDay;
 	@Column(name = "endDay")
@@ -80,9 +76,8 @@ public class Restorant extends BasicEntity<Integer> {
 	}
 
 	public Restorant(String restNUIS, String restName, String phoneNo, String activity_field, String addressRest,
-			String service_Places, String payment_Methods, Time startDay, Time endDay, List<User> users,
-			List<PaymentMethods> payment_MethodsR, List<ServicePlaces> places,
-			RestorantTables restorantTables, User admin, User adminWeb) {
+			List<ServicePlaces> service_Places, List<PaymentMethods> payment_MethodsR, Time startDay, Time endDay, List<User> users,RestorantTables restorantTables,
+			 User admin, User adminWeb) {
 
 		super();
 
@@ -91,13 +86,11 @@ public class Restorant extends BasicEntity<Integer> {
 		this.phoneNo = phoneNo;
 		this.activity_field = activity_field;
 		this.addressRest = addressRest;
-		this.service_Places = service_Places;
-		this.payment_Methods = payment_Methods;
 		this.startDay = startDay;
 		this.endDay = endDay;
 		this.users = users;
 		this.payment_MethodsR = payment_MethodsR;
-		this.places = places;
+		this.places = service_Places;
 		this.setRestorantTables(restorantTables);
 		this.setAdmin(admin);
 		this.adminWeb = adminWeb;
@@ -169,22 +162,7 @@ public class Restorant extends BasicEntity<Integer> {
 		this.addressRest = addressRest;
 	}
 
-	public String getService_Places() {
-		return service_Places;
-	}
-
-	public void setService_Places(String service_Places) {
-		this.service_Places = service_Places;
-	}
-
-	public String getPayment_Methods() {
-		return payment_Methods;
-	}
-
-	public void setPayment_Methods(String payment_Methods) {
-		this.payment_Methods = payment_Methods;
-	}
-
+	
 	public Time getStartDay() {
 		return startDay;
 	}
@@ -238,8 +216,7 @@ public class Restorant extends BasicEntity<Integer> {
 		return "RestorantService[idRestorant = " + idRestorant + ",users = " + users + ",payment_MethodsR = "
 				+ payment_MethodsR + ",places = " + places + ",restNUIS = " + restNUIS + ", restName = " + restName
 				+ ",phoneNo = " + phoneNo + ",activity_field = " + activity_field + ",addressRest =" + addressRest
-				+ ",service_Places = " + service_Places + ",payment_Methods = " + payment_Methods + ",startDay = "
-				+ startDay + ",endDay = " + endDay + ",restorantTables = " + restorantTables + ",admin = " + admin
+				+ ",startDay = "+ startDay + ",endDay = " + endDay + ",restorantTables = " + restorantTables + ",admin = " + admin
 				+ ",adminWeb = " + adminWeb + "]";
 	}
 
