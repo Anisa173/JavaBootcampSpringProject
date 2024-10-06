@@ -17,10 +17,21 @@ public class ScheduledTask {
 		System.out.println("Task's delay should be 2 sek ");
 	}
 
+<<<<<<< HEAD
 	/*@Scheduled(cron = " 0 30 11-23 ** TUE-SUN")
 	public void performDaylyTask() {
 		System.out.println("The tasks will be executed from 11:30 until 23:30 everyday TUESDAY-SUNDAY!");
 	}*/
+=======
+<<<<<<< HEAD
+	@Scheduled(cron = " 0 30 11-23 ** TUE-SUN ")
+=======
+	@Scheduled(cron = " 0 30 11-23 ** TUE-SUN")
+>>>>>>> 928e8d487bff5ab06e559826c0c655c13e643407
+	public void performDaylyTask() {
+		System.out.println("The tasks will be executed from 11:30 until 23:30 everyday TUESDAY-SUNDAY!");
+	}
+>>>>>>> 9082eee2e14fbee2d6e7bb31f962f5e4ec49326f
 
 	@Scheduled(cron = "0 0/15 * * * ?")
 	@SchedulerLock(name = "TaskScheduler_scheduledTask", lockAtLeastFor = "PT5M", lockAtMostFor = "PT14M")

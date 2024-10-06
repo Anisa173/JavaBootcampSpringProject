@@ -13,7 +13,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9082eee2e14fbee2d6e7bb31f962f5e4ec49326f
 @Entity
 public class DishCategory extends BasicEntity<Integer> {
 
