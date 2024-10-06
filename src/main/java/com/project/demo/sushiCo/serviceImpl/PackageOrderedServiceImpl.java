@@ -20,7 +20,9 @@ import jakarta.validation.Valid;
 public class PackageOrderedServiceImpl implements PackageOrderedService {
 	@Autowired
 	private final PackagedOrderedRepository packageOrRepository;
+	@Autowired
 	private final PackagedOrderedMapper packageOrMapper;
+	@Autowired
 	private final TransportingPackageOrderFormMapper packageOrderFMapper;
 
 	public PackageOrderedServiceImpl(PackagedOrderedRepository packageOrRepository,
@@ -39,7 +41,6 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 		packOrdert.setCustomerAddress(packageForm.getCustomerAddress());
 		packOrdert.setNoPhoneCustomer(packageForm.getNoPhoneCustomer());
 		packOrdert.setOrders(packageForm.getOrders());
-
 		return packageOrMapper.toDto(packageOrRepository.save(packOrdert));
 	}
 

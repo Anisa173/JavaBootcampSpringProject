@@ -19,6 +19,7 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 
 	@Autowired
 	private final DishCategoryRepository dishCategoryRepository;
+	@Autowired
 	private final DishCategoryMapper dishCategoryMapper;
 
 	public DishCategoryServiceImpl(DishCategoryRepository dishCategoryRepository,
@@ -46,7 +47,7 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 	}
 
 	@Override
-	public DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto,@Valid DishCategoryDto regDishCategForm, Integer id,Integer adminId) throws Exception {
+	public DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto,Integer id,Integer adminId) throws Exception {
 		var dishCategory = dishCategoryMapper.toEntity(getDishCategoryById(id,adminId));
 		var dishResult = dishCategoryMapper.toUpdate(dishCategoryDto, (DishCategory) dishCategory);
 		return dishCategoryMapper.toDto(dishCategoryRepository.save(dishResult));

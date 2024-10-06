@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
 import com.project.demo.sushiCo.domain.dto.DishDto;
 import com.project.demo.sushiCo.domain.dto.RegisterDishFormDto;
 import com.project.demo.sushiCo.domain.mappers.DishMapper;
@@ -21,13 +20,15 @@ public class DishServiceImpl implements DishService {
 
 	@Autowired
 	private final DishRepository dishRepository;
+	@Autowired
 	private final DishMapper dishMapper;
-private final RegisterDishFormMapper regDishMapper;
+	@Autowired
+	private final RegisterDishFormMapper regDishMapper;
 
 	public DishServiceImpl(DishRepository dishRepository, DishMapper dishMapper,RegisterDishFormMapper regDishMapper) {
 		this.dishRepository = dishRepository;
 		this.dishMapper = dishMapper;
-	this.regDishMapper = regDishMapper;
+	    this.regDishMapper = regDishMapper;
 	}
 
 	@Override
@@ -45,14 +46,6 @@ private final RegisterDishFormMapper regDishMapper;
 		return dishMapper.toDto(dishRepository.save(dishes));
 	}
 
-	/*regDish.setIdRegistration(entity.getId());
-		regDish.setDId(entity.getDId());
-		regDish.setDishName(entity.getDishName());
-		regDish.setDishPrize(entity.getDishPrize());
-		regDish.setDishDescription(entity.getDishDescription());
-		regDish.setDishType(entity.getDishType());
-		regDish.setAdminId(entity.getAdminId());
-		regDish.setCategoryId(entity.getCategoryId());*/
 
 	@Override
 	public RegisterDishFormDto create(@Valid RegisterDishFormDto dishDto) throws Exception {
@@ -61,7 +54,7 @@ private final RegisterDishFormMapper regDishMapper;
 	}
 
 	@Override
-	public RegisterDishFormDto update(@Valid RegisterDishFormDto dishDto,@Valid RegisterDishFormDto regDishForm , Integer dId, Integer categoryId,Integer adminId) throws Exception {
+	public RegisterDishFormDto update(@Valid RegisterDishFormDto dishDto, Integer dId, Integer categoryId,Integer adminId) throws Exception {
 		var dishes = regDishMapper.toEntity(getDishByDishCategory(dId, categoryId,adminId));
 		var uptodate = regDishMapper.toUpdate(dishDto, dishes);
 		return regDishMapper.toDto(dishRepository.save(uptodate));

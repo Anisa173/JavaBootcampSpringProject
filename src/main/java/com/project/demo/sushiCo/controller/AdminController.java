@@ -33,9 +33,13 @@ public class AdminController {
 
 	@Autowired
 	private final DishCategoryService dcService;
+	@Autowired
 	private final DishService dService;
+	@Autowired
 	private final OrderService oService;
+	@Autowired
 	private final RestorantTablesService rtbService;
+	@Autowired
 	private final PackageOrderedService pcgService;
 
 	public AdminController(DishCategoryService dcService, DishService dService, OrderService oService,

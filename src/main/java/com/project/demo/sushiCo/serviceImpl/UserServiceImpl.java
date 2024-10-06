@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 				registerUserForm.getIdRestorant());
 		userF.setFirst_name(registerUserForm.getFirst_name());
 		userF.setLast_name(registerUserForm.getLast_name());
-		userF.setPassword(registerUserForm.getPassword());
+		userF.setPassword(passwordEncoder.encode(registerUserForm.getPassword()));
 		userF.setEmail(registerUserForm.getEmail());
 		userF.setAddress(registerUserForm.getAddress());
 		userF.setPhoneNo(registerUserForm.getPhoneNo());
@@ -74,16 +74,6 @@ public class UserServiceImpl implements UserService {
 	public RegisterUserFormDto getUserById(Integer userId, Integer registrationId, Integer idRestorant)
 			throws Exception {
 		return registerUserFormMapper.toDto(Urepository.getUserById(userId, registrationId, idRestorant));
-
-	}
-
-	@Override
-	public UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId,Integer registrationId)
-			throws UsernameNotFoundException {
-
-		registerUserF.setPassword(passwordEncoder.encode(registerUserF.getPassword()));
-		var result = registerUserFormMapper.toEntity(registerUserF);
-		return userMapper.toDto(Urepository.save(result));
 	}
 
 	@Override

@@ -15,9 +15,9 @@ public interface PaymentMethodsRepository extends JpaRepository<PaymentMethods, 
 
 	PaymentMethods save(PaymentMethodsDto payment);
 
-	@Query(" SELECT pm.payment_Method, rest.idRestorant "
+	   @Query(" SELECT pm.payment_Method, rest.idRestorant "
 			+ " FROM Restorant rest INNER JOIN PaymentMethods pm ON rest.idRestorant = rest.pm.paymentId "
-			+ " WHERE rest.idRestorant =: ?2 ")
+			+ " WHERE rest.idRestorant = :?2 ")
 	List<PaymentMethods> getRestorantPMethods(Integer restorantId);
 
 	@Query(" Select pm.Id,r.idRestorant From PaymentMethods pm INNER JOIN Restorant r ON r.pm.paymentId = r.idRestorant "
@@ -25,7 +25,7 @@ public interface PaymentMethodsRepository extends JpaRepository<PaymentMethods, 
 	PaymentMethods getPayment_MethodsById(Integer Id, Integer idRestorant);
 
 	@Modifying
-	@Query(" Delete From PaymentMethods pm Inner Join Restorant r ON r.pm.paymentId = r.idRestorant Where pm.Id =: ?1 and r.idRestorant =: ?2 ")
+	@Query(" Delete From PaymentMethods pm Inner Join Restorant r ON r.pm.paymentId = r.idRestorant Where pm.Id = :?1 and r.idRestorant = :?2 ")
 	void delete(Integer id, Integer idRestorant);
 
 }

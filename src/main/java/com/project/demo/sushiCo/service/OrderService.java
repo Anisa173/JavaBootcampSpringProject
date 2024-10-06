@@ -8,9 +8,9 @@ import jakarta.validation.Valid;
 public interface OrderService {
 
 	// Admini qe menaxhon porosite e Restorantit kancelon nje porosi per arsye te
-	// pamundesise per ta transportuar ate porosi
+	// pamundesise per ta transportuar ate porosi 
 	void deleteOrder(Integer adminRestId, Integer oId) throws Exception;
-
+    //Krijimi i nje porosie
 	OrderDto createOrder(@Valid OrderDto oDto) throws Exception;
 
 	//Admini i restorantit liston te gjitha porosite e restorantit te grupuara sipas customerId,nënkupton te renditura sipas kohes se kryerjes 
@@ -25,14 +25,14 @@ public interface OrderService {
 
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne cilin
 	// restorant
-	List<OrderDto> getOrdByRestorantId(Integer customerId, Integer restorantId) throws Exception;
+	List<OrderDto> getOrdByRestorantId(Integer id, Integer idRestorant) throws Exception;
 
 	// Admini i restorantit kerkon te gjeneroje Porosine me koston me te madhe dhe
-	// me te vogel si edhe kush e kryer ate
+	// me te vogel si edhe kush e kryer ate(cili customer)
     List<OrderDto> getOrderMaxMinByCustomerId(Integer idRestorant, Integer userId) throws Exception;
 
 	// Klienti anullon porosine e kryer ne restorantin 'X'
-	void cancelUserOrder(Integer adminRestId, Integer idCustomer, Integer oId) throws Exception;
+	void cancelUserOrder(Integer id, Integer oId) throws Exception;
 
 	// Admini i aplikacionit 'sheh' porosite sipas customerId dhe dates se
 	// proçesimit

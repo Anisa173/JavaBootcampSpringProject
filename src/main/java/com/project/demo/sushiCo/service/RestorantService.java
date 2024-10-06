@@ -15,7 +15,7 @@ public interface RestorantService {
 
 	public void delete(Integer idRestorant, Integer adminIdWeb) throws Exception;
 
-	public List<RestorantDto> getAllRestorants(Integer adminIdWeb) throws Exception;
+	public List<RestorantDto> getAllRestorants() throws Exception;
 
 	public SelectWhichYouPreferFormDto selectRestorantByVisitor(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
 
@@ -23,19 +23,20 @@ public interface RestorantService {
 
     public SelectWhichYouPreferFormDto getRestorantById1(Integer idRestorant) throws Exception;
 	
-	public RestorantDto getRestorantsById(Integer idRestorant) throws Exception;
+	public RestorantDto getRestorantsById(Integer idRestorant,Integer adminIdWeb) throws Exception;
 
-	public RestorantDto update(@Valid RestorantDto restorantDto, @Valid RestorantDto restForm, Integer id)
-			throws Exception;
+	public RestorantDto update(@Valid RestorantDto restorantDto, Integer id, Integer adminIdWeb) throws Exception;
 
 	public  SelectWhichYouPreferFormDto selectRestorantByCustomer(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
 
-public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception;
+    public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception;
 
-public  SelectWhichYouPreferFormDto selectRestorant(@Valid SelectWhichYouPreferFormDto selectRPreference) throws Exception;
-
-public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferFormDto selectRPreference, @Valid SelectWhichYouPreferFormDto restorantSelected,Integer idSelect)
+    public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferFormDto selectRPreference, Integer idSelect)
 		throws Exception;
+
+
+
+
 
 }
 

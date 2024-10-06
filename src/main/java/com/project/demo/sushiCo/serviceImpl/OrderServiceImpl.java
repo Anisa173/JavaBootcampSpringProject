@@ -18,6 +18,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private final OrderMapper orderMapper;
+	@Autowired
 	private final OrderRepository orderRepository;
 
 	public OrderServiceImpl(OrderMapper orderMapper, OrderRepository orderRepository) {
@@ -27,7 +28,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public OrderDto createOrder(@Valid OrderDto oDto) throws Exception {
-
 		return (orderMapper.toDto(orderRepository.createOrder(oDto)));
 	}
 
@@ -35,14 +35,14 @@ public class OrderServiceImpl implements OrderService {
 	// proçesimit per arsye analitike
 	@Override
 	public List<OrderDto> getOrders() throws Exception {
-		return orderMapper.toDto((orderRepository).getOrders());
-	}
-
+		return orderRepository.findAll().stream().map(a -> orderMapper.toDto(a)).collect(Collectors.toList());
+}
 	// Çdo klient duhet të shohë porositë që ka kryer në çdo restorant në këtë
 	// aplikacion sipas kohës qe jane kryer
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderDto> getOrdersByRestorantId(Integer customerId, Integer idRest, String restName) throws Exception {
-		return orderRepository.findAll().stream().map(a -> orderMapper.toDto(a)).collect(Collectors.toList());
+		return (List<OrderDto>) orderMapper.toDto((orderRepository).getOrdersByRestorantId(customerId,idRest,restName));
 	}
 
 	// Çdo klient të shohë në profilin e tij të gjitha porositë që ka kryer
@@ -69,18 +69,17 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.toDto(orderRepository.getOrderMaxMinByCustomerId(idRestorant, userId));
 	}
 
-	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne
+	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne vetem
 	// njerin prej restoranteve
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<OrderDto> getOrdByRestorantId(Integer idCustomer, Integer idRest) throws Exception {
-
-		return orderRepository.findAll().stream().map(h -> orderMapper.toDto(h)).collect(Collectors.toList());
+	public List<OrderDto> getOrdByRestorantId(Integer id, Integer idRestorant) throws Exception {
+		return (List<OrderDto>) orderMapper.toDto(orderRepository.getOrdByRestorantId(id,idRestorant));
 	}
 
 	@Override
-	public void cancelUserOrder(Integer adminRestId, Integer idCustomer, Integer oId) throws Exception {
-
-		orderRepository.cancelUserOrder(adminRestId, idCustomer, oId);
+	public void cancelUserOrder(Integer id, Integer oId) throws Exception {
+		orderRepository.cancelUserOrder(id, oId);
 	}
 
 	@Override
@@ -94,4 +93,5 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.toDto(orderRepository.getOrderById(userId));
 	}
 
+	
 }

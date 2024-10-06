@@ -15,13 +15,9 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class WebAplication extends BasicEntity<Integer> {
-<<<<<<< HEAD
+
     //Platforma Web administrohet nga admini
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-=======
-//Platforma Web administrohet nga admini
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
->>>>>>> 9082eee2e14fbee2d6e7bb31f962f5e4ec49326f
 	@JoinColumn(name = "adminWebId", referencedColumnName = "id")
 	private User adminWebAplication;
 

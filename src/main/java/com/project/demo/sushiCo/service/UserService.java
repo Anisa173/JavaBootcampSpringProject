@@ -2,8 +2,6 @@ package com.project.demo.sushiCo.service;
 
 import java.util.List;
 import org.springframework.core.io.Resource;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import com.project.demo.sushiCo.domain.dto.LoginDto;
 import com.project.demo.sushiCo.domain.dto.RegisterUserFormDto;
 import com.project.demo.sushiCo.domain.dto.UserDto;
@@ -35,9 +33,6 @@ public interface UserService {
 
 	UserDto registerUserForm(@Valid RegisterUserForm registerUserForm, Integer userId, Integer registrationId,
 			Integer idRestorant) throws Exception;
-
-	UserDto registerNewUserAccount(@Valid RegisterUserFormDto registerUserF, Integer idRestorant, Integer userId,Integer registrationId)
-			throws UsernameNotFoundException;
 
 	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm)
 			throws Exception;

@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 
 public interface BookingProcessingService {
 
-	BookingProcessingDto register(@Valid RegisterBookingForm bookingForm, Integer idCustomer) throws Exception;
+    public	BookingProcessingDto register(@Valid RegisterBookingForm bookingForm, Integer idCustomer) throws Exception;
 
 	public RegisterBookingFormDto getCustomerReservationById(Integer idCustomer, Integer cR_Id, Integer idRestorant)
 			throws Exception;

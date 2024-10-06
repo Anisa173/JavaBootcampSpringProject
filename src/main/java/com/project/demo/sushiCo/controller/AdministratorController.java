@@ -31,9 +31,13 @@ public class AdministratorController {
 
 	@Autowired
 	private final UserService userService;
+	@Autowired
 	private final RestorantService restService;
+	@Autowired
 	private final PaymentMethodsService pmService;
+	@Autowired
 	private final ServicePlacesService sPlacesService;
+	@Autowired
 	private final OrderService oService;
 
 	public AdministratorController(UserService userService, RestorantService restService,

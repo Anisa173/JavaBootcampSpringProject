@@ -8,16 +8,18 @@ import jakarta.validation.Valid;
 
 public interface DishCategoryService {
 
-	void delete(Integer id, Integer AdminId) throws Exception;
+	 void delete(Integer id, Integer AdminId) throws Exception;
 
 	DishCategoryDto register(@Valid RegisterCategoryDishForm dishCategoryform, Integer adminId) throws Exception;
 
 	DishCategoryDto create(@Valid DishCategoryDto dishCategoryDto) throws Exception;
 
-	DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto,@Valid DishCategoryDto regDishCategForm, Integer id, Integer adminId) throws Exception;
+	DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto, Integer id, Integer adminId) throws Exception;
 
 	List<DishCategoryDto> getDishCategorybyRestorant(Integer adminId) throws Exception;
 
 	DishCategoryDto getDishCategoryById(Integer id, Integer adminId) throws Exception;
+
+	
 
 }

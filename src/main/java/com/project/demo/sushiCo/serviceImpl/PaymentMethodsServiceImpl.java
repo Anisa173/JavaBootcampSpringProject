@@ -56,7 +56,7 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 	}
 
 	@Override
-	public PaymentMethodsDto update(@Valid PaymentMethodsDto pmForm, @Valid PaymentMethodsDto paymentDto,Integer Id,Integer idRestorant)
+	public PaymentMethodsDto update(@Valid PaymentMethodsDto paymentDto,Integer Id,Integer idRestorant)
 			throws Exception {
 		var pMethod = methodsMapper.toEntity(getPayment_MethodsById(Id, idRestorant));
 		var result = methodsMapper.toUpdate(paymentDto, pMethod);
