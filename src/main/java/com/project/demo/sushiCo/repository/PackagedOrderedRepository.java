@@ -14,28 +14,26 @@ import jakarta.validation.Valid;
 public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered, Integer> {
 
 	@Query("Select shp.id, or.oId,sp.Id " + " From PackageOrdered po INNER JOIN User shp ON shp.po.shippersId = shp.id "
-			+ " INNER JOIN Order or ON po.or.idShporta = or.oId "
-			+ " INNER JOIN ServicePlaces	sp ON sp.po.serviceId = sp.Id "
+			+ " INNER JOIN Order or ON po.or.idShporta = po.id "
+			+ " INNER JOIN ServicePlaces sp ON sp.po.serviceId = sp.Id "
 			+ " Where shp.id =: ?1 AND sp.Id =: ?2 AND or.oId IN "
-			+ " (Select c.id , a.id  From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
-			+ " INNER JOIN User a ON a.o.adminRestId = a.id " + " Where c.id =: ?1 And a.id =: ?2 ) ")
-
+			+ " (Select o.oId  From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
+			+ " INNER JOIN User a ON a.o.adminRestId = a.id  Where c.id = :?1 And a.id = :?2 ) ")
 	TransportingPackageOrderForm getPackageOrderById(Integer userId, Integer serviceId, Integer idShporta);
 
 	PackageOrdered save(TransportingPackageOrderFormDto packOrdert);
 
 	@Query(" Insert into PackageOrdered(statusOrderSession,sessionPayment,shippersId,serviceId) "
-			+ " Values('IN_PROGRESS',?1,( Select concat(ship.first_name, ' ',ship.last_name  shippersName_Surname"
-			+ "From User ship INNER JOIN PackageOrdered pckg ON ship.pckg.shippersId = ship.id "
-			+ " INNER JOIN User a ON  a.ship.idAdmin = a.id "
+			+ " Values('IN_PROGRESS',?1,( Select ship.id"
+			+ " From User ship INNER JOIN PackageOrdered pckg ON ship.pckg.shippersId = ship.id "
+			+ "                INNER JOIN User a ON  a.ship.idAdmin = a.id "
 			+ " Where ship.id =: id  And pckg.id =: id  And a.id =: id),"
-			+ "( Select sp.servicePl From PackageOrdered pckg INNER JOIN ServicePlaces sp ON sp.pckg.serviceId = sp.Id Where sp.id =: ?1 And pckg.id =: ?2 )) "
+			+ "( Select sp.Id From PackageOrdered pckg INNER JOIN ServicePlaces sp ON sp.pckg.serviceId = sp.Id Where sp.id =: ?1 And pckg.id =: ?2 )) "
 			+ " Select pckg.sessionPayment From Order o INNER JOIN PackageOrdered pckg ON pckg.o.idShporta = pckg.id "
-			+ " INNER JOIN User c ON c.o.idCustomer = c.id "
-			+ " Where c.id =: id And concat(c.first_name,' ',c.last_name)   customerName_Surname  And pckg.id IN "
-			+ "( Select o From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta )"
+			+ " INNER JOIN User c ON c.o.idCustomer = c.id  Where c.id =: id And pckg.id IN "
+			+ " (Select pkg.id  From PackageOrdered pkg INNER JOIN Order o ON pkg.id = pkg.o.idShporta )"
 			+ " INNER JOIN ServicePlaces sp ON  sp.pkg.serviceId = sp.Id"
-			+ " Where  sp.pkg.sessionPayment =: (sum(o.orderPrize) + sp.shippingCost) ")
+			+ " Where  pkg.sessionPayment =: (sum(o.orderPrize) + sp.shippingCost) ")
 	TransportingPackageOrderForm create(@Valid TransportingPackageOrderFormDto shippingPackOrder);
 
 //customer
