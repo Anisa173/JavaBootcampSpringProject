@@ -75,9 +75,16 @@ public class UserServiceImpl implements UserService {
 			throws Exception {
 		return registerUserFormMapper.toDto(Urepository.getUserById(userId, registrationId, idRestorant));
 	}
+    @Override
+	public RegisterUserFormDto registerNewUserAccount(@Valid RegisterUserFormDto regUser,Integer idRestorant,
+			Integer userId, Integer registrationId) throws Exception {
+		var users = registerUserFormMapper.toEntity(regUser);
+		return registerUserFormMapper.toDto(Urepository.save(users));
+	}
 
 	@Override
-	public RegisterUserFormDto update(Integer userId,Integer idRestorant,@Valid RegisterUserFormDto regUserForm ) throws Exception {
+	public RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm,
+			@Valid RegisterUserFormDto registerUserForm ) throws Exception {
 		return registerUserFormMapper.toDto(((UserRepository) Urepository).update(userId, idRestorant,regUserForm));
 	}
 
@@ -104,7 +111,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public LoginDto updateLoginData(Integer userId,@Valid LoginDto loginForm)
+	public LoginDto updateLoginData(Integer userId,@Valid LoginDto loginForm,@Valid LoginDto userLogInById)
 			throws Exception {
 		return loginMapper.toDto(Urepository.updateLoginData(userId, loginForm));
 	}

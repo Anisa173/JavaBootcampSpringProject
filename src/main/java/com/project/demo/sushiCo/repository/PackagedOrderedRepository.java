@@ -46,8 +46,9 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 		    + " Select  sh.id From User sh Where sh.userStatus = 'ARRIVED' and sh.id = :id) "
 			+ " And o.oId IN(Select o.oId From Order o INNER JOIN User c ON c.o.idCustomer = c.id  Where  c.id= :id) "
 			+ " And o.oId  IN (Select o.oId From Order o Where o.orderStatus = 'PROCESSED' and o.oId =: oId)")
-	TransportingPackageOrderForm updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto, Integer id,
-			Integer serviceId, Integer oId, Integer userId);
+	TransportingPackageOrderForm updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto,
+			@Valid TransportingPackageOrderForm shippingPackOrder2, Integer id, Integer serviceId, Integer oId,
+			Integer userId);
 
 //Admini
 	@Modifying
@@ -59,7 +60,8 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ "	 Where o.orderStatus = 'IN_PROGRESS'  and o.oId =: oId  and  c.id IN ("
 			+ "	 Select cust.id From User cust Where cust.userStatus = 'WAITING' And customerName_Surname = concat(cust.First_name,' ',cust.Last_name)"
             + "   And cust.address =:address  And cust.phoneNo =:phoneNo And cust.id =: id ) )")
-	TransportingPackageOrderForm update(@Valid TransportingPackageOrderFormDto packOrDto, Integer idShporta,
+	TransportingPackageOrderForm update(@Valid TransportingPackageOrderFormDto packOrDto,
+			@Valid TransportingPackageOrderForm shippingPackOrder, Integer idShporta,
 			Integer serviceId, Integer oId, Integer userId);
 
 //Admini
@@ -91,5 +93,7 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 			+ "                        INNER JOIN ServicePlaces sp ON sp.pc.serviceId = sp.Id " + "	Where sp.Id =: Id And o.oId IN  "
 			+ "( Select o.oId From Order o INNER JOIN User c ON o.oId = o.c.idCustomer  Group By c.id ")
 	List<TransportingPackageOrderForm> getPackageOrdersByServiceP(Integer Id);
+
+	
 
 }

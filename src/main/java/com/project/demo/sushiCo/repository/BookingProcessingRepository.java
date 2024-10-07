@@ -38,7 +38,8 @@ public interface BookingProcessingRepository extends JpaRepository<BookingProces
 			+ " FROM BookingProcessing bp  INNER JOIN User c ON c.bp.customerId = c.id  "
 			+ "                            INNER JOIN RestorantTables rtb ON rtb.bp.reservationId = rtb.rtb_id "
 			+ "  Where c.id =: ?1 And bp.cR_Id =: ?2 And + Where rtb.rtb_id =: rtb_id )))")
-	RegisterBookingForm update(@Valid RegisterBookingFormDto regBooking);
+	RegisterBookingForm update(@Valid RegisterBookingFormDto regBooking,
+			@Valid RegisterBookingForm customerReservation);
 
 	@Modifying
 	@Query(" Delete From BookingProcessing bp Inner Join User c ON c.bp.customerId = c.id "

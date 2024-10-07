@@ -61,13 +61,14 @@ public class RestorantServiceImpl implements RestorantService {
 
 	}
 
-	@Override
-	public List<RestorantDto> getAllRestorants() throws Exception {
-		return restorantRepository.findAll().stream().map(a -> restorantMapper.toDto(a)).collect(Collectors.toList());
+    @Override
+	public List<RestorantDto> getAllRestorants(Integer adminIdWeb) throws Exception {
+		
+		return restorantMapper.toDto(restorantRepository.getAllRestorants(adminIdWeb));
 	}
-
-	@Override
-	public RestorantDto update(@Valid RestorantDto restorantDto,Integer id,Integer adminIdWeb)
+	
+    @Override
+	public RestorantDto update(@Valid RestorantDto restorantDto,@Valid RestorantDto restForm,Integer id,Integer adminIdWeb)
 			throws Exception {
 
 		Restorant restorant = restorantMapper.toEntity(getRestorantsById(id,adminIdWeb));
@@ -108,15 +109,19 @@ public class RestorantServiceImpl implements RestorantService {
 		return selectWhichYouPreferMapper.toDto(restorantRepository.getRestorantById1(idRestorant));
 	}
 
-	@Override
-	public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferFormDto selectRPreference,Integer idSelect) throws Exception {
-		return selectWhichYouPreferMapper.toDto(restorantRepository.updateRprefered(selectRPreference, idSelect));
-	}
-
+	
 	@Override
 	public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception {
 
 		return restorantMapper.toDto(restorantRepository.getRestorantDetails(idRestorant));
 	}
+
+	@Override
+	public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferForm restorantSelected,@Valid SelectWhichYouPreferFormDto restorantSelected1 ,Integer idSelect) throws Exception {
+		// TODO Auto-generated method stub
+		return selectWhichYouPreferMapper.toDto(restorantRepository.updateRprefered(restorantSelected,restorantSelected1, idSelect));
+	}
+
+	
 
 }

@@ -12,18 +12,17 @@ public interface AddInBasketService {
 
 	AddInBasketDto selectDishes(@Valid SelectDishesForm selectForm) throws Exception;
 
-	AddInBasketDto create(@Valid SelectDishesFormDto inBasketDto) throws Exception;
+	AddInBasketDto create( @Valid SelectDishesFormDto selectDishesInBasket) throws Exception;
 
-	AddInBasketDto update(@Valid SelectDishesFormDto selectDishesInBasket,
-			@Valid SelectDishesFormDto selectDishesFormDto, Integer dId, Integer categoryId, Integer customerId)
-			throws Exception;
+	AddInBasketDto update(@Valid SelectDishesFormDto selectDishesInBasket, @Valid SelectDishesFormDto selectDishesFormDto,
+			Integer dId, Integer categoryId, Integer customerId) throws Exception;
 
 	SelectDishesFormDto getDishDCategoriesByCustomerId(Integer dId, Integer categoryId, Integer custId)
 			throws Exception;
 
 	List<AddInBasketDto> getDishesByCustomerId(Integer dId, Integer categoryId, Integer custId) throws Exception;
 
-	void delete(SelectDishesFormDto selectDishesFormDto, SelectDishesFormDto selectDishesInBasket, Integer custId)
+	void delete(@Valid SelectDishesFormDto selectDishesFormDto, @Valid SelectDishesFormDto selectDishesInBasket, Integer custId)
 			throws Exception;
 
 	AddInBasketDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception;
@@ -50,6 +49,16 @@ public interface AddInBasketService {
 	void deleteCardPaymentDetails(RegisterCardBankDto cardsByCustomerId, Integer custId, Integer idRestorant,
 			Integer pmId, Integer servPId, Integer registrationId, @Valid RegisterCardBankDto regCardBank)
 			throws Exception;
+
+	
+	
+
+	
+	
+
+	
+
+	
 
 
 

@@ -71,9 +71,9 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 
 	@Override
 	public RegisterBookingFormDto update(@Valid RegisterBookingFormDto regBooking,
-			@Valid RegisterBookingFormDto customerReservationById) throws Exception {
+			@Valid RegisterBookingForm customerReservation) throws Exception {
 	
-		return registerBookMapper.toDto(bookingRepository.update(regBooking));
+		return registerBookMapper.toDto(bookingRepository.update(regBooking,customerReservation));
 	}
 
 	@Override

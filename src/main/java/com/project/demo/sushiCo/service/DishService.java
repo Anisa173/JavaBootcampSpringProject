@@ -27,9 +27,10 @@ public interface DishService {
 
 	RegisterDishFormDto create(@Valid RegisterDishFormDto dishDto) throws Exception;
 
-	RegisterDishFormDto update(@Valid RegisterDishFormDto dishDto, Integer dId, Integer categoryId, Integer adminId)
+	RegisterDishFormDto update(@Valid RegisterDishFormDto dishDto,@Valid RegisterDishFormDto regDishForm ,Integer dId, Integer categoryId, Integer adminId)
 			throws Exception;
 
+	
 
 
 

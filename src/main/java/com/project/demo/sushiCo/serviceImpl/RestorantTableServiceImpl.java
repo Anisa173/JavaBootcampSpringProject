@@ -34,7 +34,6 @@ public class RestorantTableServiceImpl implements RestorantTablesService {
 
 	@Override
 	public RestorantTablesDto getRestorantTablesDetails(Integer rtb_id, Integer adminRId) throws Exception {
-
 		return restorantTableMapper.toDto(restorantTbRepository.getRestorantTablesDetails(rtb_id, adminRId));
 	}
 
@@ -69,6 +68,11 @@ public class RestorantTableServiceImpl implements RestorantTablesService {
 		var result = restorantTableMapper.toEntity(getRestorant_tablesById(tb_id, rtb_id, adminRId));
 		var upToDate = restorantTableMapper.toUpdate(placesDto, result);
 		return restorantTableMapper.toDto(restorantTbRepository.save(upToDate));
+	}
+
+	@Override
+	public RestorantTablesDto getAlltablesById(Integer rtb_id, Integer cR_Id) throws Exception {
+		return restorantTableMapper.toDto(restorantTbRepository.getAlltablesById(rtb_id, cR_Id));
 	}
 
 }

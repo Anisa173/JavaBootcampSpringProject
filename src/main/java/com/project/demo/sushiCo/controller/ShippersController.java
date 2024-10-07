@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.demo.sushiCo.service.PackageOrderedService;
 
 @Controller
-@RequestMapping("/Shippers")
+@RequestMapping("/api/Shippers")
 public class ShippersController {
 
 	@GetMapping

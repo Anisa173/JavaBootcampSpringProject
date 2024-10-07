@@ -30,5 +30,9 @@ public interface RestorantTablesRepository extends JpaRepository<RestorantTables
 	        + " INNER JOIN User a ON a.r.adminRId = a.id Where  a.id =: ?2) ")
 	RestorantTables getRestorantTablesDetails(Integer rtb_id, Integer adminRId);
 
+    @Query("Select rtb From RestorantTable rtb inner join BookingProcessing bp ON rtb.bp.restorant_tbId = rtb.rtb_id"
+	       +"Inner join User c ON c.bp.customerId = c.id  Where bp.cR_Id =:cR_Id and  rtb.rtb_id=:rtb_id"  )
+    RestorantTables getAlltablesById(Integer rtb_id, Integer cR_Id);
+
 	
 }

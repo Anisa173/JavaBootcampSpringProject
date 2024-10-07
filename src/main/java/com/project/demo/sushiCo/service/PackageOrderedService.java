@@ -13,8 +13,9 @@ public interface PackageOrderedService {
 	public TransportingPackageOrderFormDto create(@Valid TransportingPackageOrderFormDto shippingPackOrder)
 			throws Exception;
 
-	public TransportingPackageOrderFormDto updateByStatus(@Valid TransportingPackageOrderFormDto shippingPackOrder,
-			@Valid TransportingPackageOrderFormDto shippingPackOrder2, Integer Id, Integer userId, Integer serviceId, Integer oId) throws Exception;
+	public TransportingPackageOrderFormDto updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto,
+			@Valid TransportingPackageOrderFormDto shippingPackOrder2, Integer Id, Integer serviceId, Integer oId,
+			Integer userId) throws Exception;
 
 	// public TransportingPackageOrderFormDto update(@Valid PackageOrderedDto
 	// packOrDto, Integer Id,Integer serviceId, Integer oId, Integer userId) throws
@@ -25,14 +26,22 @@ public interface PackageOrderedService {
 
 	public TransportingPackageOrderFormDto getPackageOrderById(Integer userId, Integer serviceId, Integer idShporta);
 
-	public TransportingPackageOrderFormDto update(@Valid TransportingPackageOrderFormDto packOrDto,
-			@Valid TransportingPackageOrderFormDto shippingPackOrder, Integer Id, Integer serviceId, Integer oId,
+	public TransportingPackageOrderFormDto update(@Valid TransportingPackageOrderFormDto packOrDto,@Valid TransportingPackageOrderFormDto shippingPackOrder
+			,Integer idShporta, Integer serviceId, Integer oId,
 			Integer userId) throws Exception;
+
 	// Shportat e porosise se Transportuesit per nje klient 
 	 public  List<TransportingPackageOrderFormDto> getAllPackageOByCustomerId(Integer userId) throws Exception;
     //Te gjitha shportat e te gjithe klienteve
 	 public  List<TransportingPackageOrderFormDto> getAllPackageOByshipperId(Integer userId) throws Exception;
     //Shippersit i duhet te listoje pakot qe duhet te degoje ne nje destinacion te caktuar
      public List<TransportingPackageOrderFormDto> getPackageOrdersByServiceP(Integer Id) throws Exception ;
+
+	
+
+	
+
+	
+	
 	
 }

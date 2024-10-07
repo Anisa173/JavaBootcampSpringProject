@@ -24,16 +24,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ " INNER JOIN Restorant r ON r.cst.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
 			+ " WHERE o.orderItems =: sum(ab.addItemDish)  AND o.orderStatus =: 'Pending' AND cst.o.orderPrize =: sum(ab.amountValue) And r.idRestorant =: idRestorant  ")
 	Order createOrder(@Valid OrderDto oDto);
-	/*
-	 * // Admini i webAplication rendit porosite sipas kostos ASC apo DESC dhe i
-	 * grupon // sipas Restorantit perkates
-	 * 
-	 * @Query("Select o , r.idRestorant " +
-	 * "From User c INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest "
-	 * +
-	 * "INNER JOIN Order o ON c.o.oId = c.idCustomer  Group By r.c.id  Order By r.c.o.orderPrize"
-	 * ) OrderDto getOrderRbyCustId(Integer idRestorant, Integer customerId);
-	 */
+	
 
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer dhe
 	// ku?... ne cilin restorant i ka kryer
@@ -88,14 +79,14 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
            + "Where c.id = :id"
            + "Group By r.restName" 
 			)
-    Order getOrdersByRestorantId(Integer customerId, Integer idRest, String restName) throws Exception;
+   List<Order> getOrdersByRestorantId(Integer customerId, Integer idRest, String restName) throws Exception;
 	
 	// Çdo klient te shohe ne profilin e tij te gjitha porosite qe ka kryer ne vetem
 	// njerin prej restoranteve
 	@Query("Select o , r.restName From Order o INNER JOIN User c ON c.o.idCustomer = c.id "
 			+ "           INNER JOIN Restorant r ON r.c.id = restorant_users.userId AND r.idRestorant = restorant_users.idRest"
 			+ "           Where c.id = :id and r.idRestorant=:idRestorant")
-	Order getOrdByRestorantId(Integer id, Integer idRestorant);
+	List<Order> getOrdByRestorantId(Integer id, Integer idRestorant);
 
 	
 }

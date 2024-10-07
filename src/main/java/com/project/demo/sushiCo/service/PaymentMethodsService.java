@@ -18,8 +18,7 @@ public interface PaymentMethodsService {
 
 	public void delete(Integer Id, Integer idRestorant) throws Exception;
 
-	public PaymentMethodsDto update(@Valid PaymentMethodsDto paymentDto, Integer Id, Integer idRestorant) throws Exception;
-
+	public PaymentMethodsDto update(@Valid PaymentMethodsDto paymentDto,@Valid PaymentMethodsDto pmForm , Integer Id, Integer idRestorant) throws Exception;
 
 	//PaymentMethodsDto update(Integer Id, Integer idRestorant, @Valid PaymentMethodsDto placesDto) throws Exception;
 

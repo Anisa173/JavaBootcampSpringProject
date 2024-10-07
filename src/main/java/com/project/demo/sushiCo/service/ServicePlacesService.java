@@ -18,6 +18,7 @@ public interface ServicePlacesService {
 
 	List<ServicePlacesDto> getRestorantPServices(Integer idRestorant) throws Exception;
 
-	ServicePlacesDto update(Integer idRestorant, Integer Id,@Valid ServicePlacesDto placesDto) throws Exception;
+	ServicePlacesDto update(Integer idRestorant, Integer Id,@Valid ServicePlacesDto placesDto, @Valid ServicePlacesDto sPlaces) throws Exception;
 
+	
 }

@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Optional<User> findByEmail(String email);
 
-	User save(RegisterUserForm result);
+	RegisterUserForm save(RegisterUserForm result);
 
 	@Query("Select c.id, adw.id  From User adw INNER JOIN User c On adw.c.adminIdPlatforma = adw.id "
 			+ " INNER JOIN User a ON adw.c.adminIdPlatforma = adw.id "

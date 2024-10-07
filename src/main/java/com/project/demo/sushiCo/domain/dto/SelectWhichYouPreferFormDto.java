@@ -58,4 +58,6 @@ public class SelectWhichYouPreferFormDto {
 				+ idRestorant + ",userId = " + userId + "]";
 	}
 
+	
+
 }

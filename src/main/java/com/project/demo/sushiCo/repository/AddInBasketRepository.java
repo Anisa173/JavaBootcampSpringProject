@@ -36,8 +36,8 @@ public interface AddInBasketRepository extends JpaRepository<AddInBasket, Intege
 	@Modifying
 	@Query(" DELETE FROM User c INNER JOIN AddInBasket aB ON c.aB.custId = c.id "
 			+ " INNER JOIN Dish d ON d.aB.IDdish = d.dId" + " WHERE aB.addId = :addId And  c.id=:id")
-	void delete(SelectDishesFormDto selectDishesFormDto, SelectDishesFormDto selectDishesInBasket, Integer custId);
-
+     void delete(@Valid SelectDishesFormDto selectDishesFormDto, @Valid SelectDishesFormDto selectDishesInBasket,
+			Integer custId);
 	AddInBasket save(SelectDishesForm addBasket);
 
 	@Query("Select pm.payment_Method,svp.service_Places FROM Restorant r INNER JOIN  PaymentMethods pm ON r.idRestorant = r.pm.paymentId"
@@ -77,5 +77,7 @@ public interface AddInBasketRepository extends JpaRepository<AddInBasket, Intege
 			+ "	 WHERE r.idRestorant =: idRestorant AND pm.payment_Method =: ' Pay with Card ' AND svp.Id =: Id ))")
 	void deleteCardPaymentDetails(@Valid RegisterCardBankDto regCardBank, Integer registrationId, Integer custId,
 			Integer idRestorant, Integer pmId, Integer servPId);
+
+	
 
 }

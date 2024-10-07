@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.demo.sushiCo.domain.dto.RegisterBookingFormDto;
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
-import com.project.demo.sushiCo.domain.dto.SelectWhichYouPreferFormDto;
 import com.project.demo.sushiCo.service.AddInBasketService;
 import com.project.demo.sushiCo.service.BookingProcessingService;
 import com.project.demo.sushiCo.service.DishService;
@@ -29,9 +28,13 @@ import jakarta.validation.Valid;
 public class VisitorController {
 	@Autowired
 	private final RestorantService restService;
+	@Autowired
 	private final RestorantTablesService rTablesService;
+	@Autowired
 	private final DishService dishService;
+	@Autowired
 	private final AddInBasketService addInBasketService;
+	@Autowired
 	private final BookingProcessingService bpService;
 
 	public VisitorController(RestorantService restService, RestorantTablesService rTablesService,
@@ -63,16 +66,16 @@ public class VisitorController {
 
 	@PostMapping("/restorant/select")
 	public String saveSelectedPreference(
-			@ModelAttribute("restorantPreferenceForm") @Valid SelectWhichYouPreferFormDto restorantSelected,
+			@ModelAttribute("restorantPreferenceForm") @Valid SelectWhichYouPreferForm restorantSelected,
 			Integer idRestorant, Integer idSelect, BindingResult nResult) throws Exception {
 		if (nResult.hasErrors()) {
 			return "selected - form ";
 		}
 		if (((RestorantService) restorantSelected).getRestorantById1(idRestorant) == null) {
-			restService.selectRestorant(restorantSelected);
+			restService.selectRestorantByVisitor(restorantSelected);
 		} else {
-			restService.updateRprefered(((RestorantService) restorantSelected).getRestorantById1(idRestorant),
-					restorantSelected, idSelect);
+			restService.updateRprefered(restorantSelected,
+					((RestorantService) restorantSelected).getRestorantById1(idRestorant), idSelect);
 		}
 		return "redirect:/restorant ";
 	}
@@ -105,7 +108,7 @@ public class VisitorController {
 
 	@PostMapping("/addInBasket/register")
 	public String saveSelectedDishesInBasket(
-			@ModelAttribute("AddInBasket") @Valid SelectDishesFormDto selectDishesInBasket, BindingResult result,
+			@ModelAttribute("AddInBasket")  @Valid SelectDishesFormDto selectDishesInBasket, BindingResult result,
 			Integer categoryId, Integer adminId, Integer customerId, Integer dId, Integer id) throws Exception {
 		if (result.hasErrors()) {
 			return "redirect:/selectDish - form";
@@ -114,8 +117,8 @@ public class VisitorController {
 				customerId) == null) {
 			addInBasketService.create(selectDishesInBasket);
 		} else {
-			addInBasketService.update(((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
-					categoryId, customerId), selectDishesInBasket, dId, categoryId, customerId);
+			addInBasketService.update(selectDishesInBasket,((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
+					categoryId, customerId),  dId, categoryId, customerId);
 			addInBasketService.delete(((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
 					categoryId, customerId), selectDishesInBasket, dId);
 		}
@@ -160,7 +163,6 @@ public class VisitorController {
 		if (((BookingProcessingService) regBooking).getCustomerReservationById(idCustomer, cR_Id, rtb_id) == null) {
 			bpService.createBooking(regBooking);
 		} 
-
 		return "redirect/register - view ";
 	}
 

@@ -58,19 +58,17 @@ public class PackageOrderedServiceImpl implements PackageOrderedService {
 
 	@Override
 	public TransportingPackageOrderFormDto updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto,
-			@Valid TransportingPackageOrderFormDto shippingPackOrder2, Integer Id, Integer serviceId, Integer oId,
+			@Valid TransportingPackageOrderForm shippingPackOrder2, Integer Id, Integer serviceId, Integer oId,
 			Integer userId) throws Exception {
-
 		return packageOrderFMapper
-				.toDto(packageOrRepository.updateByStatus(packOrderedDto, Id, serviceId, oId, userId));
+				.toDto(packageOrRepository.updateByStatus(packOrderedDto,shippingPackOrder2, Id, serviceId, oId, userId));
 	}
 
 	@Override
 	public TransportingPackageOrderFormDto update(@Valid TransportingPackageOrderFormDto packOrDto,
-			@Valid TransportingPackageOrderFormDto shippingPackOrder, Integer idShporta, Integer serviceId, Integer oId,
+			@Valid TransportingPackageOrderForm shippingPackOrder, Integer idShporta, Integer serviceId, Integer oId,
 			Integer userId) throws Exception {
-
-		return packageOrderFMapper.toDto(packageOrRepository.update(packOrDto, idShporta, serviceId, oId, userId));
+		return packageOrderFMapper.toDto(packageOrRepository.update(packOrDto,shippingPackOrder ,idShporta, serviceId, oId, userId));
 	}
 
 	@Override

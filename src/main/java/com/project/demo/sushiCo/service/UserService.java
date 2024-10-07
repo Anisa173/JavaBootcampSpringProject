@@ -34,16 +34,21 @@ public interface UserService {
 	UserDto registerUserForm(@Valid RegisterUserForm registerUserForm, Integer userId, Integer registrationId,
 			Integer idRestorant) throws Exception;
 
-	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm)
+    RegisterUserFormDto registerNewUserAccount(@Valid RegisterUserFormDto regUser,Integer idRestorant, Integer userId,
+			Integer registrationId ) throws Exception;
+	
+	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm, @Valid RegisterUserFormDto registerUserForm)
 			throws Exception;
 
 	UserDto login(@Valid Login form, Integer userId, Integer registrationId) throws Exception;
 
 	LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception;
 
-	LoginDto updateLoginData(Integer userId, @Valid LoginDto loginForm) throws Exception;
+	LoginDto updateLoginData(Integer userId, @Valid LoginDto loginForm,@Valid LoginDto userLogInById) throws Exception;
 
 	List<UserDto> getAllCustomers(Integer userId) throws Exception;
+
+
 
 	
 

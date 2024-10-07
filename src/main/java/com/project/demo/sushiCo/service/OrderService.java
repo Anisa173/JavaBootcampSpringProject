@@ -41,5 +41,6 @@ public interface OrderService {
 	// Admini i restorantit rendit porosite sipas kostos ASC apo DESC te grupuara
 	// per çdo restorant
 	List<OrderDto> getOrdersByCost(Integer id) throws Exception;
+	
 
 }

@@ -47,13 +47,21 @@ public class CustomerController {
 
 	@Autowired
 	private final RestorantTablesService rTablesService;
+	@Autowired
 	private final RestorantService restService;
+	@Autowired
 	private final DishService dishService;
+	@Autowired
 	private final AddInBasketService addInBasketService;
+	@Autowired
 	private final BookingProcessingService bpService;
+	@Autowired
 	private final PaymentMethodsService pmethodService;
+	@Autowired
 	private final ServicePlacesService sPlacesService;
+	@Autowired
 	private final OrderService oService;
+	@Autowired
 	private final PackageOrderedService pcgService;
 
 	public CustomerController(RestorantTablesService rTablesService, RestorantService restService,
@@ -89,17 +97,17 @@ public class CustomerController {
 
 	@PostMapping("/restorant/select")
 	public String saveSelectedPreference(
-			@ModelAttribute("restorantPreferenceForm") @Valid SelectWhichYouPreferFormDto restorantSelected,
+			@ModelAttribute("restorantPreferenceForm") @Valid SelectWhichYouPreferForm restorantSelected,
 			Integer userId, Integer idRestorant, Integer idSelect, BindingResult nResult) throws Exception {
 		if (nResult.hasErrors()) {
 			return "selected - form ";
 		}
 		if (((RestorantService) restorantSelected).getCustomerRestorantById(userId, idRestorant) == null) {
-			restService.selectRestorant(restorantSelected);
+			restService.selectRestorantByCustomer(restorantSelected);
 		} else {
 			restService.updateRprefered(
-					((RestorantService) restorantSelected).getCustomerRestorantById(userId, idRestorant),
-					restorantSelected, idSelect);
+					restorantSelected,
+					((RestorantService) restorantSelected).getCustomerRestorantById(userId, idRestorant), idSelect);
 		}
 		return "redirect:/restorant ";
 	}
@@ -239,9 +247,9 @@ public class CustomerController {
 	}
 
 	@DeleteMapping
-	public String delete(@RequestParam(value = "orderId ", required = true) Integer idCustomer, Integer adminRestId,
+	public String delete(@RequestParam(value = "orderId ", required = true) Integer id,
 			Integer oId) throws Exception {
-		oService.cancelUserOrder(adminRestId, idCustomer, oId);
+		oService.cancelUserOrder(id, oId);
 		return "redirect:/orderList";
 	}
 

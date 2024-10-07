@@ -87,12 +87,12 @@ public class AdministratorController {
 
 	@GetMapping("/restorant/register - view")
 	public String getRestorantRegistrationView(Model model,
-			@RequestParam(value = "userId", required = false) Integer idRestorant) throws Exception {
+			@RequestParam(value = "userId", required = false) Integer idRestorant,Integer adminIdWeb) throws Exception {
 		if (idRestorant == null) {
 			model.addAttribute("restorantForm", new RegisterRestorantForm());
 			model.addAttribute("viewTitle", "Restorant Registration");
 		} else {
-			model.addAttribute("restorantForm", restService.getRestorantsById(idRestorant));
+			model.addAttribute("restorantForm", restService.getRestorantsById(idRestorant, adminIdWeb));
 			model.addAttribute("viewTitle", "Restorant Update");
 		}
 
@@ -101,14 +101,14 @@ public class AdministratorController {
 
 	@PostMapping("/restorant/register")
 	public String register(@ModelAttribute("restorantForm") @Valid RestorantDto restForm, BindingResult bResult,
-			Integer idRestorant) throws Exception {
+			Integer idRestorant,Integer adminIdWeb) throws Exception {
 		if (bResult.hasErrors()) {
 			return "redirect:/register - view ";
 		}
-		if (((RestorantService) restForm).getRestorantsById(idRestorant) == null) {
+		if (((RestorantService) restForm).getRestorantsById(idRestorant,adminIdWeb) == null) {
 			restService.create(restForm);
 		} else {
-			restService.update(((RestorantService) restForm).getRestorantsById(idRestorant), restForm, idRestorant);
+			restService.update(((RestorantService) restForm).getRestorantsById(idRestorant,adminIdWeb), restForm, idRestorant,adminIdWeb);
 		}
 		return "redirect:/restorant";
 	}

@@ -71,15 +71,14 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 			@Valid SelectDishesFormDto selectDishesFormDto, Integer dId, Integer categoryId, Integer customerId)
 			throws Exception {
 		var basketAdd = dishFormMapper.toEntity(getDishDCategoriesByCustomerId(dId, categoryId, customerId));
-		var result = dishFormMapper.toUpdate(selectDishesInBasket, basketAdd);
+		var result = dishFormMapper.toUpdate(selectDishesFormDto, basketAdd);
 		return basketMapper.toDto(basketRepository.save(result));
 	}
 
 	@Override
-	public void delete(SelectDishesFormDto selectDishesFormDto, SelectDishesFormDto selectDishesInBasket,
+	public void delete(@Valid SelectDishesFormDto selectDishesFormDto,@Valid SelectDishesFormDto selectDishesInBasket,
 			Integer custId) throws Exception {
 		basketRepository.delete(selectDishesFormDto, selectDishesInBasket, custId);
-
 	}
 
 	@Override
