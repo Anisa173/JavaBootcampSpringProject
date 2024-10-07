@@ -20,7 +20,9 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 
 	@Autowired
 	private final BookingProcessingRepository bookingRepository;
+	@Autowired
 	private final BookingProcessingMapper bookingMapper;
+	@Autowired
 	private final RegisterBookingFormMapper registerBookMapper;
 
 	public BookingProcessingServiceImpl(BookingProcessingRepository bookingRepository,
@@ -66,8 +68,6 @@ public class BookingProcessingServiceImpl implements BookingProcessingService {
 		bookingRepository.deleteReservation(id, cR_id,idRestorant);
 
 	}
-
-
 
 	@Override
 	public RegisterBookingFormDto update(@Valid RegisterBookingFormDto regBooking,
