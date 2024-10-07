@@ -20,8 +20,7 @@ public class RegisterBookingFormDto {
 
 	public RegisterBookingFormDto(Integer crId, String First_name, String Last_name, String phoneNo,
 			Date reservationDate, Time start_reservationTime, Time end_reservationTime, Integer noParticipants,
-			String reservationDescription, RestorantTables tableName, Integer noTables, Integer lockedTables,
-			Integer idCustomer, Integer rtb_id) {
+			String reservationDescription, RestorantTables tableName, Integer idCustomer, Integer rtb_id) {
 		this.crId = crId;
 		this.First_name = First_name;
 		this.Last_name = Last_name;
@@ -127,24 +126,22 @@ public class RegisterBookingFormDto {
 	public void setIdCustomer(Integer idCustomer) {
 		this.idCustomer = idCustomer;
 	}
-public Integer getRtb_id() {
+
+	public Integer getRtb_id() {
 		return rtb_id;
 	}
 
 	public void setRtb_id(Integer rtb_id) {
 		this.rtb_id = rtb_id;
 	}
+
 	public String toString() {
 		return "RegisterBookingFormDto[crId = " + crId + ", First_name = " + First_name + ",Last_name = " + Last_name
 				+ ",phoneNo = " + phoneNo + ", reservationDate = " + reservationDate + ",start_reservationTime = "
 				+ start_reservationTime + ", end_reservationTime = " + end_reservationTime + ",noParticipants = "
 				+ noParticipants + ", reservationDescription = " + reservationDescription + ",tableName = " + tables
-				+ ",idCustomer = " + idCustomer + ",id = " + rtb_id+ "]";
+				+ ",idCustomer = " + idCustomer + ",id = " + rtb_id + "]";
 
 	}
-
-	
-
-	
 
 }

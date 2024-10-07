@@ -14,6 +14,7 @@ public class RestorantTablesDto {
 	private String tableName;
 	@NotNull(message = "It's Required")
 	private Integer noTables;
+	@NotNull(message = "It's Required")
 	private Integer availableTables;
 	@NotNull(message = "It's required !")
 	private Integer lockedTables;

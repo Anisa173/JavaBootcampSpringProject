@@ -64,11 +64,11 @@ public interface PackagedOrderedRepository extends JpaRepository<PackageOrdered,
 
 //Admini
 	@Modifying
-	@Query(" Update pcO Set deleted =: true , pcO.statusOrderSession =: ' CANCEL '  From PackageOrdered pcO "
+	@Query(" Update pcO Set deleted =: true , pcO.statusOrderSession =: ' Cancel '  From PackageOrdered pcO "
 			+ " Where pcO.id IN ( Select pcO.id From Order o INNER JOIN pcO ON pcO.o.idShporta = pcO.id "
 			+ " INNER JOIN User c ON  c.o.idCustomer = c.id "
 			+ " INNER JOIN User a ON  a.o.adminRestId = a.id  Where  pcO.id =: ?1 And a.id =: ?2  And o.oId IN  "
-			+ " (Select o.oId From Order o Where o.status = 'ANULLATED' And o.oId = :oId  )")
+			+ " (Select o.oId From Order o Where o.status = 'Cancel' And o.oId = :oId  )")
 	void delete(Integer id, Integer oId, Integer adminRestId);
 
 	@Query("  Select o.orderPrize , o.orderItems noItems , o.orderStatus, pack.id  noPackage , pack.sessionPayment Total_Cost  "

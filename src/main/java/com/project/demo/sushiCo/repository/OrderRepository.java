@@ -46,7 +46,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	// me te vogel si edhe kush e kreu ate
 	@Query(value = " Select CONCAT(c.first_name, ' ' ,c.last_name) as CustomerName , max(o.orderPrize) as MaxPrize, min(o.orderPrize) as MinPrize , o.orderId"
 			+ " From Order as o INNER JOIN User as c ON o.idCustomer = c.id"
-			+ "	                INNER JOIN User as a ON o.adminRestId = a.id" + " Where a.id =: id  ", nativeQuery = true)
+			+ "	                INNER JOIN User as a ON o.adminRestId = a.id" + " Where a.id =: id  "
+            + " Group by CONCAT(c.first_name, ' ' ,c.last_name), o.orderId", nativeQuery = true)
 	List<Order> getOrderMaxMinByCustomerId(Integer idRestorant, Integer userId);
 
 	// Porosia anullohet nga klienti
@@ -68,7 +69,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     // Porosia anullohet nga admini për arsye të rradhës së gjatë apo kushte te pamundura per te realizuar transportin ne destinacion
 	@Modifying
-	@Query(" UPDATE or SET deleted = true And or.orderStatus = 'Cancel' FROM Order or WHERE or.oId IN  "
+	@Query(" UPDATE or SET deleted = true , or.orderStatus = 'Cancel' FROM Order or WHERE or.oId IN  "
 			+ " ( Select or.oId  From or INNER JOIN User c  ON c.id = c.or.idCustomer "
 			+ "	INNER JOIN User a ON a.or.adminRestId = a.id  WHERE  or.oId =: ?1  And  a.id =: id  ) ")
 	void deleteOrder(Integer adminRestId, Integer oId);
