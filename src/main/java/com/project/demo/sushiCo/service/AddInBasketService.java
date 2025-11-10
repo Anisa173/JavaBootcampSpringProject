@@ -14,15 +14,15 @@ public interface AddInBasketService {
 
 	AddInBasketDto create( @Valid SelectDishesFormDto selectDishesInBasket) throws Exception;
 
-	AddInBasketDto update(@Valid SelectDishesFormDto selectDishesInBasket, @Valid SelectDishesFormDto selectDishesFormDto,
-			Integer dId, Integer categoryId, Integer customerId) throws Exception;
+	AddInBasketDto update(@Valid SelectDishesFormDto selectDishesInBasket, Integer dId, Integer categoryId, Integer customerId
+                          ) throws Exception;
 
 	SelectDishesFormDto getDishDCategoriesByCustomerId(Integer dId, Integer categoryId, Integer custId)
 			throws Exception;
 
 	List<AddInBasketDto> getDishesByCustomerId(Integer dId, Integer categoryId, Integer custId) throws Exception;
 
-	void delete(@Valid SelectDishesFormDto selectDishesFormDto, @Valid SelectDishesFormDto selectDishesInBasket, Integer custId)
+	void delete(SelectDishesFormDto selectDishesFormDto, Integer custId)
 			throws Exception;
 
 	AddInBasketDto displayPaymentServices(@Valid OrderByProcessing byProcessingform) throws Exception;
@@ -38,7 +38,7 @@ public interface AddInBasketService {
 	OrderByProcessingDto createByProcessing(@Valid OrderByProcessingDto byProcessingform) throws Exception;
 
 	OrderByProcessingDto updateByProcessing(@Valid OrderByProcessingDto byProcessingform,
-			@Valid OrderByProcessingDto orderByProcessForm, Integer custId, Integer idRestorant, Integer pmId,
+                                            Integer custId, Integer idRestorant, Integer pmId,
 			Integer servPId) throws Exception;
 
 	RegisterCardBankDto createOrderPaymentDetails(@Valid RegisterCardBankDto regCardForm) throws Exception;
@@ -47,7 +47,7 @@ public interface AddInBasketService {
 			Integer servPId);
 
 	void deleteCardPaymentDetails(RegisterCardBankDto cardsByCustomerId, Integer custId, Integer idRestorant,
-			Integer pmId, Integer servPId, Integer registrationId, @Valid RegisterCardBankDto regCardBank)
+			Integer pmId, Integer servPId, Integer registrationId)
 			throws Exception;
 
 	

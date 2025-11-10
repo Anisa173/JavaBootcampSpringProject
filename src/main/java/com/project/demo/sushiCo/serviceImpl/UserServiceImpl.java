@@ -83,8 +83,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm,
-			@Valid RegisterUserFormDto registerUserForm ) throws Exception {
+	public RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm ) throws Exception {
 		return registerUserFormMapper.toDto(((UserRepository) Urepository).update(userId, idRestorant,regUserForm));
 	}
 

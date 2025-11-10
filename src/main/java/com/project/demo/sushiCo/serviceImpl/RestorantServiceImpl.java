@@ -1,7 +1,7 @@
 package com.project.demo.sushiCo.serviceImpl;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -117,7 +117,7 @@ public class RestorantServiceImpl implements RestorantService {
 	}
 
 	@Override
-	public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferForm restorantSelected,@Valid SelectWhichYouPreferFormDto restorantSelected1 ,Integer idSelect) throws Exception {
+	public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferFormDto restorantSelected1 , Integer idSelect) throws Exception {
 		// TODO Auto-generated method stub
 		return selectWhichYouPreferMapper.toDto(restorantRepository.updateRprefered(restorantSelected,restorantSelected1, idSelect));
 	}

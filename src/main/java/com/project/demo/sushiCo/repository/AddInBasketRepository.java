@@ -78,6 +78,6 @@ public interface AddInBasketRepository extends JpaRepository<AddInBasket, Intege
 	void deleteCardPaymentDetails(@Valid RegisterCardBankDto regCardBank, Integer registrationId, Integer custId,
 			Integer idRestorant, Integer pmId, Integer servPId);
 
-	
 
+    void delete(@Valid SelectDishesFormDto selectDishesFormDto, Integer custId);
 }

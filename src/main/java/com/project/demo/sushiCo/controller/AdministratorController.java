@@ -82,7 +82,7 @@ public class AdministratorController {
 	@GetMapping
 	public String getCustomersReviewList(Model model, Integer id) throws Exception {
 		model.addAttribute(" customer ", userService.getAllCustomers(id));
-		return "redirect/user -List";
+		return "redirect:/user -List";
 	}
 
 	@GetMapping("/restorant/register - view")

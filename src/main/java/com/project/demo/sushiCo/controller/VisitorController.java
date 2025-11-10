@@ -74,7 +74,7 @@ public class VisitorController {
 		if (((RestorantService) restorantSelected).getRestorantById1(idRestorant) == null) {
 			restService.selectRestorantByVisitor(restorantSelected);
 		} else {
-			restService.updateRprefered(restorantSelected,
+			restService.updateRprefered(
 					((RestorantService) restorantSelected).getRestorantById1(idRestorant), idSelect);
 		}
 		return "redirect:/restorant ";
@@ -117,10 +117,9 @@ public class VisitorController {
 				customerId) == null) {
 			addInBasketService.create(selectDishesInBasket);
 		} else {
-			addInBasketService.update(selectDishesInBasket,((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
-					categoryId, customerId),  dId, categoryId, customerId);
+			addInBasketService.update(selectDishesInBasket, dId, categoryId, customerId);
 			addInBasketService.delete(((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
-					categoryId, customerId), selectDishesInBasket, dId);
+					categoryId, customerId), dId);
 		}
 		return "redirect:/register-view";
 	}

@@ -14,7 +14,7 @@ public interface PackageOrderedService {
 			throws Exception;
 
 	public TransportingPackageOrderFormDto updateByStatus(@Valid TransportingPackageOrderFormDto packOrderedDto,
-			@Valid TransportingPackageOrderFormDto shippingPackOrder2, Integer Id, Integer serviceId, Integer oId,
+                                                          Integer Id, Integer serviceId, Integer oId,
 			Integer userId) throws Exception;
 
 	// public TransportingPackageOrderFormDto update(@Valid PackageOrderedDto

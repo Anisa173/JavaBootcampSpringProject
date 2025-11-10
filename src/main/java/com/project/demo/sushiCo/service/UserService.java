@@ -37,7 +37,7 @@ public interface UserService {
     RegisterUserFormDto registerNewUserAccount(@Valid RegisterUserFormDto regUser,Integer idRestorant, Integer userId,
 			Integer registrationId ) throws Exception;
 	
-	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm, @Valid RegisterUserFormDto registerUserForm)
+	RegisterUserFormDto update(Integer userId, Integer idRestorant, @Valid RegisterUserFormDto regUserForm)
 			throws Exception;
 
 	UserDto login(@Valid Login form, Integer userId, Integer registrationId) throws Exception;

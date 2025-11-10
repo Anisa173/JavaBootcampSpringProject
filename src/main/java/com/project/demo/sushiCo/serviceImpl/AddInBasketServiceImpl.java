@@ -67,18 +67,17 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 		return basketMapper.toDto(basketRepository.save(addBasket));
 	}
     @Override
-	public AddInBasketDto update(@Valid SelectDishesFormDto selectDishesInBasket,
-			@Valid SelectDishesFormDto selectDishesFormDto, Integer dId, Integer categoryId, Integer customerId)
+	public AddInBasketDto update(@Valid SelectDishesFormDto selectDishesInBasket, Integer dId, Integer categoryId, Integer customerId)
 			throws Exception {
 		var basketAdd = dishFormMapper.toEntity(getDishDCategoriesByCustomerId(dId, categoryId, customerId));
-		var result = dishFormMapper.toUpdate(selectDishesFormDto, basketAdd);
+		var result = dishFormMapper.toUpdate(selectDishesInBasket, basketAdd);
 		return basketMapper.toDto(basketRepository.save(result));
 	}
 
 	@Override
-	public void delete(@Valid SelectDishesFormDto selectDishesFormDto,@Valid SelectDishesFormDto selectDishesInBasket,
-			Integer custId) throws Exception {
-		basketRepository.delete(selectDishesFormDto, selectDishesInBasket, custId);
+	public void delete(@Valid SelectDishesFormDto selectDishesFormDto,
+                       Integer custId) throws Exception {
+		basketRepository.delete(selectDishesFormDto, custId);
 	}
 
 	@Override
@@ -129,7 +128,7 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 
 	@Override
 	public OrderByProcessingDto updateByProcessing(@Valid OrderByProcessingDto byProcessingform,
-			@Valid OrderByProcessingDto orderByProcessForm, Integer custId, Integer idRestorant, Integer pmId,
+                                                   Integer custId, Integer idRestorant, Integer pmId,
 			Integer servPId) throws Exception {
 		var processOrder = orderMapper.toEntity(getPaymentServicesCustomById(custId, idRestorant, pmId, servPId));
 		var result = orderMapper.toUpdate(byProcessingform, processOrder);
@@ -143,8 +142,8 @@ public class AddInBasketServiceImpl implements AddInBasketService {
 	}
 
 	@Override
-	public void deleteCardPaymentDetails(RegisterCardBankDto cardsByCustomerId, Integer custId, Integer idRestorant,
-			Integer pmId, Integer servPId, Integer registrationId, @Valid RegisterCardBankDto regCardBank)
+	public void deleteCardPaymentDetails(@Valid RegisterCardBankDto regCardBank, Integer custId, Integer idRestorant,
+			Integer pmId, Integer servPId, Integer registrationId)
 			throws Exception {
 
 		basketRepository.deleteCardPaymentDetails(regCardBank, registrationId, custId, idRestorant, pmId, servPId);

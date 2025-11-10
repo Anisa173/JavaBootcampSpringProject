@@ -60,8 +60,7 @@ public class UserController {
 		} else {
 			try {
 				userService.update(userId, idRestorant,
-						((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId),
-						registerUserForm);
+						((UserService) registerUserForm).getUserById(userId, idRestorant, registrationId));
 
 			} catch (Exception e) {
 				System.out.println("An error ocurred" + "==> " + e.getMessage());

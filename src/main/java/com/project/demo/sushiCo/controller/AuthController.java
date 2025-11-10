@@ -57,7 +57,7 @@ public class AuthController {
 			return "auth/register-view";
 		}
 
-		var m = userService.update(idRestorant, userId, registerUserForm, registerUserForm1);
+		var m = userService.update(idRestorant, userId, registerUserForm);
 		return "redirect:/users/details/" + (((UserService) m).getUserById(userId, registrationId, idRestorant));
 
 	}

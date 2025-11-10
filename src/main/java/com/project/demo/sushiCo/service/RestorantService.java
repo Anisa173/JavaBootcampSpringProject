@@ -32,8 +32,7 @@ public interface RestorantService {
 
     public RestorantDto getRestorantDetails(Integer idRestorant) throws Exception;
 
-	public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferForm restorantSelected,
-			@Valid SelectWhichYouPreferFormDto restorantSelected1, Integer idSelect) throws Exception;
+	public SelectWhichYouPreferFormDto updateRprefered(@Valid SelectWhichYouPreferFormDto restorantSelected1, Integer idSelect) throws Exception;
 
 	
 

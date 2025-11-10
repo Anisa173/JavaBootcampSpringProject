@@ -16,7 +16,6 @@ import com.project.demo.sushiCo.domain.dto.OrderByProcessingDto;
 import com.project.demo.sushiCo.domain.dto.RegisterBookingFormDto;
 import com.project.demo.sushiCo.domain.dto.RegisterCardBankDto;
 import com.project.demo.sushiCo.domain.dto.SelectDishesFormDto;
-import com.project.demo.sushiCo.domain.dto.SelectWhichYouPreferFormDto;
 import com.project.demo.sushiCo.domain.dto.TransportingPackageOrderFormDto;
 import com.project.demo.sushiCo.service.AddInBasketService;
 import com.project.demo.sushiCo.service.BookingProcessingService;
@@ -106,8 +105,7 @@ public class CustomerController {
 			restService.selectRestorantByCustomer(restorantSelected);
 		} else {
 			restService.updateRprefered(
-					restorantSelected,
-					((RestorantService) restorantSelected).getCustomerRestorantById(userId, idRestorant), idSelect);
+                    ((RestorantService) restorantSelected).getCustomerRestorantById(userId, idRestorant), idSelect);
 		}
 		return "redirect:/restorant ";
 	}
@@ -149,10 +147,10 @@ public class CustomerController {
 			addInBasketService.create(selectDishesInBasket);
 		} else {
 			addInBasketService.update(((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
-					categoryId, customerId), selectDishesInBasket, dId, categoryId, customerId);
+					categoryId, customerId), dId, categoryId, customerId);
 
 			addInBasketService.delete(((AddInBasketService) selectDishesInBasket).getDishDCategoriesByCustomerId(dId,
-					categoryId, customerId), selectDishesInBasket, dId);
+					categoryId, customerId), dId);
 
 		}
 		return "redirect:/user/addInBasket";
@@ -192,7 +190,7 @@ public class CustomerController {
 			addInBasketService.createByProcessing(orderByProcessForm);
 		} else {
 			addInBasketService.updateByProcessing(((AddInBasketService) orderByProcessForm)
-					.getPaymentServicesCustomById(custId, idRestorant, pmId, servPId), orderByProcessForm, custId,
+					.getPaymentServicesCustomById(custId, idRestorant, pmId, servPId), custId,
 					idRestorant, pmId, servPId);
 		}
 
@@ -231,7 +229,7 @@ public class CustomerController {
 		} else {
 			addInBasketService.deleteCardPaymentDetails(((AddInBasketService) regCardBank)
 					.getCardsByCustomerId(registrationId, custId, idRestorant, pmId, servPId), custId, idRestorant,
-					pmId, servPId, registrationId, regCardBank);
+					pmId, servPId, registrationId);
 		}
 		return "redirect/order ";
 	}
@@ -241,7 +239,7 @@ public class CustomerController {
 			Integer userId, Integer serviceId, Integer idShporta, Integer oId) throws Exception {
 		pcgService.updateByStatus(
 				((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta),
-				shippingPackOrder, idShporta, serviceId, oId, userId);
+				 idShporta, serviceId, oId, userId);
 
 		return "redirect:/order ";
 	}
