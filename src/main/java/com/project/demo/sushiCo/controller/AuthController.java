@@ -68,7 +68,7 @@ public class AuthController {
 		if (nResult.hasErrors()) {
 			return "auth/login-form";
 		}
-		var log = userService.updateLoginData(userId1, loginForm, loginForm1);
+		var log = userService.updateLoginData(userId1, loginForm);
 		return "redirect:/users/details/" + (((UserService) log).getUserLogInById(userId1, registrationId1));
 	}
 }

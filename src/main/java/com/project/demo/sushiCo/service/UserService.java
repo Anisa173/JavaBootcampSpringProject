@@ -44,7 +44,7 @@ public interface UserService {
 
 	LoginDto getUserLogInById(Integer userId, Integer registrationId) throws Exception;
 
-	LoginDto updateLoginData(Integer userId, @Valid LoginDto loginForm,@Valid LoginDto userLogInById) throws Exception;
+	LoginDto updateLoginData(Integer userId, @Valid LoginDto loginForm) throws Exception;
 
 	List<UserDto> getAllCustomers(Integer userId) throws Exception;
 

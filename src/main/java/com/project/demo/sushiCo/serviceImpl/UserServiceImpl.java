@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public LoginDto updateLoginData(Integer userId,@Valid LoginDto loginForm,@Valid LoginDto userLogInById)
+	public LoginDto updateLoginData(Integer userId,@Valid LoginDto loginForm)
 			throws Exception {
 		return loginMapper.toDto(Urepository.updateLoginData(userId, loginForm));
 	}
