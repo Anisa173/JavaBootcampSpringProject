@@ -18,8 +18,7 @@ public interface BookingProcessingService {
 
 	public void deleteReservation(Integer id, Integer cR_id, Integer idRestorant) throws Exception;
 
-	public RegisterBookingFormDto update(@Valid RegisterBookingFormDto regBooking,
-			@Valid RegisterBookingFormDto customerReservation) throws Exception;
+	public RegisterBookingFormDto update(@Valid RegisterBookingFormDto regBooking) throws Exception;
 
 	
 }

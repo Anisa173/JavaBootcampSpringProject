@@ -26,8 +26,8 @@ public interface PackageOrderedService {
 
 	public TransportingPackageOrderFormDto getPackageOrderById(Integer userId, Integer serviceId, Integer idShporta);
 
-	public TransportingPackageOrderFormDto update(@Valid TransportingPackageOrderFormDto packOrDto,@Valid TransportingPackageOrderFormDto shippingPackOrder
-			,Integer idShporta, Integer serviceId, Integer oId,
+	public TransportingPackageOrderFormDto update(@Valid TransportingPackageOrderFormDto packOrDto,
+                                                  Integer idShporta, Integer serviceId, Integer oId,
 			Integer userId) throws Exception;
 
 	// Shportat e porosise se Transportuesit per nje klient 

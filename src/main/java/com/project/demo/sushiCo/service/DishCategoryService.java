@@ -14,7 +14,7 @@ public interface DishCategoryService {
 
 	DishCategoryDto create(@Valid DishCategoryDto dishCategoryDto) throws Exception;
 
-	DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto,@Valid DishCategoryDto dcDto, Integer id, Integer adminId) throws Exception;
+	DishCategoryDto update(@Valid DishCategoryDto dishCategoryDto, Integer id, Integer adminId) throws Exception;
 
 	List<DishCategoryDto> getDishCategorybyRestorant(Integer adminId) throws Exception;
 

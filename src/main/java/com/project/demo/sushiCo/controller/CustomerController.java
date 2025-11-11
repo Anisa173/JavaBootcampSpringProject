@@ -315,8 +315,7 @@ public class CustomerController {
 			bpService.createBooking(regBooking);
 		} else {
 			bpService.update(
-					((BookingProcessingService) regBooking).getCustomerReservationById(idCustomer, cR_Id, rtb_id),
-					regBooking);
+					((BookingProcessingService) regBooking).getCustomerReservationById(idCustomer, cR_Id, rtb_id));
 		}
 
 		return "redirect/bookingProcessing";

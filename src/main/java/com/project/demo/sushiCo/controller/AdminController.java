@@ -79,7 +79,7 @@ public class AdminController {
 		if (((DishCategoryService) dcDto).getDishCategoryById(id, adminId) == null) {
 			dcService.create(dcDto);
 		} else {
-			dcService.update(((DishCategoryService) dcDto).getDishCategoryById(id, adminId), dcDto, id, adminId);
+			dcService.update(((DishCategoryService) dcDto).getDishCategoryById(id, adminId), id, adminId);
 		}
 		return "redirect:/DishCategory ";
 	}
@@ -126,7 +126,7 @@ public class AdminController {
 		if (((DishService) regDishForm).getDishByDishCategory(dId, categoryId, adminId) == null) {
 			dService.create(regDishForm);
 		} else {
-			dService.update(((DishService) regDishForm).getDishByDishCategory(dId, categoryId, adminId), regDishForm,
+			dService.update(((DishService) regDishForm).getDishByDishCategory(dId, categoryId, adminId),
 					adminId, categoryId, dId);
 		}
 		return "redirect:/Dish ";
@@ -199,7 +199,7 @@ public class AdminController {
 			rtbService.create(restTdto);
 		} else {
 			rtbService.update(tb_id, rtb_id, adminRId,
-					((RestorantTablesService) restTdto).getRestorant_tablesById(tb_id, rtb_id, adminRId), restTdto);
+					((RestorantTablesService) restTdto).getRestorant_tablesById(tb_id, rtb_id, adminRId));
 		}
 
 		return "redirect:/restorantTables ";
@@ -241,7 +241,7 @@ public class AdminController {
 		} else {
 			pcgService.update(
 					((PackageOrderedService) shippingPackOrder).getPackageOrderById(userId, serviceId, idShporta),
-					shippingPackOrder, idShporta, serviceId, oId, userId);
+					 idShporta, serviceId, oId, userId);
 		}
 
 		return "redirect:/packageOrder ";
