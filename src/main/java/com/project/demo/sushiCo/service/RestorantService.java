@@ -26,7 +26,7 @@ public interface RestorantService {
 	
 	public RestorantDto getRestorantsById(Integer idRestorant,Integer adminIdWeb) throws Exception;
 
-	public RestorantDto update(@Valid RestorantDto restorantDto,@Valid RestorantDto restForm, Integer id, Integer adminIdWeb) throws Exception;
+	public RestorantDto update(@Valid RestorantDto restorantDto, Integer id, Integer adminIdWeb) throws Exception;
 
 	public  SelectWhichYouPreferFormDto selectRestorantByCustomer(@Valid SelectWhichYouPreferForm restorantPreference) throws Exception;
 

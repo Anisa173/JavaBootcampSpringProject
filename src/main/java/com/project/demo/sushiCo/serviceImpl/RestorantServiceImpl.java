@@ -68,7 +68,7 @@ public class RestorantServiceImpl implements RestorantService {
 	}
 	
     @Override
-	public RestorantDto update(@Valid RestorantDto restorantDto,@Valid RestorantDto restForm,Integer id,Integer adminIdWeb)
+	public RestorantDto update(@Valid RestorantDto restorantDto, Integer id, Integer adminIdWeb)
 			throws Exception {
 
 		Restorant restorant = restorantMapper.toEntity(getRestorantsById(id,adminIdWeb));

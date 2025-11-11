@@ -108,7 +108,7 @@ public class AdministratorController {
 		if (((RestorantService) restForm).getRestorantsById(idRestorant,adminIdWeb) == null) {
 			restService.create(restForm);
 		} else {
-			restService.update(((RestorantService) restForm).getRestorantsById(idRestorant,adminIdWeb), restForm, idRestorant,adminIdWeb);
+			restService.update(((RestorantService) restForm).getRestorantsById(idRestorant,adminIdWeb), idRestorant,adminIdWeb);
 		}
 		return "redirect:/restorant";
 	}
@@ -136,7 +136,7 @@ public class AdministratorController {
 			pmService.create(pmForm);
 		} else {
 			((PaymentMethodsService) pmService).update(
-					((PaymentMethodsService) pmForm).getPayment_MethodsById(Id, idRestorant), pmForm, Id, idRestorant);
+					 ((PaymentMethodsService) pmForm).getPayment_MethodsById(Id, idRestorant), Id, idRestorant);
 		}
 		return "redirect:/paymentMethods ";
 	}
@@ -164,7 +164,7 @@ public class AdministratorController {
 			sPlacesService.create(sPlaces);
 		} else {
 			sPlacesService.update(Id, idRestorant,
-					((ServicePlacesService) sPlaces).getService_PlacesById(Id, idRestorant), sPlaces);
+					((ServicePlacesService) sPlaces).getService_PlacesById(Id, idRestorant));
 		}
 
 		return "redirect:/ServicePlaces";

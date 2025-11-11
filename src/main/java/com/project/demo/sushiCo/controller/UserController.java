@@ -94,8 +94,7 @@ public class UserController {
 			return "login-form";
 		}
 		if (((UserService) loginForm).getUserLogInById(userId1, registrationId1) != null) {
-			userService.updateLoginData(userId1, ((UserService) loginForm).getUserLogInById(userId1, registrationId1),
-					loginForm);
+			userService.updateLoginData(userId1, ((UserService) loginForm).getUserLogInById(userId1, registrationId1),loginForm);
 		}
 		return "redirect:/SelectWhichYouPreferForm";
 	}
